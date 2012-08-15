@@ -1,0 +1,6 @@
+{% capture category %}{{ post.categories | category_links | size }}{% endcapture %}
+{% unless category == '0' %}
+<span class="categories">
+  {{ post.categories | category_links }}
+</span>
+{% endunless %}

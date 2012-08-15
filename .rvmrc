@@ -1,0 +1,6 @@
+rvm use 1.9.2@jekyll-instagram --create
+
+if command -v bundle && [[ -s Gemfile ]]
+then
+  bundle | grep -v 'Using' | grep -v 'complete' | sed '/^$/d'
+fi

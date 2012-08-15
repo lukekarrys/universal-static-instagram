@@ -1,0 +1,7 @@
+{% capture category %}{{ post.categories | size }}{% endcapture %}
+<h1><a href="{{ root_url }}{{ post.url }}">{{post.title}}</a></h1>
+{% if category != '0' %}
+<footer>
+  <span class="categories">posted in {{ post.categories | category_links }}</span>
+</footer>
+{% endif %}

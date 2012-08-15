@@ -1,0 +1,8 @@
+<header>
+  <h1>{% if index %}<a href="{{ root_url }}{{ post.url }}">{% endif %}{{ page.title }}{% if index %}</a>{% endif %}</h1>
+  <p class="meta">
+    <time datetime="{{ post.date | datetime | date_to_xmlschema }}" pubdate>{{ post.date }}</time>
+  </p>
+</header>
+
+<div class="entry-content">{{ content }}</div>
