@@ -1,3 +1,5 @@
+# This project currently doesn't work. It will work soon.
+
 ## What is Jekyll-Instagram?
 
 This project was created after I added a bunch of customized things to Octopress to allow for easy creation of Instagram posts and the someone asked if it could be its own repo. So here it is!
