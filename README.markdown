@@ -12,6 +12,9 @@ I am hoping that this is a good starting point for creating your own Instagram b
 
 Yeah I know. I started development on this before and used it personally before web profile pages were rolled out. The idea was always to make it something like this: bare bones, more extensible, maybe even add theme support. I thought there might be 0.1% of Instagram users who would appreciate hosting their own pages with full control over the HTML/CSS/JS and still have people be able to like and comment. Now that all Instagram users have their own profile pages, I think that number might have dropped to 0.01% but I still wanted to publish this as a pet project.
 
+## Demo
+Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks and works.
+
 ## Setup
 
 ### Get an Instagram API Token
@@ -28,7 +31,10 @@ Yeah I know. I started development on this before and used it personally before 
 - `git clone` the repo
 - `cd` into directory
 - `rake recent_instagrams`
-- `jekyll --server`
+- `jekyll`
+
+### Customizatiom
+The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) is a great place to start to learn about jekyll and how to change this setup to match your needs. This repo is purposefully left as bare bones and as close to the jekyll defaults as possible.
 
 ### Deployment
 The `_site` directory is now full of good ol' fashioned static files. Check out the [jekyll page on deployment](https://github.com/mojombo/jekyll/wiki/Deployment) for all your options.
