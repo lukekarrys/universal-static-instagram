@@ -37,6 +37,7 @@ The `_site` directory is now full of good ol' fashioned static files. Check out 
 The site provides a JS plugin and a server-side PHP proxy to allow for the display and posting of likes and comments for each Instagram media. To get this to work:
 - Change `root` and `instagram_client` in `_config.yml`. `root` must match your Instagram redirect_url (minus the http://) and `instagram_client` is your Instagram client ID from previously.
 - Your server (or wherever you are testing) will need to support PHP for this to work. Submit a pull request for a different proxy if you want.
+- Instagram recently instituted comment whitelisting for applications. If you want comments to work, you'll have to visit [this page](http://bit.ly/instacomments) to request access for commenting on your application.
 
 
 ## License

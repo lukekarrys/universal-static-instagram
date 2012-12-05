@@ -58,7 +58,7 @@ function parseUri (str) {
     cookieKey: 'instagramAccessToken',
     usernameCookie: 'instaUsername',
     lastPageCookie: 'lastPage',
-    userProfile: 'http://www.gramfeed.com/',
+    userProfile: 'http://instagram.com/',
     username: '',
     getUsername: function() {
       return this.username || cookie.getCookie(this.usernameCookie) || '';
@@ -93,7 +93,7 @@ function parseUri (str) {
           $commentLink = $('.instagram-comment-link'),
           mediaId = $commentLink.length > 0 && $commentLink.attr('id'),
           _this = this,
-          jsonpQS = '?access_token=' + accessToken + '&callback=?',
+          jsonpQS = '?access_token=' + accessToken,
           saveUsername = function(resp) {
             if (resp.meta.code === 200) {
               cookie.setCookie(_this.usernameCookie, resp.data.username, 365, '/');
@@ -129,8 +129,8 @@ function parseUri (str) {
           // Save username
           $.ajax({
             url: this.apiBase + 'users/self' + jsonpQS,
-            type: 'jsonp',
-            method: 'GET',
+            dataType: 'jsonp',
+            type: 'GET',
             error: _this.handleError,
             success: saveUsername
           });
@@ -143,8 +143,8 @@ function parseUri (str) {
 
       $.ajax({
         url: this.apiBase + 'media/' + mediaId + '/comments' + jsonpQS,
-        type: 'jsonp',
-        method: 'GET',
+        dataType: 'jsonp',
+        type: 'GET',
         error: function(err) {},
         success: function(resp) {
           var template = _this.commentsHelper(_.template(_this.comments(resp.data.length), resp));
@@ -161,9 +161,9 @@ function parseUri (str) {
             e.preventDefault();
             var commentId = $(this).attr('data-comment-id');
             $.ajax({
-              url: '/instagram.php',
-              type: 'json',
-              method: 'POST',
+              url: '/proxy/instagram.php',
+              dataType: 'json',
+              type: 'POST',
               data: {access_token: accessToken, id: mediaId, endpoint: 'comments', _method: 'DELETE', comment_id: commentId},
               error: _this.handleError,
               success: function(resp) {
@@ -180,9 +180,9 @@ function parseUri (str) {
 
             if (text) {
               $.ajax({
-                url: '/instagram.php',
-                type: 'json',
-                method: 'POST',
+                url: '/proxy/instagram.php',
+                dataType: 'json',
+                type: 'POST',
                 data: {access_token: accessToken, id: mediaId, endpoint: 'comments', text: text},
                 error: _this.handleError,
                 success: function(resp) {
@@ -214,8 +214,8 @@ function parseUri (str) {
       // Get likes and then bind click to like/unlike
       $.ajax({
         url: this.apiBase + 'media/' + mediaId + '/likes' + jsonpQS,
-        type: 'jsonp',
-        method: 'GET',
+        dataType: 'jsonp',
+        type: 'GET',
         error: _this.handleError,
         success: function(resp) {
 
@@ -272,9 +272,9 @@ function parseUri (str) {
             }
 
             $.ajax({
-              url: '/instagram.php',
-              type: 'json',
-              method: 'POST',
+              url: '/proxy/instagram.php',
+              dataType: 'json',
+              type: 'POST',
               data: {access_token: accessToken, id: mediaId, endpoint: 'likes', _method: method},
               error: _this.handleError,
               success: function(resp) {
