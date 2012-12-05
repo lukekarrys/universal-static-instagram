@@ -1,3 +1,5 @@
 .instagram-cache
 .instagram-token
-public
+_site
+_posts
+deploy.sh

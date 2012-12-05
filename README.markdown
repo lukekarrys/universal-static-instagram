@@ -1,23 +1,36 @@
-# This project currently doesn't work. It will work soon.
-
 ## What is Jekyll-Instagram?
 
 This project was created after I added a bunch of customized things to Octopress to allow for easy creation of Instagram posts and the someone asked if it could be its own repo. So here it is!
 
-The project consists mainly of the Rakefile which has a few tasks to batch create Instagram posts and some JavaScript which allows users to comment and like Instagram posts on the post. I tried to strip it down as much as possible so that means no CSS and as little HTML and JS as possible. Much of the HTML that is already there was taken from Octopress and them stripped of anything I didn't think was necessary.
+The project consists mainly of the Rakefile which has a few tasks to batch create Instagram posts and some JavaScript which allows users to comment and like Instagram posts on the post. I tried to strip it down as much as possible so that means as little HTML/CSS/JS as possible. Much of the HTML that is already there was taken from Octopress and them stripped of anything I didn't think was necessary.
 
 ## Why?
 
-I am hoping that this is a good starting point for creating your own Instagram blog, with the ability to add all your own CSS and other JS and HTML and stuff.\
+I am hoping that this is a good starting point for creating your own Instagram blog, with the ability to add all your own CSS and other JS and HTML and stuff.
 
 ## Setup
 
-0) Install rvm
-1) `git clone`
-2) `cd`
-3) `echo 'INSTAGRAM_API_TOKEN' > .instagram-token`
-4) `rake recent_instagrams`
-5) `jekyll` (doesn't work)
+### Get an Instagram API Token
+- Go to your [Instagram developer clients page](http://instagram.com/accounts/login/?next=/developer/register/)
+- You will need to register a new client. This client will be used to create the Instagram post pages for Jekyll to parse
+- Go to `https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code`. It is very important that `REDIRECT-URI` matches the OAuth redirect_uri for your application or you will get an error. I just use `http://localhost`. It doesn't matter as long as it matches.
+- Your browser will ask you to authorize your application. Click 'Authorize'.
+- The browser will redirect to your redirect URI with a query parameter of `code`. This value will be used to generate your token.
+- run `sh gettoken.sh CLIENTID CLIENTSECRET REDIRECTURI CODE`. This will output your access token.
+- Paste the token into `./instagram-token`
+
+### Get the site up
+- Install `[rvm](https://rvm.io/)`
+- `git clone` the repo
+- `cd` into directory
+- `rake recent_instagrams`
+- `jekyll --server`
+
+### Deployment
+The `_site` directory is now full of good ol' fashioned static files. Check out the [jekyll page on deployment](https://github.com/mojombo/jekyll/wiki/Deployment) for all your options.
+
+### Liking + Commenting
+
 
 
 ## License

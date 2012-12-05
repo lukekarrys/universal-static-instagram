@@ -5,6 +5,7 @@
 
 require 'instagram'
 require 'json'
+require 'stringex'
 
 module Jekyll
   class InstagramTag < Liquid::Tag
@@ -31,18 +32,16 @@ module Jekyll
     def gen_html_output(media, uri)
       loc_name, lat, lon = nil, nil, nil
       id              = media["id"]
-      link            = media["link"]
       src             = media["images"][@image_res]["url"]
       image_w         = media["images"][@image_res]["width"]
       image_h         = media["images"][@image_res]["height"]
       location        = media["location"]
       filter          = media["filter"]
       caption         = media["caption"]
-      post_url        = "/blog/#{Time.at(Integer(media["created_time"])).strftime("%Y/%m/%d")}/#{uri}/"
       title           = caption ? caption["text"] : "Untitled Instagram"
 
-      output = "<p><a href='#{post_url}' data-instagram-url='#{link}' class='instagram-image'><img src='#{src}' alt='#{title}' height='#{image_h}' width='#{image_w}' /></a>"
-      output += "<br/>Filtered with <a href='/blog/categories/#{filter.downcase}'>#{filter}</a> through <a href='/blog/categories/instagram'>Instagram</a></p>"
+      output = "<p><img src='#{src}' alt='#{title}' height='#{image_h}' width='#{image_w}' />"
+      output += "<br/>Filtered with #{filter} via Instagram</p>"
 
       if location
         loc_name      = location["name"]
@@ -61,7 +60,11 @@ module Jekyll
         output += "</p>"
       end
 
-      output += "<p class='instagram-comment-holder'><a href='https://instagram.com/oauth/authorize/?client_id=247b74fc2ed84d748e3297618fb88121&redirect_uri=http://lukelov.es#{post_url}&response_type=token&scope=likes+comments' id='#{id}' class='instagram-comment-link'>Sign in with Instagram to view Likes and Comments</a></p>"
+      instagram_client_id = Jekyll.configuration({})['instagram_client']
+      redirect_uri = "http://#{Jekyll.configuration({})['root']}"
+      output += "<p class='instagram-comment-holder'>"
+      output += "<a href='https://instagram.com/oauth/authorize/?client_id=#{instagram_client_id}&redirect_uri=#{redirect_uri}&response_type=token&scope=likes+comments'"
+      output += "  id='#{id}' class='instagram-comment-link'>Sign in with Instagram to view Likes and Comments</a></p>"
     end
 
     def get_cache_file_for(id)

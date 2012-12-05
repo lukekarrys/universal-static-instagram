@@ -1,15 +1,6 @@
-# ----------------------- #
-#    Jekyll & Plugins     #
-# ----------------------- #
-
-# If publishing to a subdirectory as in http://site.com/project set 'root: /project'
-root: /
 permalink: /:year/:month/:day/:title/
-source: source
-destination: public
-plugins: plugins
-category_dir: categories
 markdown: rdiscount
+exclude: ["gettoken.sh", "Rakefile", "README.markdown", "Gemfile", "Gemfile.lock", "deploy.sh"]
 
-paginate: 5                     # Posts per page on the blog index
-pagination_dir:  ''             # Directory base for pagination URLs eg. /blog/page/2/
+root: localhost:9000
+instagram_client: 4f82d0b740ee4556b371647f1193a85e

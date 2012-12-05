@@ -1,4 +1,4 @@
-/*global jQuery _ parseUri ender escape document unescape window */
+/*global jQuery _ escape document unescape window */
 
 var cookie = {
   setCookie : function(name, value, days, path, domain, secure){
@@ -55,8 +55,9 @@ function parseUri (str) {
 
   var instagram = {
     apiBase: 'https://api.instagram.com/v1/',
-    cookieKey: 'lukeloves.instagramAccessToken',
-    usernameCookie: 'lukeloves.instaUsername',
+    cookieKey: 'instagramAccessToken',
+    usernameCookie: 'instaUsername',
+    lastPageCookie: 'lastPage',
     userProfile: 'http://www.gramfeed.com/',
     username: '',
     getUsername: function() {
@@ -101,14 +102,16 @@ function parseUri (str) {
               _this.initComments(mediaId, jsonpQS, accessToken);
             }
           },
-          $samePageInstaLink = $('a.instagram-image[href="'+window.location.pathname+'"]'),
           currentUsername = _this.getUsername();
 
-      if ($samePageInstaLink.length > 0) {
-        $samePageInstaLink.attr('href', $samePageInstaLink.attr('data-instagram-url'));
-      }
+      cookie.setCookie(this.cookieKey, accessToken, 365, '/');
 
-      if (accessToken && mediaId) {
+      if (_.without(_.compact(window.location.pathname.split("/")), "index.html").length > 0) cookie.setCookie(_this.lastPageCookie, window.location.pathname, 1, '/');
+
+      if (parseUri(window.location.href).anchor.split('access_token=')[1] && !mediaId) {
+        var lastPage = cookie.getCookie(_this.lastPageCookie);
+        if (lastPage && lastPage !== "null" && (lastPage.indexOf('http') === 0 || lastPage.charAt(0) === '/')) window.location.href = cookie.getCookie(_this.lastPageCookie);
+      } else if (accessToken && mediaId) {
         cookie.setCookie(this.cookieKey, accessToken, 365, '/');
 
         // If we already have a username then proceed with getting the comments/likes

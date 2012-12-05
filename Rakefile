@@ -11,7 +11,7 @@ posts_dir       = "_posts"    # directory for blog files
 
 instagram_access, instagram_cache = '.instagram-token', '.instagram-cache/'
 def ready_instagram(access, cache)
-  mkdir_p cache
+  mkdir_p cache, {:verbose => false}
   Instagram.client(:access_token => File.open(access).gets)
 end
 
@@ -94,7 +94,7 @@ end
 desc "Create a new instagram post in #{source_dir}/#{posts_dir}"
 task :new_instagram, :id, :overwrite do |t, args|
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
-  mkdir_p "#{source_dir}/#{posts_dir}"
+  mkdir_p "#{source_dir}/#{posts_dir}", {:verbose => false}
   args.with_defaults(:overwrite => "skip")
 
   raise "### You need to specify an instagram id or media hash" unless args.id
@@ -122,9 +122,10 @@ task :new_instagram, :id, :overwrite do |t, args|
   end
 
   # Prep data
-  time, caption, tags, filter = Time.at(Integer(media["created_time"])), media["caption"], media["tags"].join("\", \""), media["filter"]
-  tags = ", \"#{tags.downcase}\"" if tags != ""
-  tags += ", \"#{filter.downcase}\"" if filter
+  time, caption, tags, filter = Time.at(Integer(media["created_time"])), media["caption"], media["tags"], media["filter"]
+  tags.push(filter)
+  tags = tags.join("\", \"")
+  tags = "\"#{tags.downcase}\"" if tags != ""
   title = caption ? media["caption"]["text"] : "Untitled Instagram"
   file_id = caption ? "" : "-#{media_id.split("_")[0]}"
   post_title = title.gsub(/[#,@]/,"").to_url
