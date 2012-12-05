@@ -20,7 +20,7 @@ I am hoping that this is a good starting point for creating your own Instagram b
 - Paste the token into `./instagram-token`
 
 ### Get the site up
-- Install `[rvm](https://rvm.io/)`
+- Install [rvm](https://rvm.io/)
 - `git clone` the repo
 - `cd` into directory
 - `rake recent_instagrams`
