@@ -2,7 +2,6 @@ require "stringex"
 require "instagram"
 
 new_post_ext    = "markdown"  # default new post file extension when using the new_post task
-source_dir      = "source"    # source file directory
 posts_dir       = "_posts"    # directory for blog files
 
 ##############
@@ -78,8 +77,8 @@ task :recent_instagrams, :overwrite, :after_actions, :min_id, :max_id, :recursiv
       args.after_actions.split("").each { |action|
         case action
         when "c"
-          system "git add #{source_dir}/#{posts_dir}"
-          system "git commit -m 'Adding recent instagram posts' #{source_dir}/#{posts_dir}"
+          system "git add #{posts_dir}"
+          system "git commit -m 'Adding recent instagram posts' #{posts_dir}"
         when "p"
           system "git push"
         end
@@ -91,10 +90,9 @@ end
 # overwrite will decide if new_instagram will overwrite or skip writing to a file
 # (o)verwrite will overwrite; (s)kip will skip; (p)rompt will prompt for each file
 # default is skip
-desc "Create a new instagram post in #{source_dir}/#{posts_dir}"
+desc "Create a new instagram post in #{posts_dir}"
 task :new_instagram, :id, :overwrite do |t, args|
-  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
-  mkdir_p "#{source_dir}/#{posts_dir}", {:verbose => false}
+  mkdir_p "#{posts_dir}", {:verbose => false}
   args.with_defaults(:overwrite => "skip")
 
   raise "### You need to specify an instagram id or media hash" unless args.id
@@ -123,14 +121,14 @@ task :new_instagram, :id, :overwrite do |t, args|
 
   # Prep data
   time, caption, tags, filter = Time.at(Integer(media["created_time"])), media["caption"], media["tags"], media["filter"]
-  tags.push(filter)
   tags = tags.join("\", \"")
   tags = "\"#{tags.downcase}\"" if tags != ""
+  categories = "\"#{filter}\""
   title = caption ? media["caption"]["text"] : "Untitled Instagram"
   file_id = caption ? "" : "-#{media_id.split("_")[0]}"
   post_title = title.gsub(/[#,@]/,"").to_url
   post_uri = "#{post_title}#{file_id}"
-  filename = "#{source_dir}/#{posts_dir}/#{time.strftime("%Y-%m-%d")}-#{post_uri}.#{new_post_ext}"
+  filename = "#{posts_dir}/#{time.strftime("%Y-%m-%d")}-#{post_uri}.#{new_post_ext}"
 
   # Test if we should write post to file or not
   write_file = true
@@ -152,7 +150,8 @@ task :new_instagram, :id, :overwrite do |t, args|
       post.puts "title: \"#{title.gsub(/&/,'&amp;').gsub(/\"/, '\"')}\""
       post.puts "date: #{time.strftime('%Y-%m-%d %H:%M')}"
       post.puts "comments: false"
-      post.puts "categories: [#{tags}]"
+      post.puts "categories: [#{categories}]"
+      post.puts "tags: [#{tags}]"
       post.puts "---"
       post.puts ""
       post.puts "{% instagram #{media_id} #{post_uri} %}"
