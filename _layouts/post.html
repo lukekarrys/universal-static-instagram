@@ -6,11 +6,5 @@ layout: default
 
 <div class="entry-content">{{ content }}</div>
 
-<div id="related">
-  <h2>Related Instagrams</h2>
-  <ul class="posts">
-    {% for post in site.related_posts limit:3 %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
-</div>
+{% if page.next.url %}<a href="{{ page.next.url }}">&laquo; {{ page.next.title }}</a>{% endif %} ——
+{% if page.previous.url %}<a href="{{ page.previous.url }}">{{ page.previous.title }} &raquo;</a>{% endif %}
