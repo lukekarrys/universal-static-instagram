@@ -5,7 +5,7 @@ layout: default
 <p><a href="/">Home</a></p>
 
 <h1>{{ page.title }}</h1>
-<h2>{{ page.date }}</h2>
+<h2>{{ page.date | date: "%A %B %d, %I:%M%p" }}</h2>
 <div class="entry-content">{{ content }}</div>
 <p>Categories:{% for cat in page.categories %} <a href="/categories/{{ cat | downcase | replace:' ','-' }}">{{ cat }}</a>{% endfor %}</p>
 <p>Tags:{% for tag in page.tags %} <a href="/tags/{{ tag | downcase }}">{{ tag }}</a>{% endfor %}</p>
