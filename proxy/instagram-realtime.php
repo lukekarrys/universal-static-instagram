@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['hub_mode'] === 'subscribe' &&
   if ($id) {
     exec('rake new_instagram['+$id+',o]');
   }
- 
 }
 
 ?>
