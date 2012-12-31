@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['hub_mode'] === 'subscribe' &&
   $data = json_decode($_POST['data']);
   $id = $data->id;
   if ($id) {
-    exec('rake new_instagram['+$id+',o]');
+    exec('rake new_instagram['+$id+',o] && jekyll && sh deploy.sh');
   }
 }
 

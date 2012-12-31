@@ -41,10 +41,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  hashie
+  hashie (~> 1.2.0)
   highline (~> 1.6.15)
-  instagram
-  jekyll
-  rake
-  rdiscount
-  stringex
+  instagram (~> 0.8.5)
+  jekyll (~> 0.11.2)
+  rake (~> 10.0.2)
+  rdiscount (~> 1.6.8)
+  stringex (~> 1.5.1)
