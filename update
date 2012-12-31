@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rake recent_instagrams
+jekyll
+sh deploy.sh
