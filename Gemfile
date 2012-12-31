@@ -8,5 +8,4 @@ group :development do
   gem 'instagram', '~> 0.8.5'
   gem 'hashie', '~> 1.2.0'
   gem "highline", "~> 1.6.15"
-  gem 'whenever', "~> 0.8.1"
 end
