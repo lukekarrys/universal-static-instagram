@@ -12,6 +12,7 @@ GEM
       faraday (>= 0.7.4, < 0.9)
     fast-stemmer (1.0.1)
     hashie (1.2.0)
+    highline (1.6.15)
     instagram (0.8.5)
       faraday (>= 0.7, < 0.9)
       faraday_middleware (~> 0.8)
@@ -40,6 +41,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  hashie
+  highline (~> 1.6.15)
   instagram
   jekyll
   rake

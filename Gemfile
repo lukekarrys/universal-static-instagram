@@ -6,4 +6,6 @@ group :development do
   gem 'rdiscount'
   gem 'stringex'
   gem 'instagram'
+  gem 'hashie'
+  gem "highline", "~> 1.6.15"
 end

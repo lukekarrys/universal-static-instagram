@@ -1,5 +1,8 @@
+require "highline/import"
 require "stringex"
 require "instagram"
+require "hashie"
+require "json"
 
 new_post_ext    = "markdown"  # default new post file extension when using the new_post task
 posts_dir       = "_posts"    # directory for blog files
@@ -33,12 +36,10 @@ def get_instagram_cache(id, cache)
 end
 
 # :overwrite is passed to directly to `new_instagram`
-# :after_actions is a string where each character will trigger a command when the task is finished
-# (c)ommit source/_posts after adding, (p)ush to the repo
 # :min_id and :max_id can be set to retrieve a range of instagrams
 # if both are nil, default is getting everything newer than the latest cache (all if there's no cache)
 desc "Run `rake new_instagram` for all instagrams newer than the most recent one in the cache"
-task :recent_instagrams, :overwrite, :after_actions, :min_id, :max_id, :recursive do |t, args|
+task :recent_instagrams, :overwrite, :min_id, :max_id, :recursive do |t, args|
   instagram = ready_instagram instagram_access, instagram_cache
   instagram_request, min_default = {"count" => 60}, "beginning"
   args.with_defaults(:min_id => min_default)
@@ -71,19 +72,6 @@ task :recent_instagrams, :overwrite, :after_actions, :min_id, :max_id, :recursiv
   if media_ids.last && media_ids.last != min_id
     Rake::Task[t].reenable
     Rake::Task[t].invoke(args.overwrite, args.after_actions, min_id, media_ids.last, true)
-  else
-    # Only run after_actions if we have some and if we created new instagrams
-    if args.after_actions && (args.recursive || media_ids.length > 0)
-      args.after_actions.split("").each { |action|
-        case action
-        when "c"
-          system "git add #{posts_dir}"
-          system "git commit -m 'Adding recent instagram posts' #{posts_dir}"
-        when "p"
-          system "git push"
-        end
-      }
-    end
   end
 end
 
