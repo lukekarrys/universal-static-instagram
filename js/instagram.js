@@ -76,11 +76,11 @@ function parseUri (str) {
     likesHelper: function(str) {
       return str.replace(' | </p>', '</p>');
     },
-    individualComment: function() {
-      return "<li id='<%= item.id %>' data-from-user='<%= item.from.username %>'><span class='userlink'>"+this.userlink('item.from.username')+"</span><%= item.text %></li>";
+    individualComment: function(currentUsername) {
+      return "<li id='<%= item.id %>' data-from-user='<%= item.from.username %>'><span class='userlink'>"+this.userlink('item.from.username')+"<% if (item.from.username === '"+currentUsername+"') { %> | <a href='#' data-comment-id='<%= item.id %>' class='delete-comment'>x</a><% } %></span><%= item.text %></li>";
     },
     comments: function(count) {
-      var content = (count === 0) ? "<li class='no-comments'>No comments</li>" : "<% _.each(data, function(item) { %>"+this.individualComment()+"<% }); %>";
+      var content = (count === 0) ? "<li class='no-comments'>No comments</li>" : "<% _.each(data, function(item) { %>"+this.individualComment(this.getUsername())+"<% }); %>";
       return "<h3>Comments</h3><ul class='comment-holder'>"+content+"<li><form id='comment-form'><textarea></textarea><input class='submit' type='submit' value='Submit' /></form></li></ul>";
     },
     commentsHelper: function(str) {
@@ -147,17 +147,12 @@ function parseUri (str) {
         type: 'GET',
         error: function(err) {},
         success: function(resp) {
+          resp.data.currentUsername = _this.getUsername();
           var template = _this.commentsHelper(_.template(_this.comments(resp.data.length), resp));
           $('.instagram-comment-link').remove();
           $('.instagram-comment-holder').append(template);
 
-          // TODO: add delete link for newly generated comments. Need to do a GET to get the ID of the comment upon submittal
-          $('.comment-holder li[data-from-user="'+_this.getUsername()+'"]').each(function() {
-            var $this = $(this);
-            $this.find('span').html(_.template(_this.userlink('username'), {username: _this.getUsername()}) + ' | <a href="#" data-comment-id="'+$this.attr('id')+'" class="delete-comment">x</a>');
-          });
-
-          $('.delete-comment').click(function(e) {
+          $('.comment-holder').on('click', '.delete-comment', function(e) {
             e.preventDefault();
             var commentId = $(this).attr('data-comment-id');
             $.ajax({
@@ -194,7 +189,7 @@ function parseUri (str) {
                         id: resp.data.id
                       }
                     };
-                    $('.comment-holder li').last().before(_.template(_this.individualComment(), commentData));
+                    $('.comment-holder li').last().before(_.template(_this.individualComment(_this.getUsername()), commentData));
                     $('#comment-form textarea').val('');
                     if (noComments.length > 0) noComments.remove();
                   }
