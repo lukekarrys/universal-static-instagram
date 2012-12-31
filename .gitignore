@@ -1,5 +1,4 @@
-.instagram-cache
-.instagram-token
-_site
-_posts
-config.txt
+.instagram/
+public/
+source/_posts/
+scripts/env_vars.sh

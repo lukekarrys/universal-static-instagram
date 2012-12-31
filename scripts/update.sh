@@ -5,4 +5,5 @@ export LANG=en_US.UTF-8
 
 rake recent_instagrams
 jekyll
-sh deploy.sh
+rsync -avze 'ssh -p 22' --delete public/ $JEKYLLGRAM_DEPLOY
+date +%H:%M:%S

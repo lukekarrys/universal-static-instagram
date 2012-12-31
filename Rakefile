@@ -11,7 +11,7 @@ posts_dir       = "_posts"    # directory for blog files
 # Instagram  #
 ##############
 
-instagram_access, instagram_cache = '.instagram-token', '.instagram-cache/'
+instagram_access, instagram_cache = '.instagram/access_token.txt', '.instagram/cache/'
 def ready_instagram(access, cache)
   mkdir_p cache, {:verbose => false}
   Instagram.client(:access_token => File.open(access).gets)

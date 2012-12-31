@@ -1,6 +1,7 @@
 permalink: "/:year/:month/:day/:title/"
 markdown: "rdiscount"
-exclude: ["gettoken.sh", "realtime.sh", "recent.sh", "Rakefile", "README.markdown", "Gemfile", "Gemfile.lock", "deploy.sh", "config.txt", "config"]
-
+exclude: ["Rakefile", "README.markdown", "Gemfile", "Gemfile.lock", "scripts"]
+source: "source"
+destination: "public"
 root: "instagram.lukelov.es"
 instagram_client: "4f82d0b740ee4556b371647f1193a85e"

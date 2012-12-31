@@ -17,27 +17,31 @@ Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks a
 
 ## Setup
 
+### Setup environment variables
+- `mv scripts/env_vars_copy.sh scripts/env_vars.sh`
+- Add environment variables to `scripts/env_vars.sh` such as Instagram application tokens, verification keys, and deploy paths.
+- Once you add your environment variables you will need to either run `sh scripts/env_vars.sh` or `cd` out and back into the directory and `.rvmrc` will take care of it for you.
+
 ### Get an Instagram API Token
 - Go to your [Instagram developer clients page](http://instagram.com/accounts/login/?next=/developer/register/)
-- You will need to register a new client. This client will be used to create the Instagram post pages for Jekyll to parse
-- Go to `https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code`. It is very important that `REDIRECT-URI` matches the OAuth redirect_uri for your application or you will get an error. I just use `http://localhost`. It doesn't matter as long as it matches.
+- You will need to register a new client. This client will be used to create the Instagram post pages for Jekyll to parse.
+- From the project root run `sh .instagram/retrieve_token.sh http://REDIRECT-URI`.
 - Your browser will ask you to authorize your application. Click 'Authorize'.
-- The browser will redirect to your redirect URI with a query parameter of `code`. This value will be used to generate your token.
-- run `sh gettoken.sh CLIENTID CLIENTSECRET REDIRECTURI CODE`. This will output your access token.
-- Paste the token into `./instagram-token`
+- This will open a webpage that will redirect to your specified URI with a query parameter called `code`. It is very important that `REDIRECT-URI` matches the OAuth redirect_uri for your application or you will get an error. The browser will redirect to your redirect URI with a query parameter of `code`. Enter the code back into the waiting script.
+- Your access token will be saved to `.instagram/access_token.txt`.
 
 ### Get the site up
 - Install [rvm](https://rvm.io/)
 - `git clone` the repo
 - `cd` into directory
-- `rake recent_instagrams`
+- `. scripts/update.sh`
 - `jekyll`
 
 ### Customizatiom
 The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) is a great place to start to learn about jekyll and how to change this setup to match your needs. This repo is purposefully left as bare bones and as close to the jekyll defaults as possible.
 
 ### Deployment
-The `_site` directory is now full of good ol' fashioned static files. Check out the [jekyll page on deployment](https://github.com/mojombo/jekyll/wiki/Deployment) for all your options.
+The `public` directory is now full of good ol' fashioned static files. Check out the [jekyll page on deployment](https://github.com/mojombo/jekyll/wiki/Deployment) for all your options.
 
 ### Liking + Commenting
 The site provides a JS plugin and a server-side PHP proxy to allow for the display and posting of likes and comments for each Instagram media. To get this to work:
