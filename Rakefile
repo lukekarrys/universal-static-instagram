@@ -148,7 +148,7 @@ task :new_instagram, :id, :overwrite do |t, args|
       post.puts "---"
       post.puts "layout: post"
       post.puts "title: \"#{title.gsub(/&/,'&amp;').gsub(/\"/, '\"')}\""
-      post.puts "date: #{time.strftime('%Y-%m-%d %H:%M')}"
+      post.puts "date: #{time.strftime('%Y-%m-%d %H:%M:%S')}"
       post.puts "comments: false"
       post.puts "categories: [#{categories}]"
       post.puts "tags: [#{tags}]"

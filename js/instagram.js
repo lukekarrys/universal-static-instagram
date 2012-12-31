@@ -189,10 +189,9 @@ function parseUri (str) {
                   if (resp.meta.code === 200) {
                     var commentData = {
                       item: {
-                        text: _this.commentsHelper(text),
-                        from: {
-                          username: _this.getUsername()
-                        }
+                        text: _this.commentsHelper(resp.data.text),
+                        from: resp.data.from,
+                        id: resp.data.id
                       }
                     };
                     $('.comment-holder li').last().before(_.template(_this.individualComment(), commentData));
