@@ -71,7 +71,7 @@ task :recent_instagrams, :overwrite, :min_id, :max_id, :recursive do |t, args|
   # If we didn't reach our min_id yet, we need to abort this task and paginate
   if media_ids.last && media_ids.last != min_id
     Rake::Task[t].reenable
-    Rake::Task[t].invoke(args.overwrite, args.after_actions, min_id, media_ids.last, true)
+    Rake::Task[t].invoke(args.overwrite, min_id, media_ids.last, true)
   end
 end
 
