@@ -5,7 +5,7 @@ require "hashie"
 require "json"
 
 new_post_ext    = "markdown"  # default new post file extension when using the new_post task
-posts_dir       = "_posts"    # directory for blog files
+posts_dir       = "source/_posts"    # directory for blog files
 
 ##############
 # Instagram  #

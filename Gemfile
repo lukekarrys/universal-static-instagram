@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 group :development do
   gem 'rake', "~> 10.0.2"
-  gem 'jekyll', '~> 0.11.2'
+  gem 'jekyll', '~> 0.12'
   gem 'rdiscount', '~> 1.6.8'
   gem 'stringex', '~> 1.5.1'
   gem 'instagram', '~> 0.8.5'
