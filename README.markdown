@@ -21,6 +21,7 @@ Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks a
 - Install [rvm](https://rvm.io/)
 - `rvm install ruby-1.9.3-p362`
 - `git clone git@github.com:lukekarrys/jekyll-instagram.git`
+- `cd jekyll-instagram`
 
 ### Setup environment variables
 - `cp scripts/env_vars_copy.sh scripts/env_vars.sh`
