@@ -38,9 +38,11 @@ Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks a
 
 ### Get the site up
 - `cd` into project root
-- `sh scripts/update.sh`
-- `cd public && python -m SimpleHTTPServer` (or any other way to view static files like [pow](http://pow.cx/))
-- [http://localhost:8000](http://localhost:8000)
+- `rake recent_instagrams`
+- `jekyll --server`
+
+### All at once
+- `sh scripts/update.sh` This will rake recent instagrams, run jekyll and deploy via sync to the env var directory.
 
 ### Customizatiom
 The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) is a great place to start to learn about jekyll and how to change this setup to match your needs. This repo is purposefully left as bare bones and as close to the jekyll defaults as possible.
