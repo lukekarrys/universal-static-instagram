@@ -11,11 +11,11 @@ module Jekyll
   class InstagramTag < Liquid::Tag
     def initialize(tag_name, markup, token)
       super
-      access_token_file = File.expand_path "../.instagram-token", File.dirname(__FILE__)
+      access_token_file = File.expand_path "../.instagram/access_token.txt", File.dirname(__FILE__)
       @access_token     = File.open(access_token_file).gets
       @image_res        = "standard_resolution"
       @markup           = markup
-      @cache_folder     = File.expand_path "../.instagram-cache", File.dirname(__FILE__)
+      @cache_folder     = File.expand_path "../.instagram/cache", File.dirname(__FILE__)
       FileUtils.mkdir_p @cache_folder
     end
 

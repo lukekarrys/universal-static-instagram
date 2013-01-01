@@ -17,8 +17,13 @@ Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks a
 
 ## Setup
 
+### rvm and ruby and setup
+- Install [rvm](https://rvm.io/)
+- `rvm install ruby-1.9.3-p362`
+- `git clone git@github.com:lukekarrys/jekyll-instagram.git`
+
 ### Setup environment variables
-- `mv scripts/env_vars_copy.sh scripts/env_vars.sh`
+- `cp scripts/env_vars_copy.sh scripts/env_vars.sh`
 - Add environment variables to `scripts/env_vars.sh` such as Instagram application tokens, verification keys, and deploy paths.
 - Once you add your environment variables you will need to either run `sh scripts/env_vars.sh` or `cd` out and back into the directory and `.rvmrc` will take care of it for you.
 
@@ -31,11 +36,10 @@ Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks a
 - Your access token will be saved to `.instagram/access_token.txt`.
 
 ### Get the site up
-- Install [rvm](https://rvm.io/)
-- `git clone` the repo
-- `cd` into directory
-- `. scripts/update.sh`
-- `jekyll`
+- `cd` into project root
+- `sh scripts/update.sh`
+- `cd public && python -m SimpleHTTPServer` (or any other way to view static files like [pow](http://pow.cx/))
+- [http://localhost:8000](http://localhost:8000)
 
 ### Customizatiom
 The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) is a great place to start to learn about jekyll and how to change this setup to match your needs. This repo is purposefully left as bare bones and as close to the jekyll defaults as possible.
