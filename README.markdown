@@ -23,26 +23,24 @@ Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks a
 - `git clone git@github.com:lukekarrys/jekyll-instagram.git`
 - `cd jekyll-instagram`
 
-### Setup environment variables
-- `cp scripts/env_vars_copy.sh scripts/env_vars.sh`
-- Add environment variables to `scripts/env_vars.sh` such as Instagram application tokens, verification keys, and deploy paths.
-- Once you add your environment variables you will need to either run `sh scripts/env_vars.sh` or `cd` out and back into the directory and `.rvmrc` will take care of it for you.
+### Configuration
+- `echo instagram_secret: "YOUR_INSTAGRAM_APPLICATION_SECRET" >> _secret.yml`
+- `echo rsync_opts: "YOUR_OPTS_TO_RUN_RSYNC_WITH" >> _secret.yml`
+- Edit `root`, `instagram_client_id`, `instagram_redirect_uri` in `_config.yml`
+- You will need to register an Instagram client at the [Instagram developer clients page](http://instagram.com/accounts/login/?next=/developer/register/). This client will be used to create the Instagram post pages for Jekyll to parse. Use the values from your newly created client for the appropriate config options.
 
 ### Get an Instagram API Token
-- Go to your [Instagram developer clients page](http://instagram.com/accounts/login/?next=/developer/register/)
-- You will need to register a new client. This client will be used to create the Instagram post pages for Jekyll to parse.
-- From the project root run `sh .instagram/retrieve_token.sh http://REDIRECT-URI`.
-- Your browser will ask you to authorize your application. Click 'Authorize'.
-- This will open a webpage that will redirect to your specified URI with a query parameter called `code`. It is very important that `REDIRECT-URI` matches the OAuth redirect_uri for your application or you will get an error. The browser will redirect to your redirect URI with a query parameter of `code`. Enter the code back into the waiting script.
-- Your access token will be saved to `.instagram/access_token.txt`.
+- Run`rake access_token`
+- You will be given a URL to go to in your browser (it will be copied to your clipboard for easy access). Your browser will ask you to authorize your application. Click 'Authorize'.
+- This will redirect to your specified URI with a query parameter called `code`. Enter the code back into the waiting script.
+- Your access token will be saved to `.instagram/access_token`.
 
 ### Get the site up
-- `cd` into project root
-- `rake recent_instagrams`
+- `rake recent_instagrams` to create posts from all your instagrams
 - `jekyll --server`
 
 ### All at once
-- `sh scripts/update.sh` This will rake recent instagrams, run jekyll and deploy via sync to the env var directory.
+- `rake all` This will create any recent instagrams, genrate via jekyll and deploy via rsync.
 
 ### Customizatiom
 The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) is a great place to start to learn about jekyll and how to change this setup to match your needs. This repo is purposefully left as bare bones and as close to the jekyll defaults as possible.

@@ -5,5 +5,5 @@ export LANG=en_US.UTF-8
 
 rake recent_instagrams
 jekyll
-eval "rsync ${JEKYLLGRAM_RSYNC}"
+rake deploy
 date +%H:%M:%S

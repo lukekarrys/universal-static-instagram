@@ -11,7 +11,7 @@ module Jekyll
   class InstagramTag < Liquid::Tag
     def initialize(tag_name, markup, token)
       super
-      access_token_file = File.expand_path "../.instagram/access_token.txt", File.dirname(__FILE__)
+      access_token_file = File.expand_path "../.instagram/access_token", File.dirname(__FILE__)
       @access_token     = File.open(access_token_file).gets
       @image_res        = "standard_resolution"
       @markup           = markup

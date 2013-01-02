@@ -3,18 +3,41 @@ require "stringex"
 require "instagram"
 require "hashie"
 require "json"
+require "yaml"
+require "httpclient"
+require "clipboard"
 
 new_post_ext    = "markdown"  # default new post file extension when using the new_post task
 posts_dir       = "source/_posts"    # directory for blog files
 
-##############
-# Instagram  #
-##############
+opts = YAML.load_file('_config.yml').merge(YAML.load_file('_secret.yml'))
+instagram_access = '.instagram/access_token'
+instagram_cache = '.instagram/cache/'
 
-instagram_access, instagram_cache = '.instagram/access_token.txt', '.instagram/cache/'
 def ready_instagram(access, cache)
   mkdir_p cache, {:verbose => false}
   Instagram.client(:access_token => File.open(access).gets)
+end
+
+def configure_instagram(client, secret)
+  Instagram.configure do |config|
+    config.client_id = client
+    config.client_secret = secret
+  end
+end
+
+def authorize_url(redirect_uri)
+  Instagram.authorize_url(:redirect_uri => redirect_uri)
+end
+
+def get_access_token(code, redirect_uri, instagram_access)
+  response = Instagram.get_access_token(code, :redirect_uri => redirect_uri)
+  if File.exist?(instagram_access)
+    File.truncate(instagram_access, 0)
+  end
+  open(instagram_access, 'w') do |file|
+    file.puts response.access_token
+  end
 end
 
 def get_instagram_cache_file(id, cache_dir)
@@ -33,6 +56,34 @@ end
 def get_instagram_cache(id, cache)
   cache_file = get_instagram_cache_file id, cache
   JSON.parse(File.read(cache_file)) if File.exists? cache_file
+end
+
+desc "Create and save an Instagram access token"
+task :access_token do |t, args|
+  configure_instagram(opts["instagram_client_id"], opts["instagram_secret"])
+  auth_url = authorize_url(opts["instagram_redirect_uri"])
+  Clipboard.copy auth_url
+  code = ask("Go to #{auth_url} in your browser. Authenticate and then enter the code query param from the redirect: ")
+  get_access_token(code, opts["instagram_redirect_uri"], instagram_access)
+  puts "### Access code has been saved to #{instagram_access}"
+end
+
+task :subscription do |t, args|
+  instagram = ready_instagram instagram_access, instagram_cache
+  instagram.create_subsription(:object => "user", :aspect => "media", :callback_url => "#{opts["instagram_redirect_uri"]}/proxy/instagram-realtime.php")
+end
+
+desc "Deploy"
+task :deploy do |t, args|
+  puts "## Deploying website via Rsync"
+  system("rsync #{opts["rsync_opts"]}")
+end
+
+desc "All"
+task :all do |t, args|
+  Rake::Task["recent_instagrams"].invoke()
+  system "jekyll"
+  Rake::Task["deploy"].invoke()
 end
 
 # :overwrite is passed to directly to `new_instagram`

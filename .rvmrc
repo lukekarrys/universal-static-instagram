@@ -8,5 +8,3 @@ if command -v bundle && [[ -s Gemfile ]]
 then
   bundle | grep -v 'Using' | grep -v 'complete' | sed '/^$/d'
 fi
-
-sh ./scripts/env_vars.sh
