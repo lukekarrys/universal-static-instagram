@@ -84,6 +84,7 @@ task :all do |t, args|
   Rake::Task["recent_instagrams"].invoke()
   system "jekyll"
   Rake::Task["deploy"].invoke()
+  puts "Finished at: #{Time.now.inspect}"
 end
 
 # :overwrite is passed to directly to `new_instagram`

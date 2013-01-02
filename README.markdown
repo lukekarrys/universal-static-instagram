@@ -24,8 +24,8 @@ Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks a
 - `cd jekyll-instagram`
 
 ### Configuration
-- `echo instagram_secret: "YOUR_INSTAGRAM_APPLICATION_SECRET" >> _secret.yml`
-- `echo rsync_opts: "YOUR_OPTS_TO_RUN_RSYNC_WITH" >> _secret.yml`
+- `touch _secret.yml`
+- Add `instagram_secret` and `rsync_opts` to `_secret.yml`. These options are moved to this file instead of _config.yml since they either should be kept secret or are environment specific.
 - Edit `root`, `instagram_client_id`, `instagram_redirect_uri` in `_config.yml`
 - You will need to register an Instagram client at the [Instagram developer clients page](http://instagram.com/accounts/login/?next=/developer/register/). This client will be used to create the Instagram post pages for Jekyll to parse. Use the values from your newly created client for the appropriate config options.
 
@@ -42,11 +42,27 @@ Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks a
 ### All at once
 - `rake all` This will create any recent instagrams, genrate via jekyll and deploy via rsync.
 
+### Cron
+I've deployed this on an Ubuntu 10.04.3 LTS server and added this to my crontab to get new Instagrams every hour:
+
+`0 */1 * * * /bin/bash -c 'source /home/USERNAME/.profile && source /home/USERNAME/.rvm/environments/ruby-1.9.3-p362@jekyll-instagram && cd /PATH/TO/jekyll-instagram/ && rake all'`
+
+Make sure you update your `rsync_opts` to specify where to copy the files to.
+
+I ran into some encoding issues when running jekyll from a cron job, so I am sourcing my .profile. It contains these two lines:
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+```
+See [jekyll issue #188](https://github.com/mojombo/jekyll/issues/188) for more details.
+
 ### Customizatiom
 The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) is a great place to start to learn about jekyll and how to change this setup to match your needs. This repo is purposefully left as bare bones and as close to the jekyll defaults as possible.
 
 ### Deployment
 The `public` directory is now full of good ol' fashioned static files. Check out the [jekyll page on deployment](https://github.com/mojombo/jekyll/wiki/Deployment) for all your options.
+
+I use `rsync` which is why I add `rsync_opts` to `_secret.yml`. These are the options that the `rsync` command will use to copy files.
 
 ### Liking + Commenting
 The site provides a JS plugin and a server-side PHP proxy to allow for the display and posting of likes and comments for each Instagram media. To get this to work:
