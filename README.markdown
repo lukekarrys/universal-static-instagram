@@ -56,6 +56,9 @@ export LANG=en_US.UTF-8
 ```
 See [jekyll issue #188](https://github.com/mojombo/jekyll/issues/188) for more details.
 
+### Push
+`source/proxy/instagram-realtime.php` is an endpoint that Instagram can hit using the Realtime API. This doesn't work yet as I need to figure out how to properly ger PHP to call the correct exec command.
+
 ### Customizatiom
 The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) is a great place to start to learn about jekyll and how to change this setup to match your needs. This repo is purposefully left as bare bones and as close to the jekyll defaults as possible.
 
@@ -69,7 +72,6 @@ The site provides a JS plugin and a server-side PHP proxy to allow for the displ
 - Change `root` and `instagram_client` in `_config.yml`. `root` must match your Instagram redirect_url (minus the http://) and `instagram_client` is your Instagram client ID from previously.
 - Your server (or wherever you are testing) will need to support PHP for this to work. Submit a pull request for a different proxy if you want.
 - Instagram recently instituted comment whitelisting for applications. If you want comments to work, you'll have to visit [this page](http://bit.ly/instacomments) to request access for commenting on your application.
-
 
 ## License
 (The MIT License)
