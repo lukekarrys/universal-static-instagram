@@ -9,4 +9,4 @@ then
   bundle | grep -v 'Using' | grep -v 'complete' | sed '/^$/d'
 fi
 
-. ./scripts/env_vars.sh
+sh ./scripts/env_vars.sh
