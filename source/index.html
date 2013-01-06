@@ -5,8 +5,9 @@ layout: default
 <div class="blog-index">
   <h1>Instagrams</h1>
   <ul class="posts">
-    {% for post in site.posts %}
+    {% for post in paginator.posts %}
       <li><img src="{{ post | instagram_data: "images.thumbnail.url" }}" /><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
+  <p>{% if paginator.previous_page %}{% if paginator.previous_page == 1 %}<a href="/">&laquo; Previous</a>{% else %}<a href="/page{{paginator.previous_page}}">&laquo; Previous</a>{% else %}<span>Previous</span>{% endif %}{% endif %}  —— {% if paginator.next_page %}<a href="/page{{paginator.next_page}}">Next &raquo;</a>{% else %}<span>Next &raquo;</span>{% endif %}</p>
 </div>
