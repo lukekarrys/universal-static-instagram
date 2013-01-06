@@ -64,7 +64,7 @@ task :access_token do |t, args|
   configure_instagram(opts["instagram_client_id"], opts["instagram_secret"])
   auth_url = authorize_url(opts["instagram_redirect_uri"])
   Clipboard.copy auth_url
-  code = ask("Go to #{auth_url} in your browser. Authenticate and then enter the code query param from the redirect: ")
+  code = ask("Go to #{auth_url} in your browser (the url has ben copied to your clipboard). Authenticate and then enter the code query param from the redirect: ")
   get_access_token(code, opts["instagram_redirect_uri"], instagram_access)
   puts "### Access code has been saved to #{instagram_access}"
 end
@@ -94,17 +94,18 @@ task :all do |t, args|
 end
 
 # :overwrite is passed to directly to `new_instagram`
-# :delete_cache of 'y' or 'yes' will delete *ALL* cache and posts first
+# :nuke of 'y' or 'yes' will delete *ALL* cache and posts first
+# :use_cache of 'y' or 'yes' will only write posts that are in the cache
 # :min_id and :max_id can be set to retrieve a range of instagrams
 # if both are nil, default is getting everything newer than the latest cache (all if there's no cache)
 desc "Run `rake new_instagram` for all instagrams newer than the most recent one in the cache"
-task :recent_instagrams, :overwrite, :delete_cache, :min_id, :max_id, :recursive do |t, args|
+task :recent_instagrams, :overwrite, :nuke, :use_cache, :min_id, :max_id, :recursive do |t, args|
   instagram = ready_instagram instagram_access, instagram_cache
   instagram_request, min_default = {"count" => 60}, "beginning"
   args.with_defaults(:min_id => min_default)
   min_id = args.min_id
 
-  if args.delete_cache == "yes" || args.delete_cache == "y"
+  if args.nuke == "yes" || args.nuke == "y"
     puts "Deteting #{instagram_cache}"
     `rm -rf #{instagram_cache}`
     mkdir_p instagram_cache
@@ -119,26 +120,34 @@ task :recent_instagrams, :overwrite, :delete_cache, :min_id, :max_id, :recursive
     y <=> x
   }
 
-  # Set min_id to the most recent cached id, if a min_id wasn't explicity passed in
-  min_id = ordered_cache.first.split(".")[0] if args.min_id == min_default && ordered_cache.length > 0 && !args.recursive
-
-  instagram_request["min_id"] = min_id unless min_id == min_default
-  instagram_request["max_id"] = args.max_id if args.max_id
-
-  # Get instagrams and create a new post for each, while storing each media id
-  media_ids = instagram.user_recent_media(instagram_request).map { |media|
-    media_id = media["id"]
-    unless media_id == min_id
+  if args.use_cache == "yes" || args.use_cache == "y"
+    ordered_cache.each { |cache|
+      media = get_instagram_cache cache.split('.')[0], instagram_cache
       Rake::Task["new_instagram"].reenable
       Rake::Task["new_instagram"].invoke(media, args.overwrite)
-    end
-    media_id
-  }
+    }
+  else
+    # Set min_id to the most recent cached id, if a min_id wasn't explicity passed in
+    min_id = ordered_cache.first.split(".")[0] if args.min_id == min_default && ordered_cache.length > 0 && !args.recursive
 
-  # If we didn't reach our min_id yet, we need to abort this task and paginate
-  if media_ids.last && media_ids.last != min_id
-    Rake::Task[t].reenable
-    Rake::Task[t].invoke(args.overwrite, "no", min_id, media_ids.last, true)
+    instagram_request["min_id"] = min_id unless min_id == min_default
+    instagram_request["max_id"] = args.max_id if args.max_id
+
+    # Get instagrams and create a new post for each, while storing each media id
+    media_ids = instagram.user_recent_media(instagram_request).map { |media|
+      media_id = media["id"]
+      unless media_id == min_id
+        Rake::Task["new_instagram"].reenable
+        Rake::Task["new_instagram"].invoke(media, args.overwrite)
+      end
+      media_id
+    }
+
+    # If we didn't reach our min_id yet, we need to abort this task and paginate
+    if media_ids.last && media_ids.last != min_id
+      Rake::Task[t].reenable
+      Rake::Task[t].invoke(args.overwrite, "no", args.use_cache, min_id, media_ids.last, true)
+    end
   end
 end
 
@@ -154,7 +163,7 @@ task :new_instagram, :id, :overwrite do |t, args|
   media = nil
 
   # If we passed in a hash, use it and cache it
-  if args.id.is_a?(Hashie::Mash)
+  if args.id.is_a?(Hashie::Mash) || args.id.is_a?(Hash)
     media = args.id
     media_id = media["id"]
     cache_instagram media_id, media, instagram_cache

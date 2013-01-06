@@ -1,5 +1,4 @@
-.instagram/cache/
-.instagram/access_token
+.instagram/
 public/
 source/_posts/
 _secret.yml

@@ -65,6 +65,8 @@ See [jekyll issue #188](https://github.com/mojombo/jekyll/issues/188) for more d
 ### Push
 `source/proxy/instagram-realtime.php` is an endpoint that Instagram can hit using the Realtime API. This doesn't work yet as I need to figure out how to properly ger PHP to call the correct exec command.
 
+You can setup this endpoint using the rake task `subscription`. However, the endpoint must already be accessible at your redirect url before running the task.
+
 ### Customizatiom
 The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) is a great place to start to learn about jekyll and how to change this setup to match your needs. This repo is purposefully left as bare bones and as close to the jekyll defaults as possible.
 
