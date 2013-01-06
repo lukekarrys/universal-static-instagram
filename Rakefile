@@ -86,26 +86,27 @@ task :gen_deploy do |t, args|
   Rake::Task["deploy"].invoke()
 end
 
-desc "Get recent_instagram and generate and deploy"
-task :all do |t, args|
-  Rake::Task["recent_instagrams"].invoke()
-  Rake::Task["gen_deploy"].invoke()
+desc "Get recent_instagrams and if there are updates, then generate and deploy"
+task :all, :overwrite, :cache do |t, args|
+  args.with_defaults(:overwrite => 'skip', :cache => 'nothing')
+  Rake::Task["recent_instagrams"].invoke(args.overwrite, args.cache, 'gen_deploy')
   puts "Finished at: #{Time.now.inspect}"
 end
 
 # :overwrite is passed to directly to `new_instagram`
-# :nuke of 'y' or 'yes' will delete *ALL* cache and posts first
-# :use_cache of 'y' or 'yes' will only write posts that are in the cache
+# :cache of 'delete' will delete *ALL* cache and posts first
+# :cache of 'use' will only write posts that are in the cache
+# :after is a rake task that will be called after
 # :min_id and :max_id can be set to retrieve a range of instagrams
 # if both are nil, default is getting everything newer than the latest cache (all if there's no cache)
 desc "Run `rake new_instagram` for all instagrams newer than the most recent one in the cache"
-task :recent_instagrams, :overwrite, :nuke, :use_cache, :min_id, :max_id, :recursive do |t, args|
+task :recent_instagrams, :overwrite, :cache, :after, :min_id, :max_id, :recursive do |t, args|
   instagram = ready_instagram instagram_access, instagram_cache
   instagram_request, min_default = {"count" => 60}, "beginning"
   args.with_defaults(:min_id => min_default)
   min_id = args.min_id
 
-  if args.nuke == "yes" || args.nuke == "y"
+  if args.cache == "delete" && args.recursive != true
     puts "Deteting #{instagram_cache}"
     `rm -rf #{instagram_cache}`
     mkdir_p instagram_cache
@@ -120,11 +121,12 @@ task :recent_instagrams, :overwrite, :nuke, :use_cache, :min_id, :max_id, :recur
     y <=> x
   }
 
-  if args.use_cache == "yes" || args.use_cache == "y"
-    ordered_cache.each { |cache|
+  if args.cache == "use"
+    media_ids = ordered_cache.map { |cache|
       media = get_instagram_cache cache.split('.')[0], instagram_cache
       Rake::Task["new_instagram"].reenable
       Rake::Task["new_instagram"].invoke(media, args.overwrite)
+      media["id"]
     }
   else
     # Set min_id to the most recent cached id, if a min_id wasn't explicity passed in
@@ -146,8 +148,13 @@ task :recent_instagrams, :overwrite, :nuke, :use_cache, :min_id, :max_id, :recur
     # If we didn't reach our min_id yet, we need to abort this task and paginate
     if media_ids.last && media_ids.last != min_id
       Rake::Task[t].reenable
-      Rake::Task[t].invoke(args.overwrite, "no", args.use_cache, min_id, media_ids.last, true)
+      Rake::Task[t].invoke(args.overwrite, args.cache, args.after, min_id, media_ids.last, true)
     end
+  end
+
+  if args.after && (args.recursive == true || media_ids.length > 1)
+    Rake::Task[args.after].reenable
+    Rake::Task[args.after].invoke()
   end
 end
 
