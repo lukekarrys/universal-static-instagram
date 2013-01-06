@@ -6,6 +6,7 @@
 require 'instagram'
 require 'json'
 require 'stringex'
+require 'yaml'
 
 module Jekyll
   class InstagramTag < Liquid::Tag
@@ -20,16 +21,18 @@ module Jekyll
     end
 
     def render(context)
-      if parts = @markup.match(/([\d_]*) (.*)/)
-        id, uri = parts[1].strip, parts[2].strip
+      if parts = @markup.match(/([\d_]*) "(.*)"/)
+        id, title = parts[1].strip, parts[2].strip
         media = get_cached_media(id) || get_media(id)
-        gen_html_output JSON.parse(media), uri
+        gen_html_output JSON.parse(media), title
       else
         ""
       end
     end
 
-    def gen_html_output(media, uri)
+    def gen_html_output(media, title)
+      config = Jekyll.configuration({})
+
       loc_name, lat, lon = nil, nil, nil
       id              = media["id"]
       src             = media["images"][@image_res]["url"]
@@ -37,8 +40,6 @@ module Jekyll
       image_h         = media["images"][@image_res]["height"]
       location        = media["location"]
       filter          = media["filter"]
-      caption         = media["caption"]
-      title           = caption ? caption["text"] : "Untitled Instagram"
 
       output = "<p><img src='#{src}' alt='#{title}' height='#{image_h}' width='#{image_w}' />"
       output += "<br/>Filtered with #{filter} via Instagram</p>"
@@ -59,11 +60,9 @@ module Jekyll
         end
         output += "</p>"
       end
-
-      instagram_client_id = Jekyll.configuration({})['instagram_client']
-      redirect_uri = "http://#{Jekyll.configuration({})['root']}"
+      
       output += "<p class='instagram-comment-holder'>"
-      output += "<a href='https://instagram.com/oauth/authorize/?client_id=#{instagram_client_id}&redirect_uri=#{redirect_uri}&response_type=token&scope=likes+comments'"
+      output += "<a href='https://instagram.com/oauth/authorize/?client_id=#{config["instagram_client_id"]}&redirect_uri=#{config["instagram_redirect_uri"]}&response_type=token&scope=likes+comments'"
       output += "  id='#{id}' class='instagram-comment-link'>Sign in with Instagram to view Likes and Comments</a></p>"
     end
 

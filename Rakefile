@@ -6,6 +6,7 @@ require "json"
 require "yaml"
 require "httpclient"
 require "clipboard"
+require "htmlentities"
 
 new_post_ext    = "markdown"  # default new post file extension when using the new_post task
 posts_dir       = "source/_posts"    # directory for blog files
@@ -79,23 +80,37 @@ task :deploy do |t, args|
   system("rsync #{opts["rsync_opts"]}")
 end
 
-desc "All"
+desc "Generate and deploy"
+task :gen_deploy do |t, args|
+  system("jekyll")
+  Rake::Task["deploy"].invoke()
+end
+
+desc "Get recent_instagram and generate and deploy"
 task :all do |t, args|
   Rake::Task["recent_instagrams"].invoke()
-  system "jekyll"
-  Rake::Task["deploy"].invoke()
+  Rake::Task["gen_deploy"].invoke()
   puts "Finished at: #{Time.now.inspect}"
 end
 
 # :overwrite is passed to directly to `new_instagram`
+# :delete_cache of 'y' or 'yes' will delete *ALL* cache and posts first
 # :min_id and :max_id can be set to retrieve a range of instagrams
 # if both are nil, default is getting everything newer than the latest cache (all if there's no cache)
 desc "Run `rake new_instagram` for all instagrams newer than the most recent one in the cache"
-task :recent_instagrams, :overwrite, :min_id, :max_id, :recursive do |t, args|
+task :recent_instagrams, :overwrite, :delete_cache, :min_id, :max_id, :recursive do |t, args|
   instagram = ready_instagram instagram_access, instagram_cache
   instagram_request, min_default = {"count" => 60}, "beginning"
   args.with_defaults(:min_id => min_default)
   min_id = args.min_id
+
+  if args.delete_cache == "yes" || args.delete_cache == "y"
+    puts "Deteting #{instagram_cache}"
+    `rm -rf #{instagram_cache}`
+    mkdir_p instagram_cache
+    `rm -rf #{posts_dir}`
+    mkdir_p posts_dir
+  end
 
   # Get and order the cache by most recent, descending
   ordered_cache = `ls #{instagram_cache}`.split("\n").sort { |x, y|
@@ -123,7 +138,7 @@ task :recent_instagrams, :overwrite, :min_id, :max_id, :recursive do |t, args|
   # If we didn't reach our min_id yet, we need to abort this task and paginate
   if media_ids.last && media_ids.last != min_id
     Rake::Task[t].reenable
-    Rake::Task[t].invoke(args.overwrite, min_id, media_ids.last, true)
+    Rake::Task[t].invoke(args.overwrite, "no", min_id, media_ids.last, true)
   end
 end
 
@@ -164,11 +179,13 @@ task :new_instagram, :id, :overwrite do |t, args|
   tags = tags.join("\", \"")
   tags = "\"#{tags.downcase}\"" if tags != ""
   categories = "\"#{filter}\""
-  title = caption ? media["caption"]["text"] : "Untitled Instagram"
-  file_id = caption ? "" : "-#{media_id.split("_")[0]}"
-  post_title = title.gsub(/[#,@]/,"").to_url
-  post_uri = "#{post_title}#{file_id}"
+  file_id = media_id.split("_")[0]
+  hasCaption = (caption && caption["text"] && Integer(Integer(media["created_time"]) - Integer(caption["created_time"])).abs < opts["max_caption_created_diff"]) 
+  title = hasCaption ? media["caption"]["text"].gsub("#", "hashtag-") : "Untied Instagram"
+  post_uri = hasCaption ? title.to_url : (title + '-' + file_id).to_url
+  post_uri = "United Instagram #{file_id}".to_url if post_uri == ""
   filename = "#{posts_dir}/#{time.strftime("%Y-%m-%d")}-#{post_uri}.#{new_post_ext}"
+  title = HTMLEntities.new.encode title
 
   # Test if we should write post to file or not
   write_file = true
@@ -187,14 +204,13 @@ task :new_instagram, :id, :overwrite do |t, args|
     open(filename, 'w') do |post|
       post.puts "---"
       post.puts "layout: post"
-      post.puts "title: \"#{title.gsub(/&/,'&amp;').gsub(/\"/, '\"')}\""
+      post.puts "title: \"#{title}\""
       post.puts "date: #{time.strftime('%Y-%m-%d %H:%M:%S')}"
-      post.puts "comments: false"
       post.puts "categories: [#{categories}]"
       post.puts "tags: [#{tags}]"
       post.puts "---"
       post.puts ""
-      post.puts "{% instagram #{media_id} #{post_uri} %}"
+      post.puts "{% instagram #{media_id} \"#{title}\" %}"
     end
   else
     puts "Skipping post: #{filename}"

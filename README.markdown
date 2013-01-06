@@ -45,7 +45,12 @@ Check out [this page](http://instagram.lukelov.es/) for a demo of how it looks a
 ### Cron
 I've deployed this on an Ubuntu 10.04.3 LTS server and added this to my crontab to get new Instagrams every hour:
 
-`0 */1 * * * /bin/bash -c 'source /home/USERNAME/.profile && source /home/USERNAME/.rvm/environments/ruby-1.9.3-p362@jekyll-instagram && cd /PATH/TO/jekyll-instagram/ && rake all'`
+```
+0 */1 * * * /bin/bash -c 'source /home/USERNAME/.profile && 
+source /home/USERNAME/.rvm/environments/ruby-1.9.3-p362@jekyll-instagram && 
+cd /PATH/TO/jekyll-instagram/ && 
+rake all'
+```
 
 Make sure you update your `rsync_opts` to specify where to copy the files to.
 

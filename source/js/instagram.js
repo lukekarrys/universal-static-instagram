@@ -91,7 +91,7 @@ function parseUri (str) {
 
       var accessToken = this.accessToken(),
           $commentLink = $('.instagram-comment-link'),
-          mediaId = $commentLink.length > 0 && $commentLink.attr('id'),
+          mediaId = $commentLink.attr('id'),
           _this = this,
           jsonpQS = '?access_token=' + accessToken,
           saveUsername = function(resp) {
@@ -110,7 +110,9 @@ function parseUri (str) {
 
       if (parseUri(window.location.href).anchor.split('access_token=')[1] && !mediaId) {
         var lastPage = cookie.getCookie(_this.lastPageCookie);
-        if (lastPage && lastPage !== "null" && (lastPage.indexOf('http') === 0 || lastPage.charAt(0) === '/')) window.location.href = cookie.getCookie(_this.lastPageCookie);
+        if (lastPage && lastPage !== "null" && (lastPage.indexOf('http') === 0 || lastPage.charAt(0) === '/')) {
+          window.location.href = lastPage;
+        }
       } else if (accessToken && mediaId) {
         cookie.setCookie(this.cookieKey, accessToken, 365, '/');
 

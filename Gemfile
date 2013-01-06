@@ -10,4 +10,5 @@ group :development do
   gem "highline", "~> 1.6.15"
   gem "httpclient", "~> 2.3.1"
   gem "clipboard", "~> 1.0.1"
+  gem "htmlentities", "~> 4.3.1"
 end
