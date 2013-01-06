@@ -217,9 +217,10 @@ task :new_instagram, :id, :overwrite do |t, args|
       post.puts "date: #{time.strftime('%Y-%m-%d %H:%M:%S')}"
       post.puts "categories: [#{categories}]"
       post.puts "tags: [#{tags}]"
+      post.puts "media_id: \"#{media_id}\""
       post.puts "---"
       post.puts ""
-      post.puts "{% instagram #{media_id} \"#{title}\" %}"
+      post.puts "{% instagram %}"
     end
   else
     puts "Skipping post: #{filename}"

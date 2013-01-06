@@ -21,13 +21,11 @@ module Jekyll
     end
 
     def render(context)
-      if parts = @markup.match(/([\d_]*) "(.*)"/)
-        id, title = parts[1].strip, parts[2].strip
-        media = get_cached_media(id) || get_media(id)
-        gen_html_output JSON.parse(media), title
-      else
-        ""
-      end
+      id = context.environments.first["page"]["media_id"]
+      title = context.environments.first["page"]["title"]
+      return "" if id == "" || title == ""
+      media = get_cached_media(id) || get_media(id)
+      gen_html_output JSON.parse(media), title
     end
 
     def gen_html_output(media, title)
