@@ -49,6 +49,7 @@ I've deployed this on an Ubuntu 10.04.3 LTS server and added this to my crontab 
 0 */1 * * * /bin/bash -c 'source /home/USERNAME/.profile && 
 source /home/USERNAME/.rvm/environments/ruby-1.9.3-p362@jekyll-instagram && 
 cd /PATH/TO/jekyll-instagram/ && 
+git pull && 
 rake all'
 ```
 
