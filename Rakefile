@@ -69,11 +69,6 @@ task :access_token do |t, args|
   puts "### Access code has been saved to #{instagram_access}"
 end
 
-task :subscription do |t, args|
-  instagram = ready_instagram instagram_access, instagram_cache
-  instagram.create_subsription(:object => "user", :aspect => "media", :callback_url => "#{opts["instagram_redirect_uri"]}/proxy/instagram-realtime.php")
-end
-
 desc "Deploy"
 task :deploy do |t, args|
   puts "## Deploying website via Rsync"
