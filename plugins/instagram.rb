@@ -38,9 +38,10 @@ module Jekyll
       image_h         = media["images"][@image_res]["height"]
       location        = media["location"]
       filter          = media["filter"]
+      link            = media["link"]
 
       output = "<p><img src='#{src}' alt='#{title}' height='#{image_h}' width='#{image_w}' />"
-      output += "<br/>Filtered with #{filter} via Instagram</p>"
+      output += "<br/>Filtered with #{filter} via <a href='#{link}'>Instagram</a></p>"
 
       if location
         loc_name      = location["name"]
