@@ -192,7 +192,7 @@ task :new_instagram, :id, :overwrite do |t, args|
   categories = "\"#{filter}\""
   file_id = media_id.split("_")[0]
   hasCaption = (caption && caption["text"] && Integer(Integer(media["created_time"]) - Integer(caption["created_time"])).abs < opts["max_caption_created_diff"]) 
-  title = hasCaption ? media["caption"]["text"] : "Untied Instagram"
+  title = hasCaption ? media["caption"]["text"] : "Untitled Instagram"
   post_uri = hasCaption ? title.gsub("#", "hashtag-").to_url : (title + '-' + file_id).to_url
   post_uri = "United Instagram #{file_id}".to_url if post_uri == ""
   filename = "#{posts_dir}/#{time.strftime("%Y-%m-%d")}-#{post_uri}.#{new_post_ext}"
