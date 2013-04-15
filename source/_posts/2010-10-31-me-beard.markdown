@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Me. Beard."
+date: 2010-10-31 13:44:21
+categories: ["Gotham"]
+tags: []
+media_id: "1953696_326209"
+---
+
+{% instagram %}

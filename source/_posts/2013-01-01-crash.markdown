@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Crash."
+date: 2013-01-01 02:38:25
+categories: ["Inkwell"]
+tags: []
+media_id: "359142177740352030_326209"
+---
+
+{% instagram %}

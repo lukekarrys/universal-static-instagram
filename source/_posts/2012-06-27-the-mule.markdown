@@ -1,0 +1,10 @@
+---
+layout: post
+title: "The Mule!"
+date: 2012-06-27 23:58:51
+categories: ["X-Pro II"]
+tags: []
+media_id: "223528798599178607_326209"
+---
+
+{% instagram %}

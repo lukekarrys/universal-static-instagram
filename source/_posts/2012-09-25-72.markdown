@@ -1,0 +1,10 @@
+---
+layout: post
+title: "72"
+date: 2012-09-25 18:07:11
+categories: ["Amaro"]
+tags: []
+media_id: "288581617974438426_326209"
+---
+
+{% instagram %}

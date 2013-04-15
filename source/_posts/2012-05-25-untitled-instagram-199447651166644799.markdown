@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Untitled Instagram"
+date: 2012-05-25 18:33:56
+categories: ["Lo-fi"]
+tags: []
+media_id: "199447651166644799_326209"
+---
+
+{% instagram %}

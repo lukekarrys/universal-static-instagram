@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Untitled Instagram"
+date: 2012-05-15 16:40:30
+categories: ["X-Pro II"]
+tags: []
+media_id: "192142815299561808_326209"
+---
+
+{% instagram %}

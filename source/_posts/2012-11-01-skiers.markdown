@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Skiers"
+date: 2012-11-01 00:09:33
+categories: ["Amaro"]
+tags: []
+media_id: "314855953228033007_326209"
+---
+
+{% instagram %}

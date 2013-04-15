@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Church"
+date: 2012-11-02 13:33:26
+categories: ["Walden"]
+tags: []
+media_id: "315985315700599519_326209"
+---
+
+{% instagram %}

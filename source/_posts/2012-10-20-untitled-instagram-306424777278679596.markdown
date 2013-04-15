@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Untitled Instagram"
+date: 2012-10-20 08:58:21
+categories: ["Amaro"]
+tags: []
+media_id: "306424777278679596_326209"
+---
+
+{% instagram %}

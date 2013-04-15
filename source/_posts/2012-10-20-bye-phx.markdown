@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Bye PHX!"
+date: 2012-10-20 12:37:43
+categories: ["Lo-fi"]
+tags: []
+media_id: "306535183724767379_326209"
+---
+
+{% instagram %}

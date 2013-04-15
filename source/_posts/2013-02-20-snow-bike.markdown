@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Snow bike!"
+date: 2013-02-20 13:09:21
+categories: ["Lo-fi"]
+tags: []
+media_id: "395698525726501821_326209"
+---
+
+{% instagram %}

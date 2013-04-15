@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Outlook"
+date: 2013-01-25 17:21:58
+categories: ["Lo-fi"]
+tags: []
+media_id: "376981503601732429_326209"
+---
+
+{% instagram %}

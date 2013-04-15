@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Art"
+date: 2011-12-01 19:21:41
+categories: ["Amaro"]
+tags: []
+media_id: "383518080_326209"
+---
+
+{% instagram %}

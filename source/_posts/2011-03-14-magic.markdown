@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Magic."
+date: 2011-03-14 10:51:25
+categories: ["X-Pro II"]
+tags: []
+media_id: "37596305_326209"
+---
+
+{% instagram %}
