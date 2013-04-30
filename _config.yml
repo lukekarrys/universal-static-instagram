@@ -6,6 +6,7 @@ destination: "public"
 plugins: "plugins"
 paginate: 10
 
+absolute_path: "/jekyll_instagram/"
 root: "instagram.lukelov.es"
 instagram_client_id: "4f82d0b740ee4556b371647f1193a85e"
 instagram_redirect_uri: "http://instagram.lukelov.es"

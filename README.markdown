@@ -74,7 +74,7 @@ I use `rsync` to send the public dir to a server.
 
 #### gh-pages
 
-Make a `gh-pages` branch and push it up to GitHub.
+Run `rake setup_github_pages` and then `rake push`.
 
 ### Liking + Commenting
 The site provides a JS plugin and a server-side PHP proxy to allow for the display and posting of likes and comments for each Instagram media. To get this to work:

@@ -33,7 +33,7 @@ module Jekyll
 
       loc_name, lat, lon = nil, nil, nil
       id              = media["id"]
-      src             = media["images"][@image_res]["url"].gsub("http://", "/media/")
+      src             = media["images"][@image_res]["url"].gsub("http://", "#{config["absolute_path"]}media/")
       image_w         = media["images"][@image_res]["width"]
       image_h         = media["images"][@image_res]["height"]
       location        = media["location"]

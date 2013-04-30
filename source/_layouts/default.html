@@ -1,6 +1,6 @@
 {% include head.html %}
 <body>
-  <p><a href="/">Home</a> | <strong>Last compiled:</strong> {{ site.time | date: "%m/%d/%Y %I:%M:%S%p" }}</p>
+  <p><a href="{{site.absolute_path}}">Home</a> | <strong>Last compiled:</strong> {{ site.time | date: "%m/%d/%Y %I:%M:%S%p" }}</p>
   <div id="content">
     {{ content }}
   </div>

@@ -5,7 +5,7 @@ layout: default
 <h1>{{ page.title }}</h1>
 <h2>{{ page.date | date: "%A %B %d, %I:%M:%S%p" }}</h2>
 <div class="entry-content">{{ content }}</div>
-<p>Categories:{% for cat in page.categories %} <a href="/categories/{{ cat | downcase | replace:' ','-' }}">{{ cat }}</a>{% endfor %}</p>
-<p>Tags:{% for tag in page.tags %} <a href="/tags/{{ tag | downcase }}">{{ tag }}</a>{% endfor %}</p>
+<p>Categories:{% for cat in page.categories %} <a href="{{site.absolute_path}}categories/{{ cat | downcase | replace:' ','-' }}">{{ cat }}</a>{% endfor %}</p>
+<p>Tags:{% for tag in page.tags %} <a href="{{site.absolute_path}}tags/{{ tag | downcase }}">{{ tag }}</a>{% endfor %}</p>
 <p>Other pics from this <a href="..">day</a> <a href="../..">month</a> <a href="../../..">year</a></p>
-<p>{% if page.previous.url %}<a href="{{ page.previous.url }}">&laquo; {{ page.previous.title }}</a>{% endif %} —— {% if page.next.url %}<a href="{{ page.next.url }}">{{ page.next.title }} &raquo;</a>{% endif %}</p>
+<p>{% if page.previous.url %}<a href="{{site.absolute_path}}{{ page.previous.url }}">&laquo; {{ page.previous.title }}</a>{% endif %} —— {% if page.next.url %}<a href="{{site.absolute_path}}{{ page.next.url }}">{{ page.next.title }} &raquo;</a>{% endif %}</p>
