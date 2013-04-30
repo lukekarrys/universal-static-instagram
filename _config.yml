@@ -6,8 +6,9 @@ destination: "public"
 plugins: "plugins"
 paginate: 10
 
-absolute_path: "/jekyll_instagram/"
-root: "instagram.lukelov.es"
+replace_absolute: "/media/"
+absolute_path: "/jekyll-instagram"
+root: "lukekarrys.github.io"
 instagram_client_id: "4f82d0b740ee4556b371647f1193a85e"
-instagram_redirect_uri: "http://instagram.lukelov.es"
+instagram_redirect_uri: "http://lukekarrys.github.io/jekyll-instagram"
 max_caption_created_diff: 600

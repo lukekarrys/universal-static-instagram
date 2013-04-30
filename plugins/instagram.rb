@@ -33,7 +33,7 @@ module Jekyll
 
       loc_name, lat, lon = nil, nil, nil
       id              = media["id"]
-      src             = media["images"][@image_res]["url"].gsub("http://", "#{config["absolute_path"]}media/")
+      src             = media["images"][@image_res]["url"].gsub("http://", config["absolute_path"] + config["replace_absolute"])
       image_w         = media["images"][@image_res]["width"]
       image_h         = media["images"][@image_res]["height"]
       location        = media["location"]
@@ -59,7 +59,7 @@ module Jekyll
         end
         output += "</p>"
       end
-      
+
       output += "<p class='instagram-comment-holder'>"
       output += "<a href='https://instagram.com/oauth/authorize/?client_id=#{config["instagram_client_id"]}&redirect_uri=#{config["instagram_redirect_uri"]}&response_type=token&scope=likes+comments'"
       output += "  id='#{id}' class='instagram-comment-link'>Sign in with Instagram to view Likes and Comments</a></p>"

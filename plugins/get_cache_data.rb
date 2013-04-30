@@ -20,10 +20,11 @@ module Jekyll
     end
 
     def get_value(media, property)
+      config = Jekyll.configuration({})
       property.split('.').each{ |p|
         media = media[p]
       }
-      media
+      media.gsub("http://", config["replace_absolute"])
     end
 
     def get_cache_file_for(id)
