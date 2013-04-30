@@ -69,16 +69,9 @@ task :access_token do |t, args|
   puts "### Access code has been saved to #{instagram_access}"
 end
 
-desc "Deploy"
-task :deploy do |t, args|
-  puts "## Deploying website via Rsync"
-  system("rsync #{opts["rsync_opts"]}")
-end
-
-desc "Generate and deploy"
-task :gen_deploy do |t, args|
+desc "Generate"
+task :generate do |t, args|
   system("jekyll")
-  Rake::Task["deploy"].invoke()
 end
 
 desc "Get recent_instagrams and if there are updates, then generate and deploy"

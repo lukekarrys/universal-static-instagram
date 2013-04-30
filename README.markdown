@@ -68,7 +68,13 @@ The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) is a great place to st
 ### Deployment
 The `public` directory is now full of good ol' fashioned static files. Check out the [jekyll page on deployment](https://github.com/mojombo/jekyll/wiki/Deployment) for all your options.
 
-I use `rsync` which is why I add `rsync_opts` to `_secret.yml`. These are the options that the `rsync` command will use to copy files.
+#### rsync
+
+I use `rsync` to send the public dir to a server.
+
+#### gh-pages
+
+Make a `gh-pages` branch and push it up to GitHub.
 
 ### Liking + Commenting
 The site provides a JS plugin and a server-side PHP proxy to allow for the display and posting of likes and comments for each Instagram media. To get this to work:
