@@ -1,6 +1,6 @@
 permalink: "/:year/:month/:day/:title/"
 markdown: "rdiscount"
-exclude: ["Rakefile", "README.markdown", "Gemfile", "Gemfile.lock", "scripts", "_secret.yml"]
+exclude: ["Rakefile", "README.markdown", "Gemfile", "Gemfile.lock", "_secret.yml"]
 source: "source"
 destination: "public"
 plugins: "plugins"
