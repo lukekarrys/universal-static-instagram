@@ -7,8 +7,8 @@ plugins: "plugins"
 paginate: 10
 
 replace_absolute: "/media/"
-absolute_path: "/jekyll-instagram"
-root: "lukekarrys.github.io"
+absolute_path: ""
+root: "jekyllgram.com"
 instagram_client_id: "4f82d0b740ee4556b371647f1193a85e"
-instagram_redirect_uri: "http://lukekarrys.github.io/jekyll-instagram"
+instagram_redirect_uri: "http://jekyllgram.com"
 max_caption_created_diff: 600
