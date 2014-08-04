@@ -13,7 +13,7 @@ I am hoping that this is a good starting point for creating your own Instagram b
 Yeah I know. I started development on this before and used it personally before web profile pages were rolled out. The idea was always to make it something like this: bare bones, more extensible, maybe even add theme support. I thought there might be 0.1% of Instagram users who would appreciate hosting their own pages with full control over the HTML/CSS/JS and still have people be able to like and comment. Now that all Instagram users have their own profile pages, I think that number might have dropped to 0.01% but I still wanted to publish this as a pet project.
 
 ## Demo
-Check out [this page](http://lukekarrys.github.io/jekyll-instagram/) for a demo of how it looks and works.
+Check out [this page](http://jekyllgram.com) for a demo of how it looks and works.
 
 ## Setup
 
