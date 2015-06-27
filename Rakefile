@@ -1,13 +1,3 @@
-require "highline/import"
-require "stringex"
-require "instagram"
-require "hashie"
-require "json"
-require "yaml"
-require "httpclient"
-require "clipboard"
-require "htmlentities"
-
 new_post_ext    = "markdown"  # default new post file extension when using the new_post task
 posts_dir       = "source/_posts"    # directory for blog files
 
@@ -67,90 +57,6 @@ task :access_token do |t, args|
   code = ask("Go to #{auth_url} in your browser (the url has ben copied to your clipboard). Authenticate and then enter the code query param from the redirect: ")
   get_access_token(code, opts["instagram_redirect_uri"], instagram_access)
   puts "### Access code has been saved to #{instagram_access}"
-end
-
-desc "Generate"
-task :generate do |t, args|
-  system("jekyll")
-end
-
-public_dir = "public"
-deploy_dir = "_deploy"
-deploy_branch  = "gh-pages"
-
-def get_stdin(message)
-  print message
-  STDIN.gets.chomp
-end
-
-desc "deploy public directory to github pages"
-multitask :push do
-  puts "## Deploying branch to Github Pages "
-  (Dir["#{deploy_dir}/*"]).each { |f| rm_rf(f) }
-  puts "\n## copying #{public_dir} to #{deploy_dir}"
-  cp_r "#{public_dir}/.", deploy_dir
-  cd "#{deploy_dir}" do
-    system "git add ."
-    system "git add -u"
-    puts "\n## Commiting: Site updated at #{Time.now.utc}"
-    message = "Site updated at #{Time.now.utc}"
-    system "git commit -m \"#{message}\""
-    puts "\n## Pushing generated #{deploy_dir} website"
-    system "git push origin gh-pages --force"
-    puts "\n## Github Pages deploy complete"
-  end
-end
-
-desc "Set up _deploy folder and deploy branch for Github Pages deployment"
-task :setup_github_pages, :repo do |t, args|
-  if args.repo
-    repo_url = args.repo
-  else
-    puts "Enter the read/write url for your repository"
-    puts "(For example, 'git@github.com:your_username/your_username.github.io)"
-    repo_url = get_stdin("Repository url: ")
-  end
-  user = repo_url.match(/:([^\/]+)/)[1]
-  branch = (repo_url.match(/\/[\w-]+\.github\.(?:io|com)/).nil?) ? 'gh-pages' : 'master'
-  project = (branch == 'gh-pages') ? repo_url.match(/\/([^\.]+)/)[1] : ''
-  unless (`git remote -v` =~ /origin.+?octopress(?:\.git)?/).nil?
-    # If octopress is still the origin remote (from cloning) rename it to octopress
-    system "git remote rename origin octopress"
-    if branch == 'master'
-      # If this is a user/organization pages repository, add the correct origin remote
-      # and checkout the source branch for committing changes to the blog source.
-      system "git remote add origin #{repo_url}"
-      puts "Added remote #{repo_url} as origin"
-      system "git config branch.master.remote origin"
-      puts "Set origin as default remote"
-      system "git branch -m master source"
-      puts "Master branch renamed to 'source' for committing your blog source files"
-    end
-  end
-  url = "http://#{user}.github.io"
-  url += "/#{project}" unless project == ''
-  jekyll_config = IO.read('_config.yml')
-  jekyll_config.sub!(/^url:.*$/, "url: #{url}")
-  File.open('_config.yml', 'w') do |f|
-    f.write jekyll_config
-  end
-  rm_rf deploy_dir
-  mkdir deploy_dir
-  cd "#{deploy_dir}" do
-    system "git init"
-    system "echo 'My Octopress Page is coming soon &hellip;' > index.html"
-    system "git add ."
-    system "git commit -m \"Octopress init\""
-    system "git branch -m gh-pages" unless branch == 'master'
-    system "git remote add origin #{repo_url}"
-    rakefile = IO.read(__FILE__)
-    rakefile.sub!(/deploy_branch(\s*)=(\s*)(["'])[\w-]*["']/, "deploy_branch\\1=\\2\\3#{branch}\\3")
-    rakefile.sub!(/deploy_default(\s*)=(\s*)(["'])[\w-]*["']/, "deploy_default\\1=\\2\\3push\\3")
-    File.open(__FILE__, 'w') do |f|
-      f.write rakefile
-    end
-  end
-  puts "\n---\n## Now you can deploy to #{url} with `rake deploy` ##"
 end
 
 desc "Get recent_instagrams and if there are updates, then generate and deploy"
