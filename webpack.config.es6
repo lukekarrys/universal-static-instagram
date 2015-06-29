@@ -49,8 +49,8 @@ const webpackConfig = config({
   out: '_site',
   clearBeforeBuild: true,
   html: (context, htmlDone) => {
-    getData((err, results) => {
-      if (err) { throw err; }
+    getData((dataErr, results) => {
+      if (dataErr) { throw dataErr; }
 
       const {ids, tags, pages, dates} = results;
       const toData = partial(idToData, ids, ['created_time', 'images', 'id', 'caption']);
@@ -75,7 +75,11 @@ const webpackConfig = config({
       each(dates, (photos, date) => addPhotosTask(`/photos/${date}`, photos));
       each(ids, (photo) => addTask(permalink(photo), photo));
 
-      async.parallel(tasks, htmlDone);
+      async.parallel(tasks, (htmlErr, paths) => {
+        if (htmlErr) { throw htmlErr; }
+        paths.CNAME = 'jekyllgram.com';
+        htmlDone(null, paths);
+      });
     });
   }
 });
