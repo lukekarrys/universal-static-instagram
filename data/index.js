@@ -1,7 +1,7 @@
 'use strict';
 
-import zeroFill from 'zero-fill';
 import readData from './readData';
+import {dateParts} from '../src/helpers/permalink';
 
 class KeySets {
   constructor (options = {}) {
@@ -40,14 +40,10 @@ class ByDate extends KeySets {
   }
 
   add (time, id) {
-    const date = new Date(Number(time) * 1000);
-    const year = date.getFullYear();
-    const month = year + '/' + zeroFill(2, date.getMonth() + 1);
-    const day = month + '/' + zeroFill(2, date.getDate());
-
-    super.add(year, id);
-    super.add(month, id);
-    super.add(day, id);
+    const {day, month, year} = dateParts(time);
+    super.add(`${year}/${month}/${day}`, id);
+    super.add(`${year}/${month}`, id);
+    super.add(`${year}`, id);
   }
 }
 

@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import {Link} from 'react-router';
 import PhotosByPage from './PhotosByPage';
 
 const App = React.createClass({
@@ -11,10 +12,10 @@ const App = React.createClass({
   render () {
     return (
       <div>
-        <h1>Instagram</h1>
+        <h1><Link to='/'>Instagram</Link></h1>
         {this.props.children ? this.props.children : <PhotosByPage {...this.props} params={{page: 1}} />}
         <footer>
-          <p>Powered by <a href='https://github.com/lukekarrys/statigram'>Statigram</a></p>
+          <p>Powered by <a href='https://github.com/lukekarrys/universal-react-instagram'>lukekarrys/universal-react-instagram</a></p>
         </footer>
       </div>
     );

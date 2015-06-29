@@ -12,7 +12,7 @@ const PhotosByTag = React.createClass({
   render () {
     return (
       <div>
-        <h1>Date {this.props.params.tag}</h1>
+        <h1>Tag {this.props.params.tag}</h1>
         <ul>
           {this.props.photos.map(photo => <li key={photo.id}><PhotoListItem {...photo} /></li>)}
         </ul>

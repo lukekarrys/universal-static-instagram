@@ -4,33 +4,33 @@ import zeroFill from 'zero-fill';
 
 const PREFIX = 'photos';
 
-const parts = (props) => {
-  const {created_time} = props;
+const dateParts = (props) => {
+  const {created_time} = typeof props === 'object' ? props : {created_time: props};
   const date = new Date(Number(created_time) * 1000);
-  date.setTime(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
 
   const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const month = zeroFill(2, date.getMonth() + 1);
+  const day = zeroFill(2, date.getDate());
 
   return {year, month, day};
 };
 
-const permalink = (props) => {
-  const {id} = props;
-  const {year, month, day} = parts(props);
-
-  return `/${PREFIX}/${year}/${zeroFill(2, month)}/${zeroFill(2, day)}${id ? '/' + id : ''}`;
+const _datePath = (props) => {
+  const {year, month, day} = dateParts(props);
+  return `/${PREFIX}/${year}/${month}/${day}`;
 };
 
-const getYear = (props) => permalink({created_time: props.created_time}).replace(/\/\d\d\/\d\d$/, '');
+const permalink = (props) => {
+  const {id} = props;
+  return `${_datePath(props)}${id ? '/' + id : ''}`;
+};
 
-const getMonth = (props) => permalink({created_time: props.created_time}).replace(/\/\d\d$/, '');
+const getYear = (props) => _datePath(props).replace(/\/\d\d\/\d\d$/, '');
+const getMonth = (props) => _datePath(props).replace(/\/\d\d$/, '');
+const getDay = (props) => _datePath(props);
 
-const getDay = (props) => permalink({created_time: props.created_time});
-
-export {getYear as year};
-export {getMonth as month};
-export {getDay as day};
-export {parts as parts};
+export {getYear as getYear};
+export {getMonth as getMonth};
+export {getDay as getDay};
+export {dateParts as dateParts};
 export default permalink;
