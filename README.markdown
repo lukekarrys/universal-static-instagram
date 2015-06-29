@@ -13,6 +13,14 @@ Then I deleted my account. Before I deleted it I downloaded all the images and J
 So I decided to rewrite it using `react`, `react-router`, and `webpack` to be a static site (same as before) but so `react` and `react-router` can take over the clientside (and now I'll hopefully do cooler stuff with it).
 
 
+# Goals
+
+- Output plain `.html` files for every page
+- Completely usable with JS disabled
+- `react` + `react-router` takeover client-side on load
+- Images + JSON can be self hosted
+
+
 # Can I use this?
 
 Sure! But it still needs the tools to fetch all the data from the Instagram API to be rewritten in JS if you want it to use your data.
