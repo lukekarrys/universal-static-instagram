@@ -1,7 +1,7 @@
 universal-react-instagram
 ===============
 
-**This used to be [`jekyll-instagram`](https://github.com/lukekarrys/jekyll-instagram/commit/1da67ca095902c2241753f3722c7a991a39d185c) but I hadn't really updated it since March of 2013. Since my interests have moved mostly to JS I decided to rewrite it.**
+**This used to be [`jekyll-instagram`](https://github.com/lukekarrys/jekyll-instagram/tree/1da67ca095902c2241753f3722c7a991a39d185c) but I hadn't really updated it since March of 2013. Since my interests have moved mostly to JS I decided to rewrite it.**
 
 
 # What is this?
