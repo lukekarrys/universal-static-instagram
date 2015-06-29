@@ -1,0 +1,68 @@
+{
+  "name": "statigram",
+  "description": "A static site generator for Instagram.",
+  "version": "1.0.0",
+  "author": "Luke Karrys",
+  "bugs": {
+    "url": "https://github.com/lukekarrys/jekyll-instagram/issues"
+  },
+  "dependencies": {
+    "alt": "^0.16.10",
+    "async": "^1.2.1",
+    "instagram-node": "^0.5.7",
+    "lodash": "^3.9.3",
+    "react": "^0.13.3",
+    "react-router": "^1.0.0-beta2",
+    "zero-fill": "^2.2.1"
+  },
+  "devDependencies": {
+    "autoprefixer-core": "^5.2.1",
+    "babel": "^5.6.14",
+    "babel-core": "^5.6.15",
+    "babel-eslint": "^3.1.19",
+    "babel-loader": "^5.2.2",
+    "css-loader": "^0.15.1",
+    "eslint": "^0.24.0",
+    "eslint-plugin-react": "^2.5.2",
+    "file-loader": "^0.8.4",
+    "git-directory-deploy": "^1.1.0",
+    "hjs-webpack": "^2.8.1",
+    "http-server": "^0.8.0",
+    "json-loader": "^0.5.2",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
+    "node-libs-browser": "^0.5.2",
+    "postcss-loader": "^0.5.1",
+    "precommit-hook": "^3.0.0",
+    "react-hot-loader": "^1.2.7",
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.10.0",
+    "webpack-dev-server": "^1.10.0"
+  },
+  "homepage": "https://github.com/lukekarrys/jekyll-instagram",
+  "keywords": [
+    "Instagram",
+    "static site"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "pre-commit": [
+    "lint",
+    "validate"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukekarrys/jekyll-instagram.git"
+  },
+  "scripts": {
+    "build": "npm run webpack-config && NODE_ENV=production webpack && npm run copy-data",
+    "copy-data": "cp -r cache _site/json && cp -r _media _site/media",
+    "deploy": "git-directory-deploy --directory _site",
+    "lint": "eslint --ext .js,.es6 .",
+    "serve-local": "http-server ./_site -p 3000 -e html -d false -i false",
+    "start": "npm run webpack-config && webpack-dev-server",
+    "validate": "npm ls",
+    "webpack-config": "babel webpack.config.es6 --out-file webpack.config.js"
+  }
+}

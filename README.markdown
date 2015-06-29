@@ -1,1 +1,1 @@
-# node version of jekyll-instagram
+# react version of jekyll-instagram
