@@ -57,7 +57,7 @@
   },
   "scripts": {
     "build": "npm run webpack-config && NODE_ENV=production webpack && npm run copy-data",
-    "copy-data": "cp -r cache _site/json && cp -r _media _site/media",
+    "copy-data": "cp -r _cache _site/json && cp -r _media _site/media",
     "deploy": "git-directory-deploy --directory _site",
     "lint": "eslint --ext .js,.es6 .",
     "serve-local": "http-server ./_site -p 3000 -e html -d false -i false",
