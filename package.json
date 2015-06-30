@@ -11,6 +11,7 @@
     "async": "^1.2.1",
     "dateformat": "^1.0.11",
     "instagram-node": "^0.5.7",
+    "iso": "^4.1.0",
     "lodash": "^3.9.3",
     "react": "^0.13.3",
     "react-router": "^1.0.0-beta2",
@@ -58,10 +59,10 @@
   },
   "scripts": {
     "build": "npm run webpack-config && NODE_ENV=production webpack && npm run copy-data",
-    "copy-data": "cp -r _cache _site/json && cp -r _media _site/media",
+    "copy-data": "cp -r _media _site/media",
     "deploy": "git-directory-deploy --directory _site",
     "lint": "eslint --ext .js,.es6 .",
-    "serve-local": "http-server ./_site -p 3000 -e html -d false -i false",
+    "serve-local": "http-server ./_site -p 3000",
     "start": "npm run webpack-config && webpack-dev-server",
     "validate": "npm ls",
     "webpack-config": "babel webpack.config.es6 --out-file webpack.config.js"

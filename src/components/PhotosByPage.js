@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {Link} from 'react-router';
-import PhotoListItem from './PhotoListItem';
+import PhotoListItem from './photo/PhotoListItem';
 
 const PhotosByPage = React.createClass({
   propTypes: {

@@ -1,59 +1,15 @@
 'use strict';
 
 import babelRegister from 'babel/register'; // eslint-disable-line no-unused-vars
-import React from 'react';
 import config from 'hjs-webpack';
-import {Router} from 'react-router';
-import Location from 'react-router/lib/Location';
-import partial from 'lodash/function/partial';
 import each from 'lodash/collection/each';
 import pick from 'lodash/object/pick';
 import assign from 'lodash/object/assign';
 import async from 'async';
-import getData from './data';
-import routes from './src/routes';
+
+import getData from './server/data';
 import permalink from './src/helpers/permalink';
-
-const buildFiles = {
-  CNAME: 'jekyllgram.com'
-};
-
-const idToData = (byIds, attrs, id) => pick(byIds[id], attrs);
-
-const scripts = (context, data) => {
-  return `
-    <script>__INITIAL_DATA__ = ${JSON.stringify(data)};</script>
-    <script src="/${context.main}"></script>
-  `;
-};
-
-const template = (context, body, data, dynamic) => {
-
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-      </head>
-      <body>
-        <div id="app">${body}</div>
-        ${dynamic ? scripts(context, data) : ''}
-      </body>
-    </html>
-  `.replace(/\n\s*/g, '');
-};
-
-const createElement = (data) => (Component, props) => <Component {...props} {...data} />;
-
-const html = (context, path, data, done) => {
-  const location = new Location('/' + path);
-  Router.run(routes, location, (err, initialState) => {
-    if (err) { return done(err); }
-    const body = React.renderToString(<Router {...initialState} createElement={createElement(data)} />);
-    done(null, template(context, body, data));
-  });
-};
+import render from './server/render';
 
 const webpackConfig = config({
   in: 'src/main.js',
@@ -64,34 +20,48 @@ const webpackConfig = config({
       if (dataErr) { throw dataErr; }
 
       const {ids, tags, pages, dates} = results;
-      const toData = partial(idToData, ids, ['created_time', 'images', 'id', 'caption']);
+      const toData = (id) => pick(ids[id], ['created_time', 'images', 'id', 'caption']);
       const tagKeys = Object.keys(tags);
       const pageKeys = Object.keys(pages);
-      const firstPage = pages['1'].map(toData);
 
-      const tasks = {};
+      const buildFiles = {};
+      const buildFilesSync = {CNAME: 'jekyllgram.com'};
 
       const addTask = (filePath, data) => {
         const urlPath = filePath.slice(1).replace(/(\/)?(index)?\.html$/, '');
-        tasks[filePath] = (cb) => html(context, urlPath, data, cb);
+
+        if (urlPath) {
+          buildFilesSync[`/json/${urlPath}.json`] = JSON.stringify(data);
+        }
+
+        buildFiles[filePath] = (cb) => render(context, urlPath, data, cb);
       };
 
       const addPhotosTask = (filePath, photos) => {
         addTask(filePath, {photos: photos.map(toData)});
       };
 
-      addTask('/index.html', {photos: firstPage});
-      addTask('/tags/index.html', {tags: tagKeys});
-      addTask('/pages/index.html', {pages: pageKeys});
+      // Home page has first page of photos
+      addTask('/index.html', {photos: pages['1'].map(toData)});
 
+      // Save tags html and json files
+      buildFilesSync['/json/tags.json'] = JSON.stringify(tagKeys);
+      addTask('/tags/index.html', {tags: tagKeys});
       each(tags, (photos, tag) => addPhotosTask(`/tags/${tag}.html`, photos));
+
+      // Same for list of pages
+      buildFilesSync['/json/pages.json'] = JSON.stringify(pageKeys);
+      addTask('/pages/index.html', {pages: pageKeys});
       each(pages, (photos, page) => addPhotosTask(`/pages/${page}.html`, photos));
+
+      // And individual photos and date pages
       each(dates, (photos, date) => addPhotosTask(`/photos/${date}/index.html`, photos));
       each(ids, (photo) => addTask(`${permalink(photo)}.html`, photo));
 
-      async.parallel(tasks, (htmlErr, paths) => {
+      // Run all the async taks and merge those paths with the non-async paths
+      async.parallel(buildFiles, (htmlErr, paths) => {
         if (htmlErr) { throw htmlErr; }
-        htmlDone(null, assign(paths, buildFiles));
+        htmlDone(null, assign(paths, buildFilesSync));
       });
     });
   }

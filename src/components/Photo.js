@@ -3,9 +3,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {getDay, getMonth, getYear} from '../helpers/permalink';
-import PhotoImage from './PhotoImage';
-import PhotoDate from './PhotoDate';
-import PhotoTitle from './PhotoTitle';
+import PhotoImage from './photo/PhotoImage';
+import PhotoDate from './photo/PhotoDate';
+import PhotoTitle from './photo/PhotoTitle';
 
 const Photo = React.createClass({
   propTypes: {

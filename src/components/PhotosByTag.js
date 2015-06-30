@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import PhotoListItem from './PhotoListItem';
+import PhotoListItem from './photo/PhotoListItem';
 
 const PhotosByTag = React.createClass({
   propTypes: {

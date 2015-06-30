@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {Link} from 'react-router';
-import permalink from '../helpers/permalink';
+import permalink from '../../helpers/permalink';
 
 const PhotoLink = React.createClass({
   propTypes: {
