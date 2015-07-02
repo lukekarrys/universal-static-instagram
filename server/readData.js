@@ -5,7 +5,7 @@ import async from 'async';
 import path from 'path';
 import sortBy from 'lodash/collection/sortBy';
 
-const CACHE_DIR = path.resolve(__dirname, '..', '_cache');
+const CACHE_DIR = path.resolve(__dirname, '..', '_cache', 'json');
 
 const isJSON = (filename) => path.extname(filename) === '.json';
 const sortByCreate = (obj) => Number(obj.created_time);
