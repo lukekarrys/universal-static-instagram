@@ -6,14 +6,18 @@ import {dateParts} from '../src/helpers/permalink';
 class KeySets {
   constructor (options = {}) {
     this.options = options;
-    this.values = {};
+    this._values = {};
   }
 
   add (key, id) {
-    if (this.values[key] === undefined) {
-      this.values[key] = [];
+    if (this._values[key] === undefined) {
+      this._values[key] = [];
     }
-    this.values[key].push(id);
+    this._values[key].push(id);
+  }
+
+  getValues () {
+    return this._values;
   }
 }
 
@@ -70,16 +74,16 @@ const buildData = (cb) => {
     data.forEach((datum, index) => {
       const {filter, tags, created_time, id} = datum;
       byTag.addTags(tags, id);
-      byTag.add(filter || 'No Filter', id);
+      byTag.add(filter || 'Normal', id);
       byDate.add(created_time, id);
       byPage.add(index, id);
       byId[id] = datum;
     });
     cb(null, {
       ids: byId,
-      tags: byTag.values,
-      dates: byDate.values,
-      pages: byPage.values
+      tags: byTag.getValues(),
+      dates: byDate.getValues(),
+      pages: byPage.getValues()
     });
   });
 };

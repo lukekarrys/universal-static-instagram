@@ -1,11 +1,16 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
 const TagsList = React.createClass({
   propTypes: {
-    tags: React.PropTypes.array.isRequired
+    tags: PropTypes.array,
+    fetchTags: PropTypes.func
+  },
+
+  componentDidMount () {
+    this.props.fetchTags();
   },
 
   render () {
@@ -14,7 +19,7 @@ const TagsList = React.createClass({
         <h1>Tags</h1>
         <ul>
           {this.props.tags.map(tag =>
-            <li><Link to={`/tags/${tag}`}>{tag}</Link></li>
+            <li key={tag}><Link to={`/tags/${tag}`}>{tag}</Link></li>
           )}
         </ul>
       </div>

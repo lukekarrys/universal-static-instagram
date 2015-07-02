@@ -2,7 +2,9 @@
 
 import React from 'react';
 import {Link} from 'react-router';
-import PhotosByPage from './PhotosByPage';
+import AltContainer from 'alt/AltContainer';
+import Store from '../stores/AppStore';
+import Actions from '../actions/AppActions';
 
 const App = React.createClass({
   propTypes: {
@@ -13,7 +15,9 @@ const App = React.createClass({
     return (
       <div>
         <h1><Link to='/'>Instagram</Link></h1>
-        {this.props.children ? this.props.children : <PhotosByPage {...this.props} params={{page: 1}} />}
+        <AltContainer store={Store} actions={Actions}>
+          {this.props.children}
+        </AltContainer>
         <footer>
           <p>Powered by <a href='https://github.com/lukekarrys/universal-static-instagram'>lukekarrys/universal-static-instagram</a></p>
         </footer>

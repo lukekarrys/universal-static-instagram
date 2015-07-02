@@ -1,10 +1,10 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 const PhotoTitle = React.createClass({
   propTypes: {
-    caption: React.PropTypes.object
+    caption: PropTypes.object
   },
 
   render () {

@@ -1,11 +1,16 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
 const PagesList = React.createClass({
   propTypes: {
-    pages: React.PropTypes.array.isRequired
+    pages: PropTypes.array,
+    fetchPages: PropTypes.func
+  },
+
+  componentDidMount () {
+    this.props.fetchPages();
   },
 
   render () {
@@ -14,7 +19,7 @@ const PagesList = React.createClass({
         <h1>Pages</h1>
         <ul>
           {this.props.pages.map(page =>
-            <li><Link to={`/pages/${page}`}>{page}</Link></li>
+            <li key={page}><Link to={`/pages/${page}`}>{page}</Link></li>
           )}
         </ul>
       </div>

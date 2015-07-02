@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import PhotoImage from './PhotoImage';
 import PhotoDate from './PhotoDate';
 import PhotoLink from './PhotoLink';
@@ -8,7 +8,7 @@ import PhotoTitle from './PhotoTitle';
 
 const PhotoListItem = React.createClass({
   propTypes: {
-    image: React.PropTypes.string
+    image: PropTypes.string
   },
 
   getDefaultProps () {
@@ -20,7 +20,7 @@ const PhotoListItem = React.createClass({
   render () {
     return (
       <PhotoLink {...this.props}>
-        {this.props.image ? <PhotoImage {...this.props} type={this.props.image} /> : null}
+        <PhotoImage {...this.props} type={this.props.image} />
         <PhotoDate {...this.props} /> - <PhotoTitle {...this.props} />
       </PhotoLink>
     );

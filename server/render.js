@@ -21,21 +21,17 @@ const template = (context, body) => {
   `.replace(/\n\s*/g, '');
 };
 
-const createElement = (data) => (Component, props) => <Component {...props} {...data} />;
-
 const render = (context, path, data, done) => {
   const iso = new Iso();
-  const location = new Location('/' + path);
+  const location = new Location(`${path.charAt(0) === '/' ? '' : '/'}${path}`);
 
-  alt.bootstrap(JSON.stringify(data));
+  // We only have a single store in our app so all data goes there
+  alt.bootstrap(JSON.stringify({AppStore: data || {}}));
 
   Router.run(routes, location, (err, initialState) => {
     if (err) { return done(err); }
 
-    const content = React.renderToString(
-      <Router {...initialState} createElement={createElement(data)} />
-    );
-
+    const content = React.renderToString(<Router {...initialState} />);
     iso.add(content, alt.flush());
 
     done(null, template(context, iso.render()));

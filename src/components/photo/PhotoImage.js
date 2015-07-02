@@ -1,17 +1,19 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 const PhotoImage = React.createClass({
   propTypes: {
-    images: React.PropTypes.object.isRequired,
-    type: React.PropTypes.oneOf(['thumbnail', 'low', 'standard']),
-    prefix: React.PropTypes.string
+    images: PropTypes.object,
+    type: PropTypes.oneOf(['thumbnail', 'low', 'standard']),
+    prefix: PropTypes.string
   },
 
   getDefaultProps () {
     return {
-      prefix: '/media/'
+      prefix: '/media/',
+      type: 'thumbnail',
+      images: {}
     };
   },
 
@@ -24,11 +26,16 @@ const PhotoImage = React.createClass({
 
   imageProps () {
     const image = this.props.images[this.imageName()];
+
+    if (!image) return null;
+
     const {height, width} = image;
     let {url} = image;
+
     if (this.props.prefix) {
       url = url.replace(/https?:\/\//, this.props.prefix);
     }
+
     return {
       width,
       height,
@@ -37,8 +44,9 @@ const PhotoImage = React.createClass({
   },
 
   render () {
+    const imageProps = this.imageProps();
     return (
-      <img {...this.imageProps()} />
+      imageProps ? <img {...imageProps} /> : null
     );
   }
 });

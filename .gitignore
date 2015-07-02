@@ -30,4 +30,3 @@ node_modules
 _cache/
 _media/
 _site/
-webpack.config.js

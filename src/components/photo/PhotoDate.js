@@ -1,24 +1,29 @@
 'use strict';
 
-import React from 'react';
-import dateformat from 'dateformat';
+import React, {PropTypes} from 'react';
+import moment from 'moment';
 
 const PhotoDate = React.createClass({
   propTypes: {
-    created_time: React.PropTypes.string.isRequired,
-    dateFormat: React.PropTypes.string
+    created_time: PropTypes.string,
+    dateFormat: PropTypes.string
   },
 
   getDefaultProps () {
     return {
-      dateFormat: 'dddd, mmmm dS, yyyy, h:MM:ss TT'
+      dateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'
     };
   },
 
+  getDate () {
+    const {created_time: time} = this.props;
+    return time ? new Date(Number(time) * 1000) : null;
+  },
+
   render () {
-    const date = new Date(Number(this.props.created_time) * 1000);
+    const date = this.getDate();
     return (
-      <span>{dateformat(date, this.props.dateFormat)}</span>
+      date ? <span>{moment(date).format('dddd, MMMM Do YYYY, h:mm:ss a')}</span> : null
     );
   }
 });
