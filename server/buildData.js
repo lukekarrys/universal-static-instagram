@@ -1,7 +1,12 @@
 'use strict';
 
+import keys from 'lodash/object/keys';
+import sortBy from 'lodash/collection/sortBy';
 import readData from './readData';
 import {dateParts} from '../src/helpers/permalink';
+
+const sortByTag = (tag) => tag.toLowerCase();
+const sortByIndex = (num) => parseInt(num, 10);
 
 class KeySets {
   constructor (options = {}) {
@@ -68,9 +73,7 @@ const buildData = (cb) => {
   const byPage = new ByPage({pagination: 10});
   const byId = {};
   readData((err, data) => {
-    if (err) {
-      return cb(err);
-    }
+    if (err) return cb(err);
     data.forEach((datum, index) => {
       const {filter, tags, created_time, id} = datum;
       byTag.addTags(tags, id);
@@ -82,8 +85,10 @@ const buildData = (cb) => {
     cb(null, {
       ids: byId,
       tags: byTag.getValues(),
+      tagKeys: sortBy(keys(byTag.getValues()), sortByTag),
       dates: byDate.getValues(),
-      pages: byPage.getValues()
+      pages: byPage.getValues(),
+      pageKeys: sortBy(keys(byPage.getValues()), sortByIndex)
     });
   });
 };

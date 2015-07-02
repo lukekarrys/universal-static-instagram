@@ -3,7 +3,6 @@
 import each from 'lodash/collection/each';
 import pick from 'lodash/object/pick';
 import assign from 'lodash/object/assign';
-import keys from 'lodash/object/keys';
 import async from 'async';
 
 import buildData from './buildData';
@@ -13,14 +12,11 @@ import permalink from '../src/helpers/permalink';
 const LIST_PROPS = ['created_time', 'images', 'id', 'caption'];
 
 const buildFiles = (context, done) => buildData((dataErr, results) => {
-  if (dataErr) { throw dataErr; }
+  if (dataErr) throw dataErr;
 
-  const {ids, tags, pages, dates} = results;
+  const {ids, tags, tagKeys, pages, pageKeys, dates} = results;
   const toPhotos = (photos) => ({photos: photos.map(id => pick(ids[id], LIST_PROPS))});
   const render = (path, data) => (cb) => renderApp(context, path, data, cb);
-
-  const tagKeys = keys(tags);
-  const pageKeys = keys(pages);
 
   const buildFilesAsync = {'404.html': render('__NOT_A_REAL_URL__')};
   const buildFilesSync = {CNAME: 'jekyllgram.com'};
@@ -57,7 +53,7 @@ const buildFiles = (context, done) => buildData((dataErr, results) => {
 
   // Run all the async taks and merge those paths with the non-async paths
   async.parallel(buildFilesAsync, (htmlErr, paths) => {
-    if (htmlErr) { throw htmlErr; }
+    if (htmlErr) throw htmlErr;
     done(null, assign(paths, buildFilesSync));
   });
 });

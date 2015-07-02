@@ -29,7 +29,7 @@ const render = (context, path, data, done) => {
   alt.bootstrap(JSON.stringify({AppStore: data || {}}));
 
   Router.run(routes, location, (err, initialState) => {
-    if (err) { return done(err); }
+    if (err) return done(err);
 
     const content = React.renderToString(<Router {...initialState} />);
     iso.add(content, alt.flush());

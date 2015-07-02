@@ -11,25 +11,19 @@ const isJSON = (filename) => path.extname(filename) === '.json';
 const sortByCreate = (obj) => Number(obj.created_time);
 const readJSON = (file, cb) => {
   fs.readFile(path.resolve(CACHE_DIR, file), {encoding: 'utf8'}, (err, data) => {
-    if (err) {
-      return cb(err);
-    }
+    if (err) return cb(err);
     cb(null, JSON.parse(data));
   });
 };
 
 const readData = (cb) => {
   fs.readdir(CACHE_DIR, (dirErr, files) => {
-    if (dirErr) {
-      return cb(dirErr);
-    }
+    if (dirErr) return cb(dirErr);
 
     const jsonFiles = files.filter(isJSON);
 
     async.map(jsonFiles, readJSON, (err, results) => {
-      if (err) {
-        return cb(err);
-      }
+      if (err) return cb(err);
       cb(null, sortBy(results, sortByCreate).reverse());
     });
   });
