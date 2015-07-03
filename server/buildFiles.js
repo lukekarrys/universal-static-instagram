@@ -4,19 +4,21 @@ import each from 'lodash/collection/each';
 import pick from 'lodash/object/pick';
 import assign from 'lodash/object/assign';
 import async from 'async';
+import path from 'path';
 
 import buildData from './buildData';
 import renderApp from './render';
 import permalink from '../src/helpers/permalink';
 
 const LIST_PROPS = ['created_time', 'images', 'id', 'caption'];
+const DATA_DIR = path.resolve(__dirname, '..', '_cache', 'json');
 
-const buildFiles = (context, done) => buildData((dataErr, results) => {
+const buildFiles = (context, done) => buildData(DATA_DIR, (dataErr, results) => {
   if (dataErr) throw dataErr;
 
   const {ids, tags, tagKeys, pages, pageKeys, dates} = results;
   const toPhotos = (photos) => ({photos: photos.map(id => pick(ids[id], LIST_PROPS))});
-  const render = (path, data) => (cb) => renderApp(context, path, data, cb);
+  const render = (urlPath, data) => (cb) => renderApp(context, urlPath, data, cb);
 
   const buildFilesAsync = {'404.html': render('__NOT_A_REAL_URL__')};
   const buildFilesSync = {CNAME: 'jekyllgram.com'};

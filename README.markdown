@@ -23,13 +23,11 @@ So I decided to rewrite it using `react`, `react-router`, and `webpack` to be a 
 
 # Can I use this?
 
-Sure! But it still needs the tools to fetch all the data from the Instagram API to be rewritten in JS if you want it to use your data.
+Sure! You'll need to do the following steps:
 
-
-# Usage
-
-- `_cache` holds all the json in the format `ID.json`
-- `_media` holds all the images in the form `INSTAGRAM/PATH/MINUS/HTTP.jpg`
+- Fork and clone this repo
 - `npm install`
+- [Create an Instagram API client](https://instagram.com/developer/clients/register/) to get a client id and a secret
+- `npm run ig-fetch -- --client=CLIENT --secret=SECRET --user=USER_ID`
 - `npm run build`
 - `npm run deploy`

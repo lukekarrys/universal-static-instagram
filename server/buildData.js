@@ -67,12 +67,12 @@ class ByPage extends KeySets {
   }
 }
 
-const buildData = (cb) => {
+const buildData = (dir, cb) => {
   const byTag = new ByTag();
   const byDate = new ByDate();
   const byPage = new ByPage({pagination: 10});
   const byId = {};
-  readData((err, data) => {
+  readData(dir, (err, data) => {
     if (err) return cb(err);
     data.forEach((datum, index) => {
       const {filter, tags, created_time, id} = datum;
