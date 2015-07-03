@@ -8,9 +8,9 @@ universal-static-instagram
 
 Way back when, Instagram was iOS only and didn't have a web interface. I wanted one so I built some tools that would download the JSON and images and would publish them as a static site. This site idly for the most part while Instagram created amazing interfaces on all platforms.
 
-Then I deleted my account. Before I deleted it I downloaded all the images and JSON from the API with the plan of using this to just display them on the web. It had no CSS and no (useful) JS, but it kinda worked. But the fact that it was Ruby and Jekyll which are two things I don't use much anymore, meant it sat untouched.
+Then I deleted my account. Before I deleted it I downloaded all the images and JSON from the API with the plan of using this to just display them on the web. It had no CSS and no (useful) JS, but it kinda worked. But the fact that it was Ruby and Jekyll, which are two things I don't use much anymore, meant it sat untouched.
 
-So I decided to rewrite it using `react`, `react-router`, and `webpack` to be a static site (same as before) but so `react` and `react-router` can take over the clientside (and now I'll hopefully do cooler stuff with it).
+So I decided to rewrite it using `react`, `react-router`, `flux` (`alt`), and `webpack` to be a static site (same as before) but so `react` and `react-router` can take over the clientside (and now I'll hopefully do cooler stuff with it).
 
 
 # Goals
