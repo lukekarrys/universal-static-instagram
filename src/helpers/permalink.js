@@ -1,13 +1,12 @@
 'use strict';
 
 import zeroFill from 'zero-fill';
+import createdDate from './createdDate';
 
 const PREFIX = 'photos';
 
 const dateParts = (props) => {
-  const {created_time} = typeof props === 'object' ? props : {created_time: props};
-  const date = new Date(Number(created_time) * 1000);
-
+  const date = createdDate(props);
   const year = date.getFullYear();
   const month = zeroFill(2, date.getMonth() + 1);
   const day = zeroFill(2, date.getDate());

@@ -5,7 +5,7 @@ import PhotoListItem from './PhotoListItem';
 
 const PhotosList = React.createClass({
   propTypes: {
-    photos: PropTypes.array
+    photos: PropTypes.array.isRequired
   },
 
   render () {

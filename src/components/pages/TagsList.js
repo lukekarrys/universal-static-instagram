@@ -5,8 +5,8 @@ import {Link} from 'react-router';
 
 const TagsList = React.createClass({
   propTypes: {
-    tags: PropTypes.array,
-    fetchTags: PropTypes.func
+    tags: PropTypes.array.isRequired,
+    fetchTags: PropTypes.func.isRequired
   },
 
   componentDidMount () {

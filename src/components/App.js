@@ -8,7 +8,7 @@ import Actions from '../actions/AppActions';
 
 const App = React.createClass({
   propTypes: {
-    children: React.PropTypes.element
+    children: React.PropTypes.element.isRequired
   },
 
   render () {

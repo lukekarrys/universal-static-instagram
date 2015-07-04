@@ -10,8 +10,8 @@ import PhotoTitle from '../photo/PhotoTitle';
 const Photo = React.createClass({
   propTypes: {
     location: PropTypes.object.isRequired,
-    photo: PropTypes.object,
-    fetchPhoto: PropTypes.func
+    photo: PropTypes.object.isRequired,
+    fetchPhoto: PropTypes.func.isRequired
   },
 
   _fetchPhoto (props) {

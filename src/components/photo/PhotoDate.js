@@ -2,6 +2,7 @@
 
 import React, {PropTypes} from 'react';
 import moment from 'moment';
+import createdDate from '../../helpers/createdDate';
 
 const PhotoDate = React.createClass({
   propTypes: {
@@ -15,13 +16,8 @@ const PhotoDate = React.createClass({
     };
   },
 
-  getDate () {
-    const {created_time: time} = this.props;
-    return time ? new Date(Number(time) * 1000) : null;
-  },
-
   render () {
-    const date = this.getDate();
+    const date = createdDate(this.props.created_time);
     return (
       date ? <span>{moment(date).format('dddd, MMMM Do YYYY, h:mm:ss a')}</span> : null
     );

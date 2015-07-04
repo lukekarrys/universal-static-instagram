@@ -7,9 +7,9 @@ const PhotosByTag = React.createClass({
   propTypes: {
     params: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    photos: PropTypes.array,
-    children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
-    fetchPhotos: PropTypes.func
+    photos: PropTypes.array.isRequired,
+    fetchPhotos: PropTypes.func.isRequired,
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.element])
   },
 
   _fetchPhotos (props) {

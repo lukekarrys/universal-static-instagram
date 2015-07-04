@@ -28,6 +28,6 @@ Sure! You'll need to do the following steps:
 - Fork and clone this repo
 - `npm install`
 - [Create an Instagram API client](https://instagram.com/developer/clients/register/) to get a client id and a secret
-- `npm run ig-fetch -- --client=CLIENT --secret=SECRET --user=USER_ID`
+- `npm run fetch-ig -- --client=CLIENT --secret=SECRET --user=USER_ID`
 - `npm run build`
-- `npm run deploy`
+- `npm run deploy-surge # or npm run deploy-gh`

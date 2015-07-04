@@ -8,12 +8,13 @@ const PhotoLink = React.createClass({
   propTypes: {
     created_time: PropTypes.string,
     id: PropTypes.string,
-    children: PropTypes.oneOfType([PropTypes.array, PropTypes.element])
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]).isRequired
   },
 
   render () {
+    const {created_time, id, children} = this.props;
     return (
-      <Link to={permalink(this.props)}>{this.props.children}</Link>
+      <Link to={permalink({created_time, id})}>{children}</Link>
     );
   }
 });

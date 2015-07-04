@@ -1,15 +1,20 @@
 'use strict';
 
 import alt from '../alt';
+import defaults from 'lodash/object/defaults';
 import appActions from '../actions/AppActions';
+
+const defaultValues = {
+  photo: {},
+  photos: [],
+  tags: [],
+  pages: []
+};
 
 class AppStore {
   constructor () {
     this.bindActions(appActions);
-    this.photo = {};
-    this.photos = [];
-    this.tags = [];
-    this.pages = [];
+    this.on('bootstrap', () => defaults(this, defaultValues));
   }
 
   onPhotoReceive (resp) {

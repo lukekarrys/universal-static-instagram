@@ -6,6 +6,7 @@ import Location from 'react-router/lib/Location';
 import Iso from 'iso';
 import alt from '../src/alt';
 import routes from '../src/routes';
+import slash from '../src/helpers/slash';
 
 const template = (context, body) => {
   return `
@@ -23,7 +24,7 @@ const template = (context, body) => {
 
 const render = (context, path, data, done) => {
   const iso = new Iso();
-  const location = new Location(`${path.charAt(0) === '/' ? '' : '/'}${path}`);
+  const location = new Location(slash(path));
 
   // We only have a single store in our app so all data goes there
   alt.bootstrap(JSON.stringify({AppStore: data || {}}));

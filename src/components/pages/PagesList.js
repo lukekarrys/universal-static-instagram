@@ -5,8 +5,8 @@ import {Link} from 'react-router';
 
 const PagesList = React.createClass({
   propTypes: {
-    pages: PropTypes.array,
-    fetchPages: PropTypes.func
+    pages: PropTypes.array.isRequired,
+    fetchPages: PropTypes.func.isRequired
   },
 
   componentDidMount () {

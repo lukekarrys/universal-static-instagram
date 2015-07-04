@@ -1,5 +1,5 @@
 {
-  "name": "universal-static-instagram",
+  "name": "usi",
   "description": "A static site generator for Instagram.",
   "version": "1.0.0",
   "author": "Luke Karrys",
@@ -12,7 +12,8 @@
     "lodash": "^3.10.0",
     "moment": "^2.10.3",
     "react": "^0.13.3",
-    "react-router": "^1.0.0-beta2",
+    "react-router": "^1.0.0-beta3",
+    "tryit": "^1.0.1",
     "xhr": "^2.0.2",
     "zero-fill": "^2.2.1"
   },
@@ -43,6 +44,7 @@
     "react-hot-loader": "^1.2.7",
     "request": "^2.58.0",
     "style-loader": "^0.12.3",
+    "surge": "^0.14.3",
     "url-loader": "^0.5.6",
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.10.1"
@@ -62,15 +64,16 @@
     "lint",
     "validate"
   ],
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lukekarrys/universal-static-instagram.git"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack && npm run copy-data",
-    "copy-data": "cp -r _cache/media public/media",
-    "deploy": "git-directory-deploy --directory public",
-    "ig-fetch": "babel-node server/fetch.js",
+    "build": "NODE_ENV=production webpack && cp -r _cache/media public/media",
+    "deploy-gh": "git-directory-deploy --directory public",
+    "deploy-surge": "surge public usi.surge.sh",
+    "fetch-ig": "babel-node server/fetch.js",
     "lint": "eslint --ext .js,.es6 .",
     "serve-local": "http-server ./public -p 3000",
     "start": "webpack-dev-server",

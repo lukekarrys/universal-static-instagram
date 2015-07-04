@@ -18,13 +18,9 @@ const readData = (dir, cb) => {
   fs.readdir(dir, (dirErr, files) => {
     if (dirErr) return cb(dirErr);
 
-    const jsonFiles = files.filter(isJSON);
-
     async.map(
-      jsonFiles,
-      (file, fileCb) => {
-        readJSON(path.join(dir, file), fileCb);
-      },
+      files.filter(isJSON),
+      (file, fileCb) => readJSON(path.join(dir, file), fileCb),
       (err, results) => {
         if (err) return cb(err);
         cb(null, sortBy(results, sortByCreate).reverse());

@@ -1,23 +1,16 @@
 'use strict';
 
 import xhr from 'xhr';
+import tryit from 'tryit';
+import flatten from 'lodash/array/flatten';
 import alt from '../alt';
+import slash from '../helpers/slash';
 
 const api = (path, cb) => {
-  xhr(`/json${path.charAt(0) === '/' ? '' : '/'}${path}.json`, (err, resp, body) => {
-    if (err) {
-      cb(err);
-    }
-    else {
-      let json;
-      try {
-        json = JSON.parse(body);
-      }
-      catch (e) {
-        return cb(e);
-      }
-      cb(null, json);
-    }
+  xhr(`/json${slash(path)}.json`, (xhrErr, resp, body) => {
+    if (xhrErr) return cb(xhrErr);
+    let json;
+    tryit(() => json = JSON.parse(body), (err) => cb(err, json));
   });
 };
 
@@ -32,18 +25,12 @@ const fetchHelper = (ctx, path, action) => {
   });
 };
 
+const actionTypes = (a) => [`${a}Receive`, `${a}Error`];
+
 class AppActions {
   constructor () {
-    this.generateActions(
-      'photoReceive',
-      'photoError',
-      'photosReceive',
-      'photosError',
-      'tagsReceive',
-      'tagsError',
-      'pagesReceive',
-      'pagesError'
-    );
+    const actions = flatten(['photo', 'photos', 'tags', 'pages'].map(actionTypes));
+    this.generateActions.apply(this, actions);
   }
 
   fetchPhoto (path) {
