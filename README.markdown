@@ -33,3 +33,5 @@ Sure! You'll need to do the following steps:
 - `npm run deploy-surge -- --domain=domain.surge.sh # Deploy to surge`
 - or
 - `npm run deploy-gh # Deploy to gh-pages`
+- or
+- `npm run serve-local # To run locally`
