@@ -1,6 +1,6 @@
 {
   "name": "usi",
-  "description": "A static site generator for Instagram.",
+  "description": "A universal JS static site generator for Instagram built with React.",
   "version": "1.0.0",
   "author": "Luke Karrys",
   "bugs": {
