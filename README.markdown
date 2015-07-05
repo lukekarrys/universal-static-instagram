@@ -30,4 +30,6 @@ Sure! You'll need to do the following steps:
 - [Create an Instagram API client](https://instagram.com/developer/clients/register/) to get a client id and a secret
 - `npm run fetch-ig -- --client=CLIENT --secret=SECRET --user=USER_ID`
 - `npm run build`
-- `npm run deploy-surge # or npm run deploy-gh`
+- `npm run deploy-surge -- --domain=domain.surge.sh # Deploy to surge`
+- or
+- `npm run deploy-gh # Deploy to gh-pages`

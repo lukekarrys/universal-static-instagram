@@ -72,7 +72,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack && cp -r _cache/media public/media",
     "deploy-gh": "git-directory-deploy --directory public",
-    "deploy-surge": "surge public usi.surge.sh",
+    "deploy-surge": "surge public",
     "fetch-ig": "babel-node server/fetch.js",
     "lint": "eslint --ext .js,.es6 .",
     "serve-local": "http-server ./public -p 3000",
