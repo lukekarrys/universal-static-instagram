@@ -30,7 +30,7 @@ const Photo = React.createClass({
 
   render () {
     const {photo} = this.props;
-    const {id} = this.props.photo;
+    const {id} = photo;
     return (
       id ? <div>
         <h1><PhotoTitle {...photo} /></h1>
