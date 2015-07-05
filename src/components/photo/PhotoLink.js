@@ -6,8 +6,8 @@ import permalink from '../../helpers/permalink';
 
 const PhotoLink = React.createClass({
   propTypes: {
-    created_time: PropTypes.string,
-    id: PropTypes.string,
+    created_time: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]).isRequired
   },
 

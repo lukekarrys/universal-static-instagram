@@ -10,9 +10,7 @@ const PhotoTitle = React.createClass({
   render () {
     const {caption} = this.props;
     return (
-      caption === undefined
-      ? null
-      : <span>{this.props.caption ? this.props.caption.text : 'Untitled Photo'}</span>
+      <span>{caption ? caption.text : 'Untitled Photo'}</span>
     );
   }
 });

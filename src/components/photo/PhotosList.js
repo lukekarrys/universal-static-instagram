@@ -1,19 +1,30 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import PhotoListItem from './PhotoListItem';
+import PhotoImage from './PhotoImage';
+import PhotoDate from './PhotoDate';
+import PhotoLink from './PhotoLink';
+import PhotoTitle from './PhotoTitle';
 
 const PhotosList = React.createClass({
   propTypes: {
-    photos: PropTypes.array.isRequired
+    photos: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired
   },
 
   render () {
     return (
       <ul>
-        {this.props.photos.map(photo =>
-          <li key={photo.id}><PhotoListItem {...photo} /></li>
-        )}
+        {this.props.photos.map((photo) => {
+          return (
+            <li key={photo.id}>
+              <PhotoLink {...photo}>
+                <PhotoImage {...photo} type={this.props.type} />
+                <PhotoDate {...photo} /> - <PhotoTitle {...photo} />
+              </PhotoLink>
+            </li>
+          );
+        })}
       </ul>
     );
   }

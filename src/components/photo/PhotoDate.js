@@ -6,7 +6,7 @@ import createdDate from '../../helpers/createdDate';
 
 const PhotoDate = React.createClass({
   propTypes: {
-    created_time: PropTypes.string,
+    created_time: PropTypes.string.isRequired,
     dateFormat: PropTypes.string
   },
 
@@ -19,7 +19,7 @@ const PhotoDate = React.createClass({
   render () {
     const date = createdDate(this.props.created_time);
     return (
-      date ? <span>{moment(date).format('dddd, MMMM Do YYYY, h:mm:ss a')}</span> : null
+      <span>{moment(date).format(this.props.dateFormat)}</span>
     );
   }
 });

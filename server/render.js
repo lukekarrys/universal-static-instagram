@@ -4,6 +4,7 @@ import React from 'react';
 import {Router} from 'react-router';
 import Location from 'react-router/lib/Location';
 import Iso from 'iso';
+import createElement from '../src/createAltContainer';
 import alt from '../src/alt';
 import routes from '../src/routes';
 import slash from '../src/helpers/slash';
@@ -32,7 +33,7 @@ const render = (context, path, data, done) => {
   Router.run(routes, location, (err, initialState) => {
     if (err) return done(err);
 
-    const content = React.renderToString(<Router {...initialState} />);
+    const content = React.renderToString(<Router {...initialState} createElement={createElement} />);
     iso.add(content, alt.flush());
 
     done(null, template(context, iso.render()));

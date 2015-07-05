@@ -39,7 +39,7 @@ const PhotosByTag = React.createClass({
     return (
       <div>
         <h1>{this.getTitle()}</h1>
-        <PhotosList photos={this.props.photos} />
+        <PhotosList photos={this.props.photos} type='thumbnail' />
         {this.props.children}
       </div>
     );

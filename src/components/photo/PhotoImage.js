@@ -1,20 +1,12 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
+const prefix = '/media/';
 
 const PhotoImage = React.createClass({
   propTypes: {
-    images: PropTypes.object,
-    type: PropTypes.oneOf(['thumbnail', 'low', 'standard']),
-    prefix: PropTypes.string
-  },
-
-  getDefaultProps () {
-    return {
-      prefix: '/media/',
-      type: 'thumbnail',
-      images: {}
-    };
+    images: PropTypes.object.isRequired,
+    type: PropTypes.oneOf(['thumbnail', 'low', 'standard']).isRequired
   },
 
   imageName () {
@@ -27,13 +19,11 @@ const PhotoImage = React.createClass({
   imageProps () {
     const image = this.props.images[this.imageName()];
 
-    if (!image) return null;
-
     const {height, width} = image;
     let {url} = image;
 
-    if (this.props.prefix) {
-      url = url.replace(/https?:\/\//, this.props.prefix);
+    if (prefix) {
+      url = url.replace(/https?:\/\//, prefix);
     }
 
     return {
@@ -44,9 +34,8 @@ const PhotoImage = React.createClass({
   },
 
   render () {
-    const imageProps = this.imageProps();
     return (
-      imageProps ? <img {...imageProps} /> : null
+      <img {...this.imageProps()} />
     );
   }
 });
