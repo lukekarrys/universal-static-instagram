@@ -23,7 +23,7 @@ const Photo = React.createClass({
   },
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.photo.id !== this.props.photo.id) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
       this._fetchPhoto(nextProps);
     }
   },
