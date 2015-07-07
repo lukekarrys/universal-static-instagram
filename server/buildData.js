@@ -49,7 +49,7 @@ class ByDate extends KeySets {
   }
 
   add (time, id) {
-    const {day, month, year} = dateParts(time);
+    const {day, month, year} = dateParts({created_time: time});
     super.add(`${year}/${month}/${day}`, id);
     super.add(`${year}/${month}`, id);
     super.add(`${year}`, id);

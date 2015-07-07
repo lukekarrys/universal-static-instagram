@@ -27,11 +27,14 @@ const render = (context, path, data, done) => {
   const iso = new Iso();
   const location = new Location(slash(path));
 
-  // We only have a single store in our app so all data goes there
-  alt.bootstrap(JSON.stringify({AppStore: data || {}}));
-
   Router.run(routes, location, (err, initialState) => {
     if (err) return done(err);
+
+    const Page = initialState.components[1];
+    const storeName = Page.getStoreName ? Page.getStoreName() : '';
+    const bootstrap = storeName && data ? {[storeName + 'Store']: data} : {};
+
+    alt.bootstrap(JSON.stringify(bootstrap));
 
     const content = React.renderToString(<Router {...initialState} createElement={createElement} />);
     iso.add(content, alt.flush());

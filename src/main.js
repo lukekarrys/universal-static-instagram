@@ -11,11 +11,7 @@ import createElement from './createAltContainer';
 const history = new BrowserHistory();
 
 Iso.bootstrap((state, _, container) => {
-  const props = {
-    history,
-    createElement,
-    children: routes
-  };
+  const props = {history, createElement, children: routes};
   alt.bootstrap(state);
   React.render(<Router {...props} />, container);
 });

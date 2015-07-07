@@ -34,7 +34,7 @@
     "radix": 2,
     "no-else-return": 2,
     "no-var": 2,
-    "camelcase": [2, {"properties": "never"}],
+    "camelcase": 0,
     "brace-style": [2, "stroustrup", {"allowSingleLine": true}],
     "func-names": 2,
     "react/jsx-uses-react": 2,

@@ -6,8 +6,8 @@ import createdDate from './createdDate';
 const PREFIX = 'photos';
 
 const dateParts = (props) => {
-  const date = createdDate(props);
-  const year = date.getFullYear();
+  const date = createdDate(props.created_time);
+  const year = date.getFullYear() + '';
   const month = zeroFill(2, date.getMonth() + 1);
   const day = zeroFill(2, date.getDate());
 
