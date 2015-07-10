@@ -13,8 +13,9 @@ const api = (path, cb) => {
 };
 
 const apiActions = (ctx, path) => {
+  if (typeof window === 'undefined') return;
   const {actions} = ctx;
-  actions.load();
+  ctx.dispatch();
   api(path, (err, data) => {
     if (err) {
       actions.error(err);
@@ -25,5 +26,4 @@ const apiActions = (ctx, path) => {
   });
 };
 
-export {api as api};
 export default apiActions;

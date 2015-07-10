@@ -4,6 +4,9 @@ import React from 'react';
 import {Router} from 'react-router';
 import Location from 'react-router/lib/Location';
 import Iso from 'iso';
+import result from 'lodash/object/result';
+import transform from 'lodash/object/transform';
+import assign from 'lodash/object/assign';
 import createElement from '../src/createAltContainer';
 import alt from '../src/alt';
 import routes from '../src/routes';
@@ -31,8 +34,9 @@ const render = (context, path, data, done) => {
     if (err) return done(err);
 
     const Page = initialState.components[1];
-    const storeName = Page.getStoreName ? Page.getStoreName() : '';
-    const bootstrap = storeName && data ? {[storeName + 'Store']: data} : {};
+    const bootstrap = transform(result(Page, 'getStores'), (res, store) => {
+      res[store.displayName] = assign({loading: false, error: null}, data);
+    }, {});
 
     alt.bootstrap(JSON.stringify(bootstrap));
 

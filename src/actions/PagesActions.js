@@ -5,7 +5,7 @@ import api from '../helpers/api';
 
 class PagesActions {
   constructor () {
-    this.generateActions('load', 'error', 'success');
+    this.generateActions('error', 'success');
   }
 
   fetch (path) {

@@ -6,7 +6,7 @@ import TagLink from '../tag/TagLink';
 import PageLink from '../page/PageLink';
 import PhotoLink from '../photo/PhotoLink';
 
-const PhotosByTag = React.createClass({
+const PhotosBy = React.createClass({
   propTypes: {
     photos: PropTypes.array.isRequired,
     // Params that come from react router path
@@ -64,4 +64,4 @@ const PhotosByTag = React.createClass({
   }
 });
 
-export default PhotosByTag;
+export default PhotosBy;

@@ -98,8 +98,8 @@ const saveJson = queue((json, saveDone) => {
       // Full means we fetch likes and comments separately and add those
       // to the json payload that gets saved
       parallel({
-        likes: (cb) => ig.likes(id, (err, res) => cb(err, res)),
-        comments: (cb) => ig.comments(id, (err, res) => cb(err, res))
+        likes: (cb) => ig.likes(id, cb),
+        comments: (cb) => ig.comments(id, cb)
       }, (err, res) => {
         if (err) return saveDone(err);
         json.likes.data = res.likes;

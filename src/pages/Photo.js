@@ -1,25 +1,33 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Loading from '../components/Loading';
+import PageContainer from '../components/PageContainer';
 import PhotoDetail from '../components/photo/PhotoDetail';
+import PhotoStore from '../stores/PhotoStore';
+import PhotoActions from '../actions/PhotoActions';
 
 const Photo = React.createClass({
   propTypes: {
-    store: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    loading: PropTypes.bool.isRequired,
+    photo: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    error: PropTypes.instanceOf(Error)
   },
 
   statics: {
-    getStoreName () {
-      return 'Photo';
+    getStores () {
+      return [PhotoStore];
     }
   },
 
+  componentDidMount () {
+    PhotoActions.fetch(this.props.location.pathname);
+  },
+
   render () {
-    const {photo, loading} = this.props.store;
+    const {photo, loading, error} = this.props;
     return (
-      loading ? <Loading /> : <PhotoDetail {...photo} />
+      <PageContainer loading={loading} error={error} component={PhotoDetail} {...photo} />
     );
   }
 });

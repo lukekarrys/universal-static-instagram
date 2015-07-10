@@ -1,24 +1,19 @@
 'use strict';
 
 import alt from '../alt';
-import defaults from 'lodash/object/defaults';
 import actions from '../actions/PhotoActions';
-
-const defaultValues = {
-  photo: {},
-  loading: false,
-  error: null
-};
 
 class PhotoStore {
   constructor () {
+    this.photo = {};
+    this.loading = false;
+    this.error = null;
     this.bindActions(actions);
-    this.on('bootstrap', () => this.setState(defaults(this, defaultValues)));
   }
   onSuccess (resp) {
     this.setState({photo: resp.photo, loading: false, error: null});
   }
-  onLoad () {
+  onFetch () {
     this.setState({photo: {}, loading: true, error: null});
   }
   onError (err) {

@@ -1,24 +1,19 @@
 'use strict';
 
 import alt from '../alt';
-import defaults from 'lodash/object/defaults';
 import actions from '../actions/PagesActions';
-
-const defaultValues = {
-  pages: [],
-  loading: false,
-  error: null
-};
 
 class PagesStore {
   constructor () {
+    this.pages = [];
+    this.loading = false;
+    this.error = null;
     this.bindActions(actions);
-    this.on('bootstrap', () => this.setState(defaults(this, defaultValues)));
   }
   onSuccess (resp) {
     this.setState({pages: resp.pages, loading: false, error: null});
   }
-  onLoad () {
+  onFetch () {
     this.setState({pages: [], loading: true, error: null});
   }
   onError (err) {
