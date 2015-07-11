@@ -29,7 +29,12 @@ const Tags = React.createClass({
     return (
       <div>
         <h1>Tags</h1>
-        <PageContainer loading={loading} error={error} component={TagsList} tags={tags} />
+        <PageContainer
+          loading={loading}
+          error={error}
+          component={TagsList}
+          data={{tags}}
+        />
       </div>
     );
   }

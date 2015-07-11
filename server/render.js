@@ -4,9 +4,7 @@ import React from 'react';
 import {Router} from 'react-router';
 import Location from 'react-router/lib/Location';
 import Iso from 'iso';
-import result from 'lodash/object/result';
 import transform from 'lodash/object/transform';
-import assign from 'lodash/object/assign';
 import createElement from '../src/createAltContainer';
 import alt from '../src/alt';
 import routes from '../src/routes';
@@ -26,22 +24,36 @@ const template = (context, body) => {
   `.replace(/\n\s*/g, '');
 };
 
+// {
+//   photos: [],
+//   tags: []
+// }
+// ----->
+// {
+//   PhotosStore: {photos: [], loading: false, error: null},
+//   TagsStore: {tags: [], loading: false, error: null}
+// }
+const dataToStore = (data) => transform(data, (res, value, key) => {
+  res[`${key.slice(0, 1).toUpperCase()}${key.slice(1)}Store`] = {
+    [key]: value,
+    loading: false,
+    error: null
+  };
+}, {});
+
 const render = (context, path, data, done) => {
   const iso = new Iso();
   const location = new Location(slash(path));
 
-  Router.run(routes, location, (err, initialState) => {
+  Router.run(routes, location, (err, props) => {
     if (err) return done(err);
 
-    const Page = initialState.components[1];
-    const bootstrap = transform(result(Page, 'getStores'), (res, store) => {
-      res[store.displayName] = assign({loading: false, error: null}, data);
-    }, {});
+    alt.bootstrap(JSON.stringify(dataToStore(data)));
 
-    alt.bootstrap(JSON.stringify(bootstrap));
-
-    const content = React.renderToString(<Router {...initialState} createElement={createElement} />);
-    iso.add(content, alt.flush());
+    iso.add(
+      React.renderToString(<Router {...props} createElement={createElement} />),
+      alt.flush()
+    );
 
     done(null, template(context, iso.render()));
   });

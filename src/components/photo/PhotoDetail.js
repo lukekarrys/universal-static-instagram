@@ -10,24 +10,23 @@ import TagLink from '../tag/TagLink';
 
 const PhotoDetail = React.createClass({
   propTypes: {
-    tags: PropTypes.array.isRequired,
-    created_time: PropTypes.string.isRequired,
-    filter: PropTypes.string
+    photo: PropTypes.object.isRequired
   },
 
   render () {
-    const {created_time, filter} = this.props;
+    const {photo} = this.props;
+    const {created_time, filter, tags} = photo;
     return (
       <div>
-        <h1><PhotoTitle {...this.props} /></h1>
-        <h3><PhotoDate {...this.props} /></h3>
-        <PhotoImage {...this.props} type='standard' />
+        <h1><PhotoTitle {...photo} /></h1>
+        <h3><PhotoDate {...photo} /></h3>
+        <PhotoImage {...photo} type='standard' />
         <ul>
           <li><PhotoLink type='year' created_time={created_time} /></li>
           <li><PhotoLink type='month' created_time={created_time} /></li>
           <li><PhotoLink type='day' created_time={created_time} /></li>
           <li><TagLink tag={filter || 'Normal'} /></li>
-          {this.props.tags.map(tag => <li key={tag}><TagLink tag={tag} /></li>)}
+          {tags.map(tag => <li key={tag}><TagLink tag={tag} /></li>)}
         </ul>
       </div>
     );

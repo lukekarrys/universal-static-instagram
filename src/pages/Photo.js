@@ -24,10 +24,21 @@ const Photo = React.createClass({
     PhotoActions.fetch(this.props.location.pathname);
   },
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      PhotoActions.fetch(nextProps.location.pathname);
+    }
+  },
+
   render () {
     const {photo, loading, error} = this.props;
     return (
-      <PageContainer loading={loading} error={error} component={PhotoDetail} {...photo} />
+      <PageContainer
+        loading={loading}
+        error={error}
+        component={PhotoDetail}
+        data={{photo}}
+      />
     );
   }
 });

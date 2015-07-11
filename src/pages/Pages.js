@@ -29,7 +29,12 @@ const Pages = React.createClass({
     return (
       <div>
         <h1>Pages</h1>
-        <PageContainer loading={loading} error={error} component={PagesList} pages={pages} />
+        <PageContainer
+          loading={loading}
+          error={error}
+          component={PagesList}
+          data={{pages}}
+        />
       </div>
     );
   }
