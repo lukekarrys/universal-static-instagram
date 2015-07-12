@@ -1,19 +1,19 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {PropTypes, Component} from 'react';
 import isEmpty from 'lodash/lang/isEmpty';
 import some from 'lodash/collection/some';
 import assign from 'lodash/object/assign';
 import Loading from './Loading';
 import PageError from './PageError';
 
-const PageContainer = React.createClass({
-  propTypes: {
+class PageContainer extends Component {
+  static propTypes = {
     component: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.instanceOf(Error)
-  },
+  }
 
   render () {
     const {loading, error, component, data, ...componentProps} = this.props;
@@ -37,8 +37,8 @@ const PageContainer = React.createClass({
       );
     }
 
-    return React.createElement(component, assign({}, componentProps, data));
+    return React.createElement(component, assign(componentProps, data));
   }
-});
+}
 
 export default PageContainer;

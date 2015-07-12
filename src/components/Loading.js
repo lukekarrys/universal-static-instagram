@@ -1,13 +1,13 @@
 'use strict';
 
-import React from 'react';
+import React, {Component} from 'react';
 
-const Loading = React.createClass({
+class Loading extends Component {
   render () {
     return (
       <span>Loading...</span>
     );
   }
-});
+}
 
 export default Loading;

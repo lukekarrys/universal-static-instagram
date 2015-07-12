@@ -1,11 +1,11 @@
 'use strict';
 
-import React from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router';
 import PageLink from './page/PageLink';
 import TagLink from './tag/TagLink';
 
-const NotFound = React.createClass({
+class NotFound extends Component {
   render () {
     return (
       <div>
@@ -22,6 +22,6 @@ const NotFound = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default NotFound;
