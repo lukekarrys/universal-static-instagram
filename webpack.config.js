@@ -15,6 +15,11 @@ var config = require('hjs-webpack')({
   html: require('./server/buildStatic')
 });
 
+// Copy all the media to the prod dir when webpack is done
 config.plugins.push(new OnBuildPlugin(copyMedia));
+
+// Dont display assets when building for production since it will
+// contain tons of html and json assets
+config.stats = {assets: config.spec.isDev};
 
 module.exports = config;
