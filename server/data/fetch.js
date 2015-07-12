@@ -10,9 +10,9 @@ import request from 'request';
 import assign from 'lodash/object/assign';
 import each from 'lodash/collection/each';
 import debugThe from 'debug';
-import readData from './readData';
-import getConfig from './getConfig';
+import readData from './read';
 import CacheDir from './cacheDir';
+import getConfig from '../config/get';
 
 const debug = debugThe('usi:fetch');
 const CONFIG = getConfig();

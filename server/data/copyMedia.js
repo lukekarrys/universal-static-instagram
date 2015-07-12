@@ -7,7 +7,7 @@ import CacheDir from './cacheDir';
 
 const copyMedia = (cb) => cpr(
   new CacheDir().media(),
-  path.resolve(__dirname, '..', 'public', 'media'),
+  path.resolve(__dirname, '..', '..', 'public', 'media'),
   {
     deleteFirst: false,
     overwrite: false

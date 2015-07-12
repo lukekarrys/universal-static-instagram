@@ -2,8 +2,8 @@
 
 import keys from 'lodash/object/keys';
 import sortBy from 'lodash/collection/sortBy';
-import readData from './readData';
-import {dateParts} from '../src/helpers/permalink';
+import readData from './read';
+import {dateParts} from '../../src/helpers/permalink';
 
 const sortByTag = (tag) => tag.toLowerCase();
 const sortByIndex = (num) => parseInt(num, 10);

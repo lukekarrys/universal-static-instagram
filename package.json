@@ -78,9 +78,9 @@
     "build": "webpack --progress",
     "deploy.gh": "git-directory-deploy --directory public",
     "deploy.surge": "surge public",
-    "fetch.data": "babel-node server/fetchData.js",
+    "fetch.data": "babel-node server/data/fetch.js",
     "lint": "eslint .",
-    "make.config": "babel-node server/makeConfig.js",
+    "make.config": "babel-node server/config/make.js",
     "serve.local": "http-server ./public -p 3000",
     "start": "webpack-dev-server --progress",
     "validate": "npm ls"

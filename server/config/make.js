@@ -7,7 +7,7 @@ import {instagram} from 'instagram-node';
 import colors from 'colors/safe';
 import find from 'lodash/collection/find';
 
-const configPath = path.resolve(__dirname, '..', 'config.json');
+const configPath = path.resolve(__dirname, '..', '..', 'config.json');
 const clientMessage = colors.bold('What is the id of your Instagram client application?');
 const secretMessage = colors.bold('What is the secret of your Instagram client application?');
 const clientHelp = 'If you don\'t have one you can register a new one here:\nhttps://instagram.com/developer/clients/register/';

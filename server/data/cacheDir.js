@@ -1,7 +1,7 @@
 'use strict';
 
 import path from 'path';
-import getConfig from './getConfig';
+import getConfig from '../config/get';
 
 const CONFIG = getConfig();
 const CACHE_DIR = '_cache';
@@ -14,7 +14,7 @@ class CacheDir {
     if (!user) {
       throw new Error('A user id is required. Run `npm run make.config` to get started.');
     }
-    this._base = path.resolve(__dirname, '..', CACHE_DIR, user);
+    this._base = path.resolve(__dirname, '..', '..', CACHE_DIR, user);
   }
 
   json (...parts) {

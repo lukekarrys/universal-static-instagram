@@ -24,10 +24,7 @@ const template = (context, body) => {
   `.replace(/\n\s*/g, '');
 };
 
-// {
-//   photos: [],
-//   tags: []
-// }
+// {photos: [], tags: []}
 // ----->
 // {
 //   PhotosStore: {photos: [], loading: false, error: null},
@@ -40,6 +37,12 @@ const dataToStore = (data) => transform(data, (res, value, key) => {
     error: null
   };
 }, {});
+
+const renderEmpty = (context) => {
+  const iso = new Iso();
+  iso.add('', JSON.stringify({}));
+  return template(context, iso.render());
+};
 
 const render = (context, path, data, done) => {
   const iso = new Iso();
@@ -59,4 +62,5 @@ const render = (context, path, data, done) => {
   });
 };
 
+export {renderEmpty as renderEmpty};
 export default render;

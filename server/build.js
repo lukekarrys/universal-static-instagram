@@ -5,10 +5,10 @@ import pick from 'lodash/object/pick';
 import assign from 'lodash/object/assign';
 import async from 'async';
 import debugThe from 'debug';
-import organizeData from './organizeData';
-import renderApp from './render';
+import organizeData from './data/organize';
+import renderApp, {renderEmpty} from './render';
+import getConfig from './config/get';
 import permalink from '../src/helpers/permalink';
-import getConfig from './getConfig';
 
 const debug = debugThe('usi:build');
 const CONFIG = getConfig();
@@ -17,17 +17,26 @@ const LIST_PROPS = ['created_time', 'images', 'id', 'caption'];
 const buildStatic = (context, done) => organizeData((dataErr, results) => {
   if (dataErr) throw dataErr;
 
+  const isBuild = !context.isDev;
   const {ids, tags, tagKeys, pages, pageKeys, dates} = results;
   const toPhotos = (photos) => ({photos: photos.map(id => pick(ids[id], LIST_PROPS))});
   const render = (urlPath, data) => (cb) => renderApp(context, urlPath, data, cb);
 
-  const filesAsync = {'404.html': render('__NOT_A_REAL_URL__')};
+  const filesAsync = {};
   const filesSync = {};
 
-  // Create the CNAME file based on the config domain
-  if (CONFIG.domain) {
-    debug(`Domain: ${CONFIG.domain}`);
-    filesSync.CNAME = CONFIG.domain;
+  if (isBuild) {
+    // Create a 404.html file for our deployment targets in build mode
+    filesAsync['404.html'] = render('__NOT_A_REAL_URL__');
+    // Create the CNAME file based on the config domain
+    if (CONFIG.domain) {
+      debug(`Domain: ${CONFIG.domain}`);
+      filesSync.CNAME = CONFIG.domain;
+    }
+  }
+  else {
+    // In dev mode we only need one (mostly empty) html file
+    filesSync['index.html'] = renderEmpty(context);
   }
 
   const addTask = (filePath, data) => {
@@ -43,9 +52,11 @@ const buildStatic = (context, done) => organizeData((dataErr, results) => {
       filesSync[jsonPath] = JSON.stringify(data);
     }
 
-    // Add a task to async render this html file (uses react-router)
-    debug(`File: ${filePath}`);
-    filesAsync[filePath] = render(urlPath, data);
+    if (isBuild) {
+      // Add a task to async render this html file (uses react-router)
+      debug(`File: ${filePath}`);
+      filesAsync[filePath] = render(urlPath, data);
+    }
   };
 
   // Home page has first page of photos
