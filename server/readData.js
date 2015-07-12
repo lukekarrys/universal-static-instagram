@@ -4,7 +4,9 @@ import fs from 'fs';
 import async from 'async';
 import path from 'path';
 import sortBy from 'lodash/collection/sortBy';
+import CacheDir from './cacheDir';
 
+const cd = new CacheDir();
 const isJSON = (filename) => path.extname(filename) === '.json';
 const sortByCreate = (obj) => Number(obj.created_time);
 const readJSON = (file, cb) => {
@@ -14,7 +16,8 @@ const readJSON = (file, cb) => {
   });
 };
 
-const readData = (dir, cb) => {
+const readData = (cb) => {
+  const dir = cd.json();
   fs.readdir(dir, (dirErr, files) => {
     if (dirErr) return cb(dirErr);
 

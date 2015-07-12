@@ -18,7 +18,7 @@ const PhotosBy = React.createClass({
   },
 
   getType () {
-    const {year, month, day, tag, page} = this.props;
+    const {year, tag} = this.props;
     if (year) return 'date';
     if (tag) return 'tag';
     return 'page';

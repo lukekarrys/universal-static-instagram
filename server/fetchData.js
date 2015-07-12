@@ -7,16 +7,19 @@ import path from 'path';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
 import request from 'request';
+import assign from 'lodash/object/assign';
 import each from 'lodash/collection/each';
 import debugThe from 'debug';
 import readData from './readData';
+import getConfig from './getConfig';
+import CacheDir from './cacheDir';
 
-const debug = debugThe('ig');
+const debug = debugThe('usi:fetch');
+const CONFIG = getConfig();
 const MAX_COUNT = 33;
-const JSON_DIRNAME = 'json';
-const MEDIA_DIRNAME = 'media';
 const QUEUE_CONCURRENCY = 10;
 const encoding = 'utf8';
+const cd = new CacheDir();
 
 
 // --------------------
@@ -28,25 +31,21 @@ const {
   client: OPT_CLIENT,
   secret: OPT_SECRET,
   user: OPT_USER,
-  dir: OPT_DIR,
   refresh: OPT_REFRESH,
   full: OPT_FULL
-} = minimist(process.argv.slice(2), {
-  boolean: ['refresh', 'full'],
-  string: ['client', 'secret', 'user'],
-  default: {dir: '_cache'}
-});
+} = assign(minimist(process.argv.slice(2), {
+  boolean: ['refresh', 'full']
+}), CONFIG);
 
 // These are all the necessary options
-if (!OPT_CLIENT || !OPT_SECRET || !OPT_USER || !OPT_DIR) {
-  throw new Error('client, secret, user, and dir are requried');
+if (!OPT_CLIENT || !OPT_SECRET || !OPT_USER) {
+  throw new Error('client, secret, and user are requried');
 }
 
 // Log all the things to start so we know whats going on
 debug('CLIENT', OPT_CLIENT);
 debug('SECRET', OPT_SECRET);
 debug('USER ID', OPT_USER);
-debug('DIR', OPT_DIR);
 debug('REFRESH', !!OPT_REFRESH);
 debug('FULL', !!OPT_FULL);
 
@@ -59,10 +58,7 @@ ig.use({client_id: OPT_CLIENT, client_secret: OPT_SECRET});
 // HELPERS
 // --------------------
 
-// Helper to get dirs instead of user specified directory
-const getDir = (...parts) => {
-  return path.join.apply(path, [path.resolve(__dirname, '..', OPT_DIR)].concat(parts));
-};
+// A more readable path for debugging
 const debugPath = (filepath) => filepath.replace(path.resolve(__dirname, '..'), '');
 
 // Helper for deciding whether to write a file
@@ -91,7 +87,7 @@ const shouldWrite = (filepath, overwrite, yes, no) => {
 // Queue to save json to id.json in directory
 const saveJson = queue((json, saveDone) => {
   const id = json.id;
-  const filepath = getDir(JSON_DIRNAME, id + '.json');
+  const filepath = cd.json(id + '.json');
   const writeFile = (data) => fs.writeFile(filepath, JSON.stringify(data), {encoding}, saveDone);
   shouldWrite(filepath, OPT_REFRESH, () => {
     if (OPT_FULL) {
@@ -118,7 +114,7 @@ const saveImage = queue((url, cb) => {
   // The Instagram images get saved to a location on disk that matches the
   // urls domain+path, so we need to make that directory and then save the file
   const stripped = url.replace(/^https?:\/\//, '/');
-  const dirname = getDir(MEDIA_DIRNAME, path.dirname(stripped));
+  const dirname = cd.media(path.dirname(stripped));
   const filepath = path.join(dirname, path.basename(stripped));
   // An Instagram image at a url should never change so we shouldn't ever
   // need to download it more than once
@@ -155,9 +151,9 @@ const fetchMedia = (err, medias, pagination, remaining) => {
 // Make sure all our directories are created and
 // then start the instagram fetching
 series({
-  json: (cb) => mkdirp(getDir(JSON_DIRNAME), cb),
-  media: (cb) => mkdirp(getDir(MEDIA_DIRNAME), cb),
-  data: (cb) => readData(getDir(JSON_DIRNAME), cb)
+  json: (cb) => mkdirp(cd.json(), cb),
+  media: (cb) => mkdirp(cd.media(), cb),
+  data: (cb) => readData(cb)
 }, (err, results) => {
   if (err) throw err;
 

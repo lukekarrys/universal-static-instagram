@@ -8,6 +8,7 @@ import {dateParts} from '../src/helpers/permalink';
 const sortByTag = (tag) => tag.toLowerCase();
 const sortByIndex = (num) => parseInt(num, 10);
 
+// Adds ids to an object of arrays specified by keys
 class KeySets {
   constructor (options = {}) {
     this.options = options;
@@ -67,12 +68,12 @@ class ByPage extends KeySets {
   }
 }
 
-const buildData = (dir, cb) => {
+const buildData = (cb) => {
   const byTag = new ByTag();
   const byDate = new ByDate();
   const byPage = new ByPage({pagination: 10});
   const byId = {};
-  readData(dir, (err, data) => {
+  readData((err, data) => {
     if (err) return cb(err);
     data.forEach((datum, index) => {
       const {filter, tags, created_time, id} = datum;

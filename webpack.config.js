@@ -7,5 +7,5 @@ module.exports = require('hjs-webpack')({
   out: 'public',
   clearBeforeBuild: true,
   output: {hash: true},
-  html: require('./server/buildFiles')
+  html: require('./server/buildStatic')
 });
