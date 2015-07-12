@@ -82,7 +82,7 @@
     "lint": "eslint .",
     "make.config": "babel-node server/makeConfig.js",
     "serve.local": "http-server ./public -p 3000",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --progress",
     "validate": "npm ls"
   }
 }
