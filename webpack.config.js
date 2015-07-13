@@ -14,12 +14,13 @@ var config = webpack({
   out: 'public',
   clearBeforeBuild: true,
   output: {hash: true},
-  html: require('./server/build')
+  html: require('./server/build'),
+  devServer: {noInfo: true}
 });
 
 // Dont display assets because it will contain tons of html and json assets
-config.stats = {assets: false}; // webpack
-if (config.devServer) config.devServer.noInfo = true; // webpack-dev-server
+// devServer.noInfo = true does the same thing for webpack-dev-server
+config.stats = {assets: false};
 
 // Copy all the media (only once) to the build/contentBase dir when webpack is
 // has finished compiling. This means in dev mode that the server needs to be
