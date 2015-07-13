@@ -90,7 +90,7 @@ npm run deploy.gh
 
 Since you already have this forked on GitHub, and every path has a matching built file, you can use GitHub Pages, which is pretty neat. Running the above command will push the built site up to your GitHub fork on the `gh-pages` branch. If you picked a domain when running `npm run make.config` it will create a [`CNAME` file](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/#creating-and-committing-a-cname-file) for you. See the [GitHub Pages help docs](https://help.github.com/categories/github-pages-basics/) for more information.
 
-*Note: a `gh-pages` branch will need to exist already, which it should if you forked the repo.*
+*Note: you will first need to create a `gh-pages` branch on your forked repo.*
 
 ### Re-fetching Data
 
