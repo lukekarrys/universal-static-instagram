@@ -82,6 +82,8 @@ npm run deploy.surge
 
 Surge is really great. If you don't have an account, running this command will prompt you to create one and then it will deploy your site to the domain you chose when running `npm run make.config` (via a [`CNAME` file](https://surge.sh/help/remembering-a-domain)). If you didn't pick a domain, Surge will prompt you for one. See the [Surge help docs](https://surge.sh/help) for more information.
 
+*Note: currently Surge uploads every file for each deployment. This means that even if you only make one small style tweak, the deploy process will still have to upload all the files and images which could be 100s of megabytes. There is an [open issue](https://github.com/sintaxi/surge/issues/119) on the project to allow deploying based on diffs only, but it hasn't been implemented. If this is an issue for you, I recommend using GitHub Pages for deploying.*
+
 #### [GitHub Pages](https://pages.github.com/)
 
 ```js
