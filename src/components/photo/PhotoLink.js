@@ -4,7 +4,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import moment from 'moment';
 import PhotoTitle from './PhotoTitle';
-import permalink, {getDay, getMonth, getYear} from '../../helpers/permalink';
+import permalink, {getDay, getMonth, getYear, propsToDate} from '../../helpers/permalink';
 
 const PhotoLink = React.createClass({
   propTypes: {
@@ -31,7 +31,7 @@ const PhotoLink = React.createClass({
   },
 
   getDefaultText () {
-    const {type, year, month, day} = this.props;
+    const {type, created_time, year, month, day} = this.props;
 
     if (type === 'id') return <PhotoTitle caption={this.props.caption} />;
 
@@ -40,7 +40,7 @@ const PhotoLink = React.createClass({
     else if (type === 'month') format = 'MMMM YYYY';
     else if (type === 'year') format = 'YYYY';
 
-    return moment(new Date(year, Number(month) + 1, day)).format(format);
+    return moment(propsToDate({created_time, year, month, day})).format(format);
   },
 
   render () {

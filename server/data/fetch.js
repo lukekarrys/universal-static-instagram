@@ -13,6 +13,7 @@ import debugThe from 'debug';
 import readData from './read';
 import CacheDir from './cacheDir';
 import getConfig from '../config/get';
+import createdDate from '../../src/helpers/createdDate';
 
 const debug = debugThe('usi:fetch');
 const CONFIG = getConfig();
@@ -165,7 +166,7 @@ series({
   // to only fetch photos newer than this
   if (first && first.id && !OPT_REFRESH) {
     options.min_id = first.id;
-    debug('Start from', first.id, new Date(Number(first.created_time) * 1000).toJSON());
+    debug('Start from', first.id, createdDate(first.created_time).toJSON());
   }
 
   // The important part
