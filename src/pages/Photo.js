@@ -14,9 +14,7 @@ export default class Photo extends Component {
     error: PropTypes.instanceOf(Error)
   }
 
-  static getStores = () => {
-    return [PhotoStore];
-  }
+  static getStores = () => [PhotoStore]
 
   componentDidMount () {
     PhotoActions.fetch(this.props.location.pathname);

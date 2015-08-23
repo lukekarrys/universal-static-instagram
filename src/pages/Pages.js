@@ -14,9 +14,7 @@ export default class Pages extends Component {
     error: PropTypes.instanceOf(Error)
   }
 
-  static getStores = () => {
-    return [PagesStore];
-  }
+  static getStores = () => [PagesStore]
 
   componentDidMount () {
     PagesActions.fetch(this.props.location.pathname);
