@@ -14,26 +14,26 @@ const propsToDate = (props) => {
 
 const dateParts = (props) => {
   const date = propsToDate(props);
-  const year = date.getFullYear() + '';
+  const year = date.getFullYear().toString();
   const month = zeroFill(2, date.getMonth() + 1);
   const day = zeroFill(2, date.getDate());
 
   return {year, month, day};
 };
 
-const _datePath = (props) => {
+const datePath = (props) => {
   const {year, month, day} = dateParts(props);
   return `/${PREFIX}/${year}/${month}/${day}`;
 };
 
 const permalink = (props) => {
   const {id} = props;
-  return `${_datePath(props)}${id ? '/' + id : ''}`;
+  return `${datePath(props)}${id ? `/${id}` : ''}`;
 };
 
-const getYear = (props) => _datePath(props).replace(/\/\d\d\/\d\d$/, '');
-const getMonth = (props) => _datePath(props).replace(/\/\d\d$/, '');
-const getDay = (props) => _datePath(props);
+const getYear = (props) => datePath(props).replace(/\/\d\d\/\d\d$/, '');
+const getMonth = (props) => datePath(props).replace(/\/\d\d$/, '');
+const getDay = (props) => datePath(props);
 
 export {propsToDate as propsToDate};
 export {getYear as getYear};

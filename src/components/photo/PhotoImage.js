@@ -12,7 +12,7 @@ const PhotoImage = React.createClass({
   imageName () {
     const {type} = this.props;
     return type === 'low' || type === 'standard' ?
-      type + '_resolution' :
+      `${type}_resolution` :
       type;
   },
 

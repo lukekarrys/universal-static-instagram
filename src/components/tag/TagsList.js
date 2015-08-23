@@ -11,7 +11,7 @@ const TagsList = React.createClass({
   render () {
     return (
       <ul>
-        {this.props.tags.map(tag => <li key={tag}><TagLink tag={tag} /></li>)}
+        {this.props.tags.map((tag) => <li key={tag}><TagLink tag={tag} /></li>)}
       </ul>
     );
   }

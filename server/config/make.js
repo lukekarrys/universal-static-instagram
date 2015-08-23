@@ -8,39 +8,47 @@ import colors from 'colors/safe';
 import find from 'lodash/collection/find';
 
 const configPath = path.resolve(__dirname, '..', '..', 'config.json');
-const clientMessage = colors.bold('What is the id of your Instagram client application?');
-const secretMessage = colors.bold('What is the secret of your Instagram client application?');
-const clientHelp = 'If you don\'t have one you can register a new one here:\nhttps://instagram.com/developer/clients/register/';
-const clientValidator = (value) => value ? true : 'An Instagram client application is required. Please create one before proceeding.';
-const userValidator = (value) => value ? true : 'A valid username is required to lookup the user id';
-const newline = (str) => str + '\n';
+const clientMessage = colors.bold(`What is the id of your Instagram client application?`);
+const secretMessage = colors.bold(`What is the secret of your Instagram client application?`);
+const clientHelp = `If you don't have one you can register a new one here:\nhttps://instagram.com/developer/clients/register/`;
+const clientValidator = (value) => value ? true : `An Instagram client application is required. Please create one before proceeding.`;
+const userValidator = (value) => value ? true : `A valid username is required to lookup the user id`;
 
-let client_id, client_secret;
+let clientId, clientSecret;
 
 inquirer.prompt([
   {
     type: 'input',
     name: 'client',
-    message: newline(clientMessage + '\n' + clientHelp),
+    message: `${clientMessage}\n${clientHelp}\n`,
     validate: clientValidator,
-    filter: (value) => { client_id = value; return value; }
+    filter: (value) => {
+      clientId = value;
+      return value;
+    }
   },
   {
     type: 'input',
     name: 'secret',
-    message: newline(secretMessage),
+    message: `${secretMessage}\n`,
     validate: clientValidator,
-    filter: (value) => { client_secret = value; return value; }
+    filter: (value) => {
+      clientSecret = value;
+      return value;
+    }
   },
   {
     type: 'input',
     name: 'user',
-    message: newline('What is the username of the Instagram user?'),
+    message: `What is the username of the Instagram user?\n`,
     validate: userValidator,
     filter: function filterUser (username) {
       const done = this.async();
       const ig = instagram();
-      ig.use({client_id, client_secret});
+      ig.use({
+        client_id: clientId,
+        client_secret: clientSecret
+      });
       ig.user_search(username, (err, users) => {
         if (err) return done(err);
         const user = find(users, 'username', username);
@@ -51,7 +59,7 @@ inquirer.prompt([
   {
     type: 'input',
     name: 'domain',
-    message: newline('What domain do you want to host this at? (optional)')
+    message: `What domain do you want to host this at? (optional)\n`
   }
 ], (answers) => {
   const data = JSON.stringify(answers, null, 2);

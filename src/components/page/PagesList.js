@@ -11,7 +11,7 @@ const PagesList = React.createClass({
   render () {
     return (
       <ul>
-        {this.props.pages.map(page => <li key={page}><PageLink page={page} /></li>)}
+        {this.props.pages.map((page) => <li key={page}><PageLink page={page} /></li>)}
       </ul>
     );
   }

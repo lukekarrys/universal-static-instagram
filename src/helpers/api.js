@@ -1,14 +1,15 @@
 'use strict';
 
 import xhr from 'xhr';
-import tryit from 'tryit';
+import attempt from 'lodash/utility/attempt';
+import isError from 'lodash/lang/isError';
 import slash from './slash';
 
 const api = (path, cb) => {
   xhr(`/json${slash(path)}.json`, (xhrErr, resp, body) => {
     if (xhrErr) return cb(xhrErr);
-    let json;
-    tryit(() => json = JSON.parse(body), (err) => cb(err, json));
+    const result = attempt(() => JSON.parse(body));
+    cb(isError(result) ? result : null, result);
   });
 };
 

@@ -22,7 +22,6 @@ const QUEUE_CONCURRENCY = 10;
 const encoding = 'utf8';
 const cd = new CacheDir();
 
-
 // --------------------
 // CLI OPTIONS
 // --------------------
@@ -52,8 +51,10 @@ debug('FULL', !!OPT_FULL);
 
 // Configure our instagram API instance
 const ig = instagram();
-ig.use({client_id: OPT_CLIENT, client_secret: OPT_SECRET});
-
+ig.use({
+  client_id: OPT_CLIENT,
+  client_secret: OPT_SECRET
+});
 
 // --------------------
 // HELPERS
@@ -80,7 +81,6 @@ const shouldWrite = (filepath, overwrite, yes, no) => {
   });
 };
 
-
 // --------------------
 // SAVING JSON & IMAGES
 // --------------------
@@ -88,7 +88,7 @@ const shouldWrite = (filepath, overwrite, yes, no) => {
 // Queue to save json to id.json in directory
 const saveJson = queue((json, saveDone) => {
   const id = json.id;
-  const filepath = cd.json(id + '.json');
+  const filepath = cd.json(`${id}.json`);
   const writeFile = (data) => fs.writeFile(filepath, JSON.stringify(data), {encoding}, saveDone);
   shouldWrite(filepath, OPT_REFRESH, () => {
     if (OPT_FULL) {
@@ -126,7 +126,6 @@ const saveImage = queue((url, cb) => {
     });
   }, cb);
 }, QUEUE_CONCURRENCY);
-
 
 // --------------------
 // INSTAGRAM

@@ -12,18 +12,18 @@ const sortByIndex = (num) => parseInt(num, 10);
 class KeySets {
   constructor (options = {}) {
     this.options = options;
-    this._values = {};
+    this.values = {};
   }
 
   add (key, id) {
-    if (this._values[key] === undefined) {
-      this._values[key] = [];
+    if (this.values[key] === undefined) {
+      this.values[key] = [];
     }
-    this._values[key].push(id);
+    this.values[key].push(id);
   }
 
   getValues () {
-    return this._values;
+    return this.values;
   }
 }
 
@@ -50,7 +50,9 @@ class ByDate extends KeySets {
   }
 
   add (time, id) {
-    const {day, month, year} = dateParts({created_time: time});
+    const {day, month, year} = dateParts({
+      created_time: time
+    });
     super.add(`${year}/${month}/${day}`, id);
     super.add(`${year}/${month}`, id);
     super.add(`${year}`, id);

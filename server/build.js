@@ -19,7 +19,7 @@ const buildStatic = (context, done) => organizeData((dataErr, results) => {
 
   const isBuild = !context.isDev;
   const {ids, tags, tagKeys, pages, pageKeys, dates} = results;
-  const toPhotos = (photos) => ({photos: photos.map(id => pick(ids[id], LIST_PROPS))});
+  const toPhotos = (photos) => ({photos: photos.map((id) => pick(ids[id], LIST_PROPS))});
   const render = (urlPath, data) => (cb) => renderApp(context, urlPath, data, cb);
 
   const filesAsync = {};

@@ -7,7 +7,6 @@ import PhotoTitle from './PhotoTitle';
 import PhotoLink from './PhotoLink';
 import TagLink from '../tag/TagLink';
 
-
 const PhotoDetail = React.createClass({
   propTypes: {
     photo: PropTypes.object.isRequired
@@ -26,7 +25,7 @@ const PhotoDetail = React.createClass({
           <li><PhotoLink type='month' created_time={created_time} /></li>
           <li><PhotoLink type='day' created_time={created_time} /></li>
           <li><TagLink tag={filter || 'Normal'} /></li>
-          {tags.map(tag => <li key={tag}><TagLink tag={tag} /></li>)}
+          {tags.map((tag) => <li key={tag}><TagLink tag={tag} /></li>)}
         </ul>
       </div>
     );
