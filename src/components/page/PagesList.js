@@ -1,12 +1,12 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import PageLink from './PageLink';
 
-const PagesList = React.createClass({
-  propTypes: {
+export default class PagesList extends Component {
+  static propTypes = {
     pages: PropTypes.array.isRequired
-  },
+  }
 
   render () {
     return (
@@ -15,6 +15,4 @@ const PagesList = React.createClass({
       </ul>
     );
   }
-});
-
-export default PagesList;
+}

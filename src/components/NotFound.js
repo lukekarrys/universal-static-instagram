@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import PageLink from './page/PageLink';
 import TagLink from './tag/TagLink';
 
-class NotFound extends Component {
+export default class NotFound extends Component {
   render () {
     return (
       <div>
@@ -23,5 +23,3 @@ class NotFound extends Component {
     );
   }
 }
-
-export default NotFound;

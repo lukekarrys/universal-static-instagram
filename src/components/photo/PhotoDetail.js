@@ -1,16 +1,16 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import PhotoImage from './PhotoImage';
 import PhotoDate from './PhotoDate';
 import PhotoTitle from './PhotoTitle';
 import PhotoLink from './PhotoLink';
 import TagLink from '../tag/TagLink';
 
-const PhotoDetail = React.createClass({
-  propTypes: {
+export default class PhotoDetail extends Component {
+  static propTypes = {
     photo: PropTypes.object.isRequired
-  },
+  }
 
   render () {
     const {photo} = this.props;
@@ -30,6 +30,4 @@ const PhotoDetail = React.createClass({
       </div>
     );
   }
-});
-
-export default PhotoDetail;
+}

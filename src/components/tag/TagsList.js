@@ -1,12 +1,12 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import TagLink from './TagLink';
 
-const TagsList = React.createClass({
-  propTypes: {
+export default class TagsList extends Component {
+  static propTypes = {
     tags: PropTypes.array.isRequired
-  },
+  }
 
   render () {
     return (
@@ -15,6 +15,4 @@ const TagsList = React.createClass({
       </ul>
     );
   }
-});
-
-export default TagsList;
+}

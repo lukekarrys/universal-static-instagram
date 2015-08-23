@@ -1,28 +1,26 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import PageContainer from '../components/PageContainer';
 import TagsList from '../components/tag/TagsList';
 import TagsStore from '../stores/TagsStore';
 import TagsActions from '../actions/TagsActions';
 
-const Tags = React.createClass({
-  propTypes: {
+export default class Tags extends Component {
+  static propTypes = {
     loading: PropTypes.bool.isRequired,
     tags: PropTypes.array.isRequired,
     location: PropTypes.object.isRequired,
     error: PropTypes.instanceOf(Error)
-  },
+  }
 
-  statics: {
-    getStores () {
-      return [TagsStore];
-    }
-  },
+  static getStores = () => {
+    return [TagsStore];
+  }
 
   componentDidMount () {
     TagsActions.fetch(this.props.location.pathname);
-  },
+  }
 
   render () {
     const {tags, loading, error} = this.props;
@@ -38,6 +36,4 @@ const Tags = React.createClass({
       </div>
     );
   }
-});
-
-export default Tags;
+}

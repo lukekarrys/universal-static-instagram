@@ -1,8 +1,8 @@
 'use strict';
 
-import React, {PropTypes, Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
-class PageError extends Component {
+export default class PageError extends Component {
   static propTypes = {
     error: PropTypes.oneOfType([
       PropTypes.instanceOf(Error),
@@ -23,5 +23,3 @@ class PageError extends Component {
     );
   }
 }
-
-export default PageError;

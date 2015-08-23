@@ -1,13 +1,13 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import PhotosList from './PhotosList';
 import TagLink from '../tag/TagLink';
 import PageLink from '../page/PageLink';
 import PhotoLink from '../photo/PhotoLink';
 
-const PhotosBy = React.createClass({
-  propTypes: {
+export default class PhotosBy extends Component {
+  static propTypes = {
     photos: PropTypes.array.isRequired,
     // Params that come from react router path
     year: PropTypes.string,
@@ -15,21 +15,21 @@ const PhotosBy = React.createClass({
     day: PropTypes.string,
     tag: PropTypes.string,
     page: PropTypes.string
-  },
+  }
 
-  getType () {
+  getType = () => {
     const {year, tag} = this.props;
     if (year) return 'date';
     if (tag) return 'tag';
     return 'page';
-  },
+  }
 
-  getTitle () {
+  getTitle = () => {
     const {year, month, day, tag, page} = this.props;
     if (year) return `Date ${year || ''} ${month || ''} ${day || ''}`.trim();
     if (tag) return `Tag ${tag}`;
     return `Page ${page || 1}`;
-  },
+  }
 
   render () {
     const page = this.props.page || 1;
@@ -62,6 +62,4 @@ const PhotosBy = React.createClass({
       </div>
     );
   }
-});
-
-export default PhotosBy;
+}

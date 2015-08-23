@@ -1,11 +1,11 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 
-const PhotoTitle = React.createClass({
-  propTypes: {
+export default class PhotoTitle extends Component {
+  static propTypes = {
     caption: PropTypes.object
-  },
+  }
 
   render () {
     const {caption} = this.props;
@@ -13,6 +13,4 @@ const PhotoTitle = React.createClass({
       <span>{caption ? caption.text : 'Untitled Photo'}</span>
     );
   }
-});
-
-export default PhotoTitle;
+}

@@ -1,14 +1,14 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import slash from '../../helpers/slash';
 
-const TagLink = React.createClass({
-  propTypes: {
+export default class TagLink extends Component {
+  static propTypes = {
     tag: PropTypes.string,
     children: PropTypes.node
-  },
+  }
 
   render () {
     const {tag, children} = this.props;
@@ -18,6 +18,4 @@ const TagLink = React.createClass({
       <Link to={`/tags${path}`}>{text}</Link>
     );
   }
-});
-
-export default TagLink;
+}

@@ -1,13 +1,13 @@
 'use strict';
 
-import React, {PropTypes, Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import isEmpty from 'lodash/lang/isEmpty';
 import some from 'lodash/collection/some';
 import assign from 'lodash/object/assign';
 import Loading from './Loading';
 import PageError from './PageError';
 
-class PageContainer extends Component {
+export default class PageContainer extends Component {
   static propTypes = {
     component: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
@@ -40,5 +40,3 @@ class PageContainer extends Component {
     return React.createElement(component, assign(componentProps, data));
   }
 }
-
-export default PageContainer;

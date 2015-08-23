@@ -1,14 +1,14 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import slash from '../../helpers/slash';
 
-const PageLink = React.createClass({
-  propTypes: {
+export default class PageLink extends Component {
+  static propTypes = {
     page: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     children: PropTypes.node
-  },
+  }
 
   render () {
     const {page, children} = this.props;
@@ -19,6 +19,4 @@ const PageLink = React.createClass({
       <Link to={`/pages${path}`}>{text}</Link>
     );
   }
-});
-
-export default PageLink;
+}

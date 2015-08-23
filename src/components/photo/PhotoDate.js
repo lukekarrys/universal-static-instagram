@@ -1,20 +1,18 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 import createdDate from '../../helpers/createdDate';
 
-const PhotoDate = React.createClass({
-  propTypes: {
+export default class PhotoDate extends Component {
+  static propTypes = {
     created_time: PropTypes.string.isRequired,
     dateFormat: PropTypes.string
-  },
+  }
 
-  getDefaultProps () {
-    return {
-      dateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'
-    };
-  },
+  static defaultProps = {
+    dateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'
+  }
 
   render () {
     const date = createdDate(this.props.created_time);
@@ -22,6 +20,4 @@ const PhotoDate = React.createClass({
       <span>{moment(date).format(this.props.dateFormat)}</span>
     );
   }
-});
-
-export default PhotoDate;
+}

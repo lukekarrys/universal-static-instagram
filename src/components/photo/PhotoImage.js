@@ -1,22 +1,22 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 const prefix = '/media/';
 
-const PhotoImage = React.createClass({
-  propTypes: {
+export default class PhotoImage extends Component {
+  static propTypes = {
     images: PropTypes.object.isRequired,
     type: PropTypes.oneOf(['thumbnail', 'low', 'standard']).isRequired
-  },
+  }
 
-  imageName () {
+  imageName = () => {
     const {type} = this.props;
     return type === 'low' || type === 'standard' ?
       `${type}_resolution` :
       type;
-  },
+  }
 
-  imageProps () {
+  imageProps = () => {
     const image = this.props.images[this.imageName()];
 
     const {height, width} = image;
@@ -31,13 +31,11 @@ const PhotoImage = React.createClass({
       height,
       src: url
     };
-  },
+  }
 
   render () {
     return (
       <img {...this.imageProps()} />
     );
   }
-});
-
-export default PhotoImage;
+}

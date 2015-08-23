@@ -1,28 +1,26 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import PageContainer from '../components/PageContainer';
 import PagesList from '../components/page/PagesList';
 import PagesStore from '../stores/PagesStore';
 import PagesActions from '../actions/PagesActions';
 
-const Pages = React.createClass({
-  propTypes: {
+export default class Pages extends Component {
+  static propTypes = {
     loading: PropTypes.bool.isRequired,
     pages: PropTypes.array.isRequired,
     location: PropTypes.object.isRequired,
     error: PropTypes.instanceOf(Error)
-  },
+  }
 
-  statics: {
-    getStores () {
-      return [PagesStore];
-    }
-  },
+  static getStores = () => {
+    return [PagesStore];
+  }
 
   componentDidMount () {
     PagesActions.fetch(this.props.location.pathname);
-  },
+  }
 
   render () {
     const {pages, loading, error} = this.props;
@@ -38,6 +36,4 @@ const Pages = React.createClass({
       </div>
     );
   }
-});
-
-export default Pages;
+}

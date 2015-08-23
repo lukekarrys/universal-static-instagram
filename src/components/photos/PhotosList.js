@@ -1,16 +1,16 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import PhotoImage from '../photo/PhotoImage';
 import PhotoDate from '../photo/PhotoDate';
 import PhotoLink from '../photo/PhotoLink';
 import PhotoTitle from '../photo/PhotoTitle';
 
-const PhotosList = React.createClass({
-  propTypes: {
+export default class PhotosList extends Component {
+  static propTypes = {
     photos: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired
-  },
+  }
 
   render () {
     return (
@@ -28,6 +28,4 @@ const PhotosList = React.createClass({
       </ul>
     );
   }
-});
-
-export default PhotosList;
+}

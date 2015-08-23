@@ -1,12 +1,12 @@
 'use strict';
 
-import React from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router';
 
-const App = React.createClass({
-  propTypes: {
+export default class App extends Component {
+  static propTypes = {
     children: React.PropTypes.element.isRequired
-  },
+  }
 
   render () {
     return (
@@ -19,6 +19,4 @@ const App = React.createClass({
       </div>
     );
   }
-});
-
-export default App;
+}
