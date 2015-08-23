@@ -14,7 +14,7 @@ export default class Tags extends Component {
     error: PropTypes.instanceOf(Error)
   }
 
-  static getStores = () => [TagsStore]
+  static getStores = [TagsStore]
 
   componentDidMount () {
     TagsActions.fetch(this.props.location.pathname);
