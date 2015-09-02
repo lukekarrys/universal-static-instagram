@@ -9,7 +9,7 @@ export default class PhotoLikes extends Component {
     data: PropTypes.array
   }
 
-  users = () => {
+  users () {
     const {data} = this.props;
     return pluck(data, 'username').join(', ');
   }

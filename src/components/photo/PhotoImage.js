@@ -9,14 +9,14 @@ export default class PhotoImage extends Component {
     type: PropTypes.oneOf(['thumbnail', 'low', 'standard']).isRequired
   }
 
-  imageName = () => {
+  imageName () {
     const {type} = this.props;
     return type === 'low' || type === 'standard' ?
       `${type}Resolution` :
       type;
   }
 
-  imageProps = () => {
+  imageProps () {
     const image = this.props.images[this.imageName()];
 
     const {height, width} = image;

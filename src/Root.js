@@ -2,7 +2,6 @@
 
 import React, {Component, PropTypes} from 'react';
 import {Provider} from 'react-redux';
-import store from './store';
 import {Router} from 'react-router';
 import routes from './routes';
 
@@ -13,19 +12,17 @@ import routes from './routes';
  */
 export default class Root extends Component {
   static propTypes = {
-    state: PropTypes.object,
+    store: PropTypes.object,
     history: PropTypes.object,
     router: PropTypes.object
   }
 
   render () {
-    const {state, history, router} = this.props;
+    const {store, history, router} = this.props;
     return (
-      <div>
-        <Provider store={store(state)}>
-          {() => <Router history={history} children={routes} {...router} />}
-        </Provider>
-      </div>
+      <Provider store={store}>
+        {() => <Router history={history} children={routes} {...router} />}
+      </Provider>
     );
   }
 }

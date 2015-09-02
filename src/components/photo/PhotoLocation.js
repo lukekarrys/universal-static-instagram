@@ -9,7 +9,7 @@ export default class PhotoComments extends Component {
     name: PropTypes.string
   }
 
-  geo = () => {
+  geo () {
     const {latitude, longitude} = this.props;
     return latitude && longitude ? `${latitude},${longitude}` : '';
   }

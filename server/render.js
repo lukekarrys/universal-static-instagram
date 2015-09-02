@@ -9,8 +9,16 @@ import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
 import reducer from '../src/reducers';
+import store from '../src/store';
 import * as ACTIONS from '../src/actions';
 import debugThe from 'debug';
+
+const successActions = {
+  photo: ACTIONS.PHOTO_SUCCESS,
+  photos: ACTIONS.PHOTO_SUCCESS,
+  tags: ACTIONS.TAGS_SUCCESS,
+  page: ACTIONS.PAGES_SUCCESS
+};
 
 const debug = debugThe('usi:render');
 
@@ -43,7 +51,7 @@ const render = ({context, path, data, key}, done) => {
     // Use the raw reducer to make the initial data in the correct shape
     // expected by the redux on the client
     const state = data && key ? reducer(undefined, {
-      type: ACTIONS[`${key.toUpperCase()}_SUCCESS`],
+      type: successActions[key],
       key: pathToKey(location.pathname),
       ...normalize({json: data, key})
     }) : {};
@@ -53,7 +61,7 @@ const render = ({context, path, data, key}, done) => {
     done(null, template({
       context,
       state,
-      body: React.renderToString(<Root router={props} state={state} />)
+      body: React.renderToString(<Root router={props} store={store(state)} />)
     }));
   });
 };
