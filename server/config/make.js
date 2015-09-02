@@ -6,6 +6,7 @@ import inquirer from 'inquirer';
 import {instagram} from 'instagram-node';
 import colors from 'colors/safe';
 import find from 'lodash/collection/find';
+import {decamelizeKeys} from 'humps';
 
 const configPath = path.resolve(__dirname, '..', '..', 'config.json');
 const clientMessage = colors.bold(`What is the id of your Instagram client application?`);
@@ -45,10 +46,7 @@ inquirer.prompt([
     filter: function filterUser (username) {
       const done = this.async();
       const ig = instagram();
-      ig.use({
-        client_id: clientId,
-        client_secret: clientSecret
-      });
+      ig.use(decamelizeKeys({clientId, clientSecret}));
       ig.user_search(username, (err, users) => {
         if (err) return done(err);
         const user = find(users, 'username', username);

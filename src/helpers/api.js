@@ -4,27 +4,41 @@ import xhr from 'xhr';
 import attempt from 'lodash/utility/attempt';
 import isError from 'lodash/lang/isError';
 import slash from './slash';
+import normalize from './normalize';
 
-const api = (path, cb) => {
-  xhr(`/json${slash(path)}.json`, (xhrErr, resp, body) => {
-    if (xhrErr) return cb(xhrErr);
-    const result = attempt(() => JSON.parse(body));
-    cb(isError(result) ? result : null, result);
+const fetchAPI = ({endpoint, key}, cb) => {
+  xhr({
+    uri: `/json${slash(endpoint)}.json`
+  }, (__, resp, body) => {
+    if (resp.statusCode !== 200) {
+      return cb(new Error(body.message));
+    }
+
+    const json = attempt(() => JSON.parse(body));
+
+    if (isError(json)) {
+      return cb(json);
+    }
+
+    cb(null, normalize({json, key}));
   });
 };
 
-const apiActions = (ctx, path) => {
-  if (typeof window === 'undefined') return;
-  const {actions} = ctx;
-  ctx.dispatch();
-  api(path, (err, data) => {
-    if (err) {
-      actions.error(err);
+export default (store) => (next) => (action) => {
+  if (!action.endpoint) return next(action);
+
+  const {endpoint, types, key} = action;
+  const [requestType, successType, failureType] = types;
+  const actionWith = (data) => next({key: endpoint, ...data});
+
+  actionWith({type: requestType});
+
+  return fetchAPI({endpoint, key}, (error, response) => {
+    if (error) {
+      actionWith({type: failureType, error});
     }
     else {
-      actions.success(data);
+      actionWith({type: successType, ...response});
     }
   });
 };
-
-export default apiActions;

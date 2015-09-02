@@ -18,10 +18,12 @@ export default class PhotosList extends Component {
         {this.props.photos.map((photo) => {
           return (
             <li key={photo.id}>
-              <PhotoLink {...photo} type='id'>
+              <PhotoLink path={photo.id}>
                 <PhotoImage {...photo} type={this.props.type} />
                 <PhotoDate {...photo} /> - <PhotoTitle {...photo} />
               </PhotoLink>
+              <p>Comments: {photo.comments.count}</p>
+              <p>Likes: {photo.likes.count}</p>
             </li>
           );
         })}

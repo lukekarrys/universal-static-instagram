@@ -52,8 +52,8 @@ debug('FULL', !!OPT_FULL);
 // Configure our instagram API instance
 const ig = instagram();
 ig.use({
-  client_id: OPT_CLIENT,
-  client_secret: OPT_SECRET
+  client_id: OPT_CLIENT, // eslint-disable-line camelcase
+  client_secret: OPT_SECRET // eslint-disable-line camelcase
 });
 
 // --------------------
@@ -164,7 +164,7 @@ series({
   // This is our most recent instagram photo so we use it as a min_id
   // to only fetch photos newer than this
   if (first && first.id && !OPT_REFRESH) {
-    options.min_id = first.id;
+    options.min_id = first.id; // eslint-disable-line camelcase
     debug('Start from', first.id, createdDate(first.created_time).toJSON());
   }
 

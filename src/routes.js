@@ -4,10 +4,10 @@ import React from 'react';
 import {Route} from 'react-router';
 
 import App from './components/App';
-import Pages from './pages/Pages';
-import Tags from './pages/Tags';
-import Photos from './pages/Photos';
-import Photo from './pages/Photo';
+import Pages from './containers/Pages';
+import Tags from './containers/Tags';
+import Photos from './containers/Photos';
+import Photo from './containers/Photo';
 import NotFound from './components/NotFound';
 
 const routes = (

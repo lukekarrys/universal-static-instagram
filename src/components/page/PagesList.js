@@ -11,7 +11,9 @@ export default class PagesList extends Component {
   render () {
     return (
       <ul>
-        {this.props.pages.map((page) => <li key={page}><PageLink page={page} /></li>)}
+        {this.props.pages.map((page) =>
+          <li key={page.id}><PageLink page={page.id}>{page.name}</PageLink></li>
+        )}
       </ul>
     );
   }

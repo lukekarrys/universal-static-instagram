@@ -11,7 +11,7 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <h1><Link to='/'>Instagram</Link></h1>
+        <h1><Link to='/'>Home</Link></h1>
         {this.props.children}
         <footer>
           <p>Powered by <a href='https://github.com/lukekarrys/universal-static-instagram'>lukekarrys/universal-static-instagram</a></p>
