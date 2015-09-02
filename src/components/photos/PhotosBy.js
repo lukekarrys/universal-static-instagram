@@ -58,8 +58,8 @@ export default class PhotosBy extends Component {
       return [
         <PhotoLink path={previous} disabled={!previous}>Previous</PhotoLink>,
         <PhotoLink path={next} disabled={!next}>Next</PhotoLink>,
-        type === 'month' || type === 'day' && <PhotoLinkYear path={name} />,
-        type === 'day' && <PhotoLinkMonth path={name} />
+        (type === 'month' || type === 'day') && <PhotoLinkYear path={name} />,
+        (type === 'day') && <PhotoLinkMonth path={name} />
       ];
     }
   }
