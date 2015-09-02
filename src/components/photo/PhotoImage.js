@@ -12,7 +12,7 @@ export default class PhotoImage extends Component {
   imageName = () => {
     const {type} = this.props;
     return type === 'low' || type === 'standard' ?
-      `${type}_resolution` :
+      `${type}Resolution` :
       type;
   }
 

@@ -3,14 +3,18 @@
 import React from 'react';
 import {Router} from 'react-router';
 import Location from 'react-router/lib/Location';
-import Iso from 'iso';
-import transform from 'lodash/object/transform';
-import createElement from '../src/createAltContainer';
-import alt from '../src/alt';
+import Root from '../src/Root';
 import routes from '../src/routes';
 import slash from '../src/helpers/slash';
+import pathToKey from '../src/helpers/pathToKey';
+import normalize from '../src/helpers/normalize';
+import reducer from '../src/reducers';
+import * as ACTIONS from '../src/actions';
+import debugThe from 'debug';
 
-const template = (context, body) => {
+const debug = debugThe('usi:render');
+
+const template = ({context, body, state}) => {
   return `
     <!DOCTYPE html>
     <html>
@@ -18,49 +22,40 @@ const template = (context, body) => {
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
       </head>
-      <body>${body}</body>
-      <script src="/${context.main}"></script>
+      <body>${body || ''}</body>
+      ${state ? `<script>__INITIAL_STATE__=${JSON.stringify(state)}</script>` : ''}
+      ${context ? `<script src="/${context.main}"></script>` : ''}
     </html>
   `.replace(/\n\s*/g, '');
 };
 
-// {photos: [], tags: []}
-// ----->
-// {
-//   PhotosStore: {photos: [], loading: false, error: null},
-//   TagsStore: {tags: [], loading: false, error: null}
-// }
-const dataToStore = (data) => transform(data, (res, value, key) => {
-  res[`${key.slice(0, 1).toUpperCase()}${key.slice(1)}Store`] = {
-    [key]: value,
-    loading: false,
-    error: null
-  };
-}, {});
+const render = ({context, path, data, key}, done) => {
+  // This can be called with only a context to just return an empty template
+  // for dev purposes
+  if (path === undefined) return template({context});
 
-const renderEmpty = (context) => {
-  const iso = new Iso();
-  iso.add('', JSON.stringify({}));
-  return template(context, iso.render());
-};
-
-const render = (context, path, data, done) => {
-  const iso = new Iso();
   const location = new Location(slash(path));
-
   Router.run(routes, location, (err, props) => {
     if (err) return done(err);
 
-    alt.bootstrap(JSON.stringify(dataToStore(data)));
+    debug(`Router run ${location.pathname}`);
 
-    iso.add(
-      React.renderToString(<Router {...props} createElement={createElement} />),
-      alt.flush()
-    );
+    // Use the raw reducer to make the initial data in the correct shape
+    // expected by the redux on the client
+    const state = data && key ? reducer(undefined, {
+      type: ACTIONS[`${key.toUpperCase()}_SUCCESS`],
+      key: pathToKey(location.pathname),
+      ...normalize({json: data, key})
+    }) : {};
 
-    done(null, template(context, iso.render()));
+    // If we wanted to we could make this a completely static site with no JS
+    // by using renderToStaticMarkup and not including any <script> tags
+    done(null, template({
+      context,
+      state,
+      body: React.renderToString(<Root router={props} state={state} />)
+    }));
   });
 };
 
-export {renderEmpty as renderEmpty};
 export default render;

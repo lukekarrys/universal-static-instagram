@@ -6,7 +6,7 @@ import createdDate from '../../helpers/createdDate';
 
 export default class PhotoDate extends Component {
   static propTypes = {
-    created_time: PropTypes.string.isRequired,
+    createdTime: PropTypes.string.isRequired,
     dateFormat: PropTypes.string
   }
 
@@ -15,7 +15,7 @@ export default class PhotoDate extends Component {
   }
 
   render () {
-    const date = createdDate(this.props.created_time);
+    const date = createdDate(this.props.createdTime);
     return (
       <span>{moment(date).format(this.props.dateFormat)}</span>
     );

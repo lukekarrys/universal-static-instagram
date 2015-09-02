@@ -11,7 +11,9 @@ export default class TagsList extends Component {
   render () {
     return (
       <ul>
-        {this.props.tags.map((tag) => <li key={tag}><TagLink tag={tag} /></li>)}
+        {this.props.tags.map((tag) =>
+          <li key={tag.id}><TagLink tag={tag.id}>{tag.name}</TagLink></li>
+        )}
       </ul>
     );
   }

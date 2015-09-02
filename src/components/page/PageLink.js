@@ -1,22 +1,20 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
+import Link from '../InternalLink';
 import slash from '../../helpers/slash';
 
 export default class PageLink extends Component {
   static propTypes = {
-    page: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    children: PropTypes.node
+    page: PropTypes.string,
+    children: PropTypes.node.isRequired,
+    disabled: PropTypes.bool
   }
 
   render () {
-    const {page, children} = this.props;
-    const pageStr = typeof page === 'number' ? String(page) : (page || '');
-    const path = pageStr ? slash(pageStr) : '';
-    const text = children || pageStr;
+    const {page, children, disabled} = this.props;
     return (
-      <Link to={`/pages${path}`}>{text}</Link>
+      <Link to={`/pages${slash(page)}`} disabled={disabled}>{children}</Link>
     );
   }
 }

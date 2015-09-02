@@ -1,58 +1,73 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
+import compact from 'lodash/array/compact';
+import moment from 'moment';
 import PhotosList from './PhotosList';
 import TagLink from '../tag/TagLink';
 import PageLink from '../page/PageLink';
 import PhotoLink from '../photo/PhotoLink';
+import PhotoLinkYear from '../photo/PhotoLinkYear';
+import PhotoLinkMonth from '../photo/PhotoLinkMonth';
+import {propsToDate} from '../../helpers/date';
 
 export default class PhotosBy extends Component {
   static propTypes = {
     photos: PropTypes.array.isRequired,
-    // Params that come from react router path
-    year: PropTypes.string,
-    month: PropTypes.string,
-    day: PropTypes.string,
-    tag: PropTypes.string,
-    page: PropTypes.string
-  }
-
-  getType = () => {
-    const {year, tag} = this.props;
-    if (year) return 'date';
-    if (tag) return 'tag';
-    return 'page';
+    type: PropTypes.oneOf(['page', 'tag', 'year', 'month', 'day']),
+    name: PropTypes.string,
+    previous: PropTypes.string,
+    next: PropTypes.string
   }
 
   getTitle = () => {
-    const {year, month, day, tag, page} = this.props;
-    if (year) return `Date ${year || ''} ${month || ''} ${day || ''}`.trim();
-    if (tag) return `Tag ${tag}`;
-    return `Page ${page || 1}`;
+    const {type, name} = this.props;
+    switch (type) {
+    case 'page':
+      return `Page ${name}`;
+    case 'tag':
+      return `Tag ${name}`;
+    case 'year':
+      return moment(propsToDate({path: name})).format('YYYY');
+    case 'month':
+      return moment(propsToDate({path: name})).format('MMMM YYYY');
+    case 'day':
+      return moment(propsToDate({path: name})).format('MMMM D, YYYY');
+    }
+  }
+
+  getLinks = () => {
+    const {type, previous, next, name} = this.props;
+
+    switch (type) {
+    case 'page':
+      return [
+        <PageLink page={previous} disabled={!previous}>Prev</PageLink>,
+        <PageLink page={next} disabled={!next}>Next</PageLink>,
+        <PageLink>All pages</PageLink>
+      ];
+    case 'tag':
+      return [
+        <TagLink tag={previous} disabled={!previous}>Prev</TagLink>,
+        <TagLink tag={next} disabled={!next}>Next</TagLink>,
+        <TagLink>Other tags</TagLink>
+      ];
+    case 'year':
+    case 'month':
+    case 'day':
+      return [
+        <PhotoLink path={previous} disabled={!previous}>Previous</PhotoLink>,
+        <PhotoLink path={next} disabled={!next}>Next</PhotoLink>,
+        type === 'month' || type === 'day' && <PhotoLinkYear path={name} />,
+        type === 'day' && <PhotoLinkMonth path={name} />
+      ];
+    }
   }
 
   render () {
-    const page = this.props.page || 1;
-    const {photos, year, month, day} = this.props;
+    const {photos} = this.props;
     const title = this.getTitle();
-    const type = this.getType();
-    const links = [];
-
-    if (type === 'date') {
-      const date = {year, month, day};
-      if (day || month) links.push(<PhotoLink {...date} type='year' />);
-      if (day) links.push(<PhotoLink {...date} type='month' />);
-    }
-    else if (type === 'tag') {
-      links.push(<TagLink>Other tags</TagLink>);
-    }
-    else if (type === 'page') {
-      links.push(
-        <PageLink page={Number(page) - 1}>Prev</PageLink>,
-        <PageLink page={Number(page) + 1}>Next</PageLink>,
-        <PageLink>All pages</PageLink>
-      );
-    }
+    const links = compact(this.getLinks());
 
     return (
       <div>

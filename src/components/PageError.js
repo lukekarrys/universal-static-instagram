@@ -10,16 +10,18 @@ export default class PageError extends Component {
     ])
   }
 
-  getErrorMessage () {
+  getErrorMessage = () => {
     const {error} = this.props;
-    return error ?
-      (typeof error === 'string' ? error : error.message) :
+    if (typeof error === 'string') return error;
+    return error.stack ||
+      (error.toString && error.toString()) ||
+      error.message ||
       'There was an error';
   }
 
   render () {
     return (
-      <span>{this.getErrorMessage()}</span>
+      <pre>{this.getErrorMessage()}</pre>
     );
   }
 }

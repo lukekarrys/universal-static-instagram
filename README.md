@@ -15,7 +15,7 @@ Way back when, Instagram was iOS only and didn't have a web interface. I wanted 
 
 Then I deleted my account. Before I deleted it I downloaded all the images and JSON from the API with the plan of using this to just display them on the web. It had no CSS and no (useful) JS, but it kinda worked. But the fact that it was Ruby and Jekyll, which are two things I don't use much anymore, meant it sat untouched.
 
-So I decided to rewrite it using [`react`](https://facebook.github.io/react/), [`react-router`](http://rackt.github.io/react-router/), [`flux`](https://facebook.github.io/flux/) ([`alt`](http://alt.js.org/)), and [`webpack`](http://webpack.github.io/) to be a static site (same as before) but so `react` and `react-router` can take over the clientside (and now I'll hopefully do cooler stuff with it).
+So I decided to rewrite it using [`react`](https://facebook.github.io/react/), [`react-router`](http://rackt.github.io/react-router/), [`redux`](http://rackt.github.io/redux/), and [`webpack`](http://webpack.github.io/) to be a static site (same as before) but so `react` and `react-router` can take over the clientside (and now I'll hopefully do cooler stuff with it).
 
 
 ## Goals
@@ -46,7 +46,7 @@ Next you can either edit some of the `src` files to change the appearance and la
 
 ### Editing
 
-All the files for the client are located in the `src/` directory. Check out the [Architecture docs]() for an explanation of the organization and how to go about changing certain things. As you edit things you'll want to see these changes live in your browser, so you'll need to run:
+All the files for the client are located in the `src/` directory. Check out the [Client Architecture docs](CLIENTREADME.md) for an explanation of the organization and how to go about changing certain things. As you edit things you'll want to see these changes live in your browser, so you'll need to run:
 
 ```sh
 npm start
@@ -60,7 +60,7 @@ This spins up a [`webpack-dev-server`](http://webpack.github.io/docs/webpack-dev
 
 Whether you made some local modifications or not, the next step is to build all the static files for the site. As stated in the goals section above, this project aims to create an `html` file for each page, `json` file for each set of data, and a `jpg` for each image size. This can mean a lot of files!
 
-My local example has **3572 files and directories** for ~500 Instagram posts. This may seem like a lot (and some of it is technically duplicated between `json` and `html`), but storage is cheap. The benefits are that each page can be loaded on its own (without JS) and look exactly as it would if it were loaded clientside by populating our `flux` stores with the plain `json`.
+My local example has **3572 files and directories** for ~500 Instagram posts. This may seem like a lot (and some of it is technically duplicated between `json` and `html`), but storage is cheap. The benefits are that each page can be loaded on its own (without JS) and look exactly as it would if it were loaded clientside by populating our `redux` store with the plain `json`.
 
 This may seem like overkill (it probably is), but hey, it's one of the goals of the project. You can't argue with goals! To do this:
 
@@ -115,13 +115,6 @@ npm run fetch.data -- --refresh --full
 ```
 
 *Note: Instagram photos are never redownloaded because they should never change after being posted.*
-
-
-## TODO
-
-- ["Feature Complete"](https://github.com/lukekarrys/universal-static-instagram/milestones/Feature%20Complete) issues
-- Figure out styling: themes, inline/component styling, etc
-- Client only features (infinite scroll? load animations?)
 
 
 ## Contributing
