@@ -11,9 +11,9 @@ const propsToDate = (props) => {
     [year, month, day] = path.split('/');
   }
 
-  return createdTime ?
-    createdDate(createdTime) :
-    new Date(year, month === undefined ? 0 : (Number(month) - 1), day === undefined ? 1 : day);
+  return createdTime
+    ? createdDate(createdTime)
+    : new Date(year, month === undefined ? 0 : (Number(month) - 1), day === undefined ? 1 : day);
 };
 
 const dateParts = (props) => {
