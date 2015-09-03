@@ -1,9 +1,18 @@
+/* global __DEVTOOLS__ */
+
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
 import {Provider} from 'react-redux';
 import {Router} from 'react-router';
 import routes from './routes';
+
+let RD;
+
+// Only require devtools based on flag so they dont get bundled
+if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
+  RD = require('redux-devtools/lib/react');
+}
 
 /*
  * If rendering on the client, the Provider needs initial data and the Router
@@ -20,9 +29,16 @@ export default class Root extends Component {
   render () {
     const {store, history, router} = this.props;
     return (
-      <Provider store={store}>
-        {() => <Router history={history} children={routes} {...router} />}
-      </Provider>
+      <div>
+        <Provider store={store}>
+          {() => <Router history={history} children={routes} {...router} />}
+        </Provider>
+        {typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__ &&
+          <RD.DebugPanel left={true} right={true} bottom={true}>
+            <RD.DevTools store={store} monitor={RD.LogMonitor} />
+          </RD.DebugPanel>
+        }
+      </div>
     );
   }
 }
