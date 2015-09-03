@@ -1,0 +1,10 @@
+{
+  "name": "usi",
+  "root": "public",
+  "clean_urls": true,
+  "error_page": "404.html",
+  "cache_control": {
+    "/media/**": 31536000,
+    "/usi.*.js": 31536000
+  }
+}

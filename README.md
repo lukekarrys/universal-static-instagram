@@ -94,6 +94,16 @@ Since you already have this forked on GitHub, and every path has a matching buil
 
 *Note: you will first need to create a `gh-pages` branch on your forked repo.*
 
+#### [Divshot](https://divshot.com/)
+
+```js
+npm run divshot -- login
+# Change the 'name' in divshot.json
+npm run deploy.divshot
+```
+
+Divshot is another static hosting platform that works well with this setup. It's already specified as a dev dependency so if you run the first command you will get prompted to login to Divshot (or make an account) and then you'll be authorized to run the second command. Divshot gets its config from a `divshot.json` file which has been created in the repo. You'll need to change the `name` to something else before you deploy.
+
 ### Re-fetching Data
 
 Running `npm run fetch.data` again will start after the most recent Instagram post ID, so that you can easily only fetch the latest Instagram data. Sometimes you'll want to refresh all the existing Instagram `json` data as well.

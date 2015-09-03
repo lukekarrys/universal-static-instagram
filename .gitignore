@@ -30,3 +30,4 @@ node_modules
 _cache
 public
 config.json
+.divshot-cache

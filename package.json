@@ -7,6 +7,7 @@
     "url": "https://github.com/lukekarrys/universal-static-instagram/issues"
   },
   "dependencies": {
+    "andlog": "^1.0.0",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "normalizr": "^1.0.0",
@@ -32,6 +33,7 @@
     "cpr": "^0.4.1",
     "css-loader": "^0.17.0",
     "debug": "^2.2.0",
+    "divshot-cli": "^1.10.5",
     "eslint": "^1.3.1",
     "eslint-plugin-react": "^3.3.1",
     "file-loader": "^0.8.4",
@@ -79,8 +81,10 @@
   },
   "scripts": {
     "build": "webpack --progress",
+    "deploy.divshot": "npm run divshot -- push",
     "deploy.gh": "git-directory-deploy --directory public",
     "deploy.surge": "surge public",
+    "divshot": "divshot",
     "fetch.data": "babel-node server/data/fetch.js",
     "lint": "eslint .",
     "make.config": "babel-node server/config/make.js",
