@@ -7,11 +7,11 @@ import {Provider} from 'react-redux';
 import {Router} from 'react-router';
 import routes from './routes';
 
-let RD;
-
 // Only require devtools based on flag so they dont get bundled
+let DebugPanel, DevTools, SliderMonitor;
 if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
-  RD = require('redux-devtools/lib/react');
+  ({DebugPanel, DevTools} = require('redux-devtools/lib/react'));
+  SliderMonitor = require('redux-slider-monitor');
 }
 
 /*
@@ -34,9 +34,9 @@ export default class Root extends Component {
           {() => <Router history={history} children={routes} {...router} />}
         </Provider>
         {typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__ &&
-          <RD.DebugPanel left={true} right={true} bottom={true}>
-            <RD.DevTools store={store} monitor={RD.LogMonitor} />
-          </RD.DebugPanel>
+          <DebugPanel left={true} right={true} bottom={true}>
+            <DevTools store={store} monitor={SliderMonitor} />
+          </DebugPanel>
         }
       </div>
     );
