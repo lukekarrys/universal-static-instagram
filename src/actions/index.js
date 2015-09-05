@@ -19,8 +19,8 @@ export const PHOTO_FAILURE = 'PHOTO_FAILURE';
 export const loadPhoto = (path) => (dispatch, getState) => {
   const key = pathToKey(path);
   const {entities, byId} = getState().photos;
-  const {isFetching = false, ids = []} = byId[key] || {};
-  const photo = entities[ids[0]] || {};
+  const {isFetching = false, ids} = byId[key] || {};
+  const photo = entities[ids] || {};
 
   // link only appears if a photo is fetched individually
   if (isFetching || photo.hasOwnProperty('link')) {
