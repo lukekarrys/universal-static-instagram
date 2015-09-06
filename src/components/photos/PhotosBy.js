@@ -11,6 +11,8 @@ import PhotoLinkYear from '../photo/PhotoLinkYear';
 import PhotoLinkMonth from '../photo/PhotoLinkMonth';
 import {propsToDate} from '../../helpers/date';
 
+const formatPath = (path, format) => moment(propsToDate({path})).format(format);
+
 export default class PhotosBy extends Component {
   static propTypes = {
     photos: PropTypes.array.isRequired,
@@ -28,11 +30,11 @@ export default class PhotosBy extends Component {
     case 'tag':
       return `Tag ${name}`;
     case 'year':
-      return moment(propsToDate({path: name})).format('YYYY');
+      return formatPath(name, 'YYYY');
     case 'month':
-      return moment(propsToDate({path: name})).format('MMMM YYYY');
+      return formatPath(name, 'MMMM YYYY');
     case 'day':
-      return moment(propsToDate({path: name})).format('MMMM D, YYYY');
+      return formatPath(name, 'MMMM D, YYYY');
     }
   }
 
