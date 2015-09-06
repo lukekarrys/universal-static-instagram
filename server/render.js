@@ -15,7 +15,7 @@ import debugThe from 'debug';
 
 const successActions = {
   photo: ACTIONS.PHOTO_SUCCESS,
-  photos: ACTIONS.PHOTO_SUCCESS,
+  photos: ACTIONS.PHOTOS_SUCCESS,
   tags: ACTIONS.TAGS_SUCCESS,
   pages: ACTIONS.PAGES_SUCCESS
 };
