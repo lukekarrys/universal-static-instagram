@@ -86,7 +86,7 @@ Surge is really great. If you don't have an account, running this command will p
 
 #### [GitHub Pages](https://pages.github.com/)
 
-```js
+```sh
 npm run deploy.gh
 # Or deploy to a different repository
 npm run deploy.gh -- --repo git@github.com:lukekarrys/usi.website.git
@@ -100,7 +100,7 @@ You can also deploy to a different repository by using cli argument: `--repo git
 
 #### [Divshot](https://divshot.com/)
 
-```js
+```sh
 npm run divshot -- login
 # Change the 'name' in divshot.json
 npm run deploy.divshot
