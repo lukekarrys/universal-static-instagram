@@ -14,7 +14,7 @@ const mapKeyToProps = (stateKey) => (state, ownProps) => {
   const {byId = {}, entities = {}} = state[pluralKey];
   const {pathname} = ownProps.location;
   const byPath = byId[pathToKey(pathname)] || {};
-  const {isFetching = true, ids, error = null, ...rest} = byPath;
+  const {loading = true, ids, error = null, ...rest} = byPath;
 
   let result;
   if (!ids) {
@@ -26,7 +26,7 @@ const mapKeyToProps = (stateKey) => (state, ownProps) => {
 
   return {
     error,
-    loading: isFetching,
+    loading,
     [stateKey]: result,
     ...rest
   };

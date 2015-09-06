@@ -11,13 +11,13 @@ const createReducer = (request, success, failure) => (state = {entities: {}, byI
 
   if (isAction(request)) {
     return mergeState({
-      byId: {[action.key]: {isFetching: true, error: null}}
+      byId: {[action.key]: {loading: true, error: null}}
     });
   }
 
   if (isAction(failure)) {
     return mergeState({
-      byId: {[action.key]: {isFetching: false, error: action.error}}
+      byId: {[action.key]: {loading: false, error: action.error}}
     });
   }
 
@@ -26,7 +26,7 @@ const createReducer = (request, success, failure) => (state = {entities: {}, byI
       entities: {...action.entities},
       byId: {
         [action.key]: {
-          isFetching: false,
+          loading: false,
           error: null,
           ...action.result
         }
@@ -38,8 +38,16 @@ const createReducer = (request, success, failure) => (state = {entities: {}, byI
 };
 
 export default combineReducers({
-  tags: createReducer(ACTIONS.TAGS_REQUEST, ACTIONS.TAGS_SUCCESS, ACTIONS.TAGS_FAILURE),
-  pages: createReducer(ACTIONS.PAGES_REQUEST, ACTIONS.PAGES_SUCCESS, ACTIONS.PAGES_FAILURE),
+  tags: createReducer(
+    ACTIONS.TAGS_REQUEST,
+    ACTIONS.TAGS_SUCCESS,
+    ACTIONS.TAGS_FAILURE
+  ),
+  pages: createReducer(
+    ACTIONS.PAGES_REQUEST,
+    ACTIONS.PAGES_SUCCESS,
+    ACTIONS.PAGES_FAILURE
+  ),
   photos: createReducer(
     [ACTIONS.PHOTO_REQUEST, ACTIONS.PHOTOS_REQUEST],
     [ACTIONS.PHOTO_SUCCESS, ACTIONS.PHOTOS_SUCCESS],

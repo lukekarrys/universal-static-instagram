@@ -4,10 +4,10 @@ import pathToKey from '../helpers/pathToKey';
 
 const loadKey = (stateKey, fetch) => (path) => (dispatch, getState) => {
   const key = pathToKey(path);
-  const {isFetching = false, ids = []} = getState()[stateKey].byId[key] || {};
+  const {loading = false, ids = []} = getState()[stateKey].byId[key] || {};
 
   // Dont fetch again if we already have some photos
-  if (isFetching || ids.length) return null;
+  if (loading || ids.length) return null;
 
   return dispatch(fetch(key));
 };
@@ -19,11 +19,11 @@ export const PHOTO_FAILURE = 'PHOTO_FAILURE';
 export const loadPhoto = (path) => (dispatch, getState) => {
   const key = pathToKey(path);
   const {entities, byId} = getState().photos;
-  const {isFetching = false, ids} = byId[key] || {};
+  const {loading = false, ids} = byId[key] || {};
   const photo = entities[ids] || {};
 
   // link only appears if a photo is fetched individually
-  if (isFetching || photo.hasOwnProperty('link')) {
+  if (loading || photo.hasOwnProperty('link')) {
     return null;
   }
 
