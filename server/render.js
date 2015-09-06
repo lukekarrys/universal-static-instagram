@@ -17,7 +17,7 @@ const successActions = {
   photo: ACTIONS.PHOTO_SUCCESS,
   photos: ACTIONS.PHOTO_SUCCESS,
   tags: ACTIONS.TAGS_SUCCESS,
-  page: ACTIONS.PAGES_SUCCESS
+  pages: ACTIONS.PAGES_SUCCESS
 };
 
 const debug = debugThe('usi:render');
