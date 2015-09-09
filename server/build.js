@@ -7,6 +7,7 @@ import debugThe from 'debug';
 import organizeData from './data/organize';
 import renderApp from './render';
 import getConfig from './config/get';
+import dir from './data/cacheDir';
 
 const debug = debugThe('usi:build');
 const CONFIG = getConfig();
@@ -22,7 +23,7 @@ const toPhotosList = (obj) => {
   return obj;
 };
 
-const buildStatic = (context, done) => organizeData((dataErr, results) => {
+const buildStatic = (context, done) => organizeData({dir, user: CONFIG.user}, (dataErr, results) => {
   if (dataErr) throw dataErr;
 
   const isBuild = !context.isDev;

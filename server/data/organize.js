@@ -7,7 +7,7 @@ import pick from 'lodash/object/pick';
 import map from 'lodash/collection/map';
 import transform from 'lodash/object/transform';
 import {camelizeKeys} from 'humps';
-import readData from './read';
+import {read} from 'instagram-download';
 import {dateParts} from '../../src/helpers/date';
 import slug from '../../src/helpers/slug';
 
@@ -126,7 +126,9 @@ class ById extends KeySets {
   }
 }
 
-const buildData = (cb) => {
+const buildData = (options, cb) => read(options, (err, data) => {
+  if (err) return cb(err);
+
   const byTag = new ByTag();
   const byDay = new ByDay();
   const byMonth = new ByMonth();
@@ -134,35 +136,31 @@ const buildData = (cb) => {
   const byPage = new ByPage();
   const byId = new ById();
 
-  readData((err, data) => {
-    if (err) return cb(err);
-
-    data.forEach((datum, index) => {
-      const photo = camelizeKeys(datum);
-      const {filter, tags, createdTime, id} = photo;
-      const dateId = toId({createdTime, id});
-      photo.id = dateId;
-      byTag.add(tags.concat(filter || 'Normal'), dateId);
-      byDay.add(createdTime, dateId);
-      byMonth.add(createdTime, dateId);
-      byYear.add(createdTime, dateId);
-      byPage.add(index, dateId);
-      byId.add(dateId, photo);
-    });
-
-    const ids = byId.getValues();
-    const tags = byTag.getValues(ids);
-    const pages = byPage.getValues(ids);
-
-    cb(null, {
-      tags,
-      pages,
-      ids,
-      dates: merge(...invoke([byDay, byMonth, byYear], 'getValues', ids)),
-      tagKeys: map(tags, (item) => pick(item, 'id', 'name')),
-      pageKeys: map(pages, (item) => pick(item, 'id', 'name'))
-    });
+  data.forEach((datum, index) => {
+    const photo = camelizeKeys(datum);
+    const {filter, tags, createdTime, id} = photo;
+    const dateId = toId({createdTime, id});
+    photo.id = dateId;
+    byTag.add(tags.concat(filter || 'Normal'), dateId);
+    byDay.add(createdTime, dateId);
+    byMonth.add(createdTime, dateId);
+    byYear.add(createdTime, dateId);
+    byPage.add(index, dateId);
+    byId.add(dateId, photo);
   });
-};
+
+  const ids = byId.getValues();
+  const tags = byTag.getValues(ids);
+  const pages = byPage.getValues(ids);
+
+  cb(null, {
+    tags,
+    pages,
+    ids,
+    dates: merge(...invoke([byDay, byMonth, byYear], 'getValues', ids)),
+    tagKeys: map(tags, (item) => pick(item, 'id', 'name')),
+    pageKeys: map(pages, (item) => pick(item, 'id', 'name'))
+  });
+});
 
 export default buildData;
