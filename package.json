@@ -41,7 +41,7 @@
     "hjs-webpack": "^2.13.0",
     "humps": "^0.6.0",
     "inquirer": "^0.9.0",
-    "instagram-download": "^1.0.0",
+    "instagram-download": "^1.1.0",
     "instagram-node": "^0.5.8",
     "json-loader": "^0.5.2",
     "less": "^2.5.1",
