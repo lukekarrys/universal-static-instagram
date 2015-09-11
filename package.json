@@ -8,14 +8,16 @@
   },
   "dependencies": {
     "andlog": "^1.0.0",
+    "history": "^1.9.0",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "normalizr": "^1.0.0",
     "react": "^0.13.3",
     "react-redux": "^2.1.1",
-    "react-router": "1.0.0-beta3",
+    "react-router": "1.0.0-rc1",
     "redux": "^2.0.0",
     "redux-logger": "^1.0.6",
+    "redux-react-router": "1.0.0-beta1",
     "redux-thunk": "^0.1.0",
     "xhr": "^2.0.4",
     "zero-fill": "^2.2.1"
