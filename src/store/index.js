@@ -3,13 +3,22 @@
 'use strict';
 
 import {compose, createStore, applyMiddleware} from 'redux';
+import {reduxReactRouter} from 'redux-react-router';
 import thunk from 'redux-thunk';
 import debugLogger from 'redux-logger';
+import createHistory from 'history/lib/createBrowserHistory';
 import logger from 'andlog';
 import api from '../helpers/api';
 import reducer from '../reducers';
+import routes from '../routes';
 
-const storeEnhancers = [applyMiddleware(thunk, api, debugLogger({logger}))];
+const storeEnhancers = [
+  applyMiddleware(thunk, api, debugLogger({logger})),
+  reduxReactRouter({
+    routes,
+    createHistory
+  })
+];
 
 // Only require devtools based on flag so they dont get bundled
 if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {

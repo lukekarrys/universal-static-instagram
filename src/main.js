@@ -3,11 +3,9 @@
 'use strict';
 
 import React from 'react';
-import Router from 'react-router';
+import {ReduxRouter} from 'redux-react-router';
 import {Provider} from 'react-redux';
-import createHistory from 'history/lib/createBrowserHistory';
 import createStore from './store';
-import routes from './routes';
 
 const store = createStore(window.__INITIAL_STATE__ || {});
 
@@ -21,7 +19,7 @@ if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
 React.render((
   <div>
     <Provider store={store}>
-      {() => <Router history={createHistory()}>{routes}</Router>}
+      {() => <ReduxRouter />}
     </Provider>
     {typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__ &&
       <DebugPanel left={true} right={true} bottom={true}>

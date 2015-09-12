@@ -10,7 +10,7 @@ import mapKeyToProps from '../helpers/mapKeyToProps';
 @connect(mapKeyToProps('tags'), {loadTags})
 export default class Tags extends Component {
   static propTypes = {
-    location: PropTypes.shape({pathname: PropTypes.string.isRequired}).isRequired,
+    fetchKey: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.instanceOf(Error),
     tags: PropTypes.array.isRequired,
@@ -18,8 +18,7 @@ export default class Tags extends Component {
   }
 
   render () {
-    const {tags, loading, error} = this.props;
-    const {pathname} = this.props.location;
+    const {tags, loading, error, fetchKey} = this.props;
     const loadData = this.props.loadTags;
     return (
       <div>
@@ -27,7 +26,7 @@ export default class Tags extends Component {
         <PageContainer
           component={TagsList}
           data={{tags}}
-          {...{error, loading, loadData, pathname}}
+          {...{error, loading, loadData, fetchKey}}
         />
       </div>
     );

@@ -10,7 +10,7 @@ import mapKeyToProps from '../helpers/mapKeyToProps';
 @connect(mapKeyToProps('photos'), {loadPhotos})
 export default class Photos extends Component {
   static propTypes = {
-    location: PropTypes.shape({pathname: PropTypes.string.isRequired}).isRequired,
+    fetchKey: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.instanceOf(Error),
     photos: PropTypes.array.isRequired,
@@ -22,14 +22,13 @@ export default class Photos extends Component {
   }
 
   render () {
-    const {loading, error, photos, previous, next, name, type} = this.props;
+    const {loading, error, photos, previous, next, name, type, fetchKey} = this.props;
     const loadData = this.props.loadPhotos;
-    const {pathname} = this.props.location;
     return (
       <PageContainer
         component={PhotosBy}
         data={{photos}}
-        {...{error, loading, previous, next, name, type, pathname, loadData}}
+        {...{error, loading, previous, next, name, type, loadData, fetchKey}}
       />
     );
   }
