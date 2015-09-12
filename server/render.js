@@ -10,7 +10,7 @@ import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
 import reducer from '../src/reducers';
-import store from '../src/store';
+import createStore from '../src/store';
 import * as ACTIONS from '../src/actions';
 import debugThe from 'debug';
 
@@ -32,32 +32,37 @@ const template = ({context, body, state}) => {
         <meta name="apple-mobile-web-app-capable" content="yes">
       </head>
       <body><div id='container'>${body || ''}</div></body>
-      ${state ? `<script>__INITIAL_STATE__=${JSON.stringify(state)}</script>` : ''}
-      ${context ? `<script src="/${context.main}"></script>` : ''}
+      <script>__INITIAL_STATE__=${JSON.stringify(state || {})}</script>
+      <script src="/${context.main}"></script>
     </html>
   `.replace(/\n\s*/g, '');
 };
 
-const render = ({context, path, data, key}, done) => {
+export default ({context, path, data = null, key = null}, done) => {
   // During dev this is called with only a context to just return an empty template
-  if (path === undefined) return template({context});
+  if (path === undefined && !done) return template({context});
 
+  let state = {};
   const location = createLocation(slash(path));
   const actionType = successActions[key];
-  const pathKey = pathToKey(location.pathname);
+  const pathKey = key === null ? null : pathToKey(location.pathname);
 
   debug(`Router run ${location.pathname}`);
   debug(`Action type ${actionType}`);
   debug(`Path key ${pathKey}`);
   debug(`Has data ${!!data}`);
 
-  // Use the raw reducer to make the initial data in the correct shape
-  // expected by the redux on the client
-  const state = data && key ? reducer(undefined, {
-    type: actionType,
-    key: pathKey,
-    ...normalize({json: data, key})
-  }) : {};
+  if (pathKey && data) {
+    // Use the raw reducer to make the initial data in the correct shape
+    // expected by the redux on the client
+    state = reducer(undefined, {
+      type: actionType,
+      key: pathKey,
+      ...normalize({json: data, key})
+    });
+  }
+
+  const store = createStore(state, {createHistory});
 
   match({routes, location}, (err, __, renderProps) => {
     if (err) return done(err);
@@ -70,12 +75,10 @@ const render = ({context, path, data, key}, done) => {
       context,
       state,
       body: React.renderToString(
-        <Provider store={store(state, {createHistory})}>
+        <Provider store={store}>
           {() => <RoutingContext {...renderProps} />}
         </Provider>
       )
     }));
   });
 };
-
-export default render;

@@ -3,7 +3,7 @@
 import zeroFill from 'zero-fill';
 import createdDate from './createdDate';
 
-const propsToDate = (props) => {
+export const propsToDate = (props) => {
   const {createdTime, path} = props;
   let {year, month, day} = props;
 
@@ -16,7 +16,7 @@ const propsToDate = (props) => {
     : new Date(year, month === undefined ? 0 : (Number(month) - 1), day === undefined ? 1 : day);
 };
 
-const dateParts = (props) => {
+export const dateParts = (props) => {
   const date = propsToDate(props);
   const year = date.getFullYear().toString();
   const month = zeroFill(2, date.getMonth() + 1);
@@ -24,6 +24,3 @@ const dateParts = (props) => {
 
   return {year, month, day};
 };
-
-export {propsToDate as propsToDate};
-export {dateParts as dateParts};

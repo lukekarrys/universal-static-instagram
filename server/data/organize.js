@@ -131,7 +131,7 @@ class ById extends KeySets {
   }
 }
 
-const buildData = (options, cb) => read(options, (err, data) => {
+export default (options, cb) => read(options, (err, data) => {
   if (err) return cb(err);
 
   const byTag = new ByTag();
@@ -167,5 +167,3 @@ const buildData = (options, cb) => read(options, (err, data) => {
     pageKeys: map(pages, (item) => pick(item, 'id', 'name'))
   });
 });
-
-export default buildData;

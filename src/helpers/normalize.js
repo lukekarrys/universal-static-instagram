@@ -4,7 +4,7 @@ import {normalize} from 'normalizr';
 import omit from 'lodash/object/omit';
 import Schemas from './schema';
 
-const normalizeJson = ({json, key}) => {
+export default ({json, key}) => {
   const schema = Schemas[key];
   const schemaKey = (schema._itemSchema || schema)._key;
 
@@ -18,5 +18,3 @@ const normalizeJson = ({json, key}) => {
     }
   };
 };
-
-export default normalizeJson;

@@ -2,8 +2,6 @@
 
 import slash from './slash';
 
-const pathToKey = (path) =>
+export default (path) =>
   slash(!path || path === '/' ? 'pages/1' : path)
   .replace(/\.html$/, '');
-
-export default pathToKey;

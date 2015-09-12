@@ -8,14 +8,14 @@ import createHistory from 'history/lib/createBrowserHistory';
 import {Provider} from 'react-redux';
 import createStore from './store';
 
-const store = createStore(window.__INITIAL_STATE__ || {}, {createHistory});
-
 // Only require devtools based on flag so they dont get bundled
-let DebugPanel, DevTools, SliderMonitor;
+let DebugPanel, DevTools;
 if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
   ({DebugPanel, DevTools} = require('redux-devtools/lib/react'));
-  SliderMonitor = require('redux-slider-monitor');
 }
+
+const store = createStore(window.__INITIAL_STATE__ || {}, {createHistory});
+const container = document.getElementById('container');
 
 React.render((
   <div>
@@ -24,8 +24,8 @@ React.render((
     </Provider>
     {typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__ &&
       <DebugPanel left={true} right={true} bottom={true}>
-        <DevTools store={store} monitor={SliderMonitor} />
+        <DevTools store={store} monitor={require('redux-slider-monitor')} />
       </DebugPanel>
     }
   </div>
-), document.getElementById('container'));
+), container);

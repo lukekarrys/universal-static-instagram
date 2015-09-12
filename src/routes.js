@@ -10,7 +10,7 @@ import Photos from './containers/Photos';
 import Photo from './containers/Photo';
 import NotFound from './components/NotFound';
 
-const routes = (
+export default (
   <Route component={App}>
     <Route path='/' component={Photos} />
     <Route path='pages' component={Pages} />
@@ -27,5 +27,3 @@ const routes = (
     <Route path='*' component={NotFound} />
   </Route>
 );
-
-export default routes;

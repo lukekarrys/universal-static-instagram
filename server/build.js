@@ -5,7 +5,7 @@ import assign from 'lodash/object/assign';
 import async from 'async';
 import debugThe from 'debug';
 import organizeData from './data/organize';
-import renderApp from './render';
+import render from './render';
 import getConfig from './config/get';
 import dir from './data/cacheDir';
 
@@ -23,19 +23,20 @@ const toPhotosList = (obj) => {
   return obj;
 };
 
-const buildStatic = (context, done) => organizeData({dir, user: CONFIG.user}, (dataErr, results) => {
+export default (context, done) => organizeData({dir, user: CONFIG.user}, (dataErr, results) => {
   if (dataErr) throw dataErr;
 
   const isBuild = !context.isDev;
   const {ids, tags, tagKeys, pages, pageKeys, dates} = results;
-  const render = ({path, data, key}) => (cb) => renderApp({context, path, data, key}, cb);
+  const renderAsync = ({path, data, key}) => (cb) => render({context, path, data, key}, cb);
+  const emptyTemplate = render({context});
 
   const filesAsync = {};
   const filesSync = {};
 
   if (isBuild) {
     // Create a 404.html file for our deployment targets in build mode
-    filesAsync['404.html'] = render({path: '__NOT_A_REAL_URL__'});
+    filesAsync['404.html'] = renderAsync({path: '__NOT_A_REAL_URL__'});
     // Create the CNAME file based on the config domain
     if (CONFIG.domain) {
       debug(`Domain: ${CONFIG.domain}`);
@@ -44,7 +45,7 @@ const buildStatic = (context, done) => organizeData({dir, user: CONFIG.user}, (d
   }
   else {
     // In dev mode we only need one (mostly empty) html file
-    filesSync['index.html'] = renderApp({context});
+    filesSync['index.html'] = emptyTemplate;
   }
 
   const addTask = (filePath, data, key) => {
@@ -64,7 +65,7 @@ const buildStatic = (context, done) => organizeData({dir, user: CONFIG.user}, (d
       // Add a task to async render this html file (uses react-router)
       debug(`File: ${filePath}`);
       debug(`URL Path: ${urlPath}`);
-      filesAsync[filePath] = render({path: urlPath, data, key});
+      filesAsync[filePath] = renderAsync({path: urlPath, data, key});
     }
   };
 
@@ -89,5 +90,3 @@ const buildStatic = (context, done) => organizeData({dir, user: CONFIG.user}, (d
     done(null, assign(paths, filesSync));
   });
 });
-
-export default buildStatic;

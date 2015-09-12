@@ -6,7 +6,7 @@ const endsWithS = (str) => str.charAt(str.length - 1) === 's';
 const pluralize = (str) => endsWithS(str) ? str : `${str}s`;
 const singularize = (str) => endsWithS(str) ? str.slice(0, -1) : str;
 
-const mapKeyToProps = (stateKey) => (state) => {
+export default (stateKey) => (state) => {
   const pluralKey = pluralize(stateKey);
   const singularKey = singularize(stateKey);
   const isSingular = stateKey === singularKey;
@@ -34,5 +34,3 @@ const mapKeyToProps = (stateKey) => (state) => {
     ...rest
   };
 };
-
-export default mapKeyToProps;

@@ -6,7 +6,7 @@ import noop from 'lodash/utility/noop';
 import getConfig from '../config/get';
 import cacheDir from './cacheDir';
 
-const copyMedia = (cb) => cpr(
+export default (cb) => cpr(
   path.join(cacheDir, getConfig().user, 'media'),
   path.resolve(__dirname, '..', '..', 'public', 'media'),
   {
@@ -15,5 +15,3 @@ const copyMedia = (cb) => cpr(
   },
   typeof cb === 'function' ? cb : noop
 );
-
-export default copyMedia;
