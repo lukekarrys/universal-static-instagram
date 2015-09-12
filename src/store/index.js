@@ -3,14 +3,18 @@
 'use strict';
 
 import {compose, createStore, applyMiddleware} from 'redux';
+import {reduxReactRouter} from 'redux-react-router';
 import thunk from 'redux-thunk';
 import debugLogger from 'redux-logger';
 import logger from 'andlog';
 import api from '../helpers/api';
 import reducer from '../reducers';
+import routes from '../routes';
 
-const storeEnhancers = [applyMiddleware(thunk, api, debugLogger({logger}))];
+const middleware = applyMiddleware(thunk, api, debugLogger({logger}));
+const storeEnhancers = [];
 
+// Only require devtools based on flag so they dont get bundled
 if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
   const {devTools, persistState} = require('redux-devtools');
   storeEnhancers.push(
@@ -19,8 +23,11 @@ if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
   );
 }
 
-const configureStore = (state) => {
-  const store = compose(...storeEnhancers)(createStore)(reducer, state);
+const configureStore = (state, {createHistory}) => {
+  // Pass in createHistory as an option to allow for redux-react-router to be
+  // initialized with different histories for server/client
+  const router = reduxReactRouter({routes, createHistory});
+  const store = compose(middleware, router, ...storeEnhancers)(createStore)(reducer, state);
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
