@@ -60,7 +60,8 @@ class KeySets {
 
 class ByTag extends KeySets {
   toObject (key, id) {
-    return assign(super.toObject(key, id), {id: slug(key), type: 'tag'});
+    const parent = super.toObject.apply(this, arguments);
+    return assign(parent, {id: slug(key), type: 'tag'});
   }
 
   add (tags, id) {
@@ -70,7 +71,8 @@ class ByTag extends KeySets {
 
 class ByDay extends KeySets {
   toObject () {
-    return assign(super.toObject.apply(this, arguments), {type: 'day'});
+    const parent = super.toObject.apply(this, arguments);
+    return assign(parent, {type: 'day'});
   }
 
   add (createdTime, id) {
@@ -81,7 +83,8 @@ class ByDay extends KeySets {
 
 class ByMonth extends KeySets {
   toObject () {
-    return assign(super.toObject.apply(this, arguments), {type: 'month'});
+    const parent = super.toObject.apply(this, arguments);
+    return assign(parent, {type: 'month'});
   }
 
   add (createdTime, id) {
@@ -92,7 +95,8 @@ class ByMonth extends KeySets {
 
 class ByYear extends KeySets {
   toObject () {
-    return assign(super.toObject.apply(this, arguments), {type: 'year'});
+    const parent = super.toObject.apply(this, arguments);
+    return assign(parent, {type: 'year'});
   }
 
   add (createdTime, id) {
@@ -107,7 +111,8 @@ class ByPage extends KeySets {
   }
 
   toObject () {
-    return assign(super.toObject.apply(this, arguments), {type: 'page'});
+    const parent = super.toObject.apply(this, arguments);
+    return assign(parent, {type: 'page'});
   }
 
   add (index, id) {
