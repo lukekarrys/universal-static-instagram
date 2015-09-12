@@ -2,6 +2,7 @@
 
 import React from 'react';
 import createLocation from 'history/lib/createLocation';
+import createHistory from 'history/lib/createMemoryHistory';
 import {RoutingContext, match} from 'react-router';
 import {Provider} from 'react-redux';
 import routes from '../src/routes';
@@ -69,7 +70,7 @@ const render = ({context, path, data, key}, done) => {
       context,
       state,
       body: React.renderToString(
-        <Provider store={store(state)}>
+        <Provider store={store(state, {createHistory})}>
           {() => <RoutingContext {...renderProps} />}
         </Provider>
       )

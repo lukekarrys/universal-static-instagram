@@ -4,10 +4,11 @@
 
 import React from 'react';
 import {ReduxRouter} from 'redux-react-router';
+import createHistory from 'history/lib/createBrowserHistory';
 import {Provider} from 'react-redux';
 import createStore from './store';
 
-const store = createStore(window.__INITIAL_STATE__ || {});
+const store = createStore(window.__INITIAL_STATE__ || {}, {createHistory});
 
 // Only require devtools based on flag so they dont get bundled
 let DebugPanel, DevTools, SliderMonitor;
