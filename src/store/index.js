@@ -11,6 +11,7 @@ import reducer from '../reducers';
 
 const storeEnhancers = [applyMiddleware(thunk, api, debugLogger({logger}))];
 
+// Only require devtools based on flag so they dont get bundled
 if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
   const {devTools, persistState} = require('redux-devtools');
   storeEnhancers.push(
