@@ -34,6 +34,7 @@
     "colors": "^1.1.2",
     "cpr": "^0.4.2",
     "css-loader": "^0.18.0",
+    "cssnano": "^3.0.1",
     "debug": "^2.2.0",
     "divshot-cli": "^1.10.5",
     "eslint": "^1.4.1",
@@ -83,16 +84,17 @@
     "url": "git+https://github.com/lukekarrys/universal-static-instagram.git"
   },
   "scripts": {
-    "build": "webpack --progress",
+    "build": "npm run webpack.config && webpack --progress",
     "deploy.divshot": "npm run divshot -- push",
     "deploy.gh": "git-directory-deploy --directory public",
     "deploy.surge": "surge public",
     "divshot": "divshot",
     "fetch.data": "babel-node server/data/fetch.js",
-    "lint": "eslint .",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.es6 .",
     "make.config": "babel-node server/config/make.js",
-    "start": "webpack-dev-server --progress",
+    "start": "npm run webpack.config && webpack-dev-server --progress",
     "static": "http-server ./public -p 8080",
-    "validate": "npm ls"
+    "validate": "npm ls",
+    "webpack.config": "babel webpack.config.es6 --out-file webpack.config.js"
   }
 }

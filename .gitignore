@@ -31,3 +31,4 @@ _cache
 public
 config.json
 .divshot-cache
+webpack.config.js
