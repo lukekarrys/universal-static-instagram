@@ -18,7 +18,7 @@ var config = webpack({
   output: {hash: true},
   html: require('./server/build'),
   devServer: {noInfo: true},
-  define: {__DEVTOOLS__: isDev}
+  define: {__DEVTOOLS__: false}
 });
 
 // Dont display assets because it will contain tons of html and json assets

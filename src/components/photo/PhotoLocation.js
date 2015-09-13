@@ -28,9 +28,7 @@ export default class PhotoComments extends Component {
     if (!name && !geo) return null;
 
     return (
-      <div>
-        <span>{`Location:${space(name)}${space(geo)}`}</span>
-      </div>
+      <span>{`${space(name)}${space(geo)}`}</span>
     );
   }
 }
