@@ -9,9 +9,9 @@ import {Provider} from 'react-redux';
 import createStore from './store';
 
 // Only require devtools based on flag so they dont get bundled
-let DebugPanel, DevTools;
+let DebugPanel, DevTools, LogMonitor;
 if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
-  ({DebugPanel, DevTools} = require('redux-devtools/lib/react'));
+  ({DebugPanel, DevTools, LogMonitor} = require('redux-devtools/lib/react'));
 }
 
 const store = createStore(window.__INITIAL_STATE__ || {}, {createHistory});
@@ -24,7 +24,7 @@ React.render((
     </Provider>
     {typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__ &&
       <DebugPanel left={true} right={true} bottom={true}>
-        <DevTools store={store} monitor={require('redux-slider-monitor')} />
+        <DevTools store={store} monitor={LogMonitor} />
       </DebugPanel>
     }
   </div>
