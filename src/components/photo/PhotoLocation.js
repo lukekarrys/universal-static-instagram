@@ -2,6 +2,8 @@
 
 import React, {Component, PropTypes} from 'react';
 
+const space = (str) => str ? ` ${str}` : '';
+
 export default class PhotoComments extends Component {
   static propTypes = {
     latitude: PropTypes.number,
@@ -11,17 +13,23 @@ export default class PhotoComments extends Component {
 
   geo () {
     const {latitude, longitude} = this.props;
-    return latitude && longitude ? `${latitude},${longitude}` : '';
+    return latitude && longitude ? `${latitude}, ${longitude}` : '';
+  }
+
+  name () {
+    const {name} = this.props;
+    return name ? name : '';
   }
 
   render () {
-    const {latitude, longitude, name} = this.props;
+    const name = this.name();
+    const geo = this.geo();
 
-    if (!name && !latitude && !longitude) return null;
+    if (!name && !geo) return null;
 
     return (
       <div>
-        <span>{`Location: ${name} ${this.geo()}`}</span>
+        <span>{`Location:${space(name)}${space(geo)}`}</span>
       </div>
     );
   }
