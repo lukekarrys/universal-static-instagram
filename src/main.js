@@ -14,7 +14,8 @@ if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
   ({DebugPanel, DevTools, LogMonitor} = require('redux-devtools/lib/react'));
 }
 
-const store = createStore(window.__INITIAL_STATE__ || {}, {createHistory});
+const {__INITIAL_STATE__: state} = window;
+const store = createStore({state, createHistory});
 const container = document.getElementById('container');
 
 React.render((

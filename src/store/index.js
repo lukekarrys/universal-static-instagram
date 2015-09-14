@@ -23,7 +23,7 @@ if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
   );
 }
 
-export default (state, {createHistory}) => {
+export default ({state, createHistory}) => {
   // Pass in createHistory as an option to allow for redux-react-router to be
   // initialized with different histories for server/client
   const router = reduxReactRouter({routes, createHistory});

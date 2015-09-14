@@ -9,7 +9,6 @@ import routes from '../src/routes';
 import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
-import reducer from '../src/reducers';
 import createStore from '../src/store';
 import * as ACTIONS from '../src/actions';
 import debugThe from 'debug';
@@ -42,7 +41,6 @@ export default ({context, path, data = null, key = null}, done) => {
   // During dev this is called with only a context to just return an empty template
   if (path === undefined && !done) return template({context});
 
-  let state = {};
   const location = createLocation(slash(path));
   const actionType = successActions[key];
   const pathKey = key === null ? null : pathToKey(location.pathname);
@@ -52,17 +50,12 @@ export default ({context, path, data = null, key = null}, done) => {
   debug(`Path key ${pathKey}`);
   debug(`Has data ${!!data}`);
 
-  if (pathKey && data) {
-    // Use the raw reducer to make the initial data in the correct shape
-    // expected by the redux on the client
-    state = reducer(undefined, {
-      type: actionType,
-      key: pathKey,
-      ...normalize({json: data, key})
-    });
-  }
-
-  const store = createStore(state, {createHistory});
+  const store = createStore({createHistory});
+  store.dispatch({
+    type: actionType || null,
+    key: pathKey,
+    ...normalize({json: data, key})
+  });
 
   match({routes, location}, (err, __, renderProps) => {
     if (err) return done(err);
@@ -73,7 +66,7 @@ export default ({context, path, data = null, key = null}, done) => {
     // by using renderToStaticMarkup and not including any <script> tags
     done(null, template({
       context,
-      state,
+      state: store.getState(),
       body: React.renderToString(
         <Provider store={store}>
           {() => <RoutingContext {...renderProps} />}

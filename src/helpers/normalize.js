@@ -5,6 +5,8 @@ import omit from 'lodash/object/omit';
 import Schemas from './schema';
 
 export default ({json, key}) => {
+  if (!json || !key) return {};
+
   const schema = Schemas[key];
   const schemaKey = (schema._itemSchema || schema)._key;
 
