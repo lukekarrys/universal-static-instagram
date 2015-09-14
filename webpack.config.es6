@@ -1,7 +1,6 @@
 'use strict';
 
-require('babel/register');
-
+import 'babel/register';
 import webpack from 'hjs-webpack';
 import cssnano from 'cssnano';
 import once from 'lodash/function/once';
