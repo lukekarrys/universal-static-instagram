@@ -1,17 +1,14 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import Section from 'rebass/dist/Section';
 import SectionHeader from 'rebass/dist/SectionHeader';
-import assign from 'lodash/object/assign';
 import PageError from '../components/PageError';
 
 export default class PageContainer extends Component {
   static propTypes = {
     loadData: PropTypes.func.isRequired,
     fetchKey: PropTypes.string.isRequired,
-    component: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired,
+    component: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.instanceOf(Error)
   }
@@ -27,29 +24,25 @@ export default class PageContainer extends Component {
   }
 
   render () {
-    const {loading, error, component, data, ...componentProps} = this.props;
+    const {loading, error, component} = this.props;
 
     if (error) {
       return (
-        <Section>
+        <div>
           <SectionHeader title='Error' />
           <PageError error={error} />
-        </Section>
+        </div>
       );
     }
 
     if (loading) {
       return (
-        <Section>
+        <div>
           <SectionHeader title='Loading...' />
-        </Section>
+        </div>
       );
     }
 
-    return (
-      <Section>
-        {React.createElement(component, assign(componentProps, data))}
-      </Section>
-    );
+    return component;
   }
 }

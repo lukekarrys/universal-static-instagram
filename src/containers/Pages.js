@@ -7,25 +7,17 @@ import {connect} from 'react-redux';
 import {loadPages} from '../actions';
 import mapKeyToProps from '../helpers/mapKeyToProps';
 
-@connect(mapKeyToProps('pages'), {loadPages})
+@connect(mapKeyToProps('pages'), {loadData: loadPages})
 export default class Pages extends Component {
   static propTypes = {
-    fetchKey: PropTypes.string.isRequired,
-    loading: PropTypes.bool.isRequired,
-    error: PropTypes.instanceOf(Error),
-    pages: PropTypes.array.isRequired,
-    loadPages: PropTypes.func.isRequired
+    pages: PropTypes.array.isRequired
   }
 
   render () {
-    const {pages, loading, error, fetchKey} = this.props;
-    const loadData = this.props.loadPages;
+    const {pages, ...rest} = this.props;
+    const component = <PagesList pages={pages} />;
     return (
-      <PageContainer
-        component={PagesList}
-        data={{pages}}
-        {...{error, loading, loadData, fetchKey}}
-      />
+      <PageContainer component={component} {...rest} />
     );
   }
 }

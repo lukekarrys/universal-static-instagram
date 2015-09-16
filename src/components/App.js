@@ -5,6 +5,7 @@ import {Link} from 'react-router';
 import Container from 'rebass/dist/Container';
 import Toolbar from 'rebass/dist/Toolbar';
 import Footer from 'rebass/dist/Footer';
+import Section from 'rebass/dist/Section';
 
 export default class App extends Component {
   static propTypes = {
@@ -20,7 +21,7 @@ export default class App extends Component {
           <Link to='/pages' className='NavItem btn'>Pages</Link>
         </Toolbar>
         <Container>
-          {this.props.children}
+          <Section>{this.props.children}</Section>
           <Footer>
             <div className='flex'>
               <div className='flex-auto px2'>

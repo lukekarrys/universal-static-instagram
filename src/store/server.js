@@ -7,7 +7,9 @@ import api from '../helpers/api';
 import reducer from '../reducers';
 import routes from '../routes';
 
-export default (state) => compose(
+const finalCreateStore = compose(
   applyMiddleware(thunk, api),
   reduxReactRouter({routes})
-)(createStore)(reducer, state);
+)(createStore);
+
+export default (state) => finalCreateStore(reducer, state);

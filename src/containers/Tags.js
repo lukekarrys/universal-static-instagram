@@ -7,25 +7,17 @@ import {connect} from 'react-redux';
 import {loadTags} from '../actions';
 import mapKeyToProps from '../helpers/mapKeyToProps';
 
-@connect(mapKeyToProps('tags'), {loadTags})
+@connect(mapKeyToProps('tags'), {loadData: loadTags})
 export default class Tags extends Component {
   static propTypes = {
-    fetchKey: PropTypes.string.isRequired,
-    loading: PropTypes.bool.isRequired,
-    error: PropTypes.instanceOf(Error),
-    tags: PropTypes.array.isRequired,
-    loadTags: PropTypes.func.isRequired
+    tags: PropTypes.array.isRequired
   }
 
   render () {
-    const {tags, loading, error, fetchKey} = this.props;
-    const loadData = this.props.loadTags;
+    const {tags, ...rest} = this.props;
+    const component = <TagsList tags={tags} />;
     return (
-      <PageContainer
-        component={TagsList}
-        data={{tags}}
-        {...{error, loading, loadData, fetchKey}}
-      />
+      <PageContainer component={component} {...rest} />
     );
   }
 }

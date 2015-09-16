@@ -8,7 +8,7 @@ export default class Root extends Component {
   static propTypes = {
     store: React.PropTypes.object.isRequired,
     routes: React.PropTypes.object,
-    children: React.PropTypes.element
+    debugger: React.PropTypes.element
   }
 
   render () {
@@ -17,7 +17,7 @@ export default class Root extends Component {
         <Provider store={this.props.store}>
           {() => <ReduxRouter routes={this.props.routes} />}
         </Provider>
-        {this.props.children}
+        {this.props.debugger}
       </div>
     );
   }

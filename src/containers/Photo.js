@@ -7,27 +7,19 @@ import {connect} from 'react-redux';
 import {loadPhoto} from '../actions';
 import mapKeyToProps from '../helpers/mapKeyToProps';
 
-@connect(mapKeyToProps('photo'), {loadPhoto})
+@connect(mapKeyToProps('photo'), {loadData: loadPhoto})
 export default class Photo extends Component {
   static propTypes = {
-    fetchKey: PropTypes.string.isRequired,
-    loading: PropTypes.bool.isRequired,
-    error: PropTypes.instanceOf(Error),
     photo: PropTypes.object.isRequired,
-    loadPhoto: PropTypes.func.isRequired,
     previous: PropTypes.string,
     next: PropTypes.string
   }
 
   render () {
-    const {photo, loading, error, previous, next, fetchKey} = this.props;
-    const loadData = this.props.loadPhoto;
+    const {photo, previous, next, ...rest} = this.props;
+    const component = <PhotoDetail {...{photo, previous, next}} />;
     return (
-      <PageContainer
-        component={PhotoDetail}
-        data={{photo}}
-        {...{loading, error, previous, next, loadData, fetchKey}}
-      />
+      <PageContainer component={component} {...rest} />
     );
   }
 }
