@@ -14,7 +14,7 @@ export default class InternalLink extends Component {
 
     if (disabled) {
       return (
-        <a className='disabled' disabled='disabled' {...rest}>{children}</a>
+        <a className='is-disabled' disabled={true} {...rest}>{children}</a>
       );
     }
 

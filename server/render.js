@@ -2,15 +2,13 @@
 
 import React from 'react';
 import createLocation from 'history/lib/createLocation';
-import createHistory from 'history/lib/createMemoryHistory';
-import {RoutingContext, match} from 'react-router';
-import {Provider} from 'react-redux';
-import routes from '../src/routes';
+import {match} from 'redux-react-router/lib/server';
 import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
-import createStore from '../src/store';
+import createStore from '../src/store/server';
 import * as ACTIONS from '../src/actions';
+import Root from '../src/Root';
 import debugThe from 'debug';
 
 const debug = debugThe('usi:render');
@@ -51,28 +49,27 @@ export default ({context, path, data = null, key = null}, done) => {
   debug(`Path key ${pathKey}`);
   debug(`Has data ${!!data}`);
 
-  const store = createStore({createHistory});
+  const store = createStore();
+
+  // Dispatch action with initial data
   store.dispatch({
     type: actionType || null,
     key: pathKey,
     ...normalize({json: data, key})
   });
 
-  match({routes, location}, (err, __, renderProps) => {
-    if (err) return done(err);
+  // Use redux-react-router to match location and dispatch that to the store
+  // and then render it all
+  store.dispatch(match(location.pathname, (err) => {
+    if (err) {
+      debug(`Store dispatch matching location err ${err}`);
+      return done(err);
+    }
 
-    debug(`Router found match ${!!renderProps}`);
-
-    // If we wanted to we could make this a completely static site with no JS
-    // by using renderToStaticMarkup and not including any <script> tags
     done(null, template({
       context,
       state: store.getState(),
-      body: React.renderToString(
-        <Provider store={store}>
-          {() => <RoutingContext {...renderProps} />}
-        </Provider>
-      )
+      body: React.renderToString(<Root store={store} />)
     }));
-  });
+  }));
 };

@@ -3,31 +3,23 @@
 'use strict';
 
 import React from 'react';
-import {ReduxRouter} from 'redux-react-router';
-import createHistory from 'history/lib/createBrowserHistory';
-import {Provider} from 'react-redux';
-import createStore from './store';
+import routes from './routes';
+import createStore from './store/client';
+import Root from './Root';
 import 'basscss/css/basscss.css';
 
-// Only require devtools based on flag so they dont get bundled
-let DebugPanel, DevTools, LogMonitor;
-if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
-  ({DebugPanel, DevTools, LogMonitor} = require('redux-devtools/lib/react'));
-}
-
-const {__INITIAL_STATE__: state} = window;
-const store = createStore({state, createHistory});
+const store = createStore(window.__INITIAL_STATE__);
 const container = document.getElementById('container');
 
-React.render((
-  <div>
-    <Provider store={store}>
-      {() => <ReduxRouter />}
-    </Provider>
-    {typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__ &&
-      <DebugPanel left={true} right={true} bottom={true}>
-        <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
-      </DebugPanel>
-    }
-  </div>
-), container);
+// Only require devtools based on flag so they dont get bundled
+let Debugger = null;
+if (__DEVTOOLS__) {
+  const {DebugPanel, DevTools, LogMonitor} = require('redux-devtools/lib/react');
+  Debugger = (
+    <DebugPanel left={true} right={true} bottom={true}>
+      <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
+    </DebugPanel>
+  );
+}
+
+React.render(<Root store={store} routes={routes}>{Debugger}</Root>, container);

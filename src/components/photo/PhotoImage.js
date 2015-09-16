@@ -30,7 +30,7 @@ export default class PhotoImage extends Component {
       width,
       height,
       src: url,
-      style: {'max-width': 'none'}
+      style: {maxWidth: 'none'}
     };
   }
 
