@@ -7,6 +7,7 @@ import {ReduxRouter} from 'redux-react-router';
 import createHistory from 'history/lib/createBrowserHistory';
 import {Provider} from 'react-redux';
 import createStore from './store';
+import 'basscss/css/basscss.css';
 
 // Only require devtools based on flag so they dont get bundled
 let DebugPanel, DevTools, LogMonitor;
@@ -25,7 +26,7 @@ React.render((
     </Provider>
     {typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__ &&
       <DebugPanel left={true} right={true} bottom={true}>
-        <DevTools store={store} monitor={LogMonitor} />
+        <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
       </DebugPanel>
     }
   </div>

@@ -7,14 +7,13 @@ import slash from '../../helpers/slash';
 export default class PhotoLink extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    path: PropTypes.string,
-    disabled: PropTypes.bool
+    path: PropTypes.string
   }
 
   render () {
-    const {children, path, disabled} = this.props;
+    const {children, path, ...rest} = this.props;
     return (
-      <Link to={`/photos${slash(path)}`} disabled={disabled}>{children}</Link>
+      <Link to={`/photos${slash(path)}`} {...rest}>{children}</Link>
     );
   }
 }

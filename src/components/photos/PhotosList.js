@@ -5,6 +5,7 @@ import PhotoImage from '../photo/PhotoImage';
 import PhotoDate from '../photo/PhotoDate';
 import PhotoLink from '../photo/PhotoLink';
 import PhotoTitle from '../photo/PhotoTitle';
+import Media from 'rebass/dist/Media';
 
 export default class PhotosList extends Component {
   static propTypes = {
@@ -14,20 +15,23 @@ export default class PhotosList extends Component {
 
   render () {
     return (
-      <ul>
-        {this.props.photos.map((photo) => {
-          return (
-            <li key={photo.id}>
-              <PhotoLink path={photo.id}>
-                <PhotoImage {...photo} type={this.props.type} />
-                <PhotoDate {...photo} /> - <PhotoTitle {...photo} />
-              </PhotoLink>
-              <p>Comments: {photo.comments.count}</p>
-              <p>Likes: {photo.likes.count}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <div>
+        {this.props.photos.map((photo) =>
+          <Media
+            key={photo.id}
+            middle={true}
+            image={<PhotoImage images={photo.images} type={this.props.type} />}
+          >
+            <p><PhotoLink path={photo.id}><PhotoDate createdTime={photo.createdTime} /></PhotoLink></p>
+            <p><PhotoTitle caption={photo.caption} /></p>
+            <p>
+              Comments: {photo.comments.count}
+              {' '}
+              Likes: {photo.likes.count}
+            </p>
+          </Media>
+        )}
+      </div>
     );
   }
 }

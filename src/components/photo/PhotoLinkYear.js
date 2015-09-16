@@ -13,10 +13,10 @@ export default class PhotoLinkYear extends Component {
   }
 
   render () {
-    const {createdTime, year, path} = this.props;
+    const {createdTime, year, path, ...rest} = this.props;
     const mYear = createdTime || path ? moment(propsToDate({createdTime, path})).format('YYYY') : year;
     return (
-      <PhotoLink path={mYear}>{`Other photos from ${mYear}`}</PhotoLink>
+      <PhotoLink path={mYear} {...rest}>{mYear}</PhotoLink>
     );
   }
 }

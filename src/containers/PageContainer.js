@@ -1,9 +1,10 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
+import Section from 'rebass/dist/Section';
+import SectionHeader from 'rebass/dist/SectionHeader';
 import assign from 'lodash/object/assign';
-import Loading from './Loading';
-import PageError from './PageError';
+import PageError from '../components/PageError';
 
 export default class PageContainer extends Component {
   static propTypes = {
@@ -30,16 +31,25 @@ export default class PageContainer extends Component {
 
     if (error) {
       return (
-        <PageError error={error} />
+        <Section>
+          <SectionHeader title='Error' />
+          <PageError error={error} />
+        </Section>
       );
     }
 
     if (loading) {
       return (
-        <Loading />
+        <Section>
+          <SectionHeader title='Loading...' />
+        </Section>
       );
     }
 
-    return React.createElement(component, assign(componentProps, data));
+    return (
+      <Section>
+        {React.createElement(component, assign(componentProps, data))}
+      </Section>
+    );
   }
 }

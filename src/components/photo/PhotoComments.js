@@ -11,14 +11,14 @@ export default class PhotoComments extends Component {
   render () {
     const {count, data} = this.props;
     return (
-      <div>
+      <span>
         <span>{`${count} comments`}</span>
         <ul>
           {data.map((comment) =>
             <li key={comment.id}>{`${comment.from.username}: ${comment.text}`}</li>
           )}
         </ul>
-      </div>
+      </span>
     );
   }
 }

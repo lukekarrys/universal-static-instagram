@@ -10,6 +10,7 @@ import PhotoLink from '../photo/PhotoLink';
 import PhotoLinkYear from '../photo/PhotoLinkYear';
 import PhotoLinkMonth from '../photo/PhotoLinkMonth';
 import {propsToDate} from '../../helpers/date';
+import SectionHeader from 'rebass/dist/SectionHeader';
 
 const formatPath = (path, format) => moment(propsToDate({path})).format(format);
 
@@ -46,7 +47,7 @@ export default class PhotosBy extends Component {
       return [
         <PageLink page={previous} disabled={!previous}>Prev</PageLink>,
         <PageLink page={next} disabled={!next}>Next</PageLink>,
-        <PageLink>All pages</PageLink>
+        <PageLink className='btn btn-outline'>All pages</PageLink>
       ];
     case 'tag':
       return [
@@ -73,9 +74,15 @@ export default class PhotosBy extends Component {
 
     return (
       <div>
-        <h1>{title}</h1>
+        <SectionHeader title={title} />
         <PhotosList photos={photos} type='thumbnail' />
-        <ul>{links.map((link, index) => <li key={index}>{link}</li>)}</ul>
+        <div className='flex flex-wrap'>
+          {links.map((link, index) =>
+            <div key={index} className='mb2 px1'>
+              {React.cloneElement(link, {className: 'btn btn-outline'})}
+            </div>
+          )}
+        </div>
       </div>
     );
   }

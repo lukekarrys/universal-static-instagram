@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import PageContainer from '../components/PageContainer';
+import PageContainer from './PageContainer';
 import PagesList from '../components/page/PagesList';
 import {connect} from 'react-redux';
 import {loadPages} from '../actions';
@@ -21,14 +21,11 @@ export default class Pages extends Component {
     const {pages, loading, error, fetchKey} = this.props;
     const loadData = this.props.loadPages;
     return (
-      <div>
-        <h1>Pages</h1>
-        <PageContainer
-          component={PagesList}
-          data={{pages}}
-          {...{error, loading, loadData, fetchKey}}
-        />
-      </div>
+      <PageContainer
+        component={PagesList}
+        data={{pages}}
+        {...{error, loading, loadData, fetchKey}}
+      />
     );
   }
 }

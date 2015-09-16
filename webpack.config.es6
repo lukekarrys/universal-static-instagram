@@ -8,11 +8,6 @@ import OnBuildPlugin from 'on-build-webpack';
 import copyMedia from './server/data/copyMedia';
 
 const isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1;
-const replaceLoader = (match, replacer) => (l) => {
-  if (l && l.loader && l.loader.match(match)) {
-    l.loader = l.loader.replace(match, replacer);
-  }
-};
 
 const config = webpack({
   isDev,
@@ -22,7 +17,7 @@ const config = webpack({
   output: {hash: true},
   html: require('./server/build'),
   devServer: {noInfo: true},
-  define: {__DEVTOOLS__: false}
+  define: {__DEVTOOLS__: isDev}
 });
 
 // Dont display assets because it will contain tons of html and json assets
@@ -33,11 +28,6 @@ config.stats = {assets: false};
 // has finished compiling. This means in dev mode that the server needs to be
 // restarted if new images are fetched.
 config.plugins.push(new OnBuildPlugin(once(copyMedia)));
-
-// Happy, debuggable selectors in dev. Super compact selectors in prod.
-// Update any css-loader with the necessary loader params to do css module stuffs
-const cssModulesLoader = `?modules&localIdentName=${isDev ? '[name]___[local]___' : ''}[hash:base64:5]`;
-config.module.loaders.forEach(replaceLoader(/(^|!)(css-loader)($|!)/, `$1$2${cssModulesLoader}$3`));
 
 // Add custom cssnano for css-modules to existing postcss plugin
 config.postcss.push(cssnano({

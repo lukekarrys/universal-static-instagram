@@ -14,10 +14,10 @@ export default class PhotoLinkMonth extends Component {
   }
 
   render () {
-    const {createdTime, year, month, path} = this.props;
+    const {createdTime, year, month, path, ...rest} = this.props;
     const mMonth = moment(propsToDate({createdTime, year, month, path}));
     return (
-      <PhotoLink path={mMonth.format('YYYY/MM')}>{`Other photos from ${mMonth.format('MMMM YYYY')}`}</PhotoLink>
+      <PhotoLink path={mMonth.format('YYYY/MM')} {...rest}>{mMonth.format('MMMM YYYY')}</PhotoLink>
     );
   }
 }

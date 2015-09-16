@@ -29,7 +29,8 @@ export default class PhotoImage extends Component {
     return {
       width,
       height,
-      src: url
+      src: url,
+      style: {'max-width': 'none'}
     };
   }
 

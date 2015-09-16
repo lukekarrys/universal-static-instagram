@@ -29,6 +29,7 @@ const template = ({context, body, state}) => {
       <head>
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="/${context.css}">
       </head>
       <body><div id='container'>${body || ''}</div></body>
       <script>__INITIAL_STATE__=${JSON.stringify(state || {})}</script>

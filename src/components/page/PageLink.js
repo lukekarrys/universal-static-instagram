@@ -7,14 +7,13 @@ import slash from '../../helpers/slash';
 export default class PageLink extends Component {
   static propTypes = {
     page: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    disabled: PropTypes.bool
+    children: PropTypes.node.isRequired
   }
 
   render () {
-    const {page, children, disabled} = this.props;
+    const {page, children, ...rest} = this.props;
     return (
-      <Link to={`/pages${slash(page)}`} disabled={disabled}>{children}</Link>
+      <Link to={`/pages${slash(page)}`} {...rest}>{children}</Link>
     );
   }
 }

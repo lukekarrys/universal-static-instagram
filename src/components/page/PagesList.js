@@ -10,11 +10,13 @@ export default class PagesList extends Component {
 
   render () {
     return (
-      <ul>
+      <div className='flex flex-wrap'>
         {this.props.pages.map((page) =>
-          <li key={page.id}><PageLink page={page.id}>{page.name}</PageLink></li>
+          <div className='px1 mt2' key={page.id}>
+            <PageLink page={page.id} className='btn btn-outline'>{page.name}</PageLink>
+          </div>
         )}
-      </ul>
+      </div>
     );
   }
 }

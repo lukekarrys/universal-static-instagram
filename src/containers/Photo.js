@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import PageContainer from '../components/PageContainer';
+import PageContainer from './PageContainer';
 import PhotoDetail from '../components/photo/PhotoDetail';
 import {connect} from 'react-redux';
 import {loadPhoto} from '../actions';

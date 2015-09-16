@@ -15,10 +15,10 @@ export default class PhotoLinkDay extends Component {
   }
 
   render () {
-    const {createdTime, year, month, day, path} = this.props;
+    const {createdTime, year, month, day, path, ...rest} = this.props;
     const mDay = moment(propsToDate({createdTime, year, month, day, path}));
     return (
-      <PhotoLink path={mDay.format('YYYY/MM/DD')}>{`Other photos from ${mDay.format('MMMM D YYYY')}`}</PhotoLink>
+      <PhotoLink path={mDay.format('YYYY/MM/DD')} {...rest}>{mDay.format('MMMM D YYYY')}</PhotoLink>
     );
   }
 }

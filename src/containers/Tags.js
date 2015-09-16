@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import PageContainer from '../components/PageContainer';
+import PageContainer from './PageContainer';
 import TagsList from '../components/tag/TagsList';
 import {connect} from 'react-redux';
 import {loadTags} from '../actions';
@@ -21,14 +21,11 @@ export default class Tags extends Component {
     const {tags, loading, error, fetchKey} = this.props;
     const loadData = this.props.loadTags;
     return (
-      <div>
-        <h1>Tags</h1>
-        <PageContainer
-          component={TagsList}
-          data={{tags}}
-          {...{error, loading, loadData, fetchKey}}
-        />
-      </div>
+      <PageContainer
+        component={TagsList}
+        data={{tags}}
+        {...{error, loading, loadData, fetchKey}}
+      />
     );
   }
 }

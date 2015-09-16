@@ -8,15 +8,14 @@ import slash from '../../helpers/slash';
 export default class TagLink extends Component {
   static propTypes = {
     tag: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    disabled: PropTypes.bool
+    children: PropTypes.node.isRequired
   }
 
   render () {
-    const {tag, children, disabled} = this.props;
+    const {tag, children, ...rest} = this.props;
     const tagSlug = tag ? slug(tag, {lower: true}) : tag;
     return (
-      <Link to={`/tags${slash(tagSlug)}`} disabled={disabled}>{children}</Link>
+      <Link to={`/tags${slash(tagSlug)}`} {...rest}>{children}</Link>
     );
   }
 }

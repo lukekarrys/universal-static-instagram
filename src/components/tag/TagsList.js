@@ -10,11 +10,13 @@ export default class TagsList extends Component {
 
   render () {
     return (
-      <ul>
+      <div className='flex flex-wrap flex-justify'>
         {this.props.tags.map((tag) =>
-          <li key={tag.id}><TagLink tag={tag.id}>{tag.name}</TagLink></li>
+          <div className='px1 mt2' key={tag.id}>
+            <TagLink tag={tag.id} className='btn btn-outline'>{tag.name}</TagLink>
+          </div>
         )}
-      </ul>
+      </div>
     );
   }
 }
