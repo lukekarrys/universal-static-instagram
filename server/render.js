@@ -6,13 +6,14 @@ import {match} from 'redux-react-router/lib/server';
 import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
-import createStore from '../src/store/server';
 import * as ACTIONS from '../src/actions';
 import Root from '../src/Root';
+import createStore from '../src/store';
+import routes from '../src/routes';
 import debugThe from 'debug';
 
 const debug = debugThe('usi:render');
-
+const finalCreateStore = createStore({router: {routes}});
 const successActions = {
   photo: ACTIONS.PHOTO_SUCCESS,
   photos: ACTIONS.PHOTOS_SUCCESS,
@@ -49,17 +50,19 @@ export default ({context, path, data = null, key = null}, done) => {
   debug(`Path key ${pathKey}`);
   debug(`Has data ${!!data}`);
 
-  const store = createStore();
+  const store = finalCreateStore();
 
-  // Dispatch action with initial data
-  store.dispatch({
-    type: actionType || null,
-    key: pathKey,
-    ...normalize({json: data, key})
-  });
+  // Dispatch action with initial data if we have one
+  if (actionType) {
+    store.dispatch({
+      type: actionType,
+      key: pathKey,
+      ...normalize({json: data, key})
+    });
+  }
 
   // Use redux-react-router to match location and dispatch that to the store
-  // and then render it all
+  // and then get the page rendered to a string
   store.dispatch(match(location.pathname, (err) => {
     if (err) {
       debug(`Store dispatch matching location err ${err}`);

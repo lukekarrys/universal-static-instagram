@@ -18,7 +18,7 @@ export default class PhotoComments extends Component {
 
   name () {
     const {name} = this.props;
-    return name ? name : '';
+    return name || '';
   }
 
   render () {

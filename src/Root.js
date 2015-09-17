@@ -7,17 +7,18 @@ import {Provider} from 'react-redux';
 export default class Root extends Component {
   static propTypes = {
     store: React.PropTypes.object.isRequired,
-    routes: React.PropTypes.object,
-    debugger: React.PropTypes.element
+    routes: React.PropTypes.element,
+    children: React.PropTypes.element
   }
 
   render () {
+    const {store, routes, children} = this.props;
     return (
       <div>
-        <Provider store={this.props.store}>
-          {() => <ReduxRouter routes={this.props.routes} />}
+        <Provider store={store}>
+          {() => <ReduxRouter>{routes}</ReduxRouter>}
         </Provider>
-        {this.props.debugger}
+        {children}
       </div>
     );
   }

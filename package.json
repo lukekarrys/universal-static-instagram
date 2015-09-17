@@ -96,7 +96,7 @@
     "make.config": "babel-node server/config/make.js",
     "start": "npm run webpack.config && webpack-dev-server --progress",
     "static": "http-server ./public -p 8080",
-    "validate": "npm ls",
+    "validate": "npm ls >/dev/null",
     "webpack.config": "babel webpack.config.es6 --out-file webpack.config.js"
   }
 }
