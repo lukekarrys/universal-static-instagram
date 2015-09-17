@@ -91,7 +91,7 @@
     "deploy.gh": "git-directory-deploy --directory public",
     "deploy.surge": "surge public",
     "divshot": "divshot",
-    "fetch.data": "babel-node server/data/fetch.js",
+    "fetch.data": "DEBUG=instagram-download:* babel-node server/data/fetch.js",
     "lint": "eslint --ignore-path .gitignore --ext .js,.es6 .",
     "make.config": "babel-node server/config/make.js",
     "start": "npm run webpack.config && webpack-dev-server --progress",
