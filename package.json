@@ -9,7 +9,6 @@
   "dependencies": {
     "andlog": "^1.0.0",
     "basscss": "^7.0.4",
-    "history": "^1.9.1",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "normalizr": "^1.0.0",
@@ -92,6 +91,7 @@
     "deploy.surge": "surge public",
     "divshot": "divshot",
     "fetch.data": "babel-node server/data/fetch.js",
+    "debug.fetch.data": "DEBUG=instagram-download:* babel-node server/data/fetch.js",
     "lint": "eslint --ignore-path .gitignore --ext .js,.es6 .",
     "make.config": "babel-node server/config/make.js",
     "start": "npm run webpack.config && webpack-dev-server --progress",
