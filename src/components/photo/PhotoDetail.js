@@ -12,6 +12,7 @@ import PhotoLikes from './PhotoLikes';
 import PhotoComments from './PhotoComments';
 import PhotoLocation from './PhotoLocation';
 import TagLink from '../tag/TagLink';
+import Links from '../ui/Links';
 
 export default class PhotoDetail extends Component {
   static propTypes = {
@@ -38,6 +39,8 @@ export default class PhotoDetail extends Component {
 
   render () {
     const {photo} = this.props;
+    const links = this.getLinks();
+
     return (
       <div>
         <h1><PhotoTitle {...photo} /></h1>
@@ -46,13 +49,7 @@ export default class PhotoDetail extends Component {
         <p><PhotoLikes {...photo.likes} /></p>
         <p><PhotoComments {...photo.comments} /></p>
         <p><PhotoLocation {...photo.location} /></p>
-        <div className='flex flex-wrap'>
-          {this.getLinks().map((link, index) =>
-            <div key={index} className='mb2 px1'>
-              {React.cloneElement(link, {className: 'btn btn-outline'})}
-            </div>
-          )}
-        </div>
+        <Links links={links} />
       </div>
     );
   }

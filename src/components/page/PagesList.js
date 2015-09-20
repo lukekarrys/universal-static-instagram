@@ -2,6 +2,7 @@
 
 import React, {Component, PropTypes} from 'react';
 import PageLink from './PageLink';
+import Links from '../ui/Links';
 
 export default class PagesList extends Component {
   static propTypes = {
@@ -9,14 +10,10 @@ export default class PagesList extends Component {
   }
 
   render () {
+    const {pages} = this.props;
+
     return (
-      <div className='flex flex-wrap'>
-        {this.props.pages.map((page) =>
-          <div className='px1 mt2' key={page.id}>
-            <PageLink page={page.id} className='btn btn-outline'>{page.name}</PageLink>
-          </div>
-        )}
-      </div>
+      <Links links={pages.map((page) => <PageLink page={page.id}>{page.name}</PageLink>)} />
     );
   }
 }

@@ -9,6 +9,7 @@ import PageLink from '../page/PageLink';
 import PhotoLink from '../photo/PhotoLink';
 import PhotoLinkYear from '../photo/PhotoLinkYear';
 import PhotoLinkMonth from '../photo/PhotoLinkMonth';
+import Links from '../ui/Links';
 import {propsToDate} from '../../helpers/date';
 import SectionHeader from 'rebass/dist/SectionHeader';
 
@@ -76,13 +77,7 @@ export default class PhotosBy extends Component {
       <div>
         <SectionHeader title={title} />
         <PhotosList photos={photos} type='thumbnail' />
-        <div className='flex flex-wrap'>
-          {links.map((link, index) =>
-            <div key={index} className='mb2 px1'>
-              {React.cloneElement(link, {className: 'btn btn-outline'})}
-            </div>
-          )}
-        </div>
+        <Links links={links} />
       </div>
     );
   }
