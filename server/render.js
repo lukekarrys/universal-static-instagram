@@ -2,7 +2,7 @@
 
 import React from 'react';
 import createLocation from 'history/lib/createLocation';
-import {match} from 'redux-react-router/lib/server';
+import {match} from 'redux-router/server';
 import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
@@ -61,7 +61,7 @@ export default ({context, path, data = null, key = null}, done) => {
     });
   }
 
-  // Use redux-react-router to match location and dispatch that to the store
+  // Use redux-router to match location and dispatch that to the store
   // and then get the page rendered to a string
   store.dispatch(match(location.pathname, (err) => {
     if (err) {

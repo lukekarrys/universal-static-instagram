@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {ReduxRouter} from 'redux-react-router';
+import {ReduxRouter} from 'redux-router';
 import {Provider} from 'react-redux';
 
 export default class Root extends Component {

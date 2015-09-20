@@ -1,7 +1,7 @@
 'use strict';
 
 import {combineReducers} from 'redux';
-import {routerStateReducer} from 'redux-react-router';
+import {routerStateReducer} from 'redux-router';
 import merge from 'lodash/object/merge';
 import includes from 'lodash/collection/includes';
 import * as ACTIONS from '../actions';

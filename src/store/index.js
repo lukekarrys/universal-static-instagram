@@ -1,8 +1,8 @@
 'use strict';
 
 import {compose, createStore, applyMiddleware} from 'redux';
-import {reduxReactRouter as reduxReactRouterServer} from 'redux-react-router/lib/server';
-import {reduxReactRouter} from 'redux-react-router';
+import {reduxReactRouter as reduxReactRouterServer} from 'redux-router/server';
+import {reduxReactRouter} from 'redux-router';
 import partial from 'lodash/function/partial';
 import thunk from 'redux-thunk';
 import api from '../helpers/api';
