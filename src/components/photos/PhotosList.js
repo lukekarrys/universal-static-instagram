@@ -17,19 +17,20 @@ export default class PhotosList extends Component {
     return (
       <div>
         {this.props.photos.map((photo) =>
-          <Media
-            key={photo.id}
-            middle={true}
-            image={<PhotoImage images={photo.images} type={this.props.type} />}
-          >
-            <p><PhotoLink path={photo.id}><PhotoDate createdTime={photo.createdTime} /></PhotoLink></p>
-            <p><PhotoTitle caption={photo.caption} /></p>
-            <p>
-              Comments: {photo.comments.count}
-              {' '}
-              Likes: {photo.likes.count}
-            </p>
-          </Media>
+          <div className='mb2' key={photo.id}>
+            <Media
+              middle={true}
+              image={<PhotoImage images={photo.images} type={this.props.type} />}
+            >
+              <p><PhotoLink path={photo.id}><PhotoDate createdTime={photo.createdTime} /></PhotoLink></p>
+              <p><PhotoTitle caption={photo.caption} /></p>
+              <p>
+                Comments: {photo.comments.count}
+                {' '}
+                Likes: {photo.likes.count}
+              </p>
+            </Media>
+          </div>
         )}
       </div>
     );

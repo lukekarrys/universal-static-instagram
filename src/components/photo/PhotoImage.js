@@ -6,7 +6,8 @@ const prefix = '/media/';
 export default class PhotoImage extends Component {
   static propTypes = {
     images: PropTypes.object.isRequired,
-    type: PropTypes.oneOf(['thumbnail', 'low', 'standard']).isRequired
+    type: PropTypes.oneOf(['thumbnail', 'low', 'standard']).isRequired,
+    style: PropTypes.object
   }
 
   imageName () {
@@ -16,27 +17,23 @@ export default class PhotoImage extends Component {
       : type;
   }
 
-  imageProps () {
-    const image = this.props.images[this.imageName()];
+  imageSrc () {
+    const imageName = this.imageName();
+    const image = this.props.images[imageName];
 
-    const {height, width} = image;
     let {url} = image;
 
     if (prefix) {
       url = url.replace(/https?:\/\//, prefix);
     }
 
-    return {
-      width,
-      height,
-      src: url,
-      style: {maxWidth: 'none'}
-    };
+    return url;
   }
 
   render () {
+    const {style} = this.props;
     return (
-      <img {...this.imageProps()} />
+      <img src={this.imageSrc()} style={style} />
     );
   }
 }

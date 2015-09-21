@@ -13,7 +13,7 @@ export default class Links extends Component {
     return (
       <div className='flex flex-wrap mxn1'>
         {links.map((link, index) =>
-          <div key={index} className='mt2 px1'>
+          <div key={index} className='mb2 px1'>
             {React.cloneElement(link, {className: 'btn btn-outline'})}
           </div>
         )}
