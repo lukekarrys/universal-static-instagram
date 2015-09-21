@@ -6,20 +6,21 @@ import {Link} from 'react-router';
 export default class InternalLink extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
+    className: PropTypes.string,
     disabled: PropTypes.bool
   }
 
   render () {
-    const {disabled, children, ...rest} = this.props;
+    const {disabled, children, className, ...rest} = this.props;
 
     if (disabled) {
       return (
-        <a className='is-disabled' disabled={true} {...rest}>{children}</a>
+        <a style={{cursor: 'default'}} className={`${className} is-disabled`} {...rest}>{children}</a>
       );
     }
 
     return (
-      <Link {...rest}>{children}</Link>
+      <Link className={className} {...rest}>{children}</Link>
     );
   }
 }
