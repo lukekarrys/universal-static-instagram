@@ -16,7 +16,7 @@ export default class App extends Component {
     return (
       <div>
         <Toolbar>
-          <Link to='/' className='NavItem btn'>USI</Link>
+          <Link to='/' className='NavItem btn'>Home</Link>
           <Link to='/tags' className='NavItem btn'>Tags</Link>
           <Link to='/pages' className='NavItem btn'>Pages</Link>
         </Toolbar>
@@ -24,11 +24,6 @@ export default class App extends Component {
           <Section>{this.props.children}</Section>
           <Footer>
             <div className='flex'>
-              <div className='flex-auto px2'>
-                Created by
-                {' '}
-                <a href='https://github.com/lukekarrys'>lukekarrys</a>
-              </div>
               <div className='flex-auto right-align px2'>
                 Powered by
                 {' '}
