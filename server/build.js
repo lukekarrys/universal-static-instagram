@@ -18,7 +18,7 @@ const toPhotosList = (obj) => {
     id: photo.id,
     caption: photo.caption,
     likes: {count: photo.likes.count || 0},
-    comments: {count: photo.likes.comments || 0}
+    comments: {count: photo.comments.count || 0}
   }));
   return obj;
 };
