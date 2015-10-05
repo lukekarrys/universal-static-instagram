@@ -3,13 +3,17 @@ universal-static-instagram
 
 **Previously [`jekyll-instagram`](https://github.com/lukekarrys/jekyll-instagram/tree/1da67ca095902c2241753f3722c7a991a39d185c)**
 
+
 ## TL;DR
 
 1. Fetch Instagram data
 2. Build HTML and [Universal JavaScript](https://medium.com/@mjackson/universal-javascript-4761051b7ae9)
 3. Deploy static files
 
+
 ## What is this?
+
+[Demo](http://insta.lukelov.es)
 
 Way back when, Instagram was iOS only and didn't have a web interface. I wanted one so I built some tools that would download the JSON and images and would publish them as a static site. This site idly for the most part while Instagram created amazing interfaces on all platforms.
 
