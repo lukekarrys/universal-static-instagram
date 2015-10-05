@@ -89,7 +89,7 @@ Surge is really great. If you don't have an account, running this command will p
 ```sh
 npm run deploy.gh
 # Or deploy to a different repository
-npm run deploy.gh -- --repo git@github.com:lukekarrys/usi.website.git
+npm run deploy.gh -- --repo git@github.com:lukekarrys/insta.lukelov.es.git
 ```
 
 Since you already have this forked on GitHub, and every path has a matching built file, you can use GitHub Pages, which is pretty neat. Running the above command will push the built site up to your GitHub fork on the `gh-pages` branch. If you picked a domain when running `npm run make.config` it will create a [`CNAME` file](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/#creating-and-committing-a-cname-file) for you. See the [GitHub Pages help docs](https://help.github.com/categories/github-pages-basics/) for more information.
