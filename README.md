@@ -30,7 +30,7 @@ So I decided to rewrite it using [`react`](https://facebook.github.io/react/), [
 - `react` + `react-router` takeover client-side on load
 - Can be self hosted, including images
 - Easy to fetch latest or refresh existing Instagram data/media
-- Easy deployment to any static hosting including [Surge](https://surge.sh/), [GitHub Pages](https://pages.github.com/), or [Divshot](https://divshot.com/)
+- Easy deployment to any static hosting including [Surge](https://surge.sh/) or [GitHub Pages](https://pages.github.com/)
 
 
 ## Usage
@@ -101,16 +101,6 @@ Since you already have this forked on GitHub, and every path has a matching buil
 You can also deploy to a different repository by using cli argument: `--repo git@github.com:USERNAME/REPO_NAME.git`. This uses [`git-directory-deploy`](https://github.com/lukekarrys/git-directory-deploy) under the hood, so check out the other available arguments in the [documentation](https://github.com/lukekarrys/git-directory-deploy#usage).
 
 *Note: you will first need to create a `gh-pages` branch on your forked repo.*
-
-#### [Divshot](https://divshot.com/)
-
-```sh
-npm run divshot -- login
-# Change the 'name' in divshot.json
-npm run deploy.divshot
-```
-
-Divshot is another static hosting platform that works well with this setup. It's already specified as a dev dependency so if you run the first command you will get prompted to login to Divshot (or make an account) and then you'll be authorized to run the second command. Divshot gets its config from a `divshot.json` file which has been created in the repo. You'll need to change the `name` to something else before you deploy.
 
 ### Re-fetching Data
 

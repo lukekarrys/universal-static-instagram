@@ -38,7 +38,6 @@
     "css-loader": "^0.19.0",
     "cssnano": "^3.2.0",
     "debug": "^2.2.0",
-    "divshot-cli": "^1.10.5",
     "eslint": "^1.6.0",
     "eslint-plugin-classes": "0.0.4",
     "eslint-plugin-react": "^3.5.1",
@@ -90,10 +89,8 @@
   },
   "scripts": {
     "build": "npm run webpack.config && webpack --progress",
-    "deploy.divshot": "npm run divshot -- push",
     "deploy.gh": "git-directory-deploy --directory public",
     "deploy.surge": "surge public",
-    "divshot": "divshot",
     "fetch.data": "DEBUG=instagram-download:* babel-node server/data/fetch.js",
     "lint": "eslint --ignore-path .gitignore --ext .js,.es6 .",
     "make.config": "babel-node server/config/make.js",
