@@ -6,11 +6,12 @@ import isError from 'lodash/lang/isError';
 import slash from './slash';
 import normalize from './normalize';
 
+const SUCCESS_CODE = 200;
 const fetchAPI = ({endpoint, key}, cb) => {
   xhr({
     uri: `/json${slash(endpoint)}.json`
   }, (__, resp, body) => {
-    if (resp.statusCode !== 200) {
+    if (resp.statusCode !== SUCCESS_CODE) {
       return cb(new Error(body.message));
     }
 

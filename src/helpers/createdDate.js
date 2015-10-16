@@ -1,3 +1,5 @@
 'use strict';
 
-export default (time) => new Date(Number(time) * 1000);
+const MS = 1000;
+
+export default (time) => new Date(Number(time) * MS);

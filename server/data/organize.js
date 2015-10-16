@@ -11,6 +11,7 @@ import {read} from 'instagram-download';
 import {dateParts} from '../../src/helpers/date';
 import slug from '../../src/helpers/slug';
 
+const PAGINATION = 10;
 const merge = (...parts) => assign(...[{}, ...parts]);
 const toId = ({createdTime, id}) => {
   const {day, month, year} = dateParts({createdTime});
@@ -116,7 +117,7 @@ class ByPage extends KeySets {
   }
 
   add (index, id) {
-    const page = Math.floor(index / 10);
+    const page = Math.floor(index / PAGINATION);
     super.add(page + 1, id);
   }
 }

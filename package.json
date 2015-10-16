@@ -25,7 +25,7 @@
     "zero-fill": "^2.2.1"
   },
   "devDependencies": {
-    "@lukekarrys/eslint-config": "^1.0.17",
+    "@lukekarrys/eslint-config": "^1.0.18",
     "async": "^1.4.2",
     "autoprefixer": "^6.0.3",
     "babel": "^5.8.23",
@@ -38,8 +38,8 @@
     "css-loader": "^0.19.0",
     "cssnano": "^3.2.0",
     "debug": "^2.2.0",
-    "eslint": "^1.6.0",
-    "eslint-plugin-classes": "0.0.4",
+    "eslint": "^1.7.1",
+    "eslint-plugin-classes": "^0.1.0",
     "eslint-plugin-react": "^3.5.1",
     "file-loader": "^0.8.4",
     "git-directory-deploy": "^1.2.1",

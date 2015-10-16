@@ -3,6 +3,8 @@
 import React, {Component, PropTypes} from 'react';
 import pluck from 'lodash/collection/pluck';
 
+const MAX_USERNAME_LIKES = 10;
+
 export default class PhotoLikes extends Component {
   static propTypes = {
     count: PropTypes.number,
@@ -17,7 +19,7 @@ export default class PhotoLikes extends Component {
   render () {
     const {count} = this.props;
 
-    if (count <= 10) {
+    if (count <= MAX_USERNAME_LIKES) {
       return (
         <span>{`${count} likes ${this.users()}`}</span>
       );
