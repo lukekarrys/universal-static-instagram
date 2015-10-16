@@ -25,7 +25,7 @@
     "zero-fill": "^2.2.1"
   },
   "devDependencies": {
-    "@lukekarrys/eslint-config": "^1.0.18",
+    "@lukekarrys/eslint-config": "^1.0.20",
     "async": "^1.4.2",
     "autoprefixer": "^6.0.3",
     "babel": "^5.8.23",
@@ -39,6 +39,7 @@
     "cssnano": "^3.2.0",
     "debug": "^2.2.0",
     "eslint": "^1.7.1",
+    "eslint-plugin-arrow-function": "github:lukekarrys/eslint-plugin-arrow-function",
     "eslint-plugin-classes": "^0.1.0",
     "eslint-plugin-react": "^3.5.1",
     "file-loader": "^0.8.4",
