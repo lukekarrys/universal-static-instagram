@@ -47,7 +47,7 @@ export default class PhotoDetail extends Component {
         <h3><PhotoDate {...photo} /></h3>
         <PhotoImage {...photo} type='standard' />
         <p><PhotoLikes {...photo.likes} /></p>
-        <p><PhotoComments {...photo.comments} /></p>
+        <PhotoComments {...photo.comments} />
         <p><PhotoLocation {...photo.location} /></p>
         <Links links={links} />
       </div>

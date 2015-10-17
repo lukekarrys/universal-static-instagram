@@ -16,7 +16,7 @@ export default class Root extends Component {
     return (
       <div>
         <Provider store={store}>
-          {() => <ReduxRouter>{routes}</ReduxRouter>}
+          <ReduxRouter>{routes}</ReduxRouter>
         </Provider>
         {children}
       </div>

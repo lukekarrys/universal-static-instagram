@@ -3,6 +3,7 @@
 'use strict';
 
 import React from 'react';
+import {render} from 'react-dom';
 import routes from './routes';
 import createStore from './store/client';
 import Root from './Root';
@@ -22,4 +23,4 @@ if (__DEVTOOLS__) {
   );
 }
 
-React.render(<Root {...{store, routes, children}} />, container);
+render(<Root {...{store, routes, children}} />, container);

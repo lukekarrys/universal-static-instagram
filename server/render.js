@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import {renderToString} from 'react-dom/server';
 import createLocation from 'history/lib/createLocation';
 import {match} from 'redux-router/server';
 import slash from '../src/helpers/slash';
@@ -72,7 +73,7 @@ export default ({context, path, data = null, key = null}, done) => {
     done(null, template({
       context,
       state: store.getState(),
-      body: React.renderToString(<Root store={store} />)
+      body: renderToString(<Root store={store} />)
     }));
   }));
 };
