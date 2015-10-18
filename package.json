@@ -26,7 +26,7 @@
     "zero-fill": "^2.2.1"
   },
   "devDependencies": {
-    "@lukekarrys/eslint-config": "^1.0.20",
+    "@lukekarrys/eslint-config": "^1.0.21",
     "async": "^1.4.2",
     "autoprefixer": "^6.0.3",
     "babel": "^5.8.23",
@@ -42,7 +42,7 @@
     "eslint": "^1.7.1",
     "eslint-plugin-arrow-function": "github:lukekarrys/eslint-plugin-arrow-function",
     "eslint-plugin-classes": "^0.1.0",
-    "eslint-plugin-react": "^3.5.1",
+    "eslint-plugin-react": "^3.6.1",
     "git-directory-deploy": "^1.3.0",
     "hjs-webpack": "^3.0.0",
     "http-server": "^0.8.5",
