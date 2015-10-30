@@ -22,8 +22,8 @@ const successActions = {
   pages: ACTIONS.PAGES_SUCCESS
 };
 
-const template = ({context, body, state}) => {
-  return `
+const template = ({context, body, state}) =>
+  `
     <!DOCTYPE html>
     <html>
       <head>
@@ -36,7 +36,6 @@ const template = ({context, body, state}) => {
       <script src="/${context.main}"></script>
     </html>
   `.replace(/\n\s*/g, '');
-};
 
 export default ({context, path, data = null, key = null}, done) => {
   // During dev this is called with only a context to just return an empty template
