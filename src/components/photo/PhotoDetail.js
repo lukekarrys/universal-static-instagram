@@ -28,12 +28,12 @@ export default class PhotoDetail extends Component {
   getLinks () {
     const {photo: {createdTime, tags, filter}, previous, next} = this.props;
     return [
-      <PhotoLink path={previous} disabled={!previous}>Previous</PhotoLink>,
-      <PhotoLink path={next} disabled={!next}>Next</PhotoLink>,
-      <PhotoLinkYear createdTime={createdTime} />,
-      <PhotoLinkMonth createdTime={createdTime} />,
-      <PhotoLinkDay createdTime={createdTime} />,
-      ...[filter || 'Normal', ...tags].map((tag) => <TagLink tag={tag}>{tag}</TagLink>)
+      <PhotoLink path={previous} disabled={!previous} key={previous}>Previous</PhotoLink>,
+      <PhotoLink path={next} disabled={!next} key={next}>Next</PhotoLink>,
+      <PhotoLinkYear createdTime={createdTime} key={`year${createdTime}`} />,
+      <PhotoLinkMonth createdTime={createdTime} key={`month${createdTime}`} />,
+      <PhotoLinkDay createdTime={createdTime} key={`day${createdTime}`} />,
+      ...[filter || 'Normal', ...tags].map((tag) => <TagLink tag={tag} key={tag}>{tag}</TagLink>)
     ];
   }
 

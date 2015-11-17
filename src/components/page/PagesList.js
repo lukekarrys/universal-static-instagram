@@ -13,7 +13,7 @@ export default class PagesList extends Component {
     const {pages} = this.props;
 
     return (
-      <Links links={pages.map((page) => <PageLink page={page.id}>{page.name}</PageLink>)} />
+      <Links links={pages.map((page) => <PageLink page={page.id} key={page.id}>{page.name}</PageLink>)} />
     );
   }
 }

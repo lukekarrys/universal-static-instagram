@@ -46,24 +46,24 @@ export default class PhotosBy extends Component {
     switch (type) {
     case 'page':
       return [
-        <PageLink page={previous} disabled={!previous}>Prev</PageLink>,
-        <PageLink page={next} disabled={!next}>Next</PageLink>,
-        <PageLink className='btn btn-outline'>All pages</PageLink>
+        <PageLink page={previous} disabled={!previous} key={`page-${previous}`}>Prev</PageLink>,
+        <PageLink page={next} disabled={!next} key={`page-${next}`}>Next</PageLink>,
+        <PageLink className='btn btn-outline' key='page-all'>All pages</PageLink>
       ];
     case 'tag':
       return [
-        <TagLink tag={previous} disabled={!previous}>Prev</TagLink>,
-        <TagLink tag={next} disabled={!next}>Next</TagLink>,
-        <TagLink>Other tags</TagLink>
+        <TagLink tag={previous} disabled={!previous} key={`tag-${previous}`}>Prev</TagLink>,
+        <TagLink tag={next} disabled={!next} key={`tag-${next}`}>Next</TagLink>,
+        <TagLink key={`tag-other`}>Other tags</TagLink>
       ];
     case 'year':
     case 'month':
     case 'day':
       return [
-        <PhotoLink path={previous} disabled={!previous}>Previous</PhotoLink>,
-        <PhotoLink path={next} disabled={!next}>Next</PhotoLink>,
-        (type === 'month' || type === 'day') && <PhotoLinkYear path={name} />,
-        (type === 'day') && <PhotoLinkMonth path={name} />
+        <PhotoLink path={previous} disabled={!previous} key={`photo-${previous}`}>Previous</PhotoLink>,
+        <PhotoLink path={next} disabled={!next} key={`photo-${next}`}>Next</PhotoLink>,
+        (type === 'month' || type === 'day') && <PhotoLinkYear path={name} key={`photo-year-${name}`} />,
+        (type === 'day') && <PhotoLinkMonth path={name} key={`photo-month-${name}`} />
       ];
     }
   }
