@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {renderToString} from 'react-dom/server';
+import {renderToString, renderToStaticMarkup} from 'react-dom/server';
 import createLocation from 'history/lib/createLocation';
 import {match} from 'redux-router/server';
 import slash from '../src/helpers/slash';
@@ -13,6 +13,7 @@ import createStore from '../src/store';
 import routes from '../src/routes';
 import debugThe from 'debug';
 
+const noJS = process.env.USI_NOJS === 'true';
 const debug = debugThe('usi:render');
 const finalCreateStore = createStore({router: {routes}});
 const successActions = {
@@ -32,8 +33,8 @@ const template = ({context, body, state}) =>
         ${context.css ? `<link rel="stylesheet" href="/${context.css}">` : ''}
       </head>
       <body><div id='container'>${body || ''}</div></body>
-      <script>__INITIAL_STATE__=${JSON.stringify(state || {})}</script>
-      <script src="/${context.main}"></script>
+      ${noJS ? '' : `<script>__INITIAL_STATE__=${JSON.stringify(state || {})}</script>`}
+      ${noJS ? '' : `<script src="/${context.main}"></script>`}
     </html>
   `.replace(/\n\s*/g, '');
 
@@ -72,7 +73,7 @@ export default ({context, path, data = null, key = null}, done) => {
     done(null, template({
       context,
       state: store.getState(),
-      body: renderToString(<Root store={store} />)
+      body: (noJS ? renderToStaticMarkup : renderToString)(<Root store={store} />)
     }));
   }));
 };
