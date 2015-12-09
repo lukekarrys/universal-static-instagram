@@ -24,7 +24,7 @@ export default class PhotosBy extends Component {
     next: PropTypes.string
   }
 
-  getTitle () {
+  getTitle() {
     const {type, name} = this.props;
     switch (type) {
     case 'page':
@@ -40,7 +40,7 @@ export default class PhotosBy extends Component {
     }
   }
 
-  getLinks () {
+  getLinks() {
     const {type, previous, next, name} = this.props;
 
     switch (type) {
@@ -68,7 +68,7 @@ export default class PhotosBy extends Component {
     }
   }
 
-  render () {
+  render() {
     const {photos} = this.props;
     const title = this.getTitle();
     const links = compact(this.getLinks());

@@ -25,7 +25,7 @@ export default class PhotoDetail extends Component {
     })
   }
 
-  getLinks () {
+  getLinks() {
     const {photo: {createdTime, tags, filter}, previous, next} = this.props;
     return [
       <PhotoLink path={previous} disabled={!previous} key={previous}>Previous</PhotoLink>,
@@ -37,7 +37,7 @@ export default class PhotoDetail extends Component {
     ];
   }
 
-  render () {
+  render() {
     const {photo} = this.props;
     const links = this.getLinks();
 

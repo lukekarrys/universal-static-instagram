@@ -12,7 +12,7 @@ export default class App extends Component {
     children: React.PropTypes.element.isRequired
   }
 
-  render () {
+  render() {
     return (
       <div>
         <Toolbar>

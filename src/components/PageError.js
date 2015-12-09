@@ -10,7 +10,7 @@ export default class PageError extends Component {
     ])
   }
 
-  getErrorMessage () {
+  getErrorMessage() {
     const {error} = this.props;
     if (typeof error === 'string') return error;
     return error.stack ||
@@ -19,7 +19,7 @@ export default class PageError extends Component {
       'There was an error';
   }
 
-  render () {
+  render() {
     return (
       <pre>{this.getErrorMessage()}</pre>
     );

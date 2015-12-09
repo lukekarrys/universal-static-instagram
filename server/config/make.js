@@ -43,7 +43,7 @@ inquirer.prompt([
     name: 'user',
     message: `What is the username of the Instagram user?\n`,
     validate: userValidator,
-    filter: function filterUser (username) {
+    filter: function filterUser(username) {
       const done = this.async();
       const ig = instagram();
       ig.use(decamelizeKeys({clientId, clientSecret}));

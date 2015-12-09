@@ -14,7 +14,7 @@ export default class PhotoDate extends Component {
     dateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'
   }
 
-  render () {
+  render() {
     const date = createdDate(this.props.createdTime);
     return (
       <span>{moment(date).format(this.props.dateFormat)}</span>

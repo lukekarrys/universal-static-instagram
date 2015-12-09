@@ -11,7 +11,7 @@ export default class Root extends Component {
     children: React.PropTypes.element
   }
 
-  render () {
+  render() {
     const {store, routes, children} = this.props;
     return (
       <div>

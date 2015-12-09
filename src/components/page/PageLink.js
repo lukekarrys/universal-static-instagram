@@ -10,7 +10,7 @@ export default class PageLink extends Component {
     children: PropTypes.node.isRequired
   }
 
-  render () {
+  render() {
     const {page, children, ...rest} = this.props;
     return (
       <Link to={`/pages${slash(page)}`} {...rest}>{children}</Link>

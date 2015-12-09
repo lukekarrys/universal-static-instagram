@@ -14,7 +14,7 @@ export default class PhotoLinkDay extends Component {
     path: PropTypes.string
   }
 
-  render () {
+  render() {
     const {createdTime, year, month, day, path, ...rest} = this.props;
     const mDay = moment(propsToDate({createdTime, year, month, day, path}));
     return (

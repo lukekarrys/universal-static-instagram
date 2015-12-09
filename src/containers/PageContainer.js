@@ -13,17 +13,17 @@ export default class PageContainer extends Component {
     error: PropTypes.instanceOf(Error)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.loadData(this.props.fetchKey);
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.fetchKey !== this.props.fetchKey) {
       this.props.loadData(nextProps.fetchKey);
     }
   }
 
-  render () {
+  render() {
     const {loading, error, component} = this.props;
 
     if (error) {

@@ -17,7 +17,7 @@ let children = null;
 if (__DEVTOOLS__) {
   const {DebugPanel, DevTools, LogMonitor} = require('redux-devtools/lib/react');
   children = (
-    <DebugPanel left={true} right={true} bottom={true}>
+    <DebugPanel left right bottom>
       <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
     </DebugPanel>
   );

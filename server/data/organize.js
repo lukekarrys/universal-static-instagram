@@ -19,20 +19,20 @@ const toId = ({createdTime, id}) => {
 };
 
 class KeySets {
-  constructor (options = {}) {
+  constructor(options = {}) {
     this.options = options;
     this.values = {};
   }
 
-  comparator ({id}) {
+  comparator({id}) {
     return id;
   }
 
-  toObject (key, value) {
+  toObject(key, value) {
     return {id: key.toString(), ids: [], name: key.toString()};
   }
 
-  add (key, id) {
+  add(key, id) {
     if (this.values[key] === undefined) {
       this.values[key] = this.toObject(key, id);
     }
@@ -41,7 +41,7 @@ class KeySets {
     }
   }
 
-  getValues (photos) {
+  getValues(photos) {
     const sorted = sortBy(this.values, this.comparator).map(this.addItemPagination);
     return transform(sorted, (result, val) => {
       if (val.ids && photos) {
@@ -52,7 +52,7 @@ class KeySets {
     }, {});
   }
 
-  addItemPagination (values, index, list) {
+  addItemPagination(values, index, list) {
     const previous = index === 0 ? null : list[index - 1].id;
     const next = index === list.length - 1 ? null : list[index + 1].id;
     return merge(values, {previous, next});
@@ -60,74 +60,74 @@ class KeySets {
 }
 
 class ByTag extends KeySets {
-  toObject (key, id) {
+  toObject(key, id) {
     const parent = super.toObject.apply(this, arguments);
     return assign(parent, {id: slug(key), type: 'tag'});
   }
 
-  add (tags, id) {
+  add(tags, id) {
     tags.forEach((tag) => super.add(tag.indexOf('#') === 0 ? tag.slice(1) : tag, id));
   }
 }
 
 class ByDay extends KeySets {
-  toObject () {
+  toObject() {
     const parent = super.toObject.apply(this, arguments);
     return assign(parent, {type: 'day'});
   }
 
-  add (createdTime, id) {
+  add(createdTime, id) {
     const {day, month, year} = dateParts({createdTime});
     super.add(`${year}/${month}/${day}`, id);
   }
 }
 
 class ByMonth extends KeySets {
-  toObject () {
+  toObject() {
     const parent = super.toObject.apply(this, arguments);
     return assign(parent, {type: 'month'});
   }
 
-  add (createdTime, id) {
+  add(createdTime, id) {
     const {month, year} = dateParts({createdTime});
     super.add(`${year}/${month}`, id);
   }
 }
 
 class ByYear extends KeySets {
-  toObject () {
+  toObject() {
     const parent = super.toObject.apply(this, arguments);
     return assign(parent, {type: 'year'});
   }
 
-  add (createdTime, id) {
+  add(createdTime, id) {
     const {year} = dateParts({createdTime});
     super.add(`${year}`, id);
   }
 }
 
 class ByPage extends KeySets {
-  comparator ({id}) {
+  comparator({id}) {
     return parseInt(id, 10);
   }
 
-  toObject () {
+  toObject() {
     const parent = super.toObject.apply(this, arguments);
     return assign(parent, {type: 'page'});
   }
 
-  add (index, id) {
+  add(index, id) {
     const page = Math.floor(index / PAGINATION);
     super.add(page + 1, id);
   }
 }
 
 class ById extends KeySets {
-  comparator ({photo}) {
+  comparator({photo}) {
     return Number(photo.createdTime);
   }
 
-  toObject (id, photo) {
+  toObject(id, photo) {
     return {id, photo};
   }
 }

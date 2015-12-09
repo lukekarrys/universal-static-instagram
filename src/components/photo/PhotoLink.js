@@ -10,7 +10,7 @@ export default class PhotoLink extends Component {
     path: PropTypes.string
   }
 
-  render () {
+  render() {
     const {children, path, ...rest} = this.props;
     return (
       <Link to={`/photos${slash(path)}`} {...rest}>{children}</Link>

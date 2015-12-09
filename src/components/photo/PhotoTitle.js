@@ -7,7 +7,7 @@ export default class PhotoTitle extends Component {
     caption: PropTypes.object
   }
 
-  render () {
+  render() {
     const {caption} = this.props;
     return (
       <span>{caption ? caption.text : 'Untitled Photo'}</span>

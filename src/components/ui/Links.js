@@ -7,7 +7,7 @@ export default class Links extends Component {
     links: PropTypes.arrayOf(PropTypes.element).isRequired
   }
 
-  render () {
+  render() {
     const {links} = this.props;
 
     return (

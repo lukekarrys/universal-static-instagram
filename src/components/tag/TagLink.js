@@ -11,7 +11,7 @@ export default class TagLink extends Component {
     children: PropTypes.node.isRequired
   }
 
-  render () {
+  render() {
     const {tag, children, ...rest} = this.props;
     const tagSlug = tag ? slug(tag, {lower: true}) : tag;
     return (

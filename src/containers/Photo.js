@@ -15,7 +15,7 @@ export default class Photo extends Component {
     next: PropTypes.string
   }
 
-  render () {
+  render() {
     const {photo, previous, next, ...rest} = this.props;
     const component = <PhotoDetail {...{photo, previous, next}} />;
     return (

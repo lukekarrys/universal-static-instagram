@@ -1,11 +1,12 @@
 'use strict';
 
-import 'babel/register';
+import 'babel-core/register';
 import webpack from 'hjs-webpack';
 import cssnano from 'cssnano';
 import once from 'lodash/function/once';
 import OnBuildPlugin from 'on-build-webpack';
 import copyMedia from './server/data/copyMedia';
+import serverBuild from './server/build';
 
 const isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1;
 
@@ -15,7 +16,7 @@ const config = webpack({
   out: 'public',
   clearBeforeBuild: true,
   output: {hash: true},
-  html: require('./server/build'),
+  html: serverBuild,
   devServer: {noInfo: true},
   define: {__DEVTOOLS__: false}
 });

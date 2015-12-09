@@ -10,7 +10,7 @@ export default class InternalLink extends Component {
     disabled: PropTypes.bool
   }
 
-  render () {
+  render() {
     const {disabled, children, className, ...rest} = this.props;
 
     if (disabled) {

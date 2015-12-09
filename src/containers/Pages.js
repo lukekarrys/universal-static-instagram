@@ -13,7 +13,7 @@ export default class Pages extends Component {
     pages: PropTypes.array.isRequired
   }
 
-  render () {
+  render() {
     const {pages, ...rest} = this.props;
     const component = <PagesList pages={pages} />;
     return (

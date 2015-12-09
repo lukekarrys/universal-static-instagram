@@ -10,14 +10,14 @@ export default class PhotoImage extends Component {
     style: PropTypes.object
   }
 
-  imageName () {
+  imageName() {
     const {type} = this.props;
     return type === 'low' || type === 'standard'
       ? `${type}Resolution`
       : type;
   }
 
-  imageSrc () {
+  imageSrc() {
     const imageName = this.imageName();
     const image = this.props.images[imageName];
 
@@ -30,7 +30,7 @@ export default class PhotoImage extends Component {
     return url;
   }
 
-  render () {
+  render() {
     const {style} = this.props;
     return (
       <img src={this.imageSrc()} style={style} />

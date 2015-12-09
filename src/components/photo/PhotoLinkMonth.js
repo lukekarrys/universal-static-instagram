@@ -13,7 +13,7 @@ export default class PhotoLinkMonth extends Component {
     path: PropTypes.string
   }
 
-  render () {
+  render() {
     const {createdTime, year, month, path, ...rest} = this.props;
     const mMonth = moment(propsToDate({createdTime, year, month, path}));
     return (

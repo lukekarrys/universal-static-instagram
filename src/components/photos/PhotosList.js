@@ -13,13 +13,13 @@ export default class PhotosList extends Component {
     type: PropTypes.string.isRequired
   }
 
-  render () {
+  render() {
     return (
       <div>
         {this.props.photos.map((photo) =>
           <div className='mb2' key={photo.id}>
             <Media
-              middle={true}
+              middle
               image={<PhotoImage images={photo.images} type={this.props.type} />}
             >
               <p><PhotoLink path={photo.id}><PhotoDate createdTime={photo.createdTime} /></PhotoLink></p>

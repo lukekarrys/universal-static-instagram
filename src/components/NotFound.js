@@ -6,7 +6,7 @@ import PageLink from './page/PageLink';
 import TagLink from './tag/TagLink';
 
 export default class NotFound extends Component {
-  render () {
+  render() {
     return (
       <div>
         <h1>Not Found</h1>

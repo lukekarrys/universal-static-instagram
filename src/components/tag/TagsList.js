@@ -9,7 +9,7 @@ export default class TagsList extends Component {
     tags: PropTypes.array.isRequired
   }
 
-  render () {
+  render() {
     const {tags} = this.props;
 
     return (

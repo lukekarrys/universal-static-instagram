@@ -11,19 +11,19 @@ export default class PhotoComments extends Component {
     name: PropTypes.string
   }
 
-  geo () {
+  getGeo() {
     const {latitude, longitude} = this.props;
     return latitude && longitude ? `${latitude}, ${longitude}` : '';
   }
 
-  name () {
+  getName() {
     const {name} = this.props;
     return name || '';
   }
 
-  render () {
-    const name = this.name();
-    const geo = this.geo();
+  render() {
+    const name = this.getGeo();
+    const geo = this.getName();
 
     if (!name && !geo) return null;
 

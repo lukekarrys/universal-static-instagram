@@ -8,7 +8,7 @@ export default class PhotoComments extends Component {
     data: PropTypes.array
   }
 
-  render () {
+  render() {
     const {count, data} = this.props;
     return (
       <span>
