@@ -74,14 +74,14 @@ export default (context, done) => organizeData({dir, user: CONFIG.user}, (dataEr
 
   // Save tags html and json files
   addTask('/tags/index.html', {tags: tagKeys}, 'tags');
-  each(tags, (obj) => addTask(`/tags/${obj.id}.html`, toPhotosList(obj), 'photos'));
+  each(tags, (obj) => addTask(`/tags/${obj.id}/index.html`, toPhotosList(obj), 'photos'));
 
   // Same for list of pages
   addTask('/pages/index.html', {pages: pageKeys}, 'pages');
-  each(pages, (obj) => addTask(`/pages/${obj.id}.html`, toPhotosList(obj), 'photos'));
+  each(pages, (obj) => addTask(`/pages/${obj.id}/index.html`, toPhotosList(obj), 'photos'));
 
   // And individual photos and date pages
-  each(ids, (obj) => addTask(`/photos/${obj.id}.html`, obj, 'photo'));
+  each(ids, (obj) => addTask(`/photos/${obj.id}/index.html`, obj, 'photo'));
   each(dates, (obj) => addTask(`/photos/${obj.id}/index.html`, toPhotosList(obj), 'photos'));
 
   // Run all the async taks and merge those paths with the non-async paths
