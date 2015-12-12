@@ -7,7 +7,6 @@
     "url": "https://github.com/lukekarrys/universal-static-instagram/issues"
   },
   "dependencies": {
-    "andlog": "^1.0.0",
     "basscss": "^7.0.4",
     "history": "1.13.x",
     "lodash": "^3.10.1",
@@ -89,14 +88,15 @@
   },
   "scripts": {
     "build": "npm run webpack.config && NODE_ENV=production webpack --progress",
+    "build.local": "USI_LOGGER=true npm run build",
     "build.nojs": "USI_NOJS=true npm run build && rimraf public/*.js && rimraf public/json/",
     "deploy.gh": "git-directory-deploy --directory public",
     "deploy.surge": "surge public",
     "fetch.data": "DEBUG=instagram-download:* babel-node server/data/fetch.js",
     "lint": "eslint --ignore-path .gitignore --ext .js,.es6 .",
     "make.config": "babel-node server/config/make.js",
-    "start": "npm run webpack.config && webpack-dev-server --progress",
-    "static": "http-server ./public -p 8080",
+    "start": "npm run webpack.config && USI_LOGGER=true webpack-dev-server --progress",
+    "start.static": "http-server ./public -p 8080",
     "validate": "rm -rf ./node_modules/redux-simple-router/node_modules/history && npm ls >/dev/null",
     "webpack.config": "babel webpack.config.es6 --out-file webpack.config.js"
   }

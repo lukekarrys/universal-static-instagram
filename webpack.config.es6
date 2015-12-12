@@ -9,6 +9,7 @@ import copyMedia from './server/data/copyMedia';
 import serverBuild from './server/build';
 
 const isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1;
+const {USI_DEVTOOLS, USI_LOGGER} = process.env;
 
 const config = webpack({
   isDev,
@@ -18,7 +19,10 @@ const config = webpack({
   output: {hash: true},
   html: serverBuild,
   devServer: {noInfo: true},
-  define: {__DEVTOOLS__: false}
+  define: {
+    __LOGGER__: USI_LOGGER === 'true' || isDev,
+    __DEVTOOLS__: USI_DEVTOOLS === 'true'
+  }
 });
 
 // Dont display assets because it will contain tons of html and json assets

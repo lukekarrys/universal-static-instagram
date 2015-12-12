@@ -1,13 +1,11 @@
-/* global __DEVTOOLS__ */
-
 'use strict';
 
-import debugLogger from 'redux-logger';
-import logger from 'andlog';
-import createStore from './';
+import createStore from './index';
 
-// Only require devtools based on flag so they dont get bundled
-let storeEnhancers;
+let storeEnhancers = [];
+let middleware = [];
+
+// Only require devtools/logger based on flag so they dont get bundled
 if (__DEVTOOLS__) {
   const {devTools, persistState} = require('redux-devtools');
   storeEnhancers = [
@@ -16,10 +14,11 @@ if (__DEVTOOLS__) {
   ];
 }
 
-const finalCreateStore = createStore({
-  middleware: [debugLogger({logger})],
-  storeEnhancers
-});
+if (__LOGGER__) {
+  middleware = [require('redux-logger')()];
+}
+
+const finalCreateStore = createStore({middleware, storeEnhancers});
 
 export default (state) => {
   const store = finalCreateStore(state);

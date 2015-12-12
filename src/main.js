@@ -1,5 +1,3 @@
-/* global __DEVTOOLS__ */
-
 'use strict';
 
 import React from 'react';
