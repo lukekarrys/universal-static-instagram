@@ -2,20 +2,19 @@
 
 import React from 'react';
 import {renderToString, renderToStaticMarkup} from 'react-dom/server';
-import createLocation from 'history/lib/createLocation';
-import {match} from 'redux-router/server';
+import {match, RoutingContext} from 'react-router';
+import {Provider} from 'react-redux';
 import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
 import * as ACTIONS from '../src/actions';
-import Root from '../src/Root';
 import createStore from '../src/store';
 import routes from '../src/routes';
 import debugThe from 'debug';
 
 const noJS = process.env.USI_NOJS === 'true';
 const debug = debugThe('usi:render');
-const finalCreateStore = createStore({router: {routes}});
+const finalCreateStore = createStore();
 const successActions = {
   photo: ACTIONS.PHOTO_SUCCESS,
   photos: ACTIONS.PHOTOS_SUCCESS,
@@ -42,14 +41,16 @@ export default ({context, path, data = null, key = null}, done) => {
   // During dev this is called with only a context to just return an empty template
   if (path === undefined && !done) return template({context});
 
-  const location = createLocation(slash(path));
+  const location = slash(path) || '/';
   const actionType = successActions[key];
-  const pathKey = key === null ? null : pathToKey(location.pathname);
+  const pathKey = key === null ? null : pathToKey(location);
 
-  debug(`Router run ${location.pathname}`);
+  debug(`Path ${path}`);
+  debug(`Router run ${location}`);
   debug(`Action type ${actionType}`);
   debug(`Path key ${pathKey}`);
   debug(`Has data ${!!data}`);
+  debug('-----------------------');
 
   const store = finalCreateStore();
 
@@ -62,9 +63,7 @@ export default ({context, path, data = null, key = null}, done) => {
     });
   }
 
-  // Use redux-router to match location and dispatch that to the store
-  // and then get the page rendered to a string
-  store.dispatch(match(location.pathname, (err) => {
+  match({routes, location}, (err, __, renderProps) => {
     if (err) {
       debug(`Store dispatch matching location err ${err}`);
       return done(err);
@@ -73,7 +72,11 @@ export default ({context, path, data = null, key = null}, done) => {
     done(null, template({
       context,
       state: store.getState(),
-      body: (noJS ? renderToStaticMarkup : renderToString)(<Root store={store} />)
+      body: (noJS ? renderToStaticMarkup : renderToString)(
+        <Provider store={store}>
+          <RoutingContext {...renderProps} />
+        </Provider>
+      )
     }));
-  }));
+  });
 };

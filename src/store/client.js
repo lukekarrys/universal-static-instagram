@@ -2,7 +2,6 @@
 
 'use strict';
 
-import createHistory from 'history/lib/createBrowserHistory';
 import debugLogger from 'redux-logger';
 import logger from 'andlog';
 import createStore from './';
@@ -19,7 +18,6 @@ if (__DEVTOOLS__) {
 
 const finalCreateStore = createStore({
   middleware: [debugLogger({logger})],
-  router: {createHistory},
   storeEnhancers
 });
 

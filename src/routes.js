@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {Route} from 'react-router';
+import {Route, IndexRoute} from 'react-router';
 
 import App from './components/App';
 import Pages from './containers/Pages';
@@ -11,8 +11,9 @@ import Photo from './containers/Photo';
 import NotFound from './components/NotFound';
 
 export default (
-  <Route component={App}>
-    <Route path='/' component={Photos} />
+  <Route path='/' component={App}>
+    <IndexRoute component={Photos} />
+
     <Route path='pages' component={Pages} />
     <Route path='pages/:page' component={Photos} />
 
