@@ -1,6 +1,8 @@
 universal-static-instagram
 ===============
 
+[![Build Status](https://img.shields.io/travis/lukekarrys/universal-static-instagram/master.svg)](https://travis-ci.org/lukekarrys/universal-static-instagram)
+
 **Previously [`jekyll-instagram`](https://github.com/lukekarrys/jekyll-instagram/tree/1da67ca095902c2241753f3722c7a991a39d185c)**
 
 
