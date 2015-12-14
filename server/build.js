@@ -4,6 +4,7 @@ import each from 'lodash/collection/each';
 import assign from 'lodash/object/assign';
 import async from 'async';
 import debugThe from 'debug';
+import {resolve} from 'path';
 import organizeData from './data/organize';
 import render from './render';
 import getConfig from './config/get';
@@ -22,6 +23,9 @@ const toPhotosList = (obj) => {
   }));
   return obj;
 };
+
+const {USI_BUILD_DIR} = process.env;
+export const buildDir = resolve(__dirname, '..', USI_BUILD_DIR || 'public');
 
 export default (context, done) => organizeData({dir, user: CONFIG.user}, (dataErr, results) => {
   if (dataErr) throw dataErr;

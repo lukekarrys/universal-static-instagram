@@ -79,7 +79,8 @@
   "main": "index.js",
   "pre-commit": [
     "lint",
-    "validate"
+    "validate",
+    "test"
   ],
   "private": true,
   "repository": {
@@ -97,6 +98,7 @@
     "make.config": "babel-node server/config/make.js",
     "start": "npm run webpack.config && USI_LOGGER=true webpack-dev-server --progress",
     "start.static": "http-server ./public -p 8080",
+    "test": "USI_BUILD_DIR=test/public USI_CACHE_DIR=test/fixtures npm run build -- --user 100 && rimraf test/public",
     "validate": "rm -rf ./node_modules/redux-simple-router/node_modules/history && npm ls >/dev/null",
     "webpack.config": "babel webpack.config.es6 --out-file webpack.config.js"
   }

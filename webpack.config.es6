@@ -6,7 +6,7 @@ import cssnano from 'cssnano';
 import once from 'lodash/function/once';
 import OnBuildPlugin from 'on-build-webpack';
 import copyMedia from './server/data/copyMedia';
-import serverBuild from './server/build';
+import serverBuild, {buildDir} from './server/build';
 
 const isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1;
 const {USI_DEVTOOLS, USI_LOGGER} = process.env;
@@ -14,7 +14,7 @@ const {USI_DEVTOOLS, USI_LOGGER} = process.env;
 const config = webpack({
   isDev,
   in: 'src/main.js',
-  out: 'public',
+  out: buildDir,
   clearBeforeBuild: true,
   output: {hash: true},
   html: serverBuild,
