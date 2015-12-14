@@ -19,19 +19,15 @@ syncReduxAndRouter(history, store);
 // Only require devtools based on flag so they dont get bundled
 let debuggers = null;
 if (__DEVTOOLS__) {
-  const {DebugPanel, DevTools, LogMonitor} = require('redux-devtools/lib/react');
-  debuggers = (
-    <DebugPanel left right bottom>
-      <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
-    </DebugPanel>
-  );
+  const DevTools = require('./containers/DevTools');
+  debuggers = (<DevTools />);
 }
 
 render(
-  <div>
-    <Provider store={store}>
+  <Provider store={store}>
+    <div>
       <Router history={history}>{routes}</Router>
-    </Provider>
-    {debuggers}
-  </div>
+      {debuggers}
+    </div>
+  </Provider>
 , container);
