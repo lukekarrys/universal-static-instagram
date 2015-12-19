@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "basscss": "^7.0.4",
-    "history": "1.13.x",
+    "history": "1.17.0",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "normalizr": "^1.4.0",
