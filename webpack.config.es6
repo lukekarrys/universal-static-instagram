@@ -13,7 +13,7 @@ const {USI_DEVTOOLS, USI_LOGGER} = process.env;
 
 const config = webpack({
   isDev,
-  in: 'src/main.js',
+  'in': 'src/main.js',
   out: buildDir,
   clearBeforeBuild: true,
   output: {hash: true},
