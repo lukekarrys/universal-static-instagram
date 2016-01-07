@@ -8,7 +8,7 @@ export default class PageError extends Component {
       PropTypes.instanceOf(Error),
       PropTypes.string
     ])
-  }
+  };
 
   getErrorMessage() {
     const {error} = this.props;

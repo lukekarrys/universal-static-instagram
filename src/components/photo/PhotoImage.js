@@ -8,7 +8,7 @@ export default class PhotoImage extends Component {
     images: PropTypes.object.isRequired,
     type: PropTypes.oneOf(['thumbnail', 'low', 'standard']).isRequired,
     style: PropTypes.object
-  }
+  };
 
   imageName() {
     const {type} = this.props;

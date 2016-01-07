@@ -8,11 +8,11 @@ export default class PhotoDate extends Component {
   static propTypes = {
     createdTime: PropTypes.string.isRequired,
     dateFormat: PropTypes.string
-  }
+  };
 
   static defaultProps = {
     dateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'
-  }
+  };
 
   render() {
     const date = createdDate(this.props.createdTime);

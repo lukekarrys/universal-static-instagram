@@ -6,7 +6,7 @@ export default class PhotoComments extends Component {
   static propTypes = {
     count: PropTypes.number,
     data: PropTypes.array
-  }
+  };
 
   render() {
     const {count, data} = this.props;

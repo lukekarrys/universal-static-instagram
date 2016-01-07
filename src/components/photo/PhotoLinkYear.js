@@ -10,7 +10,7 @@ export default class PhotoLinkYear extends Component {
     createdTime: PropTypes.string,
     year: PropTypes.string,
     path: PropTypes.string
-  }
+  };
 
   render() {
     const {createdTime, year, path, ...rest} = this.props;

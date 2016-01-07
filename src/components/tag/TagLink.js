@@ -9,7 +9,7 @@ export default class TagLink extends Component {
   static propTypes = {
     tag: PropTypes.string,
     children: PropTypes.node.isRequired
-  }
+  };
 
   render() {
     const {tag, children, ...rest} = this.props;

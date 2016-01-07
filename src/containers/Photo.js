@@ -13,7 +13,7 @@ export default class Photo extends Component {
     photo: PropTypes.object.isRequired,
     previous: PropTypes.string,
     next: PropTypes.string
-  }
+  };
 
   render() {
     const {photo, previous, next, ...rest} = this.props;

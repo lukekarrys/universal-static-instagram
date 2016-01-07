@@ -8,7 +8,7 @@ export default class InternalLink extends Component {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
     disabled: PropTypes.bool
-  }
+  };
 
   render() {
     const {disabled, children, className, ...rest} = this.props;

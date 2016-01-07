@@ -10,7 +10,7 @@ import Section from 'rebass/dist/Section';
 export default class App extends Component {
   static propTypes = {
     children: React.PropTypes.element.isRequired
-  }
+  };
 
   render() {
     return (

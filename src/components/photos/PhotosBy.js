@@ -22,7 +22,7 @@ export default class PhotosBy extends Component {
     name: PropTypes.string,
     previous: PropTypes.string,
     next: PropTypes.string
-  }
+  };
 
   getTitle() {
     const {type, name} = this.props;

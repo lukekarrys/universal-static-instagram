@@ -11,7 +11,7 @@ export default class PageContainer extends Component {
     component: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.instanceOf(Error)
-  }
+  };
 
   componentDidMount() {
     this.props.loadData(this.props.fetchKey);

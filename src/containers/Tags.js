@@ -11,7 +11,7 @@ import mapKeyToProps from '../helpers/mapKeyToProps';
 export default class Tags extends Component {
   static propTypes = {
     tags: PropTypes.array.isRequired
-  }
+  };
 
   render() {
     const {tags, ...rest} = this.props;

@@ -12,7 +12,7 @@ export default class PhotoLinkDay extends Component {
     month: PropTypes.string,
     day: PropTypes.string,
     path: PropTypes.string
-  }
+  };
 
   render() {
     const {createdTime, year, month, day, path, ...rest} = this.props;

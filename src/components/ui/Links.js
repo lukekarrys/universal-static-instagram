@@ -5,7 +5,7 @@ import React, {Component, PropTypes} from 'react';
 export default class Links extends Component {
   static propTypes = {
     links: PropTypes.arrayOf(PropTypes.element).isRequired
-  }
+  };
 
   render() {
     const {links} = this.props;

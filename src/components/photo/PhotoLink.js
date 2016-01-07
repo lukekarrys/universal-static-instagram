@@ -8,7 +8,7 @@ export default class PhotoLink extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     path: PropTypes.string
-  }
+  };
 
   render() {
     const {children, path, ...rest} = this.props;

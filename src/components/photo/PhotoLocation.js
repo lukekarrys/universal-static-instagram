@@ -9,7 +9,7 @@ export default class PhotoComments extends Component {
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     name: PropTypes.string
-  }
+  };
 
   getGeo() {
     const {latitude, longitude} = this.props;

@@ -11,7 +11,7 @@ export default class PhotosList extends Component {
   static propTypes = {
     photos: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired
-  }
+  };
 
   render() {
     return (

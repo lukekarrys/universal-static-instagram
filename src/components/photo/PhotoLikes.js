@@ -9,7 +9,7 @@ export default class PhotoLikes extends Component {
   static propTypes = {
     count: PropTypes.number,
     data: PropTypes.array
-  }
+  };
 
   users() {
     const {data} = this.props;
