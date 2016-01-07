@@ -13,7 +13,7 @@
     "moment": "^2.10.6",
     "normalizr": "^1.4.0",
     "react": "^0.14.3",
-    "react-dom": "^0.14.3",
+    "react-dom": "^0.14.6",
     "react-redux": "^4.0.5",
     "react-router": "^1.0.3",
     "rebass": "^0.1.5",
