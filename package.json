@@ -9,7 +9,7 @@
   "dependencies": {
     "basscss": "^7.1.0",
     "history": "^1.17.0",
-    "lodash": "^3.10.1",
+    "lodash": "^4.0.0",
     "moment": "^2.11.0",
     "normalizr": "^1.4.1",
     "react": "^0.14.6",
