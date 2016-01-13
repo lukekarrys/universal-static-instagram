@@ -11,7 +11,7 @@
     "history": "^1.17.0",
     "lodash": "^3.10.1",
     "moment": "^2.11.0",
-    "normalizr": "^1.4.1",
+    "normalizr": "^2.0.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",
