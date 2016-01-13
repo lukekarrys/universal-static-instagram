@@ -1,11 +1,6 @@
 'use strict';
 
-import sortBy from 'lodash/collection/sortBy';
-import assign from 'lodash/object/assign';
-import invoke from 'lodash/collection/invoke';
-import pick from 'lodash/object/pick';
-import map from 'lodash/collection/map';
-import transform from 'lodash/object/transform';
+import {sortBy, assign, invokeMap, pick, map, transform} from 'lodash';
 import {camelizeKeys} from 'humps';
 import {read} from 'instagram-download';
 import {dateParts} from '../../src/helpers/date';
@@ -163,7 +158,7 @@ export default (options, cb) => read(options, (err, data) => {
     tags,
     pages,
     ids,
-    dates: merge(...invoke([byDay, byMonth, byYear], 'getValues', ids)),
+    dates: merge(...invokeMap([byDay, byMonth, byYear], 'getValues', ids)),
     tagKeys: map(tags, (item) => pick(item, 'id', 'name')),
     pageKeys: map(pages, (item) => pick(item, 'id', 'name'))
   });

@@ -1,7 +1,7 @@
 'use strict';
 
 import {normalize} from 'normalizr';
-import omit from 'lodash/object/omit';
+import {omit} from 'lodash';
 import Schemas from './schema';
 
 export default ({json, key}) => {

@@ -1,7 +1,6 @@
 'use strict';
 
-import each from 'lodash/collection/each';
-import assign from 'lodash/object/assign';
+import {each, assign} from 'lodash';
 import async from 'async';
 import debugThe from 'debug';
 import {resolve} from 'path';

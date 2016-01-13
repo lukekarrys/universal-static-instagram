@@ -1,8 +1,7 @@
 'use strict';
 
 import xhr from 'xhr';
-import attempt from 'lodash/utility/attempt';
-import isError from 'lodash/lang/isError';
+import {attempt, isError} from 'lodash';
 import slash from './slash';
 import normalize from './normalize';
 

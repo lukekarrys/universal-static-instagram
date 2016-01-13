@@ -2,8 +2,7 @@
 
 import {combineReducers} from 'redux';
 import {routeReducer} from 'redux-simple-router';
-import merge from 'lodash/object/merge';
-import includes from 'lodash/collection/includes';
+import {merge, includes} from 'lodash';
 import * as ACTIONS from '../actions';
 
 const createReducer = (request, success, failure) => (state = {entities: {}, byId: {}}, action) => {

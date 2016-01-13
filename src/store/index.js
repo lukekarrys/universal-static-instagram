@@ -1,7 +1,7 @@
 'use strict';
 
 import {compose, createStore, applyMiddleware} from 'redux';
-import partial from 'lodash/function/partial';
+import {partial} from 'lodash';
 import thunk from 'redux-thunk';
 import api from '../helpers/api';
 import reducer from '../reducers';

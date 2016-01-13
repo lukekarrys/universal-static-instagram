@@ -9,16 +9,16 @@
   "dependencies": {
     "basscss": "^7.1.0",
     "history": "^1.17.0",
-    "lodash": "^3.10.1",
-    "moment": "^2.11.0",
-    "normalizr": "^1.4.1",
+    "lodash": "^4.0.0",
+    "moment": "^2.11.1",
+    "normalizr": "^2.0.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",
     "react-router": "^1.0.3",
     "rebass": "^0.1.5",
     "redux": "^3.0.5",
-    "redux-logger": "^2.3.1",
+    "redux-logger": "^2.3.2",
     "redux-simple-router": "^1.0.2",
     "redux-thunk": "^1.0.3",
     "xhr": "^2.2.0",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@lukekarrys/eslint-config": "^1.0.38",
-    "async": "^1.5.1",
+    "async": "^1.5.2",
     "autoprefixer": "^6.2.3",
     "babel": "^6.3.26",
     "babel-cli": "^6.4.0",
@@ -47,12 +47,12 @@
     "debug": "^2.2.0",
     "eslint": "^1.10.3",
     "eslint-plugin-classes": "^0.1.1",
-    "eslint-plugin-react": "^3.14.0",
+    "eslint-plugin-react": "^3.15.0",
     "git-directory-deploy": "^1.4.0",
     "hjs-webpack": "^6.1.0",
     "http-server": "^0.8.5",
     "humps": "^1.0.0",
-    "inquirer": "^0.11.1",
+    "inquirer": "^0.11.2",
     "instagram-download": "^1.1.4",
     "instagram-node": "^0.5.8",
     "minimist": "^1.2.0",
@@ -66,8 +66,8 @@
     "rimraf": "^2.5.0",
     "style-loader": "^0.13.0",
     "surge": "^0.17.4",
-    "webpack": "^1.12.10",
-    "webpack-dev-server": "^1.14.0"
+    "webpack": "^1.12.11",
+    "webpack-dev-server": "^1.14.1"
   },
   "homepage": "https://github.com/lukekarrys/universal-static-instagram",
   "keywords": [
@@ -91,18 +91,17 @@
     "url": "git+https://github.com/lukekarrys/universal-static-instagram.git"
   },
   "scripts": {
-    "build": "npm run webpack.config && NODE_ENV=production webpack --progress",
+    "build": "NODE_ENV=production webpack --progress",
     "build.local": "USI_LOGGER=true npm run build",
     "build.nojs": "USI_NOJS=true npm run build && rimraf public/*.js && rimraf public/json/",
     "deploy.gh": "git-directory-deploy --directory public",
     "deploy.surge": "surge public",
     "fetch.data": "DEBUG=instagram-download:* babel-node server/data/fetch.js",
-    "lint": "eslint --ignore-path .gitignore --ext .js,.es6 .",
+    "lint": "eslint --ignore-path .gitignore",
     "make.config": "babel-node server/config/make.js",
-    "start": "npm run webpack.config && USI_LOGGER=true USI_DEVTOOLS=true webpack-dev-server --progress",
+    "start": "USI_LOGGER=true USI_DEVTOOLS=false webpack-dev-server --progress",
     "start.static": "http-server ./public -p 8080",
     "test": "USI_BUILD_DIR=test/public USI_CACHE_DIR=test/fixtures npm run build -- --user 100 && rimraf test/public",
-    "validate": "rm -rf ./node_modules/redux-simple-router/node_modules/history && npm ls >/dev/null",
-    "webpack.config": "babel webpack.config.es6 --out-file webpack.config.js"
+    "validate": "rm -rf ./node_modules/redux-simple-router/node_modules/history && npm ls >/dev/null"
   }
 }

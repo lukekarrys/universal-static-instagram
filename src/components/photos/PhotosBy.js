@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import compact from 'lodash/array/compact';
+import {compact} from 'lodash';
 import moment from 'moment';
 import PhotosList from './PhotosList';
 import TagLink from '../tag/TagLink';

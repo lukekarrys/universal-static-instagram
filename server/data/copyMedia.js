@@ -2,7 +2,7 @@
 
 import cpr from 'cpr';
 import path from 'path';
-import noop from 'lodash/utility/noop';
+import {noop} from 'lodash';
 import getConfig from '../config/get';
 import cacheDir from './cacheDir';
 import {buildDir} from '../build';

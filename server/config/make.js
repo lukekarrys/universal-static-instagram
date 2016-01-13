@@ -5,7 +5,7 @@ import path from 'path';
 import inquirer from 'inquirer';
 import {instagram} from 'instagram-node';
 import colors from 'colors/safe';
-import find from 'lodash/collection/find';
+import {find} from 'lodash';
 import {decamelizeKeys} from 'humps';
 
 const configPath = path.resolve(__dirname, '..', '..', 'config.json');

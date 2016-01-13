@@ -1,6 +1,6 @@
 'use strict';
 
-import assign from 'lodash/object/assign';
+import {assign} from 'lodash';
 import minimist from 'minimist';
 
 let config;

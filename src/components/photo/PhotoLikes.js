@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import pluck from 'lodash/collection/pluck';
+import {map} from 'lodash';
 
 const MAX_USERNAME_LIKES = 10;
 
@@ -13,7 +13,7 @@ export default class PhotoLikes extends Component {
 
   users() {
     const {data} = this.props;
-    return pluck(data, 'username').join(', ');
+    return map(data, 'username').join(', ');
   }
 
   render() {
