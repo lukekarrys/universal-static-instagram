@@ -19,7 +19,7 @@
     "rebass": "^0.1.5",
     "redux": "^3.0.5",
     "redux-logger": "^2.3.2",
-    "redux-simple-router": "^1.0.2",
+    "redux-simple-router": "^2.0.3",
     "redux-thunk": "^1.0.3",
     "xhr": "^2.2.0",
     "zero-fill": "^2.2.1"
