@@ -1,6 +1,8 @@
 'use strict';
 
-require('babel-core/register');
+require('babel-register');
+
+const fs = require('fs');
 const webpack = require('hjs-webpack');
 const cssnano = require('cssnano');
 const _ = require('lodash');
@@ -11,7 +13,7 @@ const server = require('./server/build');
 const serverBuild = server.default;
 const buildDir = server.buildDir;
 
-const isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1;
+const isDev = (process.argv[1] || '').indexOf('hjs-dev-server') !== -1;
 const env = process.env;
 
 const config = webpack({
@@ -21,10 +23,20 @@ const config = webpack({
   clearBeforeBuild: true,
   output: {hash: true},
   html: serverBuild,
-  devServer: {noInfo: true},
   define: {
-    __LOGGER__: env.USI_LOGGER === 'true' || isDev,
-    __DEVTOOLS__: env.USI_DEVTOOLS === 'true'
+    __LOGGER__: JSON.stringify(env.USI_LOGGER === 'true' || isDev),
+    __DEVTOOLS__: JSON.stringify(env.USI_DEVTOOLS === 'true')
+  }
+});
+
+// Having hmre present in the .babelrc will break the babel-register above
+// so we wait until that is done and then add it here via the loader query
+const babelrc = JSON.parse(fs.readFileSync('./.babelrc'));
+config.module.loaders[0].query = _.extend(babelrc, {
+  env: {
+    development: {
+      presets: ['react-hmre']
+    }
   }
 });
 
