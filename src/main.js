@@ -2,19 +2,20 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
-import {syncReduxAndRouter} from 'redux-simple-router';
-import {Router} from 'react-router';
+import {syncHistory} from 'react-router-redux';
+import {Router, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 import routes from './routes';
 import createStore from './store/client';
 import 'basscss/css/basscss.css';
 
-const store = createStore(window.__INITIAL_STATE__);
-const history = createBrowserHistory();
-const container = document.getElementById('container');
+const {__INITIAL_STATE__: initialState} = window;
+const routerMiddleware = syncHistory(browserHistory);
+const store = createStore({initialState, routerMiddleware});
 
-syncReduxAndRouter(history, store);
+if (__DEVTOOLS__) {
+  routerMiddleware.listenForReplays(store);
+}
 
 // Only require devtools based on flag so they dont get bundled
 let debuggers = null;
@@ -26,8 +27,8 @@ if (__DEVTOOLS__) {
 render(
   <Provider store={store}>
     <div>
-      <Router history={history}>{routes}</Router>
+      <Router history={browserHistory}>{routes}</Router>
       {debuggers}
     </div>
   </Provider>
-, container);
+, document.getElementById('container'));

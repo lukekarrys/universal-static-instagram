@@ -14,7 +14,6 @@ import debugThe from 'debug';
 
 const noJS = process.env.USI_NOJS === 'true';
 const debug = debugThe('usi:render');
-const finalCreateStore = createStore();
 const successActions = {
   photo: ACTIONS.PHOTO_SUCCESS,
   photos: ACTIONS.PHOTOS_SUCCESS,
@@ -52,7 +51,7 @@ export default ({context, path, data = null, key = null}, done) => {
   debug(`Has data ${!!data}`);
   debug('-----------------------');
 
-  const store = finalCreateStore();
+  const store = createStore();
 
   // Dispatch action with initial data if we have one
   if (actionType) {

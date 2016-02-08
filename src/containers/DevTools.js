@@ -12,6 +12,7 @@ export default createDevTools(
     toggleVisibilityKey='ctrl-h'
     changePositionKey='ctrl-q'
     defaultPosition='bottom'
+    defaultIsVisible={false}
     defaultSize={DEFAULT_SIZE}
   >
     <SliderMonitor keyboardEnabled />
