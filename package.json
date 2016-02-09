@@ -53,7 +53,7 @@
     "hjs-webpack": "^7.1.0",
     "http-server": "^0.8.5",
     "humps": "^1.0.0",
-    "inquirer": "^0.11.4",
+    "inquirer": "^0.12.0",
     "instagram-download": "^1.1.4",
     "instagram-node": "^0.5.8",
     "minimist": "^1.2.0",
