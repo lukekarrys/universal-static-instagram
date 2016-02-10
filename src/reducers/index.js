@@ -1,5 +1,6 @@
 'use strict';
 
+import {routerReducer as routing} from 'react-router-redux';
 import {combineReducers} from 'redux';
 import {merge, includes} from 'lodash';
 import * as ACTIONS from '../actions';
@@ -37,6 +38,7 @@ const createReducer = (request, success, failure) => (state = {entities: {}, byI
 };
 
 export default combineReducers({
+  routing,
   tags: createReducer(
     ACTIONS.TAGS_REQUEST,
     ACTIONS.TAGS_SUCCESS,

@@ -11,7 +11,7 @@ export default (stateKey) => (state, props) => {
   const singularKey = singularize(stateKey);
   const isSingular = stateKey === singularKey;
 
-  const {location} = state.routing || props;
+  const {location} = props;
   const fetchKey = pathToKey(location ? location.pathname : null);
 
   const {byId = {}, entities = {}} = state[pluralKey];

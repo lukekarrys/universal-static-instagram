@@ -15,7 +15,7 @@
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
-    "react-router-redux": "^3.0.0",
+    "react-router-redux": "^4.0.0-beta.1",
     "rebass": "^0.1.5",
     "redux": "^3.3.1",
     "redux-logger": "^2.5.0",
@@ -102,7 +102,7 @@
     "fetch.data": "DEBUG=instagram-download:* babel-node server/data/fetch.js",
     "lint": "eslint --ignore-path .gitignore .",
     "make.config": "babel-node server/config/make.js",
-    "start": "USI_LOGGER=true USI_DEVTOOLS=false hjs-dev-server",
+    "start": "USI_LOGGER=true USI_DEVTOOLS=true hjs-dev-server",
     "start.static": "http-server ./public -p 8080",
     "test": "USI_BUILD_DIR=test/public USI_CACHE_DIR=test/fixtures npm run build -- --user 100 && rimraf test/public",
     "validate": "npm ls >/dev/null"
