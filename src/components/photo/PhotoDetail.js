@@ -43,7 +43,7 @@ export default class PhotoDetail extends Component {
 
     return (
       <div>
-        <h1><PhotoTitle {...photo} /></h1>
+        <h1 className='unbold-for-emoji'><PhotoTitle {...photo} /></h1>
         <h3><PhotoDate {...photo} /></h3>
         <PhotoImage {...photo} type='standard' />
         <p><PhotoLikes {...photo.likes} /></p>
