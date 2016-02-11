@@ -4,6 +4,7 @@ import React from 'react';
 import {renderToString, renderToStaticMarkup} from 'react-dom/server';
 import {match, RoutingContext} from 'react-router';
 import {Provider} from 'react-redux';
+import {minify} from 'html-tagged-literals';
 import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
@@ -21,20 +22,19 @@ const successActions = {
   pages: ACTIONS.PAGES_SUCCESS
 };
 
-const template = ({context, body, state}) =>
-  `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        ${context.css ? `<link rel="stylesheet" href="/${context.css}">` : ''}
-      </head>
-      <body><div id='container'>${body || ''}</div></body>
-      ${noJS ? '' : `<script>__INITIAL_STATE__=${JSON.stringify(state || {})}</script>`}
-      ${noJS ? '' : `<script src="/${context.main}"></script>`}
-    </html>
-  `.replace(/\n\s*/g, '');
+const template = ({context, body, state}) => minify`
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      ${context.css ? `<link rel="stylesheet" href="/${context.css}">` : ''}
+    </head>
+    <body><div id='container'>${body || ''}</div></body>
+    ${noJS ? '' : `<script>__INITIAL_STATE__=${JSON.stringify(state || {})}</script>`}
+    ${noJS ? '' : `<script src="/${context.main}"></script>`}
+  </html>
+`;
 
 export default ({context, path, data = null, key = null}, done) => {
   // During dev this is called with only a context to just return an empty template

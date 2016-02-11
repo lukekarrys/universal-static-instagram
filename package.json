@@ -51,6 +51,7 @@
     "eslint-plugin-react": "^3.16.1",
     "git-directory-deploy": "^1.4.0",
     "hjs-webpack": "^7.2.0",
+    "html-tagged-literals": "^1.0.1",
     "http-server": "^0.8.5",
     "humps": "^1.0.0",
     "inquirer": "^0.12.0",
