@@ -46,7 +46,7 @@
     "css-loader": "^0.23.1",
     "cssnano": "^3.4.0",
     "debug": "^2.2.0",
-    "eslint": "^1.10.3",
+    "eslint": "^2.0.0",
     "eslint-plugin-classes": "^0.1.1",
     "eslint-plugin-react": "^3.16.1",
     "git-directory-deploy": "^1.4.0",
