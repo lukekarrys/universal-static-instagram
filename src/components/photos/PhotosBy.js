@@ -37,6 +37,8 @@ export default class PhotosBy extends Component {
       return formatPath(name, 'MMMM YYYY');
     case 'day':
       return formatPath(name, 'MMMM D, YYYY');
+    default:
+      return '';
     }
   }
 
@@ -54,7 +56,7 @@ export default class PhotosBy extends Component {
       return [
         <TagLink tag={previous} disabled={!previous} key={`tag-${previous}`}>Prev</TagLink>,
         <TagLink tag={next} disabled={!next} key={`tag-${next}`}>Next</TagLink>,
-        <TagLink key={`tag-other`}>Other tags</TagLink>
+        <TagLink key='tag-other'>Other tags</TagLink>
       ];
     case 'year':
     case 'month':
@@ -65,6 +67,8 @@ export default class PhotosBy extends Component {
         (type === 'month' || type === 'day') && <PhotoLinkYear path={name} key={`photo-year-${name}`} />,
         (type === 'day') && <PhotoLinkMonth path={name} key={`photo-month-${name}`} />
       ];
+    default:
+      return [];
     }
   }
 

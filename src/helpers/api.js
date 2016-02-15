@@ -20,7 +20,7 @@ const fetchAPI = ({endpoint, key}, cb) => {
       return cb(json);
     }
 
-    cb(null, normalize({json, key}));
+    return cb(null, normalize({json, key}));
   });
 };
 

@@ -56,7 +56,7 @@ class KeySets {
 
 class ByTag extends KeySets {
   toObject(key, id) {
-    const parent = super.toObject.apply(this, arguments);
+    const parent = super.toObject(key, id);
     return assign(parent, {id: slug(key), type: 'tag'});
   }
 
@@ -66,8 +66,8 @@ class ByTag extends KeySets {
 }
 
 class ByDay extends KeySets {
-  toObject() {
-    const parent = super.toObject.apply(this, arguments);
+  toObject(...args) {
+    const parent = super.toObject(...args);
     return assign(parent, {type: 'day'});
   }
 
@@ -78,8 +78,8 @@ class ByDay extends KeySets {
 }
 
 class ByMonth extends KeySets {
-  toObject() {
-    const parent = super.toObject.apply(this, arguments);
+  toObject(...args) {
+    const parent = super.toObject(...args);
     return assign(parent, {type: 'month'});
   }
 
@@ -90,8 +90,8 @@ class ByMonth extends KeySets {
 }
 
 class ByYear extends KeySets {
-  toObject() {
-    const parent = super.toObject.apply(this, arguments);
+  toObject(...args) {
+    const parent = super.toObject(...args);
     return assign(parent, {type: 'year'});
   }
 
@@ -106,8 +106,8 @@ class ByPage extends KeySets {
     return parseInt(id, 10);
   }
 
-  toObject() {
-    const parent = super.toObject.apply(this, arguments);
+  toObject(...args) {
+    const parent = super.toObject(...args);
     return assign(parent, {type: 'page'});
   }
 
@@ -154,7 +154,7 @@ export default (options, cb) => read(options, (err, data) => {
   const tags = byTag.getValues(ids);
   const pages = byPage.getValues(ids);
 
-  cb(null, {
+  return cb(null, {
     tags,
     pages,
     ids,

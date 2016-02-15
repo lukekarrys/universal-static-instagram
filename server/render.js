@@ -62,13 +62,13 @@ export default ({context, path, data = null, key = null}, done) => {
     });
   }
 
-  match({routes, location}, (err, __, renderProps) => {
+  return match({routes, location}, (err, __, renderProps) => {
     if (err) {
       debug(`Store dispatch matching location err ${err}`);
       return done(err);
     }
 
-    done(null, template({
+    return done(null, template({
       context,
       state: store.getState(),
       body: (noJS ? renderToStaticMarkup : renderToString)(

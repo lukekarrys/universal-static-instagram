@@ -9,11 +9,11 @@ import {find} from 'lodash';
 import {decamelizeKeys} from 'humps';
 
 const configPath = path.resolve(__dirname, '..', '..', 'config.json');
-const clientMessage = colors.bold(`What is the id of your Instagram client application?`);
-const secretMessage = colors.bold(`What is the secret of your Instagram client application?`);
-const clientHelp = `If you don't have one you can register a new one here:\nhttps://instagram.com/developer/clients/register/`;
-const clientValidator = (value) => value ? true : `An Instagram client application is required. Please create one before proceeding.`;
-const userValidator = (value) => value ? true : `A valid username is required to lookup the user id`;
+const clientMessage = colors.bold('What is the id of your Instagram client application?');
+const secretMessage = colors.bold('What is the secret of your Instagram client application?');
+const clientHelp = 'If you don\'t have one you can register a new one here:\nhttps://instagram.com/developer/clients/register/';
+const clientValidator = (value) => value ? true : 'An Instagram client application is required. Please create one before proceeding.';
+const userValidator = (value) => value ? true : 'A valid username is required to lookup the user id';
 
 let clientId, clientSecret;
 
@@ -50,7 +50,7 @@ inquirer.prompt([
       ig.user_search(username, (err, users) => {
         if (err) return done(err);
         const user = find(users, 'username', username);
-        done(user ? user.id : new Error('No users could be found with that username.'));
+        return done(user ? user.id : new Error('No users could be found with that username.'));
       });
     }
   },

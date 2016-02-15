@@ -19,7 +19,7 @@ export default class Photos extends Component {
 
   render() {
     const {photos, previous, next, name, type, ...rest} = this.props;
-    const component = <PhotosBy {...{photos, previous, next, name, type}}/>;
+    const component = <PhotosBy {...{photos, previous, next, name, type}} />;
     return (
       <PageContainer component={component} {...rest} />
     );
