@@ -6,6 +6,6 @@
   },
   "rules": {
     // https://github.com/babel/babel-eslint/issues/249
-    "no-use-before-define": 0
+    "no-use-before-define": 1
   }
 }

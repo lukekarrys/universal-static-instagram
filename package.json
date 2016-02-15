@@ -103,6 +103,7 @@
     "fetch.data": "DEBUG=instagram-download:* babel-node server/data/fetch.js",
     "lint": "eslint --ignore-path .gitignore .",
     "make.config": "babel-node server/config/make.js",
+    "postinstall": "find . -type f -name '.jshint*' -maxdepth 1 | xargs rm",
     "start": "USI_LOGGER=true USI_DEVTOOLS=true hjs-dev-server",
     "start.static": "http-server ./public -p 8080",
     "test": "USI_BUILD_DIR=test/public USI_CACHE_DIR=test/fixtures npm run build -- --user 100 && rimraf test/public",
