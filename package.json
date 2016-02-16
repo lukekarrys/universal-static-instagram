@@ -7,7 +7,7 @@
     "url": "https://github.com/lukekarrys/universal-static-instagram/issues"
   },
   "dependencies": {
-    "basscss": "^7.1.1",
+    "basscss": "^8.0.0",
     "lodash": "^4.3.0",
     "moment": "^2.11.2",
     "normalizr": "^2.0.0",
