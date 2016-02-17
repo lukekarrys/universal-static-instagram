@@ -2,6 +2,7 @@
 
 require('babel-register');
 
+const path = require('path');
 const fs = require('fs');
 const webpack = require('hjs-webpack');
 const cssnano = require('cssnano');
@@ -40,6 +41,17 @@ config.module.loaders[0].query = _.extend(babelrc, {
   }
 });
 
+// Hacky but we want to use the version of basscss that rebass uses
+// without installing it. The css from rebass needs cssnext which I couldnt
+// get to build properly with postcss options so instead this points basscss
+// imports to whichever path exists (one for npm2 and one for npm3).
+// This is way to clever but at least it works.
+config.resolve.alias = {
+  basscss: ['basscss', 'rebass/node_modules/basscss']
+  .map((p) => path.resolve(__dirname, path.join('.', 'node_modules', p)))
+  .find((p) => _.chain(fs.statSync).attempt(p).invoke('isDirectory').value())
+};
+
 // Dont display assets because it will contain tons of html and json assets
 // devServer.noInfo = true does the same thing for webpack-dev-server
 config.stats = {assets: false};
@@ -51,9 +63,6 @@ config.plugins.push(new OnBuildPlugin(_.once(copyMedia)));
 
 // Add custom cssnano for css-modules to existing postcss plugin
 config.postcss.push(cssnano({
-  // Required to work with relative Common JS style urls for css-modules
-  // https://github.com/less/less.js/pull/2615
-  normalizeUrl: false,
   // Core is on by default so disabling it for dev allows for more readable
   // css since it retains whitespace and bracket newlines
   core: !isDev,

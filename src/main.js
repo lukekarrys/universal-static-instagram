@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import {syncHistoryWithStore} from 'react-router-redux';
 import routes from './routes';
 import createStore from './store/client';
+
 import 'basscss/css/basscss.css';
 import './styles.css';
 

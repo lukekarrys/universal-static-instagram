@@ -4,13 +4,13 @@ import fs from 'fs';
 import path from 'path';
 import inquirer from 'inquirer';
 import {instagram} from 'instagram-node';
-import colors from 'colors/safe';
+import {bold, green} from 'colors/safe';
 import {find} from 'lodash';
 import {decamelizeKeys} from 'humps';
 
 const configPath = path.resolve(__dirname, '..', '..', 'config.json');
-const clientMessage = colors.bold('What is the id of your Instagram client application?');
-const secretMessage = colors.bold('What is the secret of your Instagram client application?');
+const clientMessage = bold('What is the id of your Instagram client application?');
+const secretMessage = bold('What is the secret of your Instagram client application?');
 const clientHelp = 'If you don\'t have one you can register a new one here:\nhttps://instagram.com/developer/clients/register/';
 const clientValidator = (value) => value ? true : 'An Instagram client application is required. Please create one before proceeding.';
 const userValidator = (value) => value ? true : 'A valid username is required to lookup the user id';
@@ -62,5 +62,5 @@ inquirer.prompt([
 ], (answers) => {
   const data = JSON.stringify(answers, null, 2);
   fs.writeFileSync(configPath, data);
-  process.stdout.write(colors.green('Done!'));
+  process.stdout.write(green('Done!'));
 });
