@@ -2,7 +2,7 @@
 
 import React, {Component, PropTypes} from 'react';
 import {compact} from 'lodash';
-import moment from 'moment';
+import dateFormat from 'dateformat';
 import PhotosList from './PhotosList';
 import TagLink from '../tag/TagLink';
 import PageLink from '../page/PageLink';
@@ -13,7 +13,7 @@ import Links from '../ui/Links';
 import {propsToDate} from '../../helpers/date';
 import SectionHeader from 'rebass/dist/SectionHeader';
 
-const formatPath = (path, format) => moment(propsToDate({path})).format(format);
+const formatPath = (path, format) => dateFormat(propsToDate({path}), format);
 
 export default class PhotosBy extends Component {
   static propTypes = {
@@ -32,11 +32,11 @@ export default class PhotosBy extends Component {
     case 'tag':
       return `Tag ${name}`;
     case 'year':
-      return formatPath(name, 'YYYY');
+      return formatPath(name, 'yyyy');
     case 'month':
-      return formatPath(name, 'MMMM YYYY');
+      return formatPath(name, 'mmmm yyyy');
     case 'day':
-      return formatPath(name, 'MMMM D, YYYY');
+      return formatPath(name, 'mmmm d, yyyy');
     default:
       return '';
     }

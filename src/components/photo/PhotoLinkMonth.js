@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import moment from 'moment';
+import dateFormat from 'dateformat';
 import PhotoLink from './PhotoLink';
 import {propsToDate} from '../../helpers/date';
 
@@ -15,9 +15,9 @@ export default class PhotoLinkMonth extends Component {
 
   render() {
     const {createdTime, year, month, path, ...rest} = this.props;
-    const mMonth = moment(propsToDate({createdTime, year, month, path}));
+    const monthDate = propsToDate({createdTime, year, month, path});
     return (
-      <PhotoLink path={mMonth.format('YYYY/MM')} {...rest}>{mMonth.format('MMMM YYYY')}</PhotoLink>
+      <PhotoLink path={dateFormat(monthDate, 'yyyy/mm')} {...rest}>{dateFormat(monthDate, 'mmmm yyyy')}</PhotoLink>
     );
   }
 }

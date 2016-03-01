@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import moment from 'moment';
+import dateFormat from 'dateformat';
 import createdDate from '../../helpers/createdDate';
 
 export default class PhotoDate extends Component {
@@ -11,13 +11,12 @@ export default class PhotoDate extends Component {
   };
 
   static defaultProps = {
-    dateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'
+    dateFormat: 'dddd, mmmm dS yyyy, h:MM:ss tt'
   };
 
   render() {
-    const date = createdDate(this.props.createdTime);
     return (
-      <span>{moment(date).format(this.props.dateFormat)}</span>
+      <span>{dateFormat(createdDate(this.props.createdTime), this.props.dateFormat)}</span>
     );
   }
 }

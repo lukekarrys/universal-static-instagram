@@ -38,7 +38,7 @@ const config = webpack({
 // Having hmre present in the .babelrc will break the babel-register above
 // so we wait until that is done and then add it here via the loader query
 const babelrc = JSON.parse(fs.readFileSync('./.babelrc'));
-config.module.loaders[0].query = _.extend(babelrc, {
+config.module.loaders[0].query = _.merge(babelrc, {
   env: {
     development: {
       presets: ['react-hmre']
