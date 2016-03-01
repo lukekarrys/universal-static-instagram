@@ -1,4 +1,4 @@
 /* https://code.google.com/p/chromium/issues/detail?id=470655 */
-h1.unbold-for-emoji {
+.title {
   font-weight: 500;
 }

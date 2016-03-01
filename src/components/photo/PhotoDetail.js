@@ -14,6 +14,8 @@ import PhotoLocation from './PhotoLocation';
 import TagLink from '../tag/TagLink';
 import Links from '../ui/Links';
 
+import css from './PhotoDetail.module.css';
+
 export default class PhotoDetail extends Component {
   static propTypes = {
     previous: PropTypes.string,
@@ -43,7 +45,7 @@ export default class PhotoDetail extends Component {
 
     return (
       <div>
-        <h1 className='unbold-for-emoji'><PhotoTitle {...photo} /></h1>
+        <h1 className={css.title}><PhotoTitle {...photo} /></h1>
         <h3><PhotoDate {...photo} /></h3>
         <PhotoImage {...photo} type='standard' />
         <p><PhotoLikes {...photo.likes} /></p>

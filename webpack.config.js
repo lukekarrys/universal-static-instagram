@@ -2,20 +2,25 @@
 
 require('babel-register');
 
+const isDev = (process.argv[1] || '').indexOf('hjs-dev-server') !== -1;
+const env = process.env;
+
+// Setup css modules require hook so it works when building for the server
+const cssModulesNames = `${isDev ? '[path][name]__[local]__' : ''}[hash:base64:5]`;
+require('css-modules-require-hook')({generateScopedName: cssModulesNames});
+
 const path = require('path');
 const fs = require('fs');
 const webpack = require('hjs-webpack');
 const cssnano = require('cssnano');
 const _ = require('lodash');
 const OnBuildPlugin = require('on-build-webpack');
+
 const copyMedia = require('./server/data/copyMedia');
 const server = require('./server/build');
 
 const serverBuild = server.default;
 const buildDir = server.buildDir;
-
-const isDev = (process.argv[1] || '').indexOf('hjs-dev-server') !== -1;
-const env = process.env;
 
 const config = webpack({
   isDev,
@@ -38,6 +43,19 @@ config.module.loaders[0].query = _.extend(babelrc, {
     development: {
       presets: ['react-hmre']
     }
+  }
+});
+
+// Add support for css modules for files ending in '.module.css' and make other
+// css loaders ignore those files
+const matchCssLoaders = /(^|!)(css-loader)($|!)/;
+config.module.loaders.forEach((l, index, list) => {
+  if (l && l.loader && l.loader.match(matchCssLoaders)) {
+    l.test = new RegExp(`[^module]${l.test.source}`);
+    list.push({
+      test: /\.module\.css$/,
+      loader: l.loader.replace(matchCssLoaders, `$1$2?modules&localIdentName=${cssModulesNames}$3`)
+    });
   }
 });
 
