@@ -100,8 +100,6 @@ Since you already have this forked on GitHub, and every path has a matching buil
 
 You can also deploy to a different repository by using cli argument: `--repo git@github.com:USERNAME/REPO_NAME.git`. This uses [`git-directory-deploy`](https://github.com/lukekarrys/git-directory-deploy) under the hood, so check out the other available arguments in the [documentation](https://github.com/lukekarrys/git-directory-deploy#usage).
 
-*Note: you will first need to create a `gh-pages` branch on your forked repo.*
-
 ### Re-fetching Data
 
 Running `npm run fetch.data` again will start after the most recent Instagram post ID, so that you can easily only fetch the latest Instagram data. Sometimes you'll want to refresh all the existing Instagram `json` data as well.
