@@ -55,7 +55,7 @@ export default (context, done) => organizeData({dir, user: CONFIG.user}, (dataEr
     // Strip leading / and trailing /index.html or .html from the filepath
     // since that is what will be served by the app
     const urlPath = filePath.slice(1).replace(/(\/)?(index)?\.html$/, '');
-    const jsonPath = `/json/${urlPath}.json`;
+    const jsonPath = `json/${urlPath}.json`;
 
     if (urlPath) {
       // If we have a url path then also save the data as a plain json
