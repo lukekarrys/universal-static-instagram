@@ -100,7 +100,7 @@
     "url": "git+https://github.com/lukekarrys/universal-static-instagram.git"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack --progress",
+    "build": "NODE_ENV=production webpack --progress --bail",
     "build.local": "USI_LOGGER=true npm run build",
     "build.nojs": "USI_NOJS=true npm run build && rimraf public/*.js && rimraf public/json/",
     "deploy.gh": "git-directory-deploy --directory public",
@@ -110,7 +110,7 @@
     "make.config": "babel-node server/config/make.js",
     "start": "USI_LOGGER=true USI_DEVTOOLS=true hjs-dev-server",
     "start.static": "http-server ./public -p 8080",
-    "test": "USI_BUILD_DIR=test/public USI_CACHE_DIR=test/fixtures npm run build -- --user 100 && rimraf test/public",
+    "test": "rimraf test/public && USI_BUILD_DIR=test/public USI_CACHE_DIR=test/fixtures npm run build -- --user 100 && rimraf test/public",
     "validate": "npm ls >/dev/null"
   }
 }
