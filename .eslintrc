@@ -3,9 +3,5 @@
   "globals": {
     "__DEVTOOLS__": false,
     "__LOGGER__": false
-  },
-  "rules": {
-    // https://github.com/babel/babel-eslint/issues/249
-    "no-use-before-define": 1
   }
 }

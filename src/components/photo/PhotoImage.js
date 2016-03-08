@@ -6,20 +6,18 @@ const prefix = '/media/';
 export default class PhotoImage extends Component {
   static propTypes = {
     images: PropTypes.object.isRequired,
-    type: PropTypes.oneOf(['thumbnail', 'low', 'standard']).isRequired,
+    type: PropTypes.oneOf([
+      'thumbnail',
+      'lowResolution',
+      'standardResolution',
+      'highResolution',
+      'highResolutionCropped'
+    ]).isRequired,
     style: PropTypes.object
   };
 
-  imageName() {
-    const {type} = this.props;
-    return type === 'low' || type === 'standard'
-      ? `${type}Resolution`
-      : type;
-  }
-
   imageSrc() {
-    const imageName = this.imageName();
-    const image = this.props.images[imageName];
+    const image = this.props.images[this.props.type];
 
     let {url} = image;
 
