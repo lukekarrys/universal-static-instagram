@@ -15,7 +15,7 @@
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.0",
-    "rebass": "^0.1.5",
+    "rebass": "^0.2.3",
     "redux": "^3.3.1",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
