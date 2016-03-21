@@ -55,7 +55,7 @@
     "eslint-plugin-react": "^4.2.1",
     "git-directory-deploy": "^1.5.0",
     "git-validate": "^2.1.4",
-    "hjs-webpack": "^7.3.2",
+    "hjs-webpack": "^8.0.0",
     "html-tagged-literals": "^1.0.1",
     "http-server": "^0.9.0",
     "humps": "^1.0.0",
