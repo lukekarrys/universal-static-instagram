@@ -1,7 +1,8 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-const prefix = '/media/';
+
+const getImageSrc = (image) => image.url && image.url.replace(/https?:\/\//, '/media/');
 
 export default class PhotoImage extends Component {
   static propTypes = {
@@ -13,25 +14,25 @@ export default class PhotoImage extends Component {
       'highResolution',
       'highResolutionCropped'
     ]).isRequired,
-    style: PropTypes.object
+    style: PropTypes.object,
+    link: PropTypes.boolean
   };
 
-  imageSrc() {
-    const image = this.props.images[this.props.type];
+  render() {
+    const {style, type, images, link} = this.props;
+    const imageSrc = images[type];
+    const linkSrc = images.highResolution || images.highResolutionCropped || images.standardResolution;
 
-    let {url} = image;
+    const image = <img src={getImageSrc(imageSrc)} style={style} />;
 
-    if (prefix) {
-      url = url.replace(/https?:\/\//, prefix);
+    if (link) {
+      return (
+        <a href={getImageSrc(linkSrc)} target='_blank'>
+          {image}
+        </a>
+      );
     }
 
-    return url;
-  }
-
-  render() {
-    const {style} = this.props;
-    return (
-      <img src={this.imageSrc()} style={style} />
-    );
+    return image;
   }
 }
