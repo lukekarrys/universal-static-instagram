@@ -1,66 +1,86 @@
+/* global Promise:false */
+
 'use strict';
 
 import fs from 'fs';
 import path from 'path';
 import inquirer from 'inquirer';
 import {instagram} from 'instagram-node';
-import {bold, green} from 'colors/safe';
-import {find} from 'lodash';
-import {decamelizeKeys} from 'humps';
+import {green} from 'colors/safe';
+import {find, assign} from 'lodash';
+import {stripIndent} from 'common-tags';
+import {token} from 'instagram-download';
 
 const configPath = path.resolve(__dirname, '..', '..', 'config.json');
-const clientMessage = bold('What is the id of your Instagram client application?');
-const secretMessage = bold('What is the secret of your Instagram client application?');
-const clientHelp = 'If you don\'t have one you can register a new one here:\nhttps://instagram.com/developer/clients/register/';
-const clientValidator = (value) => value ? true : 'An Instagram client application is required. Please create one before proceeding.';
-const userValidator = (value) => value ? true : 'A valid username is required to lookup the user id';
+const required = (value) => value ? true : 'This is required.';
+const message = (...templ) => `${stripIndent(...templ)}\n`;
 
-let clientId, clientSecret;
+const save = (...objs) => {
+  fs.writeFileSync(configPath, JSON.stringify(assign(...objs), null, 2));
+  process.stdout.write(green('Done!'));
+  // eslint-disable-next-line no-process-exit
+  process.exit(0);
+};
 
-inquirer.prompt([
-  {
+const q = {
+  clientId: {
     type: 'input',
     name: 'client',
-    message: `${clientMessage}\n${clientHelp}\n`,
-    validate: clientValidator,
-    filter: (value) => {
-      clientId = value;
-      return value;
-    }
+    validate: required,
+    message: message`
+      ${green('What is the id of your Instagram client application?')}
+      If you don't have one you can register a new one here:
+
+      https://instagram.com/developer/clients/register/
+
+      Make sure you create a valid redirect URI for http://localhost:3001/
+    `
   },
-  {
+  clientSecret: {
     type: 'input',
     name: 'secret',
-    message: `${secretMessage}\n`,
-    validate: clientValidator,
-    filter: (value) => {
-      clientSecret = value;
-      return value;
-    }
+    validate: required,
+    message: message`
+      ${green('What is the secret of your Instagram client application?')}
+    `
   },
-  {
+  accessToken: (data) => ({
+    type: 'input',
+    name: 'access_token',
+    message: message`
+      Press ${green('ENTER')} to start the authorization flow (will open a browser window)
+    `,
+    filter: () => token({...data, port: 3003})
+  }),
+  user: (data) => ({
     type: 'input',
     name: 'user',
-    message: `What is the username of the Instagram user?\n`,
-    validate: userValidator,
-    filter: function filterUser(username) {
-      const done = this.async();
+    validate: required,
+    message: message`
+      What is the username of the Instagram user?
+    `,
+    filter: (username) => new Promise((resolve, reject) => {
       const ig = instagram();
-      ig.use(decamelizeKeys({clientId, clientSecret}));
-      ig.user_search(username, (err, users) => {
-        if (err) return done(err);
+      ig.use(data);
+      ig.user_search(username, (err, users = []) => {
+        if (err) return reject(err);
         const user = find(users, 'username', username);
-        return done(user ? user.id : new Error('No users could be found with that username.'));
+        if (!user) return reject(new Error('No users could be found with that username.'));
+        return resolve(user.id);
       });
-    }
-  },
-  {
+    })
+  }),
+  domain: {
     type: 'input',
     name: 'domain',
-    message: `What domain do you want to host this at? (optional)\n`
+    message: message`
+      What domain do you want to host this at? (optional)
+    `
   }
-], (answers) => {
-  const data = JSON.stringify(answers, null, 2);
-  fs.writeFileSync(configPath, data);
-  process.stdout.write(green('Done!'));
-});
+};
+
+inquirer.prompt([q.clientId, q.clientSecret]).then((client) =>
+  inquirer.prompt([q.accessToken(client)]).then((accessToken) =>
+    inquirer.prompt([q.user(accessToken), q.domain]).then((answers) => save(client, token, answers))
+  )
+);

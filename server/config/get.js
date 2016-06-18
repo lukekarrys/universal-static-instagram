@@ -12,7 +12,7 @@ catch (e) {
 }
 
 const cli = minimist(process.argv.slice(2), {
-  string: ['client', 'secret', 'user', 'domain']
+  string: ['token', 'user', 'domain']
 });
 
 // CLI options override config

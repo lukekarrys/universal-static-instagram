@@ -44,7 +44,7 @@ The best way to use this is by [forking](https://help.github.com/articles/fork-a
 - `npm run make.config`
 - `npm run fetch.data` (this could take a few minutes)
 
-Now you should have a `config.json` file with the information you entered and a `_cache/USER_ID` directory with all your Instagram data. These are both ignored by default and shouldn't be checked into the repo (especially the `config.json` which has your client secret).
+Now you should have a `config.json` file with the information you entered and a `_cache/USER_ID` directory with all your Instagram data. These are both ignored by default and shouldn't be checked into the repo (especially the `config.json` which has your access token).
 
 Next you can either edit some of the `src` files to change the appearance and layout of your site, or just go straight to deploying it to your favorite static hosting.
 
