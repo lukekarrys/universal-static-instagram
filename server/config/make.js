@@ -7,7 +7,7 @@ import path from 'path';
 import inquirer from 'inquirer';
 import {instagram} from 'instagram-node';
 import {green} from 'colors/safe';
-import {find, assign} from 'lodash';
+import {find, assign, map} from 'lodash';
 import {stripIndent} from 'common-tags';
 import {token} from 'instagram-download';
 
@@ -46,7 +46,7 @@ const q = {
   },
   accessToken: (data) => ({
     type: 'input',
-    name: 'access_token',
+    name: 'token',
     message: message`
       Press ${green('ENTER')} to start the authorization flow (will open a browser window)
     `,
@@ -61,11 +61,13 @@ const q = {
     `,
     filter: (username) => new Promise((resolve, reject) => {
       const ig = instagram();
-      ig.use(data);
+      // eslint-disable-next-line camelcase
+      ig.use({access_token: data.token});
       ig.user_search(username, (err, users = []) => {
         if (err) return reject(err);
+        if (!users.length) return reject(new Error('That search returned no results'));
         const user = find(users, 'username', username);
-        if (!user) return reject(new Error('No users could be found with that username.'));
+        if (!user) return reject(new Error(`No users could be found with that username. Found ${map(users, 'username').join(',')}`));
         return resolve(user.id);
       });
     })
