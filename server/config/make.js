@@ -44,7 +44,7 @@ const q = {
       ${green('What is the secret of your Instagram client application?')}
     `
   },
-  accessToken: (data) => ({
+  token: (data) => ({
     type: 'input',
     name: 'token',
     message: message`
@@ -81,8 +81,8 @@ const q = {
   }
 };
 
-inquirer.prompt([q.clientId, q.clientSecret]).then((client) =>
-  inquirer.prompt([q.accessToken(client)]).then((accessToken) =>
-    inquirer.prompt([q.user(accessToken), q.domain]).then((answers) => save(client, token, answers))
+inquirer.prompt([q.clientId, q.clientSecret]).then((clientData) =>
+  inquirer.prompt([q.token(clientData)]).then((tokenData) =>
+    inquirer.prompt([q.user(tokenData), q.domain]).then((answers) => save(clientData, tokenData, answers))
   )
 );
