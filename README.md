@@ -11,6 +11,11 @@ universal-static-instagram
 3. Deploy static files
 
 
+## Instagram API Updates (as of June 1, 2016)
+
+Instagram API updates went into effect on June 1, 2016. According to the new terms, API clients are in Sandbox mode by default and will only be allowed to download their last 20 posts from the API.
+
+
 ## What is this?
 
 [Demo](http://insta.lukelov.es)
