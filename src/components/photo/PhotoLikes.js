@@ -6,6 +6,10 @@ import {map} from 'lodash';
 const MAX_USERNAME_LIKES = 10;
 
 export default class PhotoLikes extends Component {
+  static defaultProps = {
+    data: []
+  };
+
   static propTypes = {
     count: PropTypes.number,
     data: PropTypes.array

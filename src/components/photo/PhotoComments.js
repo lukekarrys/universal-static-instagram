@@ -3,6 +3,10 @@
 import React, {Component, PropTypes} from 'react';
 
 export default class PhotoComments extends Component {
+  static defaultProps = {
+    data: []
+  };
+
   static propTypes = {
     count: PropTypes.number,
     data: PropTypes.array
