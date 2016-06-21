@@ -33,7 +33,7 @@ const q = {
 
       https://instagram.com/developer/clients/register/
 
-      Make sure you create a valid redirect URI for http://localhost:3001/
+      Make sure you create a valid redirect URI for http://localhost:3003/
     `
   },
   clientSecret: {
