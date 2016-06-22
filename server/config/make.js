@@ -34,6 +34,8 @@ const q = {
       https://instagram.com/developer/clients/register/
 
       Make sure you create a valid redirect URI for http://localhost:3003/
+
+      Also you should select "Non square media" in the Migrations tab
     `
   },
   clientSecret: {
