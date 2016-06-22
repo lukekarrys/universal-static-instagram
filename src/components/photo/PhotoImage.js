@@ -2,11 +2,13 @@
 
 import React, {Component, PropTypes} from 'react';
 
-const getImageSrc = (image) => image.url && image.url.replace(/https?:\/\//, '/media/');
+const getMediaSrc = (image) => image.url && image.url.replace(/https?:\/\//, '/media/');
+const getHighestRes = (obj) => obj.highResolution || obj.highResolutionCropped || obj.standardResolution;
 
 export default class PhotoImage extends Component {
   static propTypes = {
     images: PropTypes.object.isRequired,
+    videos: PropTypes.object,
     type: PropTypes.oneOf([
       'thumbnail',
       'lowResolution',
@@ -15,24 +17,20 @@ export default class PhotoImage extends Component {
       'highResolutionCropped'
     ]).isRequired,
     style: PropTypes.object,
-    link: PropTypes.boolean
+    link: PropTypes.bool
   };
 
   render() {
-    const {style, type, images, link} = this.props;
-    const imageSrc = images[type];
-    const linkSrc = images.highResolution || images.highResolutionCropped || images.standardResolution;
+    const {style, type, images, videos, link} = this.props;
+    const media = videos || images;
+    const mediaEl = React.createElement(videos ? 'video' : 'img', {
+      style,
+      autoPlay: true,
+      controls: true,
+      poster: getMediaSrc(images[type]),
+      src: getMediaSrc(media[type])
+    });
 
-    const image = <img src={getImageSrc(imageSrc)} style={style} />;
-
-    if (link) {
-      return (
-        <a href={getImageSrc(linkSrc)} target='_blank'>
-          {image}
-        </a>
-      );
-    }
-
-    return image;
+    return link ? <a href={getMediaSrc(getHighestRes(media))} target='_blank' children={mediaEl} /> : mediaEl;
   }
 }

@@ -19,9 +19,9 @@ export default class PhotoDetail extends Component {
     previous: PropTypes.string,
     next: PropTypes.string,
     photo: PropTypes.shape({
-      createdTime: PropTypes.string.isRequired,
+      createdTime: PropTypes.string,
       filter: PropTypes.string,
-      tags: PropTypes.array.isRequired
+      tags: PropTypes.array
     })
   };
 
