@@ -1,7 +1,7 @@
 'use strict';
 
-import cpr from 'cpr';
 import path from 'path';
+import cpr from 'cpr';
 import {noop} from 'lodash';
 import getConfig from '../config/get';
 import cacheDir from './cacheDir';

@@ -66,8 +66,8 @@ config.module.loaders.forEach((l, index, list) => {
 // This is way to clever but at least it works.
 config.resolve.alias = {
   basscss: ['basscss', 'rebass/node_modules/basscss']
-  .map((p) => path.resolve(__dirname, path.join('.', 'node_modules', p)))
-  .find((p) => _.chain(fs.statSync).attempt(p).invoke('isDirectory').value())
+    .map((p) => path.resolve(__dirname, path.join('.', 'node_modules', p)))
+    .find((p) => _.chain(fs.statSync).attempt(p).invoke('isDirectory').value())
 };
 
 // Dont display assets because it will contain tons of html and json assets

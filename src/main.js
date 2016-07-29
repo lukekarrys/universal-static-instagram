@@ -8,6 +8,7 @@ import {syncHistoryWithStore} from 'react-router-redux';
 import routes from './routes';
 import createStore from './store/client';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'basscss/css/basscss.css';
 
 const {__INITIAL_STATE__: initialState} = window;
@@ -18,6 +19,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 let debuggers = null;
 if (__DEVTOOLS__) {
   const DevTools = require('./containers/DevTools');
+
   debuggers = (<DevTools />);
 }
 

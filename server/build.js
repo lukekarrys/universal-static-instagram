@@ -1,9 +1,9 @@
 'use strict';
 
+import {resolve} from 'path';
 import {each, assign} from 'lodash';
 import async from 'async';
 import debugThe from 'debug';
-import {resolve} from 'path';
 import organizeData from './data/organize';
 import render from './render';
 import getConfig from './config/get';

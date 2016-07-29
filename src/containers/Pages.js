@@ -1,9 +1,9 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import PageContainer from './PageContainer';
 import PagesList from '../components/page/PagesList';
-import {connect} from 'react-redux';
 import {loadPages} from '../actions';
 import mapKeyToProps from '../helpers/mapKeyToProps';
 

@@ -7,9 +7,8 @@ const middleware = [];
 
 // Only require devtools/logger based on flag so they dont get bundled
 if (__DEVTOOLS__) {
-  const DevTools = require('../containers/DevTools');
   storeEnhancers.push(
-    DevTools.instrument()
+    require('../containers/DevTools').instrument()
   );
 }
 

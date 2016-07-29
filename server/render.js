@@ -5,13 +5,13 @@ import {renderToString, renderToStaticMarkup} from 'react-dom/server';
 import {match, RoutingContext} from 'react-router';
 import {Provider} from 'react-redux';
 import {minify} from 'html-tagged-literals';
+import debugThe from 'debug';
 import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
 import * as ACTIONS from '../src/actions';
 import createStore from '../src/store';
 import routes from '../src/routes';
-import debugThe from 'debug';
 
 const noJS = process.env.USI_NOJS === 'true';
 const debug = debugThe('usi:render');

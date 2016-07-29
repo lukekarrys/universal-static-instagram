@@ -1,11 +1,11 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
+import Media from 'rebass/dist/Media';
 import PhotoImage from '../photo/PhotoImage';
 import PhotoDate from '../photo/PhotoDate';
 import PhotoLink from '../photo/PhotoLink';
 import PhotoTitle from '../photo/PhotoTitle';
-import Media from 'rebass/dist/Media';
 
 export default class PhotosList extends Component {
   static propTypes = {
