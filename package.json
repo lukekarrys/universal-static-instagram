@@ -23,7 +23,7 @@
     "zero-fill": "^2.2.3"
   },
   "devDependencies": {
-    "@lukekarrys/eslint-config": "^2.1.1",
+    "@lukekarrys/eslint-config": "^2.1.2",
     "async": "^1.5.2",
     "autoprefixer": "^6.3.6",
     "babel": "^6.5.2",
@@ -51,11 +51,11 @@
     "css-modules-require-hook": "^4.0.1",
     "cssnano": "^3.7.1",
     "debug": "^2.2.0",
-    "eslint": "^3.2.0",
+    "eslint": "^3.2.2",
     "eslint-import-resolver-webpack": "^0.4.0",
     "eslint-plugin-classes": "^0.1.1",
     "eslint-plugin-import": "^1.12.0",
-    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-react": "^6.0.0",
     "git-directory-deploy": "^1.5.0",
     "git-validate": "^2.1.4",
     "hjs-webpack": "^8.3.0",
