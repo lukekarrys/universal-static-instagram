@@ -2,8 +2,9 @@
 
 require('babel-register');
 
-const isDev = (process.argv[1] || '').indexOf('hjs-dev-server') !== -1;
 const env = process.env;
+const nodeEnv = env.NODE_ENV || 'development';
+const isDev = nodeEnv === 'development';
 
 // Setup css modules require hook so it works when building for the server
 const cssModulesNames = `${isDev ? '[path][name]__[local]__' : ''}[hash:base64:5]`;
