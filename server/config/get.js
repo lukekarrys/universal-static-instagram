@@ -5,6 +5,7 @@ import minimist from 'minimist';
 
 let config;
 try {
+  // eslint-disable-next-line import/no-unresolved
   config = require('../../config.json');
 }
 catch (e) {
