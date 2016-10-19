@@ -13,7 +13,7 @@ universal-static-instagram
 
 ## Instagram API Updates (as of June 1, 2016)
 
-Instagram API updates went into effect on June 1, 2016. According to the new terms, API clients are in Sandbox mode by default and will only be allowed to download their last 20 posts from the API.
+Instagram API updates went into effect on June 1, 2016. According to the new terms, API clients are in Sandbox mode by default and will only be allowed to download data for the user who created the app (and up to 9 other accounts which must first approve the application request) and the last 20 posts for each user.
 
 
 ## What is this?
