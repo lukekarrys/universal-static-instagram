@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {renderToString, renderToStaticMarkup} from 'react-dom/server';
-import {match, RoutingContext} from 'react-router';
+import {match, RouterContext} from 'react-router';
 import {Provider} from 'react-redux';
 import {minify} from 'html-tagged-literals';
 import debugThe from 'debug';
@@ -67,15 +67,17 @@ export default ({context, path, data = null, key = null}, done) => {
   }
 
   match({routes, location}, (err, __, renderProps) => {
+    debugPages(`render props: ${JSON.stringify(renderProps)}`);
+
     if (err) {
-      debug(`Store dispatch matching location err ${err}`);
+      debugPages(`Store dispatch matching location err ${err}`);
       done(err);
       return;
     }
 
     const body = (noJS ? renderToStaticMarkup : renderToString)(
       <Provider store={store}>
-        <RoutingContext {...renderProps} />
+        <RouterContext {...renderProps} />
       </Provider>
     );
 
