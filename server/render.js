@@ -15,6 +15,7 @@ import routes from '../src/routes';
 
 const noJS = process.env.USI_NOJS === 'true';
 const debug = debugThe('usi:render');
+const debugPages = debugThe('usi:pages');
 const successActions = {
   photo: ACTIONS.PHOTO_SUCCESS,
   photos: ACTIONS.PHOTOS_SUCCESS,
@@ -78,13 +79,12 @@ export default ({context, path, data = null, key = null}, done) => {
       </Provider>
     );
 
-    debug(`body: ${body}`);
+    const state = store.getState();
+
+    debugPages(`body: ${body}`);
+    debugPages(`state: ${JSON.stringify(state)}`);
 
     // Hack to clear call stack to prevent max size exceeded
-    setImmediate(() => done(null, template({
-      context,
-      body,
-      state: store.getState()
-    })));
+    setImmediate(() => done(null, template({context, body, state})));
   });
 };
