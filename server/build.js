@@ -87,6 +87,8 @@ export default (context, done) => organizeData({dir, user: CONFIG.user}, (dataEr
   each(ids, (obj) => addTask(`/photos/${obj.id}/index.html`, obj, 'photo'));
   each(dates, (obj) => addTask(`/photos/${obj.id}/index.html`, toPhotosList(obj), 'photos'));
 
+  debug(`async render size: ${Object.keys(filesAsync).length}`);
+
   // Run all the async taks and merge those paths with the non-async paths
   async.parallel(filesAsync, (htmlErr, paths) => {
     if (htmlErr) throw htmlErr;

@@ -38,7 +38,10 @@ const template = ({context, body, state}) => minify`
 
 export default ({context, path, data = null, key = null}, done) => {
   // During dev this is called with only a context to just return an empty template
-  if (path === undefined && !done) return template({context});
+  if (path === undefined && !done) {
+    template({context});
+    return;
+  }
 
   const location = slash(path) || '/';
   const actionType = successActions[key];
@@ -62,20 +65,26 @@ export default ({context, path, data = null, key = null}, done) => {
     });
   }
 
-  return match({routes, location}, (err, __, renderProps) => {
+  match({routes, location}, (err, __, renderProps) => {
     if (err) {
       debug(`Store dispatch matching location err ${err}`);
-      return done(err);
+      done(err);
+      return;
     }
 
-    return done(null, template({
+    const body = (noJS ? renderToStaticMarkup : renderToString)(
+      <Provider store={store}>
+        <RoutingContext {...renderProps} />
+      </Provider>
+    );
+
+    debug(`body: ${body}`);
+
+    // Hack to clear call stack to prevent max size exceeded
+    setImmediate(() => done(null, template({
       context,
-      state: store.getState(),
-      body: (noJS ? renderToStaticMarkup : renderToString)(
-        <Provider store={store}>
-          <RoutingContext {...renderProps} />
-        </Provider>
-      )
-    }));
+      body,
+      state: store.getState()
+    })));
   });
 };
