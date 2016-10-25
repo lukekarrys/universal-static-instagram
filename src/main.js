@@ -19,7 +19,6 @@ const history = syncHistoryWithStore(browserHistory, store);
 let debuggers = null;
 if (__DEVTOOLS__) {
   const DevTools = require('./containers/DevTools');
-
   debuggers = (<DevTools />);
 }
 
