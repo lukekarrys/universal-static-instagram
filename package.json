@@ -7,7 +7,7 @@
     "url": "https://github.com/lukekarrys/universal-static-instagram/issues"
   },
   "dependencies": {
-    "dateformat": "^1.0.12",
+    "dateformat": "^2.0.0",
     "lodash": "^4.16.6",
     "normalizr": "^2.2.1",
     "react": "^15.3.2",
