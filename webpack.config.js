@@ -17,6 +17,7 @@ const cssnano = require('cssnano');
 const _ = require('lodash');
 const OnBuildPlugin = require('on-build-webpack');
 
+const userConfig = require('./server/config/get')();
 const copyMedia = require('./server/data/copyMedia');
 const server = require('./server/build');
 
@@ -31,6 +32,7 @@ const config = webpack({
   output: {hash: true},
   html: serverBuild,
   define: {
+    __GA__: JSON.stringify(userConfig.ga || ''),
     __LOGGER__: JSON.stringify(env.USI_LOGGER === 'true' || isDev),
     __DEVTOOLS__: JSON.stringify(env.USI_DEVTOOLS === 'true')
   }

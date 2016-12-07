@@ -40,8 +40,7 @@ const template = ({context, body, state}) => minify`
 export default ({context, path, data = null, key = null}, done) => {
   // During dev this is called with only a context to just return an empty template
   if (path === undefined && !done) {
-    template({context});
-    return;
+    return template({context});
   }
 
   const location = slash(path) || '/';
@@ -66,7 +65,7 @@ export default ({context, path, data = null, key = null}, done) => {
     });
   }
 
-  match({routes, location}, (err, __, renderProps) => {
+  return match({routes, location}, (err, __, renderProps) => {
     debugPages(`render props: ${JSON.stringify(renderProps)}`);
 
     if (err) {

@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import {syncHistoryWithStore} from 'react-router-redux';
 import routes from './routes';
 import createStore from './store/client';
+import {pageview} from './helpers/analytics';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'basscss/css/basscss.css';
@@ -14,6 +15,8 @@ import 'basscss/css/basscss.css';
 const {__INITIAL_STATE__: initialState} = window;
 const store = createStore({initialState});
 const history = syncHistoryWithStore(browserHistory, store);
+
+history.listen((location) => pageview(location || history.getCurrentLocation()));
 
 // Only require devtools based on flag so they dont get bundled
 let debuggers = null;

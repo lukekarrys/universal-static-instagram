@@ -80,11 +80,18 @@ const q = {
     message: message`
       What domain do you want to host this at? (optional)
     `
+  },
+  ga: {
+    type: 'input',
+    name: 'ga',
+    message: message`
+      What is your Google Analytics ID? (optional)
+    `
   }
 };
 
 inquirer.prompt([q.clientId, q.clientSecret]).then((clientData) =>
   inquirer.prompt([q.token(clientData)]).then((tokenData) =>
-    inquirer.prompt([q.user(tokenData), q.domain]).then((answers) => save(clientData, tokenData, answers))
+    inquirer.prompt([q.user(tokenData), q.domain, q.ga]).then((answers) => save(clientData, tokenData, answers))
   )
 );
