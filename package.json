@@ -50,7 +50,7 @@
     "cpr": "^2.0.0",
     "css-loader": "^0.26.0",
     "css-modules-require-hook": "^4.0.5",
-    "cssnano": "^3.8.0",
+    "cssnano": "^3.8.2",
     "debug": "^2.2.0",
     "eslint": "^3.9.1",
     "eslint-import-resolver-webpack": "^0.7.0",
