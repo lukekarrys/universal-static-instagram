@@ -9,7 +9,7 @@
   "dependencies": {
     "dateformat": "^2.0.0",
     "lodash": "^4.16.6",
-    "normalizr": "^2.2.1",
+    "normalizr": "^3.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-ga": "^2.1.2",
