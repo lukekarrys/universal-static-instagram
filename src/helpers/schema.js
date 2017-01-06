@@ -1,22 +1,22 @@
 'use strict';
 
-import {Schema, arrayOf} from 'normalizr';
+import {schema, arrayOf} from 'normalizr';
 
-const photos = new Schema('photos', {
+const photos = new schema.Entity('photos', {
   idAttribute: 'id'
 });
 
-const pages = new Schema('pages', {
+const pages = new schema.Entity('pages', {
   idAttribute: 'id'
 });
 
-const tags = new Schema('tags', {
+const tags = new schema.Entity('tags', {
   idAttribute: 'id'
 });
 
 export default {
   photo: photos,
-  photos: arrayOf(photos),
-  tags: arrayOf(tags),
-  pages: arrayOf(pages)
+  photos: new Schema.Array(photos),
+  tags: new Schema.Array(tags),
+  pages: new Schema.Array(pages)
 };
