@@ -63,7 +63,7 @@
     "html-tagged-literals": "^1.0.2",
     "http-server": "^0.9.0",
     "humps": "^2.0.0",
-    "inquirer": "^2.0.0",
+    "inquirer": "^3.0.0",
     "instagram-download": "^2.2.5",
     "instagram-node": "^0.5.8",
     "minimist": "^1.2.0",
