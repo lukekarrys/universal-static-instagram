@@ -73,7 +73,7 @@
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-slider-monitor": "^1.0.7",
     "rimraf": "^2.5.4",
-    "style-loader": "^0.13.1",
+    "style-loader": "^0.14.0",
     "surge": "^0.18.0"
   },
   "engines": {
