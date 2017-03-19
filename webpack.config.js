@@ -1,3 +1,5 @@
+/* eslint prefer-destructuring:0 */
+
 'use strict';
 
 require('babel-register');
