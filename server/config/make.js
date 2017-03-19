@@ -94,4 +94,4 @@ inquirer.prompt([q.clientId, q.clientSecret]).then((clientData) =>
   inquirer.prompt([q.token(clientData)]).then((tokenData) =>
     inquirer.prompt([q.user(tokenData), q.domain, q.ga]).then((answers) => save(clientData, tokenData, answers))
   )
-);
+).catch((err) => process.stderr.write(err));
