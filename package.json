@@ -24,7 +24,7 @@
     "zero-fill": "^2.2.3"
   },
   "devDependencies": {
-    "@lukekarrys/eslint-config": "^2.1.11",
+    "@lukekarrys/eslint-config": "^3.0.0",
     "async": "^2.1.4",
     "autoprefixer": "^6.6.1",
     "babel": "^6.5.2",
