@@ -60,7 +60,7 @@
     "eslint-plugin-react": "^6.10.2",
     "git-directory-deploy": "^1.5.1",
     "git-validate": "^2.2.2",
-    "hjs-webpack": "^8.4.3",
+    "hjs-webpack": "^9.1.0",
     "html-tagged-literals": "^1.0.2",
     "http-server": "^0.9.0",
     "humps": "^2.0.0",
