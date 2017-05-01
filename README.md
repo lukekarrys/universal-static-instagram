@@ -2,6 +2,7 @@ universal-static-instagram
 ===============
 
 [![Build Status](https://img.shields.io/travis/lukekarrys/universal-static-instagram/master.svg)](https://travis-ci.org/lukekarrys/universal-static-instagram)
+[![Greenkeeper badge](https://badges.greenkeeper.io/lukekarrys/universal-static-instagram.svg)](https://greenkeeper.io/)
 
 
 ## TL;DR
