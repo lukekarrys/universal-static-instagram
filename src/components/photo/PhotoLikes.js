@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {Badge} from 'rebass';
 import {map} from 'lodash';
 
 const MAX_USERNAME_LIKES = 10;
@@ -24,14 +25,13 @@ export default class PhotoLikes extends Component {
   render() {
     const {count} = this.props;
 
-    if (count <= MAX_USERNAME_LIKES) {
-      return (
-        <span>{`${count} likes ${this.users()}`}</span>
-      );
-    }
+    const likesText = (count <= MAX_USERNAME_LIKES) ? ` ${this.users()}` : '';
 
     return (
-      <span>{`${count} likes`}</span>
+      <span>
+        <Badge pill rounded>{count}</Badge>
+        {` likes${likesText}`}
+      </span>
     );
   }
 }

@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {compact} from 'lodash';
 import dateFormat from 'dateformat';
-import {SectionHeader} from 'rebass';
+import {PageHeader} from 'rebass';
 import PhotosList from './PhotosList';
 import TagLink from '../tag/TagLink';
 import PageLink from '../page/PageLink';
@@ -80,7 +80,7 @@ export default class PhotosBy extends Component {
 
     return (
       <div>
-        <SectionHeader heading={title} />
+        <PageHeader heading={title} />
         <PhotosList photos={photos} type='thumbnail' />
         <Links links={links} group />
       </div>

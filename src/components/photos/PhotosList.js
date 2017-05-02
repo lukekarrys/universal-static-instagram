@@ -2,11 +2,11 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Media} from 'rebass';
-import PhotoDate from '../photo/PhotoDate';
+import {Media, Badge, Block} from 'rebass';
 import PhotoLink from '../photo/PhotoLink';
-import PhotoTitle from '../photo/PhotoTitle';
-import getSrc from '../../helpers/photoImage';
+import photoSrc from '../../helpers/photoSrc';
+import photoTitle from '../../helpers/photoTitle';
+import photoDate from '../../helpers/photoDate';
 
 export default class PhotosList extends Component {
   static propTypes = {
@@ -21,15 +21,15 @@ export default class PhotosList extends Component {
           <Media
             key={photo.id}
             align='center'
-            img={getSrc(photo.images[this.props.type])}
+            img={photoSrc(photo.images[this.props.type])}
           >
-            <p><PhotoLink path={photo.id}><PhotoDate createdTime={photo.createdTime} /></PhotoLink></p>
-            <p><PhotoTitle caption={photo.caption} /></p>
-            <p>
-              Comments: {photo.comments.count}
+            <Block><PhotoLink path={photo.id}>{photoDate(photo)}</PhotoLink></Block>
+            <Block>{photoTitle(photo)}</Block>
+            <Block>
+              <Badge pill rounded>{photo.comments.count}</Badge> comments
               {' '}
-              Likes: {photo.likes.count}
-            </p>
+              <Badge pill rounded>{photo.likes.count}</Badge> likes
+            </Block>
           </Media>
         )}
       </div>

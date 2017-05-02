@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {SectionHeader} from 'rebass';
+import {PageHeader} from 'rebass';
 import PageError from '../components/PageError';
 
 export default class PageContainer extends Component {
@@ -30,7 +30,7 @@ export default class PageContainer extends Component {
     if (error) {
       return (
         <div>
-          <SectionHeader title='Error' />
+          <PageHeader heading='Error' />
           <PageError error={error} />
         </div>
       );
@@ -39,7 +39,7 @@ export default class PageContainer extends Component {
     if (loading) {
       return (
         <div>
-          <SectionHeader title='Loading...' />
+          <PageHeader heading='Loading...' />
         </div>
       );
     }

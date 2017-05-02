@@ -2,8 +2,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-const space = (str) => str ? ` ${str}` : '';
+import {Badge} from 'rebass';
 
 export default class PhotoComments extends Component {
   static propTypes = {
@@ -29,7 +28,11 @@ export default class PhotoComments extends Component {
     if (!name && !geo) return null;
 
     return (
-      <span>{`${space(name)}${space(geo)}`}</span>
+      <span>
+        <Badge>{geo}</Badge>
+        {' '}
+        <Badge>{name}</Badge>
+      </span>
     );
   }
 }

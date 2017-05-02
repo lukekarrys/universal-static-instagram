@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import getSrc, {highRes} from '../../helpers/photoImage';
+import photoSrc, {highRes} from '../../helpers/photoSrc';
 
 export default class PhotoImage extends Component {
   static propTypes = {
@@ -25,8 +25,8 @@ export default class PhotoImage extends Component {
       style,
       autoPlay: true,
       controls: true,
-      poster: getSrc(images[type]),
-      src: getSrc(media[type])
+      poster: photoSrc(images[type]),
+      src: photoSrc(media[type])
     });
 
     return <a href={highRes(media)} target='_blank' children={mediaEl} />;
