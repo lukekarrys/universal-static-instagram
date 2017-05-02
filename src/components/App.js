@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router';
-import {Container, Toolbar, Footer, Section, NavItem} from 'rebass';
+import {Container, Toolbar, Footer, Section, NavItem, ButtonOutline} from 'rebass';
 
 export default class App extends Component {
   static propTypes = {
@@ -22,9 +22,7 @@ export default class App extends Component {
           <Section>{this.props.children}</Section>
           <Footer>
             <span>
-              Powered by
-              {' '}
-              <a href='https://github.com/lukekarrys/universal-static-instagram'>universal-static-instagram</a>
+              Powered by <ButtonOutline href='https://github.com/lukekarrys/universal-static-instagram'>universal-static-instagram</ButtonOutline>
             </span>
           </Footer>
         </Container>

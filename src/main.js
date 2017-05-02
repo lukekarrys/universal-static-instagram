@@ -1,6 +1,6 @@
 'use strict';
 
-import './global.css';
+import './main.css';
 
 import React from 'react';
 import {render} from 'react-dom';
