@@ -84,12 +84,9 @@ config.module.rules.forEach((rule, index, rules) => {
 // Hacky but we want to use the version of basscss that rebass uses
 // without installing it. The css from rebass needs cssnext which I couldnt
 // get to build properly with postcss options so instead this points basscss
-// imports to whichever path exists (one for npm2 and one for npm3).
-// This is way to clever but at least it works.
+// imports to where it should be after installing with npm3
 config.resolve.alias = {
-  basscss: ['basscss', 'rebass/node_modules/basscss']
-    .map((p) => path.resolve(__dirname, path.join('.', 'node_modules', p)))
-    .find((p) => _.chain(fs.statSync).attempt(p).invoke('isDirectory').value())
+  basscss: path.resolve(__dirname, path.join('node_modules', 'basscss'))
 };
 
 // Dont display assets because it will contain tons of html and json assets
