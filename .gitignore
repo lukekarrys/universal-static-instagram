@@ -31,3 +31,4 @@ _cache
 public
 config.json
 config-*.json
+!test/config.json
