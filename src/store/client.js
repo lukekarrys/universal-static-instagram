@@ -13,7 +13,7 @@ if (__DEVTOOLS__) {
 }
 
 if (__LOGGER__) {
-  middleware.push(require('redux-logger')());
+  middleware.push(require('redux-logger').createLogger());
 }
 
 export default ({initialState = {}, routerMiddleware} = {}) => {
