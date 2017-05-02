@@ -1,10 +1,8 @@
-/* eslint prefer-destructuring:0 */
-
 'use strict';
 
 require('babel-register');
 
-const env = process.env;
+const {env} = process;
 const nodeEnv = env.NODE_ENV || 'development';
 const isDev = nodeEnv === 'development';
 
@@ -15,16 +13,12 @@ require('css-modules-require-hook')({generateScopedName: cssModulesNames});
 const path = require('path');
 const fs = require('fs');
 const webpack = require('hjs-webpack');
-const cssnano = require('cssnano');
 const _ = require('lodash');
 const OnBuildPlugin = require('on-build-webpack');
 
 const userConfig = require('./server/config/get')();
 const copyMedia = require('./server/data/copyMedia');
-const server = require('./server/build');
-
-const serverBuild = server.default;
-const buildDir = server.buildDir;
+const {'default': serverBuild, buildDir} = require('./server/build');
 
 const config = webpack({
   isDev,
@@ -42,24 +36,47 @@ const config = webpack({
 
 // Having hmre present in the .babelrc will break the babel-register above
 // so we wait until that is done and then add it here via the loader query
-const babelrc = JSON.parse(fs.readFileSync('./.babelrc'));
-config.module.loaders[0].query = _.merge(babelrc, {
-  env: {
-    development: {
-      presets: ['react-hmre']
+const babelrc = JSON.parse(fs.readFileSync(path.resolve(__dirname, '.babelrc')));
+config.module.rules[0].use = [{
+  loader: 'babel-loader',
+  options: _.merge(babelrc, {
+    env: {
+      development: {
+        presets: ['react-hmre']
+      }
     }
-  }
-});
+  })
+}];
 
 // Add support for css modules for files ending in '.module.css' and make other
 // css loaders ignore those files
-const matchCssLoaders = /(^|!)(css-loader)($|!)/;
-config.module.loaders.forEach((l, index, list) => {
-  if (l && l.loader && l.loader.match(matchCssLoaders)) {
-    l.test = new RegExp(`[^module]${l.test.source}`);
-    list.push({
+config.module.rules.forEach((rule, index, rules) => {
+  if (rule && rule.use && rule.use.includes('css-loader')) {
+    const cssIndex = rule.use.findIndex((loader) => loader === 'css-loader');
+
+    // Update current css-loader to not look for modules and to minimize
+    rule.test = new RegExp(`[^module]${rule.test.source}`);
+    rule.use[cssIndex] = {
+      loader: 'css-loader',
+      options: {
+        minimize: isDev ? false : {discardComments: {removeAll: true}}
+      }
+    };
+
+    // Add new css-loader for modules
+    rules.push({
       test: /\.module\.css$/,
-      loader: l.loader.replace(matchCssLoaders, `$1$2?modules&localIdentName=${cssModulesNames}$3`)
+      use: [
+        ...rule.use.slice(0, cssIndex),
+        {
+          loader: 'css-loader',
+          options: _.assign({}, rule.use[cssIndex].options, {
+            modules: true,
+            localIdentName: cssModulesNames
+          })
+        },
+        ...rule.use.slice(cssIndex + 1)
+      ]
     });
   }
 });
@@ -83,13 +100,5 @@ config.stats = {assets: false};
 // has finished compiling. This means in dev mode that the server needs to be
 // restarted if new images are fetched.
 config.plugins.push(new OnBuildPlugin(_.once(copyMedia)));
-
-// Add custom cssnano for css-modules to existing postcss plugin
-config.postcss.push(cssnano({
-  // Core is on by default so disabling it for dev allows for more readable
-  // css since it retains whitespace and bracket newlines
-  core: !isDev,
-  discardComments: {removeAll: !isDev}
-}));
 
 module.exports = config;
