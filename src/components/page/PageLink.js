@@ -9,7 +9,7 @@ export default class PageLink extends Component {
   static propTypes = {
     page: PropTypes.string,
     children: PropTypes.node.isRequired
-  };
+  }
 
   render() {
     const {page, children, ...rest} = this.props;

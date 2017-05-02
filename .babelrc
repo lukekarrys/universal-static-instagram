@@ -2,7 +2,16 @@
   "plugins": [
     "transform-runtime",
     "transform-decorators-legacy",
-    "add-module-exports"
+    "add-module-exports",
+    [
+      "transform-imports",
+      {
+        "rebass": {
+          "transform": "rebass/dist/${member}",
+          "preventFullImport": true
+        }
+      }
+    ]
   ],
   "presets": [
     "react",

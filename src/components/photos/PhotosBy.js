@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {compact} from 'lodash';
 import dateFormat from 'dateformat';
-import SectionHeader from 'rebass/dist/SectionHeader';
+import {SectionHeader} from 'rebass';
 import PhotosList from './PhotosList';
 import TagLink from '../tag/TagLink';
 import PageLink from '../page/PageLink';
@@ -23,7 +23,7 @@ export default class PhotosBy extends Component {
     name: PropTypes.string,
     previous: PropTypes.string,
     next: PropTypes.string
-  };
+  }
 
   getTitle() {
     const {type, name} = this.props;
@@ -51,7 +51,7 @@ export default class PhotosBy extends Component {
       return [
         <PageLink page={previous} disabled={!previous} key={`page-${previous}`}>Prev</PageLink>,
         <PageLink page={next} disabled={!next} key={`page-${next}`}>Next</PageLink>,
-        <PageLink className='btn btn-outline' key='page-all'>All pages</PageLink>
+        <PageLink key='page-all'>All pages</PageLink>
       ];
     case 'tag':
       return [
@@ -80,7 +80,7 @@ export default class PhotosBy extends Component {
 
     return (
       <div>
-        <SectionHeader title={title} />
+        <SectionHeader heading={title} />
         <PhotosList photos={photos} type='thumbnail' />
         <Links links={links} />
       </div>

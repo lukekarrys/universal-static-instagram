@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import SectionHeader from 'rebass/dist/SectionHeader';
+import {SectionHeader} from 'rebass';
 import PageError from '../components/PageError';
 
 export default class PageContainer extends Component {

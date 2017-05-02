@@ -8,7 +8,7 @@ import Links from '../ui/Links';
 export default class PagesList extends Component {
   static propTypes = {
     pages: PropTypes.array.isRequired
-  };
+  }
 
   render() {
     const {pages} = this.props;

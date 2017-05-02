@@ -1,5 +1,7 @@
 'use strict';
 
+import './global.css';
+
 import React from 'react';
 import {render} from 'react-dom';
 import {Router, browserHistory} from 'react-router';
@@ -8,9 +10,6 @@ import {syncHistoryWithStore} from 'react-router-redux';
 import routes from './routes';
 import createStore from './store/client';
 import {pageview} from './helpers/analytics';
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'basscss/css/basscss.css';
 
 const {__INITIAL_STATE__: initialState} = window;
 const store = createStore({initialState});

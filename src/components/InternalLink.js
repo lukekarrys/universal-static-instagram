@@ -3,25 +3,30 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router';
+import {ButtonOutline} from 'rebass';
+import {omit} from 'lodash';
 
 export default class InternalLink extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    className: PropTypes.string,
     disabled: PropTypes.bool
-  };
+  }
 
   render() {
-    const {disabled, children, className, ...rest} = this.props;
+    const {disabled, children, ...rest} = this.props;
 
     if (disabled) {
       return (
-        <a style={{cursor: 'default'}} className={`${className} is-disabled`} {...rest}>{children}</a>
+        <ButtonOutline style={{cursor: 'default'}} {...omit(rest, 'to')}>{children}</ButtonOutline>
       );
     }
 
     return (
-      <Link className={className} {...rest}>{children}</Link>
+      <ButtonOutline
+        {...rest}
+        is={Link}
+        children={children}
+      />
     );
   }
 }

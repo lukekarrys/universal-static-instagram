@@ -1,7 +1,6 @@
 'use strict';
 
 import React, {Component} from 'react';
-
 import PropTypes from 'prop-types';
 
 const space = (str) => str ? ` ${str}` : '';
@@ -11,7 +10,7 @@ export default class PhotoComments extends Component {
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     name: PropTypes.string
-  };
+  }
 
   getGeo() {
     const {latitude, longitude} = this.props;

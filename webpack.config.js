@@ -55,8 +55,9 @@ config.module.rules.forEach((rule, index, rules) => {
     const cssIndex = rule.use.findIndex((loader) => loader === 'css-loader');
 
     // Update current css-loader to not look for modules and to minimize
-    rule.test = new RegExp(`[^module]${rule.test.source}`);
+    rule.test = /\.?global\.css$/;
     rule.use[cssIndex] = {
+
       loader: 'css-loader',
       options: {
         minimize: isDev ? false : {discardComments: {removeAll: true}}
@@ -85,9 +86,9 @@ config.module.rules.forEach((rule, index, rules) => {
 // without installing it. The css from rebass needs cssnext which I couldnt
 // get to build properly with postcss options so instead this points basscss
 // imports to where it should be after installing with npm3
-config.resolve.alias = {
-  basscss: path.resolve(__dirname, path.join('node_modules', 'basscss'))
-};
+// config.resolve.alias = {
+//   basscss: path.resolve(__dirname, path.join('node_modules', 'basscss'))
+// };
 
 // Dont display assets because it will contain tons of html and json assets
 // devServer.noInfo = true does the same thing for webpack-dev-server

@@ -3,34 +3,29 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router';
-import Container from 'rebass/dist/Container';
-import Toolbar from 'rebass/dist/Toolbar';
-import Footer from 'rebass/dist/Footer';
-import Section from 'rebass/dist/Section';
+import {Container, Toolbar, Footer, Section, NavItem} from 'rebass';
 
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired
-  };
+  }
 
   render() {
     return (
       <div>
         <Toolbar>
-          <Link to='/' className='NavItem btn'>Home</Link>
-          <Link to='/tags' className='NavItem btn'>Tags</Link>
-          <Link to='/pages' className='NavItem btn'>Pages</Link>
+          <NavItem is={Link} to='/'>Home</NavItem>
+          <NavItem is={Link} to='/tags'>Tags</NavItem>
+          <NavItem is={Link} to='/pages'>Pages</NavItem>
         </Toolbar>
         <Container>
           <Section>{this.props.children}</Section>
           <Footer>
-            <div className='flex'>
-              <div className='flex-auto right-align px2'>
-                Powered by
-                {' '}
-                <a href='https://github.com/lukekarrys/universal-static-instagram'>universal-static-instagram</a>
-              </div>
-            </div>
+            <span>
+              Powered by
+              {' '}
+              <a href='https://github.com/lukekarrys/universal-static-instagram'>universal-static-instagram</a>
+            </span>
           </Footer>
         </Container>
       </div>
