@@ -80,7 +80,8 @@
   },
   "greenkeeper": {
     "ignore": [
-      "rebass"
+      "rebass",
+      "react-router"
     ]
   },
   "homepage": "https://github.com/lukekarrys/universal-static-instagram",
