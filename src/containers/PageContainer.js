@@ -1,6 +1,7 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import SectionHeader from 'rebass/dist/SectionHeader';
 import PageError from '../components/PageError';
 

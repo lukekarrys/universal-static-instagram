@@ -1,6 +1,8 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+
+import PropTypes from 'prop-types';
 
 const getMediaSrc = (image) => image.url && image.url.replace(/https?:\/\//, '/media/');
 const getHighestRes = (obj) => obj.highResolution || obj.highResolutionCropped || obj.standardResolution;

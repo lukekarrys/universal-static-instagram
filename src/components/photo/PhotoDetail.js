@@ -1,6 +1,7 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import PhotoImage from './PhotoImage';
 import PhotoDate from './PhotoDate';
 import PhotoTitle from './PhotoTitle';

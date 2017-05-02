@@ -1,6 +1,7 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Media from 'rebass/dist/Media';
 import PhotoImage from '../photo/PhotoImage';
 import PhotoDate from '../photo/PhotoDate';

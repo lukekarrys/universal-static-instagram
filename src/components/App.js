@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import Container from 'rebass/dist/Container';
 import Toolbar from 'rebass/dist/Toolbar';
@@ -9,7 +10,7 @@ import Section from 'rebass/dist/Section';
 
 export default class App extends Component {
   static propTypes = {
-    children: React.PropTypes.element.isRequired
+    children: PropTypes.element.isRequired
   };
 
   render() {

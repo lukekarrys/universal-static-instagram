@@ -1,6 +1,7 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
 import createdDate from '../../helpers/createdDate';
 
