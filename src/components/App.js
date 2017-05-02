@@ -21,9 +21,7 @@ export default class App extends Component {
         <Container>
           <Section>{this.props.children}</Section>
           <Footer>
-            <span>
-              Powered by <ButtonOutline href='https://github.com/lukekarrys/universal-static-instagram'>universal-static-instagram</ButtonOutline>
-            </span>
+            <ButtonOutline href='https://github.com/lukekarrys/universal-static-instagram'>Powered by universal-static-instagram</ButtonOutline>
           </Footer>
         </Container>
       </div>

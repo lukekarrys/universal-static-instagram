@@ -82,7 +82,7 @@ export default class PhotosBy extends Component {
       <div>
         <SectionHeader heading={title} />
         <PhotosList photos={photos} type='thumbnail' />
-        <Links links={links} />
+        <Links links={links} group />
       </div>
     );
   }

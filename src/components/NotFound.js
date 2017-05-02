@@ -12,7 +12,7 @@ export default class NotFound extends Component {
         <h1>Not Found</h1>
         <p>
           Check out the
-          {', '}
+          {' '}
           <PageLink>pages</PageLink>
           {', '}
           <TagLink>tags</TagLink>

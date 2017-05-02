@@ -50,7 +50,7 @@ export default class PhotoDetail extends Component {
         <p><PhotoLikes {...photo.likes} /></p>
         <PhotoComments {...photo.comments} />
         <p><PhotoLocation {...photo.location} /></p>
-        <Links links={links} />
+        <Links links={links} group />
       </div>
     );
   }
