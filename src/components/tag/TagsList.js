@@ -14,7 +14,7 @@ export default class TagsList extends Component {
     const {tags} = this.props;
 
     return (
-      <Links links={tags.map((tag) => <TagLink tag={tag.id} key={tag.id}>{tag.name}</TagLink>)} />
+      <Links justify='space-between' links={tags.map((tag) => <TagLink tag={tag.id} key={tag.id}>{tag.name}</TagLink>)} />
     );
   }
 }

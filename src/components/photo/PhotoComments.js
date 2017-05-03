@@ -19,15 +19,15 @@ export default class PhotoComments extends Component {
     return (
       <span>
         <span>
-          <Badge pill rounded>{count}</Badge>
+          <Badge theme='secondary' pill rounded>{count}</Badge>
           {' comments'}
         </span>
         {data.map((comment) =>
-          <Block key={comment.id} borderLeft px={2} borderColor='black'>
+          <Block key={comment.id} borderLeft px={2} borderColor='secondary'>
             <Text
               small
               bold
-              color='midgray'
+              color='secondary'
               children={comment.from.username}
             />
             <Text children={comment.text} />

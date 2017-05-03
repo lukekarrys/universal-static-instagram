@@ -2,16 +2,19 @@
 
 import React, {Component, cloneElement} from 'react';
 import PropTypes from 'prop-types';
-import {ButtonOutline} from 'rebass';
+import {ButtonOutline, Block} from 'rebass';
+import {Flex} from 'reflexbox';
+import {margin} from '../../helpers/rebassScale';
 
 export default class Links extends Component {
   static propTypes = {
     links: PropTypes.arrayOf(PropTypes.element).isRequired,
-    group: PropTypes.bool
+    group: PropTypes.bool,
+    justify: PropTypes.string
   }
 
   render() {
-    const {links, group} = this.props;
+    const {links, group, justify} = this.props;
 
     const groupProps = (i) => {
       if (!group) return {rounded: true};
@@ -20,13 +23,33 @@ export default class Links extends Component {
       return {rounded: false, style: {marginLeft: -1}};
     };
 
+    const styles = {
+      container: {},
+      block: {m: 0}
+    };
+
+    if (!group) {
+      const xSpacing = 1;
+      styles.block = {mb: 1, mt: 0, mx: xSpacing};
+      styles.container = {
+        marginLeft: margin({m: xSpacing}).marginLeft * -1,
+        marginRight: margin({m: xSpacing}).marginRight * -1
+      };
+    }
+
     return (
-      <div>
-        {links.map((link, index) => cloneElement(link, {
-          is: ButtonOutline,
-          ...groupProps(index)
-        }))}
-      </div>
+      <Flex wrap justify={justify} style={styles.container}>
+        {links.map((link, index) =>
+          <Block
+            key={index}
+            {...styles.block}
+            children={cloneElement(link, {
+              is: ButtonOutline,
+              ...groupProps(index)
+            })}
+          />
+        )}
+      </Flex>
     );
   }
 }

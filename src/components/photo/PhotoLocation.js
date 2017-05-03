@@ -29,9 +29,9 @@ export default class PhotoComments extends Component {
 
     return (
       <span>
-        <Badge>{geo}</Badge>
+        {geo && <Badge theme='secondary'>{geo}</Badge>}
         {' '}
-        <Badge>{name}</Badge>
+        {name && <Badge theme='secondary'>{name}</Badge>}
       </span>
     );
   }

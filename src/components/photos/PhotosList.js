@@ -26,9 +26,9 @@ export default class PhotosList extends Component {
             <Block><PhotoLink path={photo.id}>{photoDate(photo)}</PhotoLink></Block>
             <Block>{photoTitle(photo)}</Block>
             <Block>
-              <Badge pill rounded>{photo.comments.count}</Badge> comments
+              <Badge theme='secondary' pill rounded>{photo.comments.count}</Badge> comments
               {' '}
-              <Badge pill rounded>{photo.likes.count}</Badge> likes
+              <Badge theme='secondary' pill rounded>{photo.likes.count}</Badge> likes
             </Block>
           </Media>
         )}

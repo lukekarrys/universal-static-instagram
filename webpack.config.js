@@ -44,6 +44,20 @@ config.module.rules[0].use = [{
   })
 }];
 
+config.module.rules.forEach((rule) => {
+  const findLoader = 'css-loader';
+  const loaderIndex = (rule.use || []).findIndex((loader) => (loader.loader || loader) === findLoader);
+  const loader = rule.use[loaderIndex];
+  if (loader) {
+    rule.use[loaderIndex] = {
+      loader: findLoader,
+      options: Object.assign({}, loader.options || {}, {
+        minimize: isDev ? false : {discardComments: {removeAll: true}}
+      })
+    };
+  }
+});
+
 // Dont display assets because it will contain tons of html and json assets
 // devServer.noInfo = true does the same thing for webpack-dev-server
 config.stats = {assets: false};
