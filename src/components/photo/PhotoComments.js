@@ -22,7 +22,7 @@ export default class PhotoComments extends Component {
           <Badge theme='secondary' pill rounded>{count}</Badge>
           {' comments'}
         </span>
-        {data.map((comment) =>
+        {data.map((comment) => (
           <Block key={comment.id} borderLeft px={2} borderColor='secondary'>
             <Text
               small
@@ -32,7 +32,7 @@ export default class PhotoComments extends Component {
             />
             <Text children={comment.text} />
           </Block>
-        )}
+        ))}
       </span>
     );
   }

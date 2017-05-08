@@ -17,7 +17,7 @@ export default class PhotosList extends Component {
   render() {
     return (
       <div>
-        {this.props.photos.map((photo) =>
+        {this.props.photos.map((photo) => (
           <Media
             key={photo.id}
             align='center'
@@ -31,7 +31,7 @@ export default class PhotosList extends Component {
               <Badge theme='secondary' pill rounded>{photo.likes.count}</Badge> likes
             </Block>
           </Media>
-        )}
+        ))}
       </div>
     );
   }

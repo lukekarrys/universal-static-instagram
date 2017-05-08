@@ -39,7 +39,7 @@ export default class Links extends Component {
 
     return (
       <Flex wrap justify={justify} style={styles.container}>
-        {links.map((link, index) =>
+        {links.map((link, index) => (
           <Block
             key={index}
             {...styles.block}
@@ -48,7 +48,7 @@ export default class Links extends Component {
               ...groupProps(index)
             })}
           />
-        )}
+        ))}
       </Flex>
     );
   }

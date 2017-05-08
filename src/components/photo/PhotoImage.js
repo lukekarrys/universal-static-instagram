@@ -29,6 +29,6 @@ export default class PhotoImage extends Component {
       src: photoSrc(media[type])
     });
 
-    return <a href={highRes(media)} target='_blank' children={mediaEl} />;
+    return <a href={highRes(media)} target='_blank' rel='noopener noreferrer' children={mediaEl} />;
   }
 }
