@@ -25,8 +25,7 @@ const config = webpack({
   html: serverBuild,
   define: {
     __GA__: JSON.stringify(userConfig.ga || ''),
-    __LOGGER__: JSON.stringify(env.USI_LOGGER === 'true' || isDev),
-    __DEVTOOLS__: JSON.stringify(env.USI_DEVTOOLS === 'true')
+    __LOGGER__: JSON.stringify(env.USI_LOGGER === 'true' || isDev)
   }
 });
 

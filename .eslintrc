@@ -1,7 +1,6 @@
 {
   "extends": "@lukekarrys/eslint-config",
   "globals": {
-    "__DEVTOOLS__": false,
     "__LOGGER__": false
   }
 }

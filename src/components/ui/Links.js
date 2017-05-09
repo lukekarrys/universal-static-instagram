@@ -30,11 +30,9 @@ export default class Links extends Component {
 
     if (!group) {
       const xSpacing = 1;
+      const offset = margin({m: xSpacing}).margin * -1;
       styles.block = {mb: 1, mt: 0, mx: xSpacing};
-      styles.container = {
-        marginLeft: margin({m: xSpacing}).marginLeft * -1,
-        marginRight: margin({m: xSpacing}).marginRight * -1
-      };
+      styles.container = {marginLeft: offset, marginRight: offset};
     }
 
     return (

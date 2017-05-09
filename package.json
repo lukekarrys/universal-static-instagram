@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "dateformat": "^2.0.0",
+    "history": "^4.6.1",
     "lodash": "^4.17.4",
     "normalizr": "^3.2.2",
     "prop-types": "^15.5.8",
@@ -15,8 +16,7 @@
     "react-dom": "^15.5.4",
     "react-ga": "^2.2.0",
     "react-redux": "^5.0.4",
-    "react-router": "^3.0.0",
-    "react-router-redux": "^4.0.8",
+    "react-router-dom": "^4.1.1",
     "rebass": "^0.3.4",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
@@ -69,9 +69,6 @@
     "instagram-node": "^0.5.8",
     "on-build-webpack": "^0.1.0",
     "postcss-loader": "^2.0.0",
-    "redux-devtools": "^3.4.0",
-    "redux-devtools-dock-monitor": "^1.1.2",
-    "redux-slider-monitor": "^1.0.7",
     "rimraf": "^2.6.1",
     "style-loader": "^0.17.0",
     "surge": "^0.19.0"
@@ -116,7 +113,7 @@
     "fetch.data": "DEBUG=instagram-download:* babel-node server/data/fetch.js --refresh",
     "lint": "eslint .",
     "make.config": "babel-node server/config/make.js",
-    "start": "USI_LOGGER=true USI_DEVTOOLS=true hjs-dev-server",
+    "start": "USI_LOGGER=true hjs-dev-server",
     "start.static": "http-server ./public -p 8080",
     "test": "rimraf test/public && USI_BUILD_DIR=test/public USI_CACHE_DIR=test/fixtures USI_CONFIG=test/config.json npm run build && rimraf test/public",
     "validate": "npm ls >/dev/null"

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {renderToString, renderToStaticMarkup} from 'react-dom/server';
-import {match, RouterContext} from 'react-router';
+import {StaticRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {minify} from 'html-tagged-literals';
 import debugThe from 'debug';
@@ -11,11 +11,12 @@ import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
 import * as ACTIONS from '../src/actions';
 import createStore from '../src/store';
-import routes from '../src/routes';
+import Routes from '../src/routes';
 
 const noJS = process.env.USI_NOJS === 'true';
 const debug = debugThe('usi:render');
 const debugPages = debugThe('usi:pages');
+
 const successActions = {
   photo: ACTIONS.PHOTO_SUCCESS,
   photos: ACTIONS.PHOTOS_SUCCESS,
@@ -38,10 +39,12 @@ const template = ({context, body, state}) => minify`
 `;
 
 export default ({context, path, data = null, key = null}, done) => {
+  // setImmediate hack to clear call stack to prevent max size exceeded
+  const doneWithTemplate = ({body, state} = {}) =>
+    setImmediate(() => done(null, template({context, body, state})));
+
   // During dev this is called with only a context to just return an empty template
-  if (path === undefined && !done) {
-    return template({context});
-  }
+  if (path === undefined) return doneWithTemplate();
 
   const location = slash(path) || '/';
   const actionType = successActions[key];
@@ -65,27 +68,18 @@ export default ({context, path, data = null, key = null}, done) => {
     });
   }
 
-  return match({routes, location}, (err, __, renderProps) => {
-    debugPages(`render props: ${JSON.stringify(renderProps)}`);
+  const body = (noJS ? renderToStaticMarkup : renderToString)(
+    <Provider store={store}>
+      <StaticRouter location={location}>
+        <Routes />
+      </StaticRouter>
+    </Provider>
+  );
 
-    if (err) {
-      debugPages(`Store dispatch matching location err ${err}`);
-      done(err);
-      return;
-    }
+  const state = store.getState();
 
-    const body = (noJS ? renderToStaticMarkup : renderToString)(
-      <Provider store={store}>
-        <RouterContext {...renderProps} />
-      </Provider>
-    );
+  debugPages(`body: ${body}`);
+  debugPages(`state: ${JSON.stringify(state)}`);
 
-    const state = store.getState();
-
-    debugPages(`body: ${body}`);
-    debugPages(`state: ${JSON.stringify(state)}`);
-
-    // Hack to clear call stack to prevent max size exceeded
-    setImmediate(() => done(null, template({context, body, state})));
-  });
+  return doneWithTemplate({body, state});
 };

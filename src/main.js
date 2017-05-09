@@ -4,31 +4,23 @@ import './main.css';
 
 import React from 'react';
 import {render} from 'react-dom';
-import {Router, browserHistory} from 'react-router';
+import {Router} from 'react-router-dom';
 import {Provider} from 'react-redux';
-import {syncHistoryWithStore} from 'react-router-redux';
-import routes from './routes';
+import Routes from './routes';
 import createStore from './store/client';
 import {pageview} from './helpers/analytics';
+import history from './helpers/history';
 
 const {__INITIAL_STATE__: initialState} = window;
 const store = createStore({initialState});
-const history = syncHistoryWithStore(browserHistory, store);
 
-history.listen((location) => pageview(location || history.getCurrentLocation()));
-
-// Only require devtools based on flag so they dont get bundled
-let debuggers = null;
-if (__DEVTOOLS__) {
-  const DevTools = require('./containers/DevTools');
-  debuggers = (<DevTools />);
-}
+history.listen(pageview);
+pageview(history.location);
 
 render(
   <Provider store={store}>
-    <div>
-      <Router history={history}>{routes}</Router>
-      {debuggers}
-    </div>
+    <Router history={history}>
+      <Routes />
+    </Router>
   </Provider>
 , document.getElementById('container'));

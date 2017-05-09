@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Container, Toolbar, Footer, Section, NavItem, ButtonOutline, Block} from 'rebass';
 
 export default class App extends Component {
