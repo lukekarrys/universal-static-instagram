@@ -77,11 +77,6 @@
     "node": "^6.0.0",
     "npm": "^3.0.0"
   },
-  "greenkeeper": {
-    "ignore": [
-      "react-router"
-    ]
-  },
   "homepage": "https://github.com/lukekarrys/universal-static-instagram",
   "keywords": [
     "instagram",
