@@ -1,20 +1,11 @@
 'use strict';
 
-import {assign} from 'lodash';
-import minimist from 'minimist';
+import path from 'path';
+import fs from 'fs';
+import {attempt, isError} from 'lodash';
 
-let config;
-try {
-  // eslint-disable-next-line import/no-unresolved
-  config = require('../../config.json');
-}
-catch (e) {
-  config = {};
-}
+const {USI_CONFIG} = process.env;
+const configPath = path.resolve(__dirname, '..', '..', USI_CONFIG || 'config.json');
+const config = attempt(() => JSON.parse(fs.readFileSync(configPath)));
 
-const cli = minimist(process.argv.slice(2), {
-  string: ['token', 'user', 'domain']
-});
-
-// CLI options override config
-export default () => assign({}, config, cli);
+export default () => (isError(config)) ? {} : config;

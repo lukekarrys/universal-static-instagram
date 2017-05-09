@@ -1,9 +1,9 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {PageHeader, Block} from 'rebass';
 import PhotoImage from './PhotoImage';
-import PhotoDate from './PhotoDate';
-import PhotoTitle from './PhotoTitle';
 import PhotoLink from './PhotoLink';
 import PhotoLinkYear from './PhotoLinkYear';
 import PhotoLinkMonth from './PhotoLinkMonth';
@@ -13,6 +13,8 @@ import PhotoComments from './PhotoComments';
 import PhotoLocation from './PhotoLocation';
 import TagLink from '../tag/TagLink';
 import Links from '../ui/Links';
+import photoTitle from '../../helpers/photoTitle';
+import photoDate from '../../helpers/photoDate';
 
 export default class PhotoDetail extends Component {
   static propTypes = {
@@ -23,7 +25,7 @@ export default class PhotoDetail extends Component {
       filter: PropTypes.string,
       tags: PropTypes.array
     })
-  };
+  }
 
   getLinks() {
     const {photo: {createdTime, tags, filter}, previous, next} = this.props;
@@ -43,13 +45,12 @@ export default class PhotoDetail extends Component {
 
     return (
       <div>
-        <h1><PhotoTitle {...photo} /></h1>
-        <h3><PhotoDate {...photo} /></h3>
-        <PhotoImage {...photo} type='standardResolution' link />
-        <p><PhotoLikes {...photo.likes} /></p>
-        <PhotoComments {...photo.comments} />
-        <p><PhotoLocation {...photo.location} /></p>
-        <Links links={links} />
+        <PageHeader heading={photoTitle(photo)} description={photoDate(photo)} />
+        <PhotoImage {...photo} type='standardResolution' />
+        <Block><PhotoLocation {...photo.location} /></Block>
+        <Block><PhotoLikes {...photo.likes} /></Block>
+        <Block><PhotoComments {...photo.comments} /></Block>
+        <Block><Links links={links} group /></Block>
       </div>
     );
   }

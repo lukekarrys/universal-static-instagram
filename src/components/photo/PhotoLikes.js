@@ -1,6 +1,8 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {Badge} from 'rebass';
 import {map} from 'lodash';
 
 const MAX_USERNAME_LIKES = 10;
@@ -8,12 +10,12 @@ const MAX_USERNAME_LIKES = 10;
 export default class PhotoLikes extends Component {
   static defaultProps = {
     data: []
-  };
+  }
 
   static propTypes = {
     count: PropTypes.number,
     data: PropTypes.array
-  };
+  }
 
   users() {
     const {data} = this.props;
@@ -23,14 +25,13 @@ export default class PhotoLikes extends Component {
   render() {
     const {count} = this.props;
 
-    if (count <= MAX_USERNAME_LIKES) {
-      return (
-        <span>{`${count} likes ${this.users()}`}</span>
-      );
-    }
+    const likesText = (count <= MAX_USERNAME_LIKES) ? ` ${this.users()}` : '';
 
     return (
-      <span>{`${count} likes`}</span>
+      <span>
+        <Badge theme='secondary' pill rounded>{count}</Badge>
+        {` likes${likesText}`}
+      </span>
     );
   }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react';
-import {Route, IndexRoute} from 'react-router';
+import React, {Component} from 'react';
+import {Route, Switch} from 'react-router-dom';
 
 import App from './components/App';
 import Pages from './containers/Pages';
@@ -10,21 +10,27 @@ import Photos from './containers/Photos';
 import Photo from './containers/Photo';
 import NotFound from './components/NotFound';
 
-export default (
-  <Route path='/' component={App}>
-    <IndexRoute component={Photos} />
+export default class Routes extends Component {
+  render() {
+    return (
+      <App>
+        <Switch>
+          <Route exact path='/' component={Photos} />
 
-    <Route path='pages' component={Pages} />
-    <Route path='pages/:page' component={Photos} />
+          <Route exact path='/pages' component={Pages} />
+          <Route exact path='/pages/:page' component={Photos} />
 
-    <Route path='tags' component={Tags} />
-    <Route path='tags/:tag' component={Photos} />
+          <Route exact path='/tags' component={Tags} />
+          <Route exact path='/tags/:tag' component={Photos} />
 
-    <Route path='photos/:year' component={Photos} />
-    <Route path='photos/:year/:month' component={Photos} />
-    <Route path='photos/:year/:month/:day' component={Photos} />
-    <Route path='photos/:year/:month/:day/:id' component={Photo} />
+          <Route exact path='/photos/:year' component={Photos} />
+          <Route exact path='/photos/:year/:month' component={Photos} />
+          <Route exact path='/photos/:year/:month/:day' component={Photos} />
+          <Route exact path='/photos/:year/:month/:day/:id' component={Photo} />
 
-    <Route path='*' component={NotFound} />
-  </Route>
-);
+          <Route component={NotFound} />
+        </Switch>
+      </App>
+    );
+  }
+}

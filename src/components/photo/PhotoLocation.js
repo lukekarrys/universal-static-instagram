@@ -1,15 +1,15 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
-
-const space = (str) => str ? ` ${str}` : '';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {Badge} from 'rebass';
 
 export default class PhotoComments extends Component {
   static propTypes = {
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     name: PropTypes.string
-  };
+  }
 
   getGeo() {
     const {latitude, longitude} = this.props;
@@ -28,7 +28,11 @@ export default class PhotoComments extends Component {
     if (!name && !geo) return null;
 
     return (
-      <span>{`${space(name)}${space(geo)}`}</span>
+      <span>
+        {geo && <Badge theme='secondary'>{geo}</Badge>}
+        {' '}
+        {name && <Badge theme='secondary'>{name}</Badge>}
+      </span>
     );
   }
 }

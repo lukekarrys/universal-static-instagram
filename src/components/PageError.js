@@ -1,6 +1,7 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export default class PageError extends Component {
   static propTypes = {
@@ -8,7 +9,7 @@ export default class PageError extends Component {
       PropTypes.instanceOf(Error),
       PropTypes.string
     ])
-  };
+  }
 
   getErrorMessage() {
     const {error} = this.props;

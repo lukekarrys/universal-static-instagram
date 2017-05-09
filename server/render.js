@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {renderToString, renderToStaticMarkup} from 'react-dom/server';
-import {match, RouterContext} from 'react-router';
+// import {match, RouterContext} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {minify} from 'html-tagged-literals';
 import debugThe from 'debug';

@@ -1,21 +1,21 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
-import Link from '../InternalLink';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import InternalLink from '../InternalLink';
 import slug from '../../helpers/slug';
 import slash from '../../helpers/slash';
 
 export default class TagLink extends Component {
   static propTypes = {
-    tag: PropTypes.string,
-    children: PropTypes.node.isRequired
-  };
+    tag: PropTypes.string
+  }
 
   render() {
-    const {tag, children, ...rest} = this.props;
+    const {tag, ...rest} = this.props;
     const tagSlug = tag ? slug(tag, {lower: true}) : tag;
     return (
-      <Link to={`/tags${slash(tagSlug)}`} {...rest}>{children}</Link>
+      <InternalLink to={`/tags${slash(tagSlug)}`} {...rest} />
     );
   }
 }

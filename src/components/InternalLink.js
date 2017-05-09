@@ -1,26 +1,43 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 export default class InternalLink extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    disabled: PropTypes.bool
-  };
+    disabled: PropTypes.bool,
+    to: PropTypes.string,
+    is: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+      PropTypes.func
+    ])
+  }
 
   render() {
-    const {disabled, children, className, ...rest} = this.props;
+    const {disabled, children, to, is, ...rest} = this.props;
+    const LinkComponent = is || Link;
+    const DisabledComponent = is || 'a';
 
     if (disabled) {
       return (
-        <a style={{cursor: 'default'}} className={`${className} is-disabled`} {...rest}>{children}</a>
+        <DisabledComponent
+          {...rest}
+          children={children}
+          style={{...(rest.style || {}), cursor: 'default', opacity: 0.4}}
+        />
       );
     }
 
     return (
-      <Link className={className} {...rest}>{children}</Link>
+      <LinkComponent
+        {...rest}
+        children={children}
+        to={to}
+        is={LinkComponent === Link ? null : Link}
+      />
     );
   }
 }

@@ -1,6 +1,7 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
 import PhotoLink from './PhotoLink';
 import {propsToDate} from '../../helpers/date';
@@ -11,7 +12,7 @@ export default class PhotoLinkMonth extends Component {
     year: PropTypes.string,
     month: PropTypes.string,
     path: PropTypes.string
-  };
+  }
 
   render() {
     const {createdTime, year, month, path, ...rest} = this.props;

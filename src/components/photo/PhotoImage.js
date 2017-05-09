@@ -1,9 +1,8 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
-
-const getMediaSrc = (image) => image.url && image.url.replace(/https?:\/\//, '/media/');
-const getHighestRes = (obj) => obj.highResolution || obj.highResolutionCropped || obj.standardResolution;
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import photoSrc, {highRes} from '../../helpers/photoSrc';
 
 export default class PhotoImage extends Component {
   static propTypes = {
@@ -16,21 +15,20 @@ export default class PhotoImage extends Component {
       'highResolution',
       'highResolutionCropped'
     ]).isRequired,
-    style: PropTypes.object,
-    link: PropTypes.bool
-  };
+    style: PropTypes.object
+  }
 
   render() {
-    const {style, type, images, videos, link} = this.props;
+    const {style, type, images, videos} = this.props;
     const media = videos || images;
     const mediaEl = React.createElement(videos ? 'video' : 'img', {
       style,
       autoPlay: true,
       controls: true,
-      poster: getMediaSrc(images[type]),
-      src: getMediaSrc(media[type])
+      poster: photoSrc(images[type]),
+      src: photoSrc(media[type])
     });
 
-    return link ? <a href={getMediaSrc(getHighestRes(media))} target='_blank' children={mediaEl} /> : mediaEl;
+    return <a href={highRes(media)} target='_blank' rel='noopener noreferrer' children={mediaEl} />;
   }
 }
