@@ -14,7 +14,7 @@ export default class InternalLink extends Component {
       PropTypes.object,
       PropTypes.func
     ])
-  }
+  };
 
   render() {
     const {disabled, children, to, is, ...rest} = this.props;

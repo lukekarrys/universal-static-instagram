@@ -16,7 +16,7 @@ export default class PhotoImage extends Component {
       'highResolutionCropped'
     ]).isRequired,
     style: PropTypes.object
-  }
+  };
 
   render() {
     const {style, type, images, videos} = this.props;

@@ -25,7 +25,7 @@ export default class PhotoDetail extends Component {
       filter: PropTypes.string,
       tags: PropTypes.array
     })
-  }
+  };
 
   getLinks() {
     const {photo: {createdTime, tags, filter}, previous, next} = this.props;

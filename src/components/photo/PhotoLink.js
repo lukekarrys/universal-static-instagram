@@ -8,7 +8,7 @@ import slash from '../../helpers/slash';
 export default class PhotoLink extends Component {
   static propTypes = {
     path: PropTypes.string
-  }
+  };
 
   render() {
     const {path, ...rest} = this.props;

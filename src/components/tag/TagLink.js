@@ -9,7 +9,7 @@ import slash from '../../helpers/slash';
 export default class TagLink extends Component {
   static propTypes = {
     tag: PropTypes.string
-  }
+  };
 
   render() {
     const {tag, ...rest} = this.props;

@@ -8,7 +8,7 @@ import slash from '../../helpers/slash';
 export default class PageLink extends Component {
   static propTypes = {
     page: PropTypes.string
-  }
+  };
 
   render() {
     const {page, ...rest} = this.props;

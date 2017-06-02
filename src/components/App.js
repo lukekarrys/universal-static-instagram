@@ -8,7 +8,7 @@ import {Container, Toolbar, Footer, Section, NavItem, ButtonOutline, Block} from
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired
-  }
+  };
 
   render() {
     return (

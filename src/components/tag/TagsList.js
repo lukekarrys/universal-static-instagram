@@ -8,7 +8,7 @@ import Links from '../ui/Links';
 export default class TagsList extends Component {
   static propTypes = {
     tags: PropTypes.array.isRequired
-  }
+  };
 
   render() {
     const {tags} = this.props;
