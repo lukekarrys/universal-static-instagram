@@ -52,7 +52,7 @@
     "cpr": "^2.1.0",
     "css-loader": "^0.28.4",
     "debug": "^2.6.8",
-    "eslint": "^3.19.0",
+    "eslint": "^4.0.0",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-classes": "^0.1.1",
