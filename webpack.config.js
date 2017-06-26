@@ -1,3 +1,5 @@
+/* eslint-disable import/unambiguous */
+
 'use strict';
 
 require('babel-register');
@@ -32,16 +34,18 @@ const config = webpack({
 // Having hmre present in the .babelrc will break the babel-register above
 // so we wait until that is done and then add it here via the loader query
 const babelrc = JSON.parse(fs.readFileSync(path.resolve(__dirname, '.babelrc')));
-config.module.rules[0].use = [{
-  loader: 'babel-loader',
-  options: _.merge(babelrc, {
-    env: {
-      development: {
-        presets: ['react-hmre']
+config.module.rules[0].use = [
+  {
+    loader: 'babel-loader',
+    options: _.merge(babelrc, {
+      env: {
+        development: {
+          presets: ['react-hmre']
+        }
       }
-    }
-  })
-}];
+    })
+  }
+];
 
 config.module.rules.forEach((rule) => {
   const findLoader = 'css-loader';

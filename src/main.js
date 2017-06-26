@@ -17,10 +17,10 @@ const store = createStore({initialState});
 history.listen(pageview);
 pageview(history.location);
 
-render(
+render((
   <Provider store={store}>
     <Router history={history}>
       <Routes />
     </Router>
   </Provider>
-, document.getElementById('container'));
+), document.getElementById('container'));
