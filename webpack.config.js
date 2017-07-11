@@ -14,9 +14,8 @@ const userConfig = require('./server/config/get')();
 const copyMedia = require('./server/data/copyMedia');
 const {'default': serverBuild, buildDir} = require('./server/build');
 
-const {env} = process;
-const nodeEnv = env.NODE_ENV || 'development';
-const isDev = nodeEnv === 'development';
+const {env: {NODE_ENV = 'development', USI_LOGGER}} = process;
+const isDev = NODE_ENV === 'development';
 
 const config = webpack({
   isDev,
@@ -27,7 +26,7 @@ const config = webpack({
   html: serverBuild,
   define: {
     __GA__: JSON.stringify(userConfig.ga || ''),
-    __LOGGER__: JSON.stringify(env.USI_LOGGER === 'true' || isDev)
+    __LOGGER__: JSON.stringify(USI_LOGGER === 'true' || isDev)
   }
 });
 
@@ -46,20 +45,6 @@ config.module.rules[0].use = [
     })
   }
 ];
-
-config.module.rules.forEach((rule) => {
-  const findLoader = 'css-loader';
-  const loaderIndex = (rule.use || []).findIndex((loader) => (loader.loader || loader) === findLoader);
-  const loader = rule.use[loaderIndex];
-  if (loader) {
-    rule.use[loaderIndex] = {
-      loader: findLoader,
-      options: Object.assign({}, loader.options || {}, {
-        minimize: isDev ? false : {discardComments: {removeAll: true}}
-      })
-    };
-  }
-});
 
 // Dont display assets because it will contain tons of html and json assets
 // devServer.noInfo = true does the same thing for webpack-dev-server

@@ -2,9 +2,8 @@
 
 import React, {Component, cloneElement} from 'react';
 import PropTypes from 'prop-types';
-import {ButtonOutline, Block} from 'rebass';
-import {Flex} from 'reflexbox';
-import {margin} from '../../helpers/rebassScale';
+import {ButtonOutline, Block, Flex} from 'rebass';
+// import {margin} from '../../helpers/rebassScale';
 
 export default class Links extends Component {
   static propTypes = {
@@ -30,7 +29,7 @@ export default class Links extends Component {
 
     if (!group) {
       const xSpacing = 1;
-      const offset = margin({m: xSpacing}).margin * -1;
+      const offset = 1; // margin({m: xSpacing}).margin * -1;
       styles.block = {mb: 1, mt: 0, mx: xSpacing};
       styles.container = {marginLeft: offset, marginRight: offset};
     }
