@@ -1,11 +1,12 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {PageHeader, Block} from 'rebass';
 import PageLink from './page/PageLink';
 import TagLink from './tag/TagLink';
 import Links from './ui/Links';
 import InternalLink from './InternalLink';
+import PageHeader from './PageHeader';
+import Block from './Block';
 
 export default class NotFound extends Component {
   render() {

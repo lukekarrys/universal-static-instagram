@@ -2,11 +2,12 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Media, Badge, Block} from 'rebass';
+import {Media, Badge, Image} from 'rebass';
 import PhotoLink from '../photo/PhotoLink';
 import photoSrc from '../../helpers/photoSrc';
 import photoTitle from '../../helpers/photoTitle';
 import photoDate from '../../helpers/photoDate';
+import Block from '../Block';
 
 export default class PhotosList extends Component {
   static propTypes = {
@@ -18,17 +19,14 @@ export default class PhotosList extends Component {
     return (
       <div>
         {this.props.photos.map((photo) => (
-          <Media
-            key={photo.id}
-            align='center'
-            img={photoSrc(photo.images[this.props.type])}
-          >
+          <Media key={photo.id}>
+            <Image src={photoSrc(photo.images[this.props.type])} />
             <Block><PhotoLink path={photo.id}>{photoDate(photo)}</PhotoLink></Block>
             <Block>{photoTitle(photo)}</Block>
             <Block>
-              <Badge theme='secondary' pill rounded>{photo.comments.count}</Badge> comments
+              <Badge>{photo.comments.count}</Badge> comments
               {' '}
-              <Badge theme='secondary' pill rounded>{photo.likes.count}</Badge> likes
+              <Badge>{photo.likes.count}</Badge> likes
             </Block>
           </Media>
         ))}

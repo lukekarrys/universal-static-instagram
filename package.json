@@ -21,6 +21,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "styled-components": "^2.1.2",
     "xhr": "^2.4.0",
     "zero-fill": "^2.2.3"
   },
@@ -73,8 +74,8 @@
     "surge": "^0.19.0"
   },
   "engines": {
-    "node": "^6.0.0",
-    "npm": "^3.0.0"
+    "node": "^8.0.0",
+    "npm": "^5.0.0"
   },
   "homepage": "https://github.com/lukekarrys/universal-static-instagram",
   "keywords": [

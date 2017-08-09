@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {PageHeader, Block} from 'rebass';
 import PhotoImage from './PhotoImage';
 import PhotoLink from './PhotoLink';
 import PhotoLinkYear from './PhotoLinkYear';
@@ -15,6 +14,8 @@ import TagLink from '../tag/TagLink';
 import Links from '../ui/Links';
 import photoTitle from '../../helpers/photoTitle';
 import photoDate from '../../helpers/photoDate';
+import PageHeader from '../PageHeader';
+import Block from '../Block';
 
 export default class PhotoDetail extends Component {
   static propTypes = {

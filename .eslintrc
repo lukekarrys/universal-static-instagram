@@ -2,5 +2,8 @@
   "extends": "@lukekarrys/eslint-config",
   "globals": {
     "__LOGGER__": false
+  },
+  "rules": {
+    "no-unused-expressions": [2, {"allowTaggedTemplates": true}]
   }
 }
