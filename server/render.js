@@ -6,6 +6,8 @@ import {StaticRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {minify} from 'html-tagged-literals';
 import debugThe from 'debug';
+import {Provider as RebassProvider} from 'rebass';
+import {ServerStyleSheet} from 'styled-components';
 import slash from '../src/helpers/slash';
 import pathToKey from '../src/helpers/pathToKey';
 import normalize from '../src/helpers/normalize';
@@ -24,13 +26,14 @@ const successActions = {
   pages: ACTIONS.PAGES_SUCCESS
 };
 
-const template = ({context, body, state}) => minify`
+const template = ({context, body, state, styles}) => minify`
   <!DOCTYPE html>
   <html>
     <head>
       <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
       <meta name="apple-mobile-web-app-capable" content="yes">
       ${context.css ? `<link rel="stylesheet" href="/${context.css}">` : ''}
+      ${styles && styles}
     </head>
     <body><div id='container'>${body || ''}</div></body>
     ${noJS ? '' : `<script>__INITIAL_STATE__=${JSON.stringify(state || {})}</script>`}
@@ -40,8 +43,8 @@ const template = ({context, body, state}) => minify`
 
 export default ({context, path, data = null, key = null}, done) => {
   // setImmediate hack to clear call stack to prevent max size exceeded
-  const doneWithTemplate = ({body, state} = {}) =>
-    setImmediate(() => done(null, template({context, body, state})));
+  const doneWithTemplate = ({body, state, styles} = {}) =>
+    setImmediate(() => done(null, template({context, styles, body, state})));
 
   // During dev this is called with only a context to just return an empty template
   if (path === undefined) return doneWithTemplate();
@@ -68,18 +71,23 @@ export default ({context, path, data = null, key = null}, done) => {
     });
   }
 
-  const body = (noJS ? renderToStaticMarkup : renderToString)(
-    <Provider store={store}>
-      <StaticRouter location={location}>
-        <Routes />
-      </StaticRouter>
-    </Provider>
-  );
+  const sheet = new ServerStyleSheet();
 
+  const body = (noJS ? renderToStaticMarkup : renderToString)(sheet.collectStyles(
+    <RebassProvider>
+      <Provider store={store}>
+        <StaticRouter location={location}>
+          <Routes />
+        </StaticRouter>
+      </Provider>
+    </RebassProvider>
+  ));
+
+  const styles = sheet.getStyleTags();
   const state = store.getState();
 
   debugPages(`body: ${body}`);
   debugPages(`state: ${JSON.stringify(state)}`);
 
-  return doneWithTemplate({body, state});
+  return doneWithTemplate({body, state, styles});
 };
