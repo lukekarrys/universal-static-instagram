@@ -3,7 +3,6 @@
 import React, {Component, cloneElement} from 'react';
 import PropTypes from 'prop-types';
 import {ButtonOutline, Flex, Group} from 'rebass';
-import Block from '../Block';
 
 export default class Links extends Component {
   static propTypes = {
@@ -16,7 +15,7 @@ export default class Links extends Component {
     const {links, group, justify} = this.props;
 
     const buttons = links.map((link, index) => (
-      <Block
+      <ButtonOutline
         key={index}
         children={cloneElement(link, {
           is: ButtonOutline

@@ -15,7 +15,6 @@ import Links from '../ui/Links';
 import photoTitle from '../../helpers/photoTitle';
 import photoDate from '../../helpers/photoDate';
 import PageHeader from '../PageHeader';
-import Block from '../Block';
 
 export default class PhotoDetail extends Component {
   static propTypes = {
@@ -48,10 +47,10 @@ export default class PhotoDetail extends Component {
       <div>
         <PageHeader heading={photoTitle(photo)} description={photoDate(photo)} />
         <PhotoImage {...photo} type='standardResolution' />
-        <Block><PhotoLocation {...photo.location} /></Block>
-        <Block><PhotoLikes {...photo.likes} /></Block>
-        <Block><PhotoComments {...photo.comments} /></Block>
-        <Block><Links links={links} group /></Block>
+        <PhotoLocation {...photo.location} />
+        <PhotoLikes {...photo.likes} />
+        <PhotoComments {...photo.comments} />
+        <Links links={links} group />
       </div>
     );
   }

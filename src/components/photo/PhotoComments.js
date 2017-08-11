@@ -3,7 +3,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Badge, Text, Small} from 'rebass';
-import Block from '../Block';
 
 export default class PhotoComments extends Component {
   static defaultProps = {
@@ -24,13 +23,13 @@ export default class PhotoComments extends Component {
           {' comments'}
         </span>
         {data.map((comment) => (
-          <Block key={comment.id}>
+          <span key={comment.id}>
             <Small
               bold
               children={comment.from.username}
             />
             <Text children={comment.text} />
-          </Block>
+          </span>
         ))}
       </span>
     );
