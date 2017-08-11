@@ -33,7 +33,7 @@ const template = ({context, body, state, styles}) => minify`
       <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
       <meta name="apple-mobile-web-app-capable" content="yes">
       ${context.css ? `<link rel="stylesheet" href="/${context.css}">` : ''}
-      ${styles && styles}
+      ${styles || ''}
     </head>
     <body><div id='container'>${body || ''}</div></body>
     ${noJS ? '' : `<script>__INITIAL_STATE__=${JSON.stringify(state || {})}</script>`}
