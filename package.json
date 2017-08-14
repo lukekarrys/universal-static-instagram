@@ -17,7 +17,7 @@
     "react-ga": "^2.2.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
-    "rebass": "^0.3.4",
+    "rebass": "^1.0.4",
     "redux": "^3.7.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
