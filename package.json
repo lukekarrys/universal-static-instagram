@@ -51,7 +51,7 @@
     "common-tags": "^1.4.0",
     "cpr": "^2.2.0",
     "css-loader": "^0.28.4",
-    "debug": "^2.6.8",
+    "debug": "^3.0.0",
     "eslint": "^4.1.1",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-plugin-babel": "^4.1.1",
