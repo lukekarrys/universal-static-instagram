@@ -4,7 +4,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {compact} from 'lodash';
 import dateFormat from 'dateformat';
-import {PageHeader} from 'rebass';
 import PhotosList from './PhotosList';
 import TagLink from '../tag/TagLink';
 import PageLink from '../page/PageLink';
@@ -13,6 +12,7 @@ import PhotoLinkYear from '../photo/PhotoLinkYear';
 import PhotoLinkMonth from '../photo/PhotoLinkMonth';
 import Links from '../ui/Links';
 import {propsToDate} from '../../helpers/date';
+import PageHeader from '../PageHeader';
 
 const formatPath = (path, format) => dateFormat(propsToDate({path}), format);
 

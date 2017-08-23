@@ -2,8 +2,8 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {PageHeader} from 'rebass';
 import PageError from '../components/PageError';
+import PageHeader from '../components/PageHeader';
 
 export default class PageContainer extends Component {
   static propTypes = {

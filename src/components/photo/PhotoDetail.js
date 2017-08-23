@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {PageHeader, Block} from 'rebass';
 import PhotoImage from './PhotoImage';
 import PhotoLink from './PhotoLink';
 import PhotoLinkYear from './PhotoLinkYear';
@@ -15,6 +14,7 @@ import TagLink from '../tag/TagLink';
 import Links from '../ui/Links';
 import photoTitle from '../../helpers/photoTitle';
 import photoDate from '../../helpers/photoDate';
+import PageHeader from '../PageHeader';
 
 export default class PhotoDetail extends Component {
   static propTypes = {
@@ -47,10 +47,10 @@ export default class PhotoDetail extends Component {
       <div>
         <PageHeader heading={photoTitle(photo)} description={photoDate(photo)} />
         <PhotoImage {...photo} type='standardResolution' />
-        <Block><PhotoLocation {...photo.location} /></Block>
-        <Block><PhotoLikes {...photo.likes} /></Block>
-        <Block><PhotoComments {...photo.comments} /></Block>
-        <Block><Links links={links} group /></Block>
+        <PhotoLocation {...photo.location} />
+        <PhotoLikes {...photo.likes} />
+        <PhotoComments {...photo.comments} />
+        <Links links={links} group />
       </div>
     );
   }

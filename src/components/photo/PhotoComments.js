@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Badge, Block, Text} from 'rebass';
+import {Badge, Text, Small} from 'rebass';
 
 export default class PhotoComments extends Component {
   static defaultProps = {
@@ -19,19 +19,17 @@ export default class PhotoComments extends Component {
     return (
       <span>
         <span>
-          <Badge theme='secondary' pill rounded>{count}</Badge>
+          <Badge>{count}</Badge>
           {' comments'}
         </span>
         {data.map((comment) => (
-          <Block key={comment.id} borderLeft px={2} borderColor='secondary'>
-            <Text
-              small
+          <span key={comment.id}>
+            <Small
               bold
-              color='secondary'
               children={comment.from.username}
             />
             <Text children={comment.text} />
-          </Block>
+          </span>
         ))}
       </span>
     );
