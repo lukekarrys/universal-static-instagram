@@ -3,9 +3,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {Container, Toolbar, NavLink, ButtonOutline} from 'rebass';
-import Footer from './Footer';
-import Section from './Section';
+import {Container, Toolbar, NavLink, ButtonOutline, Flex, Box} from 'rebass';
 
 export default class App extends Component {
   static propTypes = {
@@ -20,13 +18,17 @@ export default class App extends Component {
           <NavLink is={Link} to='/tags'>Tags</NavLink>
           <NavLink is={Link} to='/pages'>Pages</NavLink>
         </Toolbar>
-        <Container>
-          <Section>{this.props.children}</Section>
-          <Footer>
-            <ButtonOutline href='https://github.com/lukekarrys/universal-static-instagram'>
-              Powered by universal-static-instagram
-            </ButtonOutline>
-          </Footer>
+        <Container is='section' pt={4}>
+          {this.props.children}
+        </Container>
+        <Container is='footer' mt={5} mb={5}>
+          <Flex justify='center'>
+            <Box>
+              <ButtonOutline color='gray' href='https://github.com/lukekarrys/universal-static-instagram'>
+                Powered by universal-static-instagram
+              </ButtonOutline>
+            </Box>
+          </Flex>
         </Container>
       </div>
     );

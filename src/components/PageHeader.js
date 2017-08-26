@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Heading, Text} from 'rebass';
+import {Heading, Subhead, Border} from 'rebass';
 
 export default class PageHeader extends Component {
   static propTypes = {
@@ -12,10 +12,10 @@ export default class PageHeader extends Component {
     const {heading, description} = this.props;
 
     return (
-      <div>
+      <Border bottom mb={4} pb={2}>
         <Heading>{heading}</Heading>
-        {description && <Text>{description}</Text>}
-      </div>
+        {description && <Subhead>{description}</Subhead>}
+      </Border>
     );
   }
 }
