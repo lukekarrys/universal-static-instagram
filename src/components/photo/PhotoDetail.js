@@ -1,7 +1,8 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, {Component, cloneElement} from 'react';
 import PropTypes from 'prop-types';
+import {Group, ButtonOutline, Flex, Box} from 'rebass';
 import PhotoImage from './PhotoImage';
 import PhotoLink from './PhotoLink';
 import PhotoLinkYear from './PhotoLinkYear';
@@ -11,7 +12,6 @@ import PhotoLikes from './PhotoLikes';
 import PhotoComments from './PhotoComments';
 import PhotoLocation from './PhotoLocation';
 import TagLink from '../tag/TagLink';
-import Links from '../ui/Links';
 import photoTitle from '../../helpers/photoTitle';
 import photoDate from '../../helpers/photoDate';
 import PageHeader from '../PageHeader';
@@ -47,10 +47,18 @@ export default class PhotoDetail extends Component {
       <div>
         <PageHeader heading={photoTitle(photo)} description={photoDate(photo)} />
         <PhotoImage {...photo} type='standardResolution' />
-        <PhotoLocation {...photo.location} />
-        <PhotoLikes {...photo.likes} />
-        <PhotoComments {...photo.comments} />
-        <Links links={links} group />
+        <Flex wrap>
+          <Box width={1} mb={1}><PhotoLocation {...photo.location} /></Box>
+          <Box width={1} mb={1}><PhotoLikes {...photo.likes} /></Box>
+          <Box width={1} mb={1}><PhotoComments {...photo.comments} /></Box>
+          <Box width={1}>
+            <Group>
+              {links.map((link) => cloneElement(link, {
+                is: ButtonOutline
+              }))}
+            </Group>
+          </Box>
+        </Flex>
       </div>
     );
   }

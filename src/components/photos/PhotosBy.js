@@ -1,16 +1,16 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, {Component, cloneElement} from 'react';
 import PropTypes from 'prop-types';
 import {compact} from 'lodash';
 import dateFormat from 'dateformat';
+import {Group, ButtonOutline} from 'rebass';
 import PhotosList from './PhotosList';
 import TagLink from '../tag/TagLink';
 import PageLink from '../page/PageLink';
 import PhotoLink from '../photo/PhotoLink';
 import PhotoLinkYear from '../photo/PhotoLinkYear';
 import PhotoLinkMonth from '../photo/PhotoLinkMonth';
-import Links from '../ui/Links';
 import {propsToDate} from '../../helpers/date';
 import PageHeader from '../PageHeader';
 
@@ -82,7 +82,11 @@ export default class PhotosBy extends Component {
       <div>
         <PageHeader heading={title} />
         <PhotosList photos={photos} type='thumbnail' />
-        <Links links={links} group />
+        <Group>
+          {links.map((link) => cloneElement(link, {
+            is: ButtonOutline
+          }))}
+        </Group>
       </div>
     );
   }

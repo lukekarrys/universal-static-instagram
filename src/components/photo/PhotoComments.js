@@ -19,7 +19,7 @@ export default class PhotoComments extends Component {
     return (
       <span>
         <span>
-          <Badge>{count}</Badge>
+          <Badge ml={0}>{count}</Badge>
           {' comments'}
         </span>
         {data.map((comment) => (
