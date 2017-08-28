@@ -22,6 +22,7 @@ export default class InternalLink extends Component {
     const DisabledComponent = is || 'a';
 
     if (disabled) {
+      // TODO: disabled ButtonOutlines should not have hover or active styles
       return (
         <DisabledComponent
           {...rest}
@@ -32,6 +33,7 @@ export default class InternalLink extends Component {
     }
 
     return (
+      // TODO: links should have non-default colors
       <LinkComponent
         {...rest}
         children={children}

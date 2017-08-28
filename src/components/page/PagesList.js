@@ -2,8 +2,9 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {Flex, Box, ButtonOutline} from 'rebass';
 import PageLink from './PageLink';
-import Links from '../ui/Links';
+import PageHeader from '../PageHeader';
 
 export default class PagesList extends Component {
   static propTypes = {
@@ -14,7 +15,18 @@ export default class PagesList extends Component {
     const {pages} = this.props;
 
     return (
-      <Links justify='space-between' links={pages.map((page) => <PageLink page={page.id} key={page.id}>{page.name}</PageLink>)} />
+      <div>
+        <PageHeader heading='Pages' />
+        <Flex wrap justify='space-between' ml={-2} mr={-2}>
+          {pages.map((page) => (
+            <Box key={page.id} m={2}>
+              <PageLink page={page.id} is={ButtonOutline}>
+                {page.name}
+              </PageLink>
+            </Box>
+          ))}
+        </Flex>
+      </div>
     );
   }
 }

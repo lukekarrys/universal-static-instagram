@@ -29,7 +29,7 @@ export default class PhotoLikes extends Component {
 
     return (
       <span>
-        <Badge ml={0}>{count}</Badge>
+        <Badge ml={0} mr={0}>{count}</Badge>
         {` likes${likesText}`}
       </span>
     );

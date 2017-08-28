@@ -46,11 +46,11 @@ export default class PhotoDetail extends Component {
     return (
       <div>
         <PageHeader heading={photoTitle(photo)} description={photoDate(photo)} />
-        <PhotoImage {...photo} type='standardResolution' />
         <Flex wrap>
-          <Box width={1} mb={1}><PhotoLocation {...photo.location} /></Box>
-          <Box width={1} mb={1}><PhotoLikes {...photo.likes} /></Box>
-          <Box width={1} mb={1}><PhotoComments {...photo.comments} /></Box>
+          <Box width={1} mb={3}><PhotoImage {...photo} type='standardResolution' /></Box>
+          <Box width={1} mb={3}><PhotoLocation {...photo.location} /></Box>
+          <Box width={1} mb={3}><PhotoLikes {...photo.likes} /></Box>
+          <Box width={1} mb={3}><PhotoComments {...photo.comments} /></Box>
           <Box width={1}>
             <Group>
               {links.map((link) => cloneElement(link, {

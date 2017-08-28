@@ -24,6 +24,7 @@ export default class App extends Component {
         <Container is='footer' mt={5} mb={5}>
           <Flex justify='center'>
             <Box>
+              {/* TODO: fix button hover color being blue */}
               <ButtonOutline color='gray' href='https://github.com/lukekarrys/universal-static-instagram'>
                 Powered by universal-static-instagram
               </ButtonOutline>
