@@ -15,16 +15,14 @@ export default class NotFound extends Component {
       <InternalLink key='home' to='/'>Home</InternalLink>
     ];
 
-    return (
-      <div>
-        <PageHeader heading='Not Found' />
-        <Text mb={3}>Nothing to see here. You probably want one of these:</Text>
-        <Group>
-          {links.map((link) => cloneElement(link, {
-            is: ButtonOutline
-          }))}
-        </Group>
-      </div>
-    );
+    return [
+      <PageHeader key='page-header' heading='Not Found' />,
+      <Text key='text' mb={3}>Nothing to see here. You probably want one of these:</Text>,
+      <Group key='links'>
+        {links.map((link) => cloneElement(link, {
+          is: ButtonOutline
+        }))}
+      </Group>
+    ];
   }
 }
