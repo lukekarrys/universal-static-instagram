@@ -43,23 +43,21 @@ export default class PhotoDetail extends Component {
     const {photo} = this.props;
     const links = this.getLinks();
 
-    return (
-      <div>
-        <PageHeader heading={photoTitle(photo)} description={photoDate(photo)} />
-        <Flex wrap>
-          <Box width={1} mb={3}><PhotoImage {...photo} type='standardResolution' /></Box>
-          <Box width={1} mb={3}><PhotoLocation {...photo.location} /></Box>
-          <Box width={1} mb={3}><PhotoLikes {...photo.likes} /></Box>
-          <Box width={1} mb={3}><PhotoComments {...photo.comments} /></Box>
-          <Box width={1}>
-            <Group>
-              {links.map((link) => cloneElement(link, {
-                is: ButtonOutline
-              }))}
-            </Group>
-          </Box>
-        </Flex>
-      </div>
-    );
+    return [
+      <PageHeader key='header' heading={photoTitle(photo)} description={photoDate(photo)} />,
+      <Flex key='photo' wrap>
+        <Box width={1} mb={3}><PhotoImage {...photo} type='standardResolution' /></Box>
+        <Box width={1} mb={3}><PhotoLocation {...photo.location} /></Box>
+        <Box width={1} mb={3}><PhotoLikes {...photo.likes} /></Box>
+        <Box width={1} mb={3}><PhotoComments {...photo.comments} /></Box>
+        <Box width={1}>
+          <Group>
+            {links.map((link) => cloneElement(link, {
+              is: ButtonOutline
+            }))}
+          </Group>
+        </Box>
+      </Flex>
+    ];
   }
 }

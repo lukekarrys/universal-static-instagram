@@ -16,24 +16,20 @@ export default class PhotoComments extends Component {
 
   render() {
     const {count, data} = this.props;
-    return (
-      <span>
-        <span>
-          <Badge ml={0} mr={0}>{count}</Badge>
-          {' comments'}
-        </span>
-        <Flex wrap>
-          {data.map((comment) => (
-            <Box width={1} mb={1} key={comment.id}>
-              <Small
-                bold
-                children={comment.from.username}
-              />
-              <Text children={comment.text} />
-            </Box>
-          ))}
-        </Flex>
-      </span>
-    );
+    return [
+      <Badge key='count' ml={0} mr={0}>{count}</Badge>,
+      ' comments',
+      <Flex key='comments' wrap>
+        {data.map((comment) => (
+          <Box width={1} mb={1} key={comment.id}>
+            <Small
+              bold
+              children={comment.from.username}
+            />
+            <Text children={comment.text} />
+          </Box>
+        ))}
+      </Flex>
+    ];
   }
 }

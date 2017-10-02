@@ -14,19 +14,23 @@ export default class TagsList extends Component {
   render() {
     const {tags} = this.props;
 
-    return (
-      <div>
-        <PageHeader heading='Tags' />
-        <Flex wrap justify='space-between' ml={-2} mr={-2}>
-          {tags.map((tag) => (
-            <Box key={tag.id} m={2}>
-              <TagLink tag={tag.id} is={ButtonOutline}>
-                {tag.name}
-              </TagLink>
-            </Box>
-          ))}
-        </Flex>
-      </div>
-    );
+    return [
+      <PageHeader key='page-header' heading='Tags' />,
+      <Flex
+        key='links'
+        wrap
+        justify='space-between'
+        ml={-2}
+        mr={-2}
+      >
+        {tags.map((tag) => (
+          <Box key={tag.id} m={2}>
+            <TagLink tag={tag.id} is={ButtonOutline}>
+              {tag.name}
+            </TagLink>
+          </Box>
+        ))}
+      </Flex>
+    ];
   }
 }

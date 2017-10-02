@@ -28,19 +28,15 @@ export default class PageContainer extends Component {
     const {loading, error, component} = this.props;
 
     if (error) {
-      return (
-        <div>
-          <PageHeader heading='Error' />
-          <PageError error={error} />
-        </div>
-      );
+      return [
+        <PageHeader key='page-header' heading='Error' />,
+        <PageError key='page-error' error={error} />
+      ];
     }
 
     if (loading) {
       return (
-        <div>
-          <PageHeader heading='Loading...' />
-        </div>
+        <PageHeader heading='Loading...' />
       );
     }
 

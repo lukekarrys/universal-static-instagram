@@ -27,11 +27,9 @@ export default class PhotoLikes extends Component {
 
     const likesText = (count <= MAX_USERNAME_LIKES) ? ` ${this.users()}` : '';
 
-    return (
-      <span>
-        <Badge ml={0} mr={0}>{count}</Badge>
-        {` likes${likesText}`}
-      </span>
-    );
+    return [
+      <Badge key='count' ml={0} mr={0}>{count}</Badge>,
+      ` likes${likesText}`
+    ];
   }
 }

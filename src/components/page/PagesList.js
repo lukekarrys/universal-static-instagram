@@ -14,19 +14,23 @@ export default class PagesList extends Component {
   render() {
     const {pages} = this.props;
 
-    return (
-      <div>
-        <PageHeader heading='Pages' />
-        <Flex wrap justify='space-between' ml={-2} mr={-2}>
-          {pages.map((page) => (
-            <Box key={page.id} m={2}>
-              <PageLink page={page.id} is={ButtonOutline}>
-                {page.name}
-              </PageLink>
-            </Box>
-          ))}
-        </Flex>
-      </div>
-    );
+    return [
+      <PageHeader key='page-header' heading='Pages' />,
+      <Flex
+        key='links'
+        wrap
+        justify='space-between'
+        ml={-2}
+        mr={-2}
+      >
+        {pages.map((page) => (
+          <Box key={page.id} m={2}>
+            <PageLink page={page.id} is={ButtonOutline}>
+              {page.name}
+            </PageLink>
+          </Box>
+        ))}
+      </Flex>
+    ];
   }
 }

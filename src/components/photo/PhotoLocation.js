@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Badge} from 'rebass';
 
-export default class PhotoComments extends Component {
+export default class PhotoLocation extends Component {
   static propTypes = {
     latitude: PropTypes.number,
     longitude: PropTypes.number,
@@ -27,12 +27,10 @@ export default class PhotoComments extends Component {
 
     if (!name && !geo) return null;
 
-    return (
-      <span>
-        {geo && <Badge ml={0} mr={0}>{geo}</Badge>}
-        {' '}
-        {name && <Badge ml={0} mr={0}>{name}</Badge>}
-      </span>
-    );
+    return [
+      geo && <Badge key='geo' ml={0} mr={0}>{geo}</Badge>,
+      ' ',
+      name && <Badge key='name' ml={0} mr={0}>{name}</Badge>
+    ];
   }
 }
