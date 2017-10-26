@@ -7,7 +7,7 @@ import {dateParts} from '../../src/helpers/date';
 import slug from '../../src/helpers/slug';
 
 const PAGINATION = 10;
-const merge = (...parts) => assign(...[{}, ...parts]);
+const merge = (...parts) => assign({}, ...parts);
 const toId = ({createdTime, id}) => {
   const {day, month, year} = dateParts({createdTime});
   return `${year}/${month}/${day}/${id}`;
