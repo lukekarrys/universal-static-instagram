@@ -66,7 +66,7 @@
     "html-tagged-literals": "^1.0.2",
     "http-server": "^0.10.0",
     "humps": "^2.0.1",
-    "inquirer": "^3.3.0",
+    "inquirer": "^4.0.0",
     "instagram-download": "^2.2.6",
     "instagram-node": "^0.5.8",
     "on-build-webpack": "^0.1.0",
