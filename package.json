@@ -113,6 +113,6 @@
     "start": "USI_LOGGER=true hjs-dev-server",
     "start.static": "http-server ./public -p 8080",
     "test": "rimraf test/public && USI_BUILD_DIR=test/public USI_CACHE_DIR=test/fixtures USI_CONFIG=test/config.json npm run build && rimraf test/public",
-    "validate": "npm ls >/dev/null; exit 0"
+    "validate": "npm ls >/dev/null; echo 'remove exit 0 once rebass#342 is merged'; exit 0"
   }
 }
