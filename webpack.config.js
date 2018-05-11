@@ -10,7 +10,6 @@ const webpack = require('hjs-webpack');
 const _ = require('lodash');
 const OnBuildPlugin = require('on-build-webpack');
 
-const userConfig = require('./server/config/get')();
 const copyMedia = require('./server/data/copyMedia');
 const {'default': serverBuild, buildDir} = require('./server/build');
 
@@ -25,7 +24,6 @@ const config = webpack({
   output: {hash: true},
   html: serverBuild,
   define: {
-    __GA__: JSON.stringify(userConfig.ga || ''),
     __LOGGER__: JSON.stringify(USI_LOGGER === 'true' || isDev)
   }
 });

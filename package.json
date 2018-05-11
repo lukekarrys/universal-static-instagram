@@ -14,7 +14,6 @@
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-ga": "^2.3.4",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "rebass": "^1.0.4",
