@@ -19,7 +19,7 @@ Instagram API updates went into effect on June 1, 2016. According to the new ter
 
 ## What is this?
 
-[Demo](http://insta.lukelov.es)
+[Demo](https://insta.lukelov.es)
 
 Way back when, Instagram was iOS only and didn't have a web interface. I wanted one so I built some tools that would download the JSON and images and would publish them as a static site. This site idly for the most part while Instagram created amazing interfaces on all platforms.
 
