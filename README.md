@@ -2,7 +2,6 @@ universal-static-instagram
 ===============
 
 [![Build Status](https://img.shields.io/travis/lukekarrys/universal-static-instagram/master.svg)](https://travis-ci.org/lukekarrys/universal-static-instagram)
-[![Greenkeeper badge](https://badges.greenkeeper.io/lukekarrys/universal-static-instagram.svg)](https://greenkeeper.io/)
 
 
 ## TL;DR
@@ -18,8 +17,6 @@ Instagram API updates went into effect on June 1, 2016. According to the new ter
 
 
 ## What is this?
-
-[Demo](http://insta.lukelov.es)
 
 Way back when, Instagram was iOS only and didn't have a web interface. I wanted one so I built some tools that would download the JSON and images and would publish them as a static site. This site idly for the most part while Instagram created amazing interfaces on all platforms.
 
@@ -99,7 +96,7 @@ Surge is really great. If you don't have an account, running this command will p
 ```sh
 npm run deploy.gh
 # Or deploy to a different repository
-npm run deploy.gh -- --repo git@github.com:lukekarrys/insta.lukelov.es.git
+npm run deploy.gh -- --repo git@github.com:USERNAME/REPO_NAME.git
 ```
 
 Since you already have this forked on GitHub, and every path has a matching built file, you can use GitHub Pages, which is pretty neat. Running the above command will push the built site up to your GitHub fork on the `gh-pages` branch. If you picked a domain when running `npm run make.config` it will create a [`CNAME` file](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/#creating-and-committing-a-cname-file) for you. See the [GitHub Pages help docs](https://help.github.com/categories/github-pages-basics/) for more information.
