@@ -1,9 +1,6 @@
 universal-static-instagram
 ===============
 
-[![Build Status](https://img.shields.io/travis/lukekarrys/universal-static-instagram/master.svg)](https://travis-ci.org/lukekarrys/universal-static-instagram)
-
-
 ## TL;DR
 
 1. Fetch Instagram data
